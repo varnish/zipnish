@@ -4,7 +4,7 @@
 
 Track timing of micro-service requests by passing micro-service requests through a varnish server.
 
-***
+
 
 ## Varnish Log Script ##
 
