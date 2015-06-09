@@ -15,3 +15,7 @@ Running the varnish logger script.
 > &gt; cd log-reader
 
 > &gt; python sample_varnishlog.py
+
+## UI and Log Storage ##
+
+ZipKin would be used for backend services and UI. It remains to be seen how it would be connected and used.
