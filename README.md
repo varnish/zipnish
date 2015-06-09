@@ -18,4 +18,4 @@ Running the varnish logger script.
 
 ## UI and Log Storage ##
 
-ZipKin would be used for backend services and UI. It remains to be seen how it would be connected and used.
+[zipkin](https://github.com/twitter/zipkin) would be used for backend services and UI. It remains to be seen how it would be connected and used.
