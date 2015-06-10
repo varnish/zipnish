@@ -50,7 +50,7 @@ Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [ht
   - Span represents an RPC. It has,
   
     - **spanId** representing itself. 
-    - **parentId** representing parent spanId. 
+    - **parentId** representing parent spanId. Absense means it's the rootSpan. A point from where trace starts.
     - **traceId** linking it to the trace.
     - one or more **annotations**
     
