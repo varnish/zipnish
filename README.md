@@ -48,7 +48,14 @@ Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [ht
   Represents a request path, contains one or more spans.
 
   - Span
+    Span represents an RPC. It has,
+    - **spanId** representing itself. 
+    - **parentId** representing parent spanId. 
+    - **traceId** linking it to the trace.
+    - one or more **annotations**
+    
     - Annotation
+      - 
 
 Trace contains multiple spans
 Each span has a traceId linking it to the Trace.
