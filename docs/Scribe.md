@@ -9,5 +9,6 @@
 5. sudo apt-get -y install libevent-dev
 6. sudo apt-get install libboost-all-dev
 7. Thrift
+  * **pre-install requirements**: sudo apt-get install libboost-dev libboost-test-dev libboost-program-options-dev libevent-dev automake libtool flex bison pkg-config g++ libssl-dev
   * Download thrift from [http://www.apache.org/dyn/closer.cgi?path=/thrift/0.9.2/thrift-0.9.2.tar.gz](http://www.apache.org/dyn/closer.cgi?path=/thrift/0.9.2/thrift-0.9.2.tar.gz)
   * 
