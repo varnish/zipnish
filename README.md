@@ -17,5 +17,4 @@ Track timing of micro-service requests by passing micro-service requests through
 * [Scribe](docs/Scribe.md)
 * [Varnish Logger](docs/Varnish Logger.md)
 * [ZipKin](docs/ZipKin.md)
-
 * [Collecting log data](docs/Collecting Data.md)
