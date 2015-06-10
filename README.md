@@ -34,6 +34,14 @@ Running the varnish logger script.
 7. Similarly configure javac, > **update-alternatives --install /usr/bin/javac javac /home/[username]/java/jdk1.8.0_45/bin/javac 1000**
 8. If needed configure default javac using, **update-alternatives --config javac**
 
+
+## Scribe ##
+
+Scribe is a server for aggregating log data streamed in real time from a large number of servers.
+
+1. git clone git@github.com:traviscrawford/scribe.git
+2. 
+
 ## ZipKin ##
 
 Running zipkin.
