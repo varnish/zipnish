@@ -6,7 +6,7 @@
 4. On validationing above 3 steps. Replace false data generation layer with python varnish logger.
 
 
-# Tracking Micro-Services via Varnish Cache #
+## Tracking Micro-Services via Varnish Cache ##
 
 Track timing of micro-service requests by passing micro-service requests through a varnish server.
 
@@ -15,3 +15,8 @@ Track timing of micro-service requests by passing micro-service requests through
 * [ZipKin](docs/ZipKin.md)
 * [Collecting log data](docs/Collecting Data.md)
 * [Varnish Logger](docs/Varnish Logger.md)
+
+
+#### Machine Used ####
+
+Debian 8.1 / **specifically** Linux debian 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt9-3~deb8u1 (2015-04-24) x86_64 GNU/Linux
