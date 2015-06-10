@@ -20,4 +20,6 @@
  * > mv /home/debian/Downloads/thrift-0.9.2.tar.gz .
  * > tar zxvf thrift-0.9.2.tar.gz
  * > cd thrift-0.9.2
- * 
+ * make
+ * sudo make install
+ * thrift -version (this should print out the version if everything went good)
