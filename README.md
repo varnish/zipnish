@@ -16,6 +16,15 @@ Running the varnish logger script.
 
 > &gt; python sample_varnishlog.py
 
+## Installing or configuring jdk. ##
+
+1. Download the jdk from: [http://www.oracle.com/technetwork/java/javase/downloads/index.html](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+2. Create a folder "java" inside user home (e.g. /home/[username])
+3. mv jdk from ~/Downloads to ~/java
+4. extract jdk using tar zxvf **jdk-archive-name.tar.gz**
+5. Use command > update-alternatives --install /usr/bin/java java /home/[username]/java/jdk1.8.0_45/bin/java 1000. Note: name or path to jdk can vary depending on downloaded version.
+6. configure the java as default using, update-alternatives --config java
+
 ## UI and Log Storage ##
 
 [zipkin](https://github.com/twitter/zipkin) would be used for backend services and UI. It remains to be seen how it would be connected and used.
