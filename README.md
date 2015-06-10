@@ -40,3 +40,16 @@ Running zipkin.
 ## UI ##
 
 Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [http://localhost:8080](http://localhost:8080)
+
+#### Request Tracking ####
+
+- Trace 
+  
+  Represents a request path, contains one or more spans.
+
+  - Span
+    - Annotation
+
+Trace contains multiple spans
+Each span has a traceId linking it to the Trace.
+Each span has a spanId identifying itself and parentId identifying parent span.
