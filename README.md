@@ -61,7 +61,7 @@ Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [ht
         - ss = time when server sent the response.
         - cr = time when client recieved the response.
         
-        cs > sr > ss > cr
+        cs -> sr -> ss -> cr
 
         - cr marks the end of a RPC call.
 
