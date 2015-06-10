@@ -29,10 +29,14 @@ Running the varnish logger script.
 
 ## ZipKin ##
 
-Clone zipkin from: 
+Running zipkin.
 
-Once java
+1. git clone git@github.com:twitter/zipkin.git
+2. cd zipkin
+3. run zipkind example using > **./bin/sbt "zipkin-example/run -zipkin.storage.anormdb.install=true -genSampleTraces=true"**
+4. Once zipkin is installed and running, you can view the UI on: [http://localhost:8080](http://localhost:8080)
+5. It is loaded with example data, and sqlite in memory database store.
 
-## UI and Log Storage ##
+## UI ##
 
-[zipkin](https://github.com/twitter/zipkin) would be used for backend services and UI. It remains to be seen how it would be connected and used.
+Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [http://localhost:8080](http://localhost:8080)
