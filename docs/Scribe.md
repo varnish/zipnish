@@ -7,3 +7,4 @@
 3. sudo apt-get -y install ruby ruby-dev
 4. sudo apt-get -y install python python-dev
 5. sudo apt-get -y install libevent-dev
+6. sudo apt-get install libboost-all-dev
