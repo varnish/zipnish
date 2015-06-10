@@ -66,4 +66,12 @@ Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [ht
         - cr marks the end of an RPC call.
       
       - **Binary Annotations** are time independent and provides extra information about an RPC.
+      
+Each of the id's are randomly generated and are 64-bits long. **traceId** is only generated once and can be the same as the initial **spanId**. 
+
+On the same RPC **spanId** is re-used during cs / sr / ss / cr (see above). 
+
+Making RPC call downstream will require a newly generated **spanId**. Each downstream call made will have a **spanId** from the RPC caller, it's called **parentId**
+
+Each downstream RPC call will inherit **spanId** RPC call initiater.
 
