@@ -63,5 +63,5 @@ Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [ht
         
         cs -> sr -> ss -> cr
 
-        - cr marks the end of a RPC call.
+        - cr marks the end of an RPC call.
 
