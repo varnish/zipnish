@@ -55,8 +55,13 @@ Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [ht
     - one or more **annotations**
     
     - Annotation
-      - 
+      - Marks an occurance in time.
+        - cs = time when client made the request.
+        - sr = time when server recieved the request.
+        - ss = time when server sent the response.
+        - cr = time when client recieved the response.
+        
+        cs > sr > ss > cr
 
-Trace contains multiple spans
-Each span has a traceId linking it to the Trace.
-Each span has a spanId identifying itself and parentId identifying parent span.
+        - cr marks the end of a RPC call.
+
