@@ -75,3 +75,4 @@ Making RPC call downstream will require a newly generated **spanId**. Each downs
 
 Each downstream RPC call will inherit **spanId** RPC call initiater.
 
+Additional headers e.g. **Sampled** value either 0 or 1 is passed. **Sampled** allows RPC call to determine if it should record trace information (1) or not (0). Pre-assuming the flag values, 1 and 0 as yes and no.
