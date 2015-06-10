@@ -64,4 +64,6 @@ Zipkin UI will be utilized for tracing request paths. UI can be accessed on: [ht
         cs -> sr -> ss -> cr
 
         - cr marks the end of an RPC call.
+      
+      - **Binary Annotations** are time independent and can be used to provide extra information about an RPC.
 
