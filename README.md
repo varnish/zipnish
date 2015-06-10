@@ -84,4 +84,6 @@ SpanReciever daemon inside ZipKin is responsible for collecting data, validating
 
 ZipKin has a Scribe reciever. [Scribe](https://github.com/facebookarchive/scribe) is a framework for aggregating log data.
 
+#### Solution Process ####
 
+Idea would be to send all data to Scribe. Then use Scribe SpanReciever inside ZipKin to collection all tracing data and log information.
