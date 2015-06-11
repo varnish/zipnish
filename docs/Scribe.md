@@ -20,3 +20,6 @@
  * sudo make install
  * thrift -version
   * should output Thrift version 0.9.2
+ * install fb303 it's inside contrib/fb303 inside the thrift-0.9.2 directory
+  * cd contrib/fb303 (assuming you are inside thrift-0.9.2 installation directory)
+  * 
