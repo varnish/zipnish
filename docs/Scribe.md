@@ -26,3 +26,10 @@
  * ./bootstrap.sh
  * ./configure
  * make install
+
+
+### Notes ###
+
+autoconf has some in-compatibility issues here.
+
+adding **LT_INIT** on top of ./configure.ac resolves some of the error / warning outputs.
