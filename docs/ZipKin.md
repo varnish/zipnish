@@ -9,6 +9,7 @@ Running zipkin.
     * if zipkin persistent store is used as in 3. above. Database for it will be found on /Users/[USERNAME]/Desktop/zipkin/logger.db
   * if you remove **-genSampleTraces=true** option, zipkin does not generate sample data.
   * for mysql - **./bin/sbt "zipkin-example/run -zipkin.storage.anormdb.install=true -zipkin.storage.anormdb.db=mysql://127.0.0.1:3306/zipkin?user=zipkin&password=kinect -genSampleTraces=true"**
+   * for using mysql change line #273 anormDriverDependencies("sqlite") to anormDriverDependencies("mysql"), this will download mysql-java-connector
 4. Once zipkin is installed and running, you can view the UI on: [http://localhost:8080](http://localhost:8080)
 5. It is loaded with example data, and sqlite in memory database store.
 
