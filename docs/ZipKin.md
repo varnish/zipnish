@@ -4,7 +4,10 @@ Running zipkin.
 
 1. git clone git@github.com:twitter/zipkin.git
 2. cd zipkin
-3. run zipkind example using > **./bin/sbt "zipkin-example/run -zipkin.storage.anormdb.install=true -genSampleTraces=true"**
+3. run zipkind example using > **./bin/sbt "zipkin-example/run -zipkin.storage.anormdb.install=true -zipkin.storage.anormdb.db=sqlite://Users/[USERNAME]/Desktop/zipkin/logger.db -genSampleTraces=true""**
+  * if you remove **-zipkin.storage.anormdb.db** option, zipkin uses mysql in-memory store.
+    * if zipkin persistent store is used as in 3. above. Database for it will be found on /Users/[USERNAME]/Desktop/zipkin/logger.db
+  * if you remove **-genSampleTraces=true** option, zipkin does not generate sample data.
 4. Once zipkin is installed and running, you can view the UI on: [http://localhost:8080](http://localhost:8080)
 5. It is loaded with example data, and sqlite in memory database store.
 
