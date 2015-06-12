@@ -1,9 +1,8 @@
 ## Solution Steps ##
 
 1. Install ZipKin and have it up and running
-2. Install Scribe and have it up and running
-3. Feed false data to Scribe, to see if Scribe SpanReciever inside ZipKin picks up data from Scribe.
-4. On validationing above 3 steps. Replace false data generation layer with python varnish logger.
+2. Feed false data to mysqlite database.
+3. Replace false data generation layer with python varnish logger.
 
 
 ## Tracking Micro-Services via Varnish Cache ##
