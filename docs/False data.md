@@ -55,6 +55,7 @@ int ( time.time() * 1000000 )
 
 ***Rough***
 
+* create functions to: generate microsecond timestamp, generate random id
 * get a handle to database connection
 * create function add_span
 * create function add_span_annotation
