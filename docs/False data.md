@@ -49,5 +49,12 @@ int ( time.time() * 1000000 )
   * duration will remain NULL for now.
     * It needs to be calculated when ``value = cr`` for ``trace_id = span_id``
 2. Use ``span_id, trace_id`` generated in **1.** to populate annotations table.
- * 
+ * service_name (use example_service as a name just for example sake)
+ * value (restrict yourself to these four values cs / sr / ss / cr, other value how they can be used need to be understood as used in example, but it comes later.)
+  * cs = client send, sr = server recieve, ss = server send, cr = client recieve
 
+***Rough***
+
+* get a handle to database connection
+* create function add_span
+* create function add_span_annotation
