@@ -67,3 +67,10 @@ For now randomness is generated using random.getrandombits(64). Skipping the ide
 In future if need following hash can be used, credits :point_down:
 
 sha256(varnish host IP, XID, timestamp) :clap: @espebra :clap:
+
+
+*** Additional Packages ***
+
+Install Python MySQL using the following command below,
+
+```sudo apt-get install python-mysqldb```
