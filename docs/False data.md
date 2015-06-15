@@ -69,7 +69,7 @@ In future if need following hash can be used, credits :point_down:
 sha256(varnish host IP, XID, timestamp) :clap: @espebra :clap:
 
 
-*** Additional Packages ***
+***Additional Packages***
 
 Install Python MySQL using the following command below,
 
