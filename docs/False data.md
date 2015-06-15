@@ -1,7 +1,7 @@
 
-db schema
+****DB Schema****
 
-spans
+Spans
 
 ```
 span_id
@@ -13,7 +13,7 @@ duration
 created_ts
 ```
 
-annotations
+Annotations
 
 ```
 span_id
