@@ -73,4 +73,7 @@ sha256(varnish host IP, XID, timestamp) :clap: @espebra :clap:
 
 Install Python MySQL using the following command below,
 
-```sudo apt-get install python-mysqldb```
+```
+sudo apt-get install -y python-mysqldb
+sudo apt-get install -y libmysqlclient-dev
+```
