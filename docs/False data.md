@@ -59,3 +59,10 @@ int ( time.time() * 1000000 )
 * get a handle to database connection
 * create function add_span
 * create function add_span_annotation
+
+***Notes***
+
+For now randomness is generated using random.getrandombits(64). Skipping the idea of using microseconds() as id for ```trace_id, span_id``` etc.
+
+In future if need following hash can be used, credits :point_down:
+sha256(varnish host IP, XID, timestamp) :clap: @espebra :clap:
