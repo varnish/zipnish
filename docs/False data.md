@@ -47,7 +47,7 @@ int ( time.time() * 1000000 )
      * for now just reuse **span_id** number if **trace_id** is not available and pass it along the chain of RPC calls.
   * created_ts will be 16-digit timestamp generated with above python script.
   * duration will remain NULL for now.
-    * It needs to be calculated based on cr timestamp
+    * It needs to be calculated when ``value = cr`` for ``trace_id = span_id``
 2. Use **span_id**, **trace_id** generated in 1. to populate annotations table.
  * 
 
