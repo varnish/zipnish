@@ -40,9 +40,12 @@ int ( time.time() * 1000000 )
 ***Process***
 
 1. Start from span table. 
-  * Generate 19 digit unique number.
-  * Insert that unique number into -> span_id
-    * if **parent_id** is available from headers insert it, otherwise leave it NULL
-    * if **trace_id** is available from headers insert it, otherwise generate a new trace_id to be used.
-      * for now just reuse **span_id** number if **trace_id** is not available and pass it along doing the chain of RPC calls.
+ * Generate 19 digit unique number.
+ * Insert that unique number into -> span_id
+   * if **parent_id** is available from headers insert it, otherwise leave it NULL
+   * if **trace_id** is available from headers insert it, otherwise generate a new trace_id to be used.
+     * for now just reuse **span_id** number if **trace_id** is not available and pass it along doing the chain of RPC calls.
+  * duration will remain NULL for now.
+2. Use **span_id**, **trace_id** generated in 1. to population annotations table.
+ * 
 
