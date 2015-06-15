@@ -27,3 +27,10 @@ a_timestamp
 duration
 ```
 All timestamps are in micro-seconds. Durations (difference between timestamps) are also in micro-seconds.
+
+Python function to generate timestamp / microsecond
+
+```
+import time
+int ( time.time() * 1000000 )
+```
