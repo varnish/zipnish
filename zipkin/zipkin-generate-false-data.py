@@ -1,7 +1,4 @@
-import time
-import random
-
-import sys
+import time, random, sys
 import MySQLdb as mdb
 
 def ts_microseconds():
@@ -13,8 +10,6 @@ def generate_id():
 # reference to database connector
 def get_db_connection():
     return mdb.connect('localhost', 'zipkin', 'kinect', 'zipkin')
-
-conn = get_db_connection()
 
 def add_span(span_name, span_id = None, trace_id = None, parent_id = None):
     span_id = generate_id() if span_id is None else span_id
@@ -48,6 +43,11 @@ def add_annotation(span_id, trace_id, span_name, service_name, value, ipv4, port
             ipv4=ipv4, port=port, a_timestamp=a_timestamp, duration=duration)
     print sql
     return
+
+
+# get database connection
+conn = get_db_connection()
+
 
 span_name = 'test_span'
 (span_id, trace_id) = add_span(span_name)
