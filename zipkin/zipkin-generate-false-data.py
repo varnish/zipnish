@@ -16,25 +16,6 @@ def get_db_connection():
 
 conn = get_db_connection()
 
-'''
-try:
-    cur = conn.cursor()
-    cur.execute('SELECT VERSION()')
-
-    ver = cur.fetchone()
-
-    print 'Database version: %s ' % ver
-
-except mdb.Error, e:
-    print 'Error %d: %s' % (e.args[0], e.args[1])
-    sys.exit(1)
-
-finally:
-
-    if conn:
-        conn.close()
-'''
-
 def add_span(span_name, span_id = None, trace_id = None, parent_id = None):
     span_id = generate_id() if span_id is None else span_id
     parent_id = 'NULL' if parent_id is None else parent_id
@@ -54,12 +35,25 @@ def add_span(span_name, span_id = None, trace_id = None, parent_id = None):
             )'.format(span_id=span_id, parent_id=parent_id, \
             trace_id=trace_id, span_name=span_name, debug=debug, \
             duration=duration, created_ts=created_ts)
-
     return (span_id, trace_id)
 
-(span_id, trace_id) = add_span('test_span')
+def add_annotation(span_id, trace_id, span_name, service_name, value, ipv4, port, a_timestamp, duration):
+    sql = 'INSERT INTO zipkin_annotations \
+            (span_id, trace_id, span_name, service_name, value, ipv4, port, a_timestamp, duration) \
+            VALUES ( \
+            {span_id}, {trace_id}, \
+            "{span_name}", "{service_name}", "{value}", \
+            {ipv4}, {port}, {a_timestamp}, {duration})'.format(span_id=span_id, trace_id=trace_id, \
+            span_name=span_name, service_name=service_name, value=value, \
+            ipv4=ipv4, port=port, a_timestamp=a_timestamp, duration=duration)
+    print sql
+    return
+
+span_name = 'test_span'
+(span_id, trace_id) = add_span(span_name)
 
 print 'span_id = ', span_id , ', trace_id = ', trace_id
+add_annotation(span_id, trace_id, span_name, 'test_service', 'cs', 123, 4545, 1, 0)
 
 # print 'timestamp: ' + str(ts_microseconds())
 # print 'random id: ' + str(generate_id())
