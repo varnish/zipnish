@@ -66,9 +66,30 @@ def add_annotation(span_id, trace_id, span_name, service_name, value, ipv4, port
     except mdb.Error, e:
         print 'Error %d: %s' % (e.args[0], e.args[1])
 
+def setup():
+    global conn
+
+    try:
+        cur = conn.cursor()
+
+        sql = 'DELETE FROM zipkin_annotations \
+                WHERE trace_id IN ( \
+                SELECT trace_id FROM zipkin_spans \
+                WHERE span_name = "test_span")'
+        cur.execute(sql)
+        conn.commit()
+
+        sql = 'DELETE FROM zipkin_spans WHERE span_name = "test_span"'
+        cur.execute(sql)
+        conn.commit()
+
+    except mdb.Error, e:
+        print 'Error %d: %s' % (e.args[0], e.args[1])
 
 # get database connection
 conn = get_db_connection()
+
+setup()
 
 span_name = 'test_span'
 (span_id, trace_id) = add_span(span_name)
