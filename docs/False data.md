@@ -68,6 +68,9 @@ In future if need following hash can be used, credits :point_down:
 
 sha256(varnish host IP, XID, timestamp) :clap: @espebra :clap:
 
+All root spans which start a trace.
+``SELECT * FROM zipkin_spans WHERE span_id IN (SELECT span_id FROM `zipkin_spans` WHERE `parent_id` IS NULL ORDER BY `parent_id` ASC)``
+
 
 ***Additional Packages***
 
@@ -78,3 +81,8 @@ sudo apt-get install -y python-mysqldb
 sudo apt-get install -y libmysqlclient-dev
 pip install mysql
 ```
+
+***Assumptions***
+
+* Spans contains RPC calls. Each new span without a parent starts a trace.
+* Each RPC call has events such as, 
