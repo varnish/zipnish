@@ -86,3 +86,5 @@ pip install mysql
 
 * Spans contains RPC calls. Each new span without a parent starts a trace.
 * Each RPC call has events such as, 
+  * **cs** - client send is marked by a first entry inside zipkin_spans
+  * 
