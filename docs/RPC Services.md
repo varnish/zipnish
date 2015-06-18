@@ -1,6 +1,6 @@
 All RPC services should be access by a proxy Varnish.
 
-***Process.***
+***Broad Overview***
 
 * Client makes a request to Varnish.
 
@@ -9,9 +9,25 @@ All RPC services should be access by a proxy Varnish.
 * Varnish gets a response and forwards it to the client.
 
 
+***Installing Node.js***
+
+Installing instructions for node.js can be found on
+[https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+
+***Configuring Services***
+
+Changing directory to ``rpc-services/service`` and running ``npm install`` should setup everything.
+
+Try the following commands on your command line / bash.
+
+```
+> cd rpc-services/service
+> npm install
+```
+
 ***Creating Services***
 
-A generic web-service code is available inside **rpc-services** on root.
+A generic web-service code is available inside ``rpc-services/services`` on root.
 
 Initiate a parent service using Node.js command,
 
