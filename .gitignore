@@ -1,2 +1,3 @@
 log-reader/venv
 zipkin/venv
+node_modules
