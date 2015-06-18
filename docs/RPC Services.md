@@ -14,6 +14,12 @@ All RPC services should be access by a proxy Varnish.
 Installing instructions for node.js can be found on
 [https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
 
+In short, running below on debian as root will setup Node.js
+
+``apt-get install -y nodejs``
+``curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -``
+
+
 ***Configuring Services***
 
 Changing directory to ``rpc-services/service`` and running ``npm install`` should setup everything.
