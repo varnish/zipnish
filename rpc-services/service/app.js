@@ -1,5 +1,8 @@
 var express = require('express');
+
 var app = express();
+
+var args = process.argv;
 
 app.get('/', function (req, res) {
   res.send('Parent Service');
