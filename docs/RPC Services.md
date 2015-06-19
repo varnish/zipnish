@@ -47,3 +47,4 @@ Initiate a parent service using Node.js command,
 | address      | ip-address / domain name to a web-service      |   required |    undefined | 127.0.0.1 |
 | service | A string to specify service name to run.      |    required |    undefined | 'Fetch News' / 'Send Photo' |
 | call | repeat argument to make call to multiple RPC-services in parallel. This can be url to an external service as well, just think of it as specifying a URL for web-service. e.g.      |     |    undefined | 127.0.0.1:5001/
+| flow | parallel / series | required, if multiple ``call`` arguments passed | | undefined | e.g. parallel |
