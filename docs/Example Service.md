@@ -4,7 +4,7 @@ If ``--flow series`` is specified, each step will finish before moving to the ne
 
 ***Process Order***
 
-Steps below proceed in ``series`` until specified.
+Steps below proceed in ``series``.
 
 1. Fetch Customer
 2. Fetch Products
@@ -13,3 +13,5 @@ Steps below proceed in ``series`` until specified.
   1. Validate Credit Card
     2. Verify Credit Card
 4. Approve Payment
+
+Steps below proceed in ``parallel``.
