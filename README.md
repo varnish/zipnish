@@ -12,6 +12,7 @@ Track timing of micro-service requests by passing micro-service requests through
 * [Configuring JDK](docs/Configuring JDK.md)
 * [ZipKin](docs/ZipKin.md)
 * [Creating Services](docs/RPC Services.md)
+  * [Example Service](docs/Example Service.md)
 * [Structure of ZipKin tables and generating false data](docs/False data.md)
 * [Varnish Logger](docs/Varnish Logger.md)
 
