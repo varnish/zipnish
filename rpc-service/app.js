@@ -37,11 +37,19 @@ app.get('/', function (req, res) {
       }( rpcCalls[i] )));
     }
 
-    async.parallel(funcs, function (err, results) {
-      //console.log('parallel finishes');
-    });
+    if (argv.flow === 'parallel') {
 
-    res.send();
+      async.parallel(funcs, function (err, results) {
+        res.send();
+      });
+
+    } else if (argv.flow === 'series') {
+
+      async.series(funcs, function (err, results) {
+        res.send();
+      });
+
+    }
 
   } else {
 
