@@ -3,7 +3,7 @@
 # terminate any existing node web services
 NODE_SERVICES=$(ps au | grep node | grep -v 'grep' | awk '{print $2}')
 
-if [ $NODE_SERVICES ]
+if [ ! -z "$NODE_SERVICES" ]
 then
   kill $NODE_SERVICES
 fi
@@ -13,11 +13,13 @@ then
   exit
 fi
 
+exit
+
 # Change directory to rpc-service/
 cd rpc-service
 
 # Process Order (Parallel: Fetch Customer / Fetch Products)
-node app.js --port 5000 --address 127.0.0.1 --service 'Process Order' --flow --call 127.0.0.1:5005/ --call 127.0.0.1:5010 &
+node app.js --port 5000 --address 127.0.0.1 --service 'Process Order' --flow --call 127.0.0.1:5005/ --call 127.0.0.1:5010/ &
 
 
 # SERIES
