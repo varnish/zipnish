@@ -39,7 +39,7 @@ Initiate a parent service using Node.js command,
 
 ``node app.js --port 5000 --address 127.0.0.1 --service 'Parent'``
 
-**Command line parameters,**
+***Command line parameters***
 
 | Name        | Value           | Status  | Defaults  |
 | ------------- |:-------------:| -----:|-----:|
