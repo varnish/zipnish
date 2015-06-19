@@ -12,7 +12,7 @@ fi
 node app.js --port 5000 --address 127.0.0.1 --service 'Process Order'
 
 
-# RUN IN SERIES
+# SERIES
 
 # Fetch Customer
 node app.js --port 5010 --address 127.0.0.1 --service 'Fetch Customer'
@@ -31,3 +31,17 @@ node app.js --port 5022 --address 127.0.0.1 --service 'Verify Credit Card'
 # Approve Payment
 node app.js --port 5031 --address 127.0.0.1 --service 'Approve Payment'
 
+
+# PARALLEL
+
+# Update Inventory
+node app.js --port 5051 --address 127.0.0.1 --service 'Update Inventory'
+
+# Update Order Status
+node app.js --port 5052 --address 127.0.0.1 --service 'Update Order Status'
+
+# Send Order Email
+node app.js --port 5053 --address 127.0.0.1 --service 'Send Order Email'
+
+# Update Order Shipping Status
+node app.js --port 5053 --address 127.0.0.1 --service 'Update Order Shipping Status'
