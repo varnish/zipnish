@@ -22,18 +22,18 @@ In short, running below on debian as root will setup Node.js
 
 ***Configuring Services***
 
-Changing directory to ``rpc-services/service`` and running ``npm install`` should setup everything.
+Changing directory to ``rpc-service`` and running ``npm install`` should setup everything.
 
 Try the following commands on your command line / bash.
 
 ```
-> cd rpc-services/service
+> cd rpc-service
 > npm install
 ```
 
 ***Creating Services***
 
-A generic web-service code is available inside ``rpc-services/services`` on root.
+A generic web-service code is available inside ``rpc-service`` on root.
 
 Initiate a parent service using Node.js command,
 
