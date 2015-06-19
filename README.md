@@ -13,7 +13,7 @@ Track timing of micro-service requests by passing micro-service requests through
 * [ZipKin](docs/ZipKin.md)
 * [Creating Services](docs/RPC Services.md)
   * [Example Service](docs/Example Service.md)
-    * [Bash Script](script.sh) - 
+    * [Bash Script](script.sh)
      * be sure to change chmod +x script.sh, so you can run it as ``$> ./script.sh``
      * use ``$> terminate=1 ./script.sh`` to only terminate services. It will exit without creating any new services.
 * [Structure of ZipKin tables and generating false data](docs/False data.md)
