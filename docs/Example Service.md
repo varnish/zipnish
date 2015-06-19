@@ -1,4 +1,4 @@
-Here we describe an example of a set of services which can be created using the [``following``](RPC Services.md).
+Here we describe an example of a set of services which can be created using the [following](RPC Services.md).
 
 If ``--flow series`` is specified, each step will finish before moving to the next step.
 
