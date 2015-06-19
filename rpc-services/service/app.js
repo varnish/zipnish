@@ -26,10 +26,20 @@ app.get('/', function (req, res) {
     for (var i = 0; i < rpcCalls.length; i++) {
       funcs.push((function (url) {
 
-        console.log('url', url);
+        return function(next) {
+
+          http.get(url, function (res) {
+            next();
+          });
+
+        };
 
       }( rpcCalls[i] )));
     }
+
+    async.parallel(funcs, function (err, results) {
+      console.log('parallel finishes');
+    });
 
     res.send();
 
