@@ -42,7 +42,7 @@ Initiate a parent service using Node.js command,
 ***Command line parameters***
 
 | Name        | Value           | Status  | Defaults  |
-| ------------- |:-------------:| -----:|-----:|
+| ------------- |-------------| -----:|-----:|
 | port      | integer > 0 | required |    undefined |
 | address      | usually      |   required |    undefined |
 | service | A string to specify service name to run.      |    required |    undefined |
