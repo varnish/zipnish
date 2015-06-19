@@ -15,3 +15,8 @@ Steps below proceed in ``series``.
 4. Approve Payment
 
 Steps below proceed in ``parallel``.
+
+* Update Inventory
+* Update Order Status
+* Send Order Email
+* Update Order Shipping Status
