@@ -13,7 +13,7 @@ Track timing of micro-service requests by passing micro-service requests through
 * [ZipKin](docs/ZipKin.md)
 * [Creating Services](docs/RPC Services.md)
   * [Example Service](docs/Example Service.md)
-   * [Bash Script](Example Service.sh)
+    * [Bash Script](script.sh)
 * [Structure of ZipKin tables and generating false data](docs/False data.md)
 * [Varnish Logger](docs/Varnish Logger.md)
 
