@@ -5,8 +5,9 @@ kill $(ps au | grep node | grep -v 'grep' | awk '{print $2}')
 
 if [ $terminate ]
 then
-  echo 'just terminate'
   exit
 fi
 
-echo 'after terminate'
+# Process Order
+node app.js --port 5000 --address 127.0.0.1 --service 'Process Order'
+
