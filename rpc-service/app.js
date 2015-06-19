@@ -40,13 +40,13 @@ app.get('/', function (req, res) {
     if (argv.flow === 'parallel') {
 
       async.parallel(funcs, function (err, results) {
-        res.send();
+        res.send('');
       });
 
     } else if (argv.flow === 'series') {
 
       async.series(funcs, function (err, results) {
-        res.send();
+        res.send('');
       });
 
     }

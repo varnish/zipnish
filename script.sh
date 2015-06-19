@@ -13,16 +13,12 @@ then
   exit
 fi
 
-exit
 
 # Change directory to rpc-service/
 cd rpc-service
 
 # Process Order (Parallel: Fetch Customer / Fetch Products)
-node app.js --port 5000 --address 127.0.0.1 --service 'Process Order' --flow --call 127.0.0.1:5005/ --call 127.0.0.1:5010/ &
-
-
-# SERIES
+node app.js --port 5000 --address 127.0.0.1 --service 'Process Order' --flow parallel --call http://127.0.0.1:5005/ &
 
 # Fetch Customer
 node app.js --port 5005 --address 127.0.0.1 --service 'Fetch Customer' &
