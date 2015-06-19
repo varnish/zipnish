@@ -38,7 +38,7 @@ app.get('/', function (req, res) {
     }
 
     async.parallel(funcs, function (err, results) {
-      console.log('parallel finishes');
+      //console.log('parallel finishes');
     });
 
     res.send();
