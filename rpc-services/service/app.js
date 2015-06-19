@@ -1,10 +1,9 @@
-var http = require('http');
-var express = require('express');
-var app = express();
+var http = require('http'),
+  async = require('async'),
+  express = require('express');
 
-var argv = require('minimist')(process.argv.slice(2));
-
-console.log('argv.call', argv.call);
+var app = express(),
+  argv = require('minimist')(process.argv.slice(2));
 
 app.get('/', function (req, res) {
 
@@ -18,10 +17,16 @@ app.get('/', function (req, res) {
     }
   }
 
+  console.log('Inside service:', argv.service);
+
   if (rpcCalls.length > 0) {
-    // single / multiple rpc calls
+
+    res.send(argv.service);
+
   } else {
-    res.send(argv, service);
+
+    res.send(argv.service);
+
   }
 
 });
