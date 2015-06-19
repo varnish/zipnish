@@ -10,6 +10,7 @@
 Track timing of micro-service requests by passing micro-service requests through a varnish server.
 
 * [Configuring JDK](docs/Configuring JDK.md)
+* [Creating Services](docs/RPC Services.md)
 * [ZipKin](docs/ZipKin.md)
 * [Collecting log data](docs/Collecting Data.md)
 * [Structure of ZipKin tables and generating false data](docs/False data.md)
