@@ -17,11 +17,21 @@ app.get('/', function (req, res) {
     }
   }
 
-  console.log('Inside service:', argv.service);
+  console.log('inside service:', argv.service);
 
   if (rpcCalls.length > 0) {
 
-    res.send(argv.service);
+    var funcs = [];
+
+    for (var i = 0; i < rpcCalls.length; i++) {
+      funcs.push((function (url) {
+
+        console.log('url', url);
+
+      }( rpcCalls[i] )));
+    }
+
+    res.send();
 
   } else {
 
