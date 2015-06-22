@@ -5,6 +5,58 @@ var http = require('http'),
 var app = express(),
   argv = require('minimist')(process.argv.slice(2));
 
+// port : { key: value pairs }
+var services = {
+  5000: {
+    service: 'Process Order'
+  },
+
+  5005: {
+    service: 'Fetch Customer'
+  },
+
+  5010: {
+    service: 'Fetch Products'
+  },
+
+  5011: {
+    service: 'Get Payment Information'
+  },
+
+  5020: {
+    service: 'Get Payment Information'
+  },
+
+  5021: {
+    service: 'Validate Credit Card'
+  },
+
+  5022: {
+    service: 'Verify Credit Card'
+  },
+
+  5031: {
+    service: 'Approve Payment'
+  },
+
+  5051: {
+    service: 'Update Inventory'
+  },
+
+  5052: {
+    service: 'Update Order Status'
+  },
+
+  5053: {
+    service: 'Send Order Email'
+  },
+
+  5054: {
+    service: 'Update Order Shipping Status'
+  }
+
+};
+
 app.get('/', function (req, res) {
 
   var rpcCalls = [];
