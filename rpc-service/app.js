@@ -1,6 +1,7 @@
 var http = require('http'),
-  async = require('async'),
-  express = require('express');
+    querystring = require('querystring'),
+    async = require('async'),
+    express = require('express');
 
 var services = require('./services'),
     servicesParser = require('./services/parser');
@@ -10,30 +11,37 @@ var app = express(),
 
 var servicesIndex = servicesParser.parseServices(argv.services);
 
-app.get('/*', function (req, res) {
+app.get('/:serviceName/:indentLevel?', function (req, res) {
 
-  var service = services.findService(req.url, servicesIndex);
+  var indentLevel = req.params.indentLevel ? parseInt(req.params.indentLevel) : 0,
+      service = services.findService('/' + req.params.serviceName, servicesIndex);
 
   if (service) {
-    //res.send( service.label );
-    console.log(service.url, '->', service.label);
+
+    console.log(Array(80).join('-'));
+    console.log(Array(indentLevel * 3).join(' '), service.label, '->', service.url);
 
     if (service.children) {
-      var funcs = [];
+      var funcs = [],
+          urlParams = (indentLevel + 1);
 
       for (var i = 0; i < service.children.urls.length; i++) {
-        funcs.push(function(url) {
+
+        funcs.push(function(path) {
 
           return function (next) {
-            http.get(url, function (res) {
+
+            http.get('http://' + argv.address +':'+ argv['port'] + path + '/' + urlParams, function (res) {
+              //console.log(url);
               next();
             });
+
           };
 
-        }(argv.proxy + service.children.urls[i]));
+        }( service.children.urls[i]) );
       }
 
-      console.log('>> flow', '-', service.children.flow);
+      //console.log('>> flow', '-', service.children.flow);
 
       if (service.children.flow === 'serial') {
 
@@ -66,5 +74,6 @@ var server = app.listen(argv.port, argv.address, function() {
     port = server.address().port;
 
   console.log(argv.service + ' server listening at http://%s:%d', address, port);
+  console.log('');
 
 });
