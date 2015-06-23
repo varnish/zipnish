@@ -12,9 +12,9 @@ var servicesIndex = servicesParser.parseServices(argv.services);
 
 app.get('/*', function (req, res) {
 
-  services.findService(req.url, servicesIndex);
+  var service = services.findService(req.url, servicesIndex);
 
-  res.send( req.url );
+  res.send( service );
 
 });
 

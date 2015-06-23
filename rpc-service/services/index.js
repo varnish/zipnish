@@ -1,6 +1,12 @@
 module.exports.findService = function (url, services) {
 
-  console.log('url', url);
-  console.log('services', services);
+  var service = null;
 
+  for (var i = services.length - 1; i >= 0; i--) {
+    if (services[i].url && services[i].url === url) {
+      return services[i];
+    }
+  }
+
+  return null;
 };
