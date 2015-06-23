@@ -17,7 +17,7 @@ fi
 # Change directory to rpc-service/
 cd rpc-service
 
-node app.js --port 5000 --address 127.0.0.1 --service 'Process Order' \
+node app.js --port 8080 --address 127.0.0.1 --service 'Process Order' \
             --services '/process-order:Process Order=>serial:/fetch-customer,/fetch-products,/get-payment-information' \
             --services '/fetch-customer:Fetch Customer' \
             --services '/fetch-products:Fetch Products=>serial:/fetch-product' \
