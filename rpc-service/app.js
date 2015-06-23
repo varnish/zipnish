@@ -15,7 +15,45 @@ app.get('/*', function (req, res) {
   var service = services.findService(req.url, servicesIndex);
 
   if (service) {
-    res.send( service.label );
+    //res.send( service.label );
+    console.log(service.url, '->', service.label);
+
+    if (service.children) {
+      var funcs = [];
+
+      for (var i = 0; i < service.children.urls.length; i++) {
+        funcs.push(function(url) {
+
+          return function (next) {
+            http.get(url, function (res) {
+              next();
+            });
+          };
+
+        }('http://' + argv.address + ':' + argv.port + service.children.urls[i]));
+      }
+
+      console.log('>> flow', '-', service.children.flow);
+
+      if (service.children.flow === 'serial') {
+
+        async.series(funcs, function (err, results) {
+          res.send();
+        });
+
+      } else if (service.children.flow === 'parallel') {
+
+        async.parallel(funcs, function (err, results) {
+          res.send();
+        });
+
+      }
+    } else {
+
+      res.send();
+
+    }
+
   } else {
     res.status(404).send();
   }
