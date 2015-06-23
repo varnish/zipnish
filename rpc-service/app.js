@@ -63,7 +63,12 @@ function parseServices(argServices)
 
 var services = parseServices(argv.services);
 
+app.get('/*', function (req, res) {
 
+  res.send( req.url );
+
+
+});
 
 var server = app.listen(argv.port, argv.address, function() {
 
