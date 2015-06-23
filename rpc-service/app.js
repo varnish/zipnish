@@ -5,9 +5,41 @@ var http = require('http'),
 var app = express(),
   argv = require('minimist')(process.argv.slice(2));
 
-console.log( argv.services );
+var services = {};
+
+function parseService(argService)
+{
+  var serviceURLAndLabel,
+    startIdx, endIdx;
 
 
+  endIdx = argService.indexOf('=>');
+
+  if (endIdx > -1) {
+    serviceURLAndLabel = argService.substr(0, endIdx);
+  } else {
+    serviceURLAndLabel = argService;
+  }
+
+  var service = {}, temp;
+
+  temp = serviceURLAndLabel.split(':');
+  service.url = temp[0];
+  service.label = temp[1];
+
+}
+
+function parseServices(argServices)
+{
+  var service;
+
+  for (var i = 0; i < argServices.length; i++) {
+    service = parseService( argServices[i] );
+  }
+
+}
+
+parseServices(argv.services);
 
 var server = app.listen(argv.port, argv.address, function() {
 
