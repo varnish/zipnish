@@ -30,7 +30,7 @@ app.get('/*', function (req, res) {
             });
           };
 
-        }('http://' + argv.address + ':' + argv.port + service.children.urls[i]));
+        }(argv.proxy + service.children.urls[i]));
       }
 
       console.log('>> flow', '-', service.children.flow);
