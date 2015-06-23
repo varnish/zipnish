@@ -14,7 +14,11 @@ app.get('/*', function (req, res) {
 
   var service = services.findService(req.url, servicesIndex);
 
-  res.send( service );
+  if (service) {
+    res.send( service.label );
+  } else {
+    res.status(404).send();
+  }
 
 });
 
