@@ -9,6 +9,11 @@
 
 Track timing of micro-service requests by passing micro-service requests through a varnish server.
 
+Varnish Cache would run on port **6081** by default. The default.vcl file connects to port 8080 for backend requests.
+
+Modify default.vcl file to ``return (pass);`` from vcl_recv sub routine.
+
+
 * [Configuring JDK](docs/Configuring JDK.md)
 * [ZipKin](docs/ZipKin.md)
 * [Creating Services](docs/RPC Services.md)
