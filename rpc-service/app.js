@@ -5,59 +5,9 @@ var http = require('http'),
 var app = express(),
   argv = require('minimist')(process.argv.slice(2));
 
-app.get('/', function (req, res) {
+console.log( argv.services );
 
-  var rpcCalls = [];
 
-  if (argv.call) {
-    if (Array.isArray(argv.call)) {
-      rpcCalls = argv.call.slice();
-    } else if (argv.call && argv.call.length) {
-      rpcCalls.push( argv.call );
-    }
-  }
-
-  console.log('inside service:', argv.service);
-
-  if (rpcCalls.length > 0) {
-
-    var funcs = [];
-
-    for (var i = 0; i < rpcCalls.length; i++) {
-      funcs.push((function (url) {
-
-        return function(next) {
-
-          http.get(url, function (res) {
-            next();
-          });
-
-        };
-
-      }( rpcCalls[i] )));
-    }
-
-    if (argv.flow === 'parallel') {
-
-      async.parallel(funcs, function (err, results) {
-        res.send('');
-      });
-
-    } else if (argv.flow === 'series') {
-
-      async.series(funcs, function (err, results) {
-        res.send('');
-      });
-
-    }
-
-  } else {
-
-    res.send(argv.service);
-
-  }
-
-});
 
 var server = app.listen(argv.port, argv.address, function() {
 
