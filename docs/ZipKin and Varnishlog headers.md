@@ -27,3 +27,9 @@ X-Varnish same as RequestID. Therefore Vxid is unique and can be used as an iden
 
 
 Can't find parent_id or any kind of reference (X-Forwarded / X-Reference) to connect one request with an parent request.
+
+Therefore we keep ``parent_id = NULL`` for now.
+
+We will reuse Vxid inside ``trace_id`` as well. Which will make ``trace_id`` same as ``span_id``. Trace and Span identifiers can be the same as per [ZipKin documentation](http://twitter.github.io/zipkin/Instrumenting.html).
+
+
