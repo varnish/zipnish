@@ -14,4 +14,7 @@ Vxid is unique therefore,
 
 **Backend Request**
 
-(ZipKin Annotation) server recieve (sr) = BeReq (Varnish Header)
+| ZipKin Annotation | varnishlog Header  |
+|---|---|
+| server recieve (sr)  | Bereq  |
+| server send (ss)  | Beresp  |
