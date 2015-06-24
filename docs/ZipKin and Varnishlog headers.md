@@ -3,6 +3,7 @@ By default varnishlog is grouped by Vxid.
 X-Varnish same as RequestID. Therefore Vxid is unique and can be used as an identifier for trace_id or span_id.
 
 
+
 | ZipKin Field | varnishlog Header  |
 |---|---|
 | span_id   | Vxid (varnish request id)  |
@@ -23,3 +24,6 @@ X-Varnish same as RequestID. Therefore Vxid is unique and can be used as an iden
 |---|---|
 | sr - server recieve   | Bereq (backend request)  |
 | ss - server send   | Beresp (backend response)  |
+
+
+Can't find parent_id or any kind of reference (X-Forwarded / X-Reference) to connect one request with an parent request.
