@@ -1,8 +1,7 @@
-By default varnishlog is grouped by Vxid
+By default varnishlog is grouped by Vxid.
 
-* X-Varnish same as RequestID
+X-Varnish same as RequestID. Therefore Vxid is unique and can be used as an identifier for trace_id or span_id.
 
-Therefore Vxid is unique and can be used as an identifier for trace_id or span_id.
 
 | ZipKin Field | varnishlog Header  |
 |---|---|
