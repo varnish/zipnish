@@ -7,6 +7,8 @@ X-Varnish same as RequestID. Therefore Vxid is unique and can be used as an iden
 | ZipKin Field | varnishlog Header  |
 |---|---|
 | span_id   | Vxid (varnish request id)  |
+| ipv4 | Host field in (Bereq and Request) |
+| port | Host field in (Bereq and Request)  |
 
 
 ***Timestamps***
