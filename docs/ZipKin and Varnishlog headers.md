@@ -4,4 +4,14 @@ By default varnishlog is grouped by Vxid
 
 Vxid is unique therefore,
 
-span_id = Vxid
+(ZipKin field) span_id = Vxid (Varnish Header)
+
+***Timestamps***
+
+**Request**
+
+
+
+**Backend Request**
+
+(ZipKin Annotation) server recieve (sr) = BeReq (Varnish Header)
