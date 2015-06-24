@@ -16,5 +16,5 @@ Vxid is unique therefore,
 
 | ZipKin Annotation | varnishlog Header  |
 |---|---|
-| server recieve (sr)  | Bereq  |
-| server send (ss)  | Beresp  |
+| (sr) server recieve   | Bereq (Backend request)  |
+| (ss) server send   | Beresp (Backend response)  |
