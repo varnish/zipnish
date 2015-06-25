@@ -1,6 +1,16 @@
 import varnishapi,time,os,sys,syslog,traceback
 
 
+class LogDataManager:
+
+    def __init__(self):
+        self.sessionVxId = 0;
+        self.logSessions = {}
+        return '__init__'
+
+    def addLogItem(self, tag, data):
+        return 'added log item'
+
 
 class LogReader:
     def execute(self,vap):
