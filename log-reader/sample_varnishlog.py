@@ -9,17 +9,13 @@ class LogDataManager:
     def addLogItem(self, vxid, tag, data):
         print "sessionId: %d, vxid: %d, tag: %s, data: %s" % (self.sessionVxId, vxid, tag, data)
 
-        if tag == 'SessOpen':
+        if self.sessionVxId == 0 and tag == 'Begin':
             self.sessionVxId = vxid
-        elif tag == 'SessClose':
-            self.pushLog(self.sessionVxId)
+        elif vxid == self.sessionVxId and tag == 'End':
+            self.pushLogForVxId(vxid)
 
-            # reset to 0
-            # new session will automatically set a new sessionVxId
+            # reset to 0, new session will automatically set a new sessionVxId
             self.sessionVxId = 0;
-
-    def pushLog(self):
-        self.pushLogForVxId(self.sessionVxId)
 
     # separate, may be we can do bulk sql inserts later on
     def pushLogForVxId(self, vxid):
