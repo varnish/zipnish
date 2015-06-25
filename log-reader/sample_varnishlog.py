@@ -7,10 +7,12 @@ class LogDataManager:
         self.logSessions = {}
 
     def addLogItem(self, vxid, tag, data):
+        print "sessionId: %d, vxid: %d, tag: %s, data: %s" % (self.sessionVxId, vxid, tag, data)
+
         if tag == 'SessOpen':
             self.sessionVxId = vxid
         elif tag == 'SessClose':
-            this.pushLog(self.sessionVxId)
+            self.pushLog(self.sessionVxId)
 
             # reset to 0
             # new session will automatically set a new sessionVxId
@@ -50,7 +52,8 @@ class LogReader:
         # log data
         data = cbd['data']
 
-        print "vxid:%d, tag:%s, data:%s" % (vxid, t_tag, data)
+        # push to logDataManager for storage
+        self.logDataManager.addLogItem(vxid, t_tag, data);
 
 # called when the program starts up
 def main(sharedMemoryLog):
