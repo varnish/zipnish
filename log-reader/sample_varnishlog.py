@@ -1,5 +1,7 @@
 import varnishapi,time,os,sys,syslog,traceback
 
+
+
 class LogReader:
     def execute(self,vap):
         #connect varnishapi
@@ -9,29 +11,31 @@ class LogReader:
             if 0 == ret:
                 time.sleep(0.5)
 
-
     def vapCallBack(self,vap,cbd,priv):
-        #level       = cbd['level']
-        #vxid        = cbd['vxid']
-        #vxid_parent = cbd['vxid_parent']
-        #type        = cbd['type']
-        #tag         = cbd['tag']
+        level       = cbd['level']
+        vxid        = cbd['vxid']
+        vxid_parent = cbd['vxid_parent']
+        type        = cbd['type']
+        tag         = cbd['tag']
         data        = cbd['data']
-        #isbin       = cbd['isbin']
+        isbin       = cbd['isbin']
         length      = cbd['length']
-        #t_tag = vap.VSL_tags[tag]
-        #var   = vap.vut.tag2VarName(t_tag,data)
+        t_tag = vap.VSL_tags[tag]
+        var   = vap.vut.tag2VarName(t_tag,data)
 
         #print "level:%d vxid:%d vxid_parent:%d tag:%s var:%s type:%s data:%s (isbin=%d,len=%d)" % (level,vxid,vxid_parent,t_tag,var,type,data,isbin,length)
+        print "vxid:%d, tag:%s, data:%s" % (vxid, t_tag, data)
 
-        print str(data)
+        #print "data "
+        #print str(data)
 
         #if data.rsplit(':', 1)[0] == 'X-Varnish':
         #   print str(data)
 
 def main(smp):
     try:
-        vap = varnishapi.VarnishLog(['-i','RespHeader'])
+        #vap = varnishapi.VarnishLog(['-i', ''])
+        vap = varnishapi.VarnishLog()
         smp.execute(vap)
     except KeyboardInterrupt:
         vap.Fini()
