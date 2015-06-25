@@ -8,6 +8,12 @@ class LogDataManager:
         self.logSessions = {}
         return '__init__'
 
+    def beginSession(self, vxid):
+        self.sessionVxId = vxid
+
+    def closeSession(self, vxid):
+        self.sessionVxId = 0
+
     def addLogItem(self, tag, data):
         return 'added log item'
 
