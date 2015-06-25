@@ -3,20 +3,29 @@ import varnishapi,time,os,sys,syslog,traceback
 # LogDataManager responsible for recording of log data
 class LogDataManager:
     def __init__(self):
-        self.log = {}
-        self.logItem = None;
+        self.logReq = {}
+        self.logBereq = {}
 
-    def addLogItem(self, vxid, tag, data):
-        print "vxid: %d, tag: %s, data: %s" % (vxid, tag, data)
-        if tag == 'Begin':
-            self.logItem = {}
+    def addLogItem(self, vxid, requestType, tag, data):
+        print "vxid: %d, type: %s, tag: %s, data: %s" % (vxid, requestType, tag, data)
+
+        if type == 'b' and tag == 'Begin':
+            self.logReq = {}
+            self.logBereq = {}
         elif tag == 'End':
-            print self.logItem
-            self.log[vxid] = self.logItem
+
+            print self.logReq
+            print self.logBereq
+
+            if requestType == 'c':
+                self.logBereq = {}
+                self.logReq = {}
 
         if vxid > 0:
-            self.logItem[tag] = data.rstrip('\x00')
-        #self.log[vxid][ tag ] = data
+            if requestType == 'b':
+                self.logReq[tag] = data.rstrip('\x00')
+            elif requestType == 'c':
+                self.logBereq[tag] = data.rstrip('\x00')
 
     # separate, may be we can do bulk sql inserts later on
     def pushLogForVxId(self, vxid):
@@ -40,6 +49,9 @@ class LogReader:
         # unique / request
         vxid = cbd['vxid']
 
+        # request type
+        requestType = cbd['type']
+
         # tag, will be a number
         tag = cbd['tag']
 
@@ -50,7 +62,7 @@ class LogReader:
         data = cbd['data']
 
         # push to logDataManager for storage
-        self.logDataManager.addLogItem(vxid, t_tag, data);
+        self.logDataManager.addLogItem(vxid, requestType, t_tag, data);
 
 # called when the program starts up
 def main(sharedMemoryLog):
