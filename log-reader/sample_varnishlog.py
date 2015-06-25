@@ -3,19 +3,20 @@ import varnishapi,time,os,sys,syslog,traceback
 # LogDataManager responsible for recording of log data
 class LogDataManager:
     def __init__(self):
-        self.sessionVxId = 0;
-        self.logSessions = {}
+        self.log = {}
+        self.logItem = None;
 
     def addLogItem(self, vxid, tag, data):
-        print "sessionId: %d, vxid: %d, tag: %s, data: %s" % (self.sessionVxId, vxid, tag, data)
+        print "vxid: %d, tag: %s, data: %s" % (vxid, tag, data)
+        if tag == 'Begin':
+            self.logItem = {}
+        elif tag == 'End':
+            print self.logItem
+            self.log[vxid] = self.logItem
 
-        if self.sessionVxId == 0 and tag == 'Begin':
-            self.sessionVxId = vxid
-        elif vxid == self.sessionVxId and tag == 'End':
-            self.pushLogForVxId(vxid)
-
-            # reset to 0, new session will automatically set a new sessionVxId
-            self.sessionVxId = 0;
+        if vxid > 0:
+            self.logItem[tag] = data.rstrip('\x00')
+        #self.log[vxid][ tag ] = data
 
     # separate, may be we can do bulk sql inserts later on
     def pushLogForVxId(self, vxid):
