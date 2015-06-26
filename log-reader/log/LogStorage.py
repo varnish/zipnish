@@ -5,5 +5,5 @@ class LogStorage:
     def __init__(self):
         self.table = [];
 
-    def push(self, row):
-        print row
+    def push(self, obj):
+        print obj

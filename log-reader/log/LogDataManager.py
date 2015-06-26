@@ -9,7 +9,7 @@ class LogDataManager:
 
     def addLogItem(self, vxid, requestType, tag, data):
 
-        print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
+        #print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
 
         if type == 'c' and tag == 'Begin':
             self.logReq = {}
@@ -19,8 +19,11 @@ class LogDataManager:
                 #print self.logReq
                 #print self.logBereq
 
-                self.logBereq = {}
+                self.logStorage.push(self.logReq)
+                self.logStorage.push(self.logBereq)
+
                 self.logReq = {}
+                self.logBereq = {}
 
         if vxid > 0:
             if requestType == 'b':
