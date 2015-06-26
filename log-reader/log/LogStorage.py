@@ -7,7 +7,7 @@ class LogStorage:
         self.rows = []
         self.minNumOfRecordsForFlush = 5
 
-    def push(self, requestType, row):
+    def push(self, row):
 
         self.rows.append(row)
 
@@ -15,6 +15,6 @@ class LogStorage:
             self.flush()
 
     def flush(self):
-        print tabulate(self.rows, self.headers)
+        print self.rows
         self.rows = []
 

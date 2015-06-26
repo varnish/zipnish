@@ -7,6 +7,12 @@ class LogDataManager:
         self.logBereq = {}
         self.logStorage = logStorage
 
+        self.Tags = ['ReqURL', 'BereqURL']
+        self.MapTagToZipKinField = {
+                'ReqURL': 'span_name',
+                'BereqURL': 'span_name'
+                }
+
     def addLogItem(self, vxid, requestType, tag, data):
 
         #print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
@@ -19,17 +25,19 @@ class LogDataManager:
                 #print self.logReq
                 #print self.logBereq
 
-                self.logStorage.push('c', self.logReq)
-                self.logStorage.push('b', self.logBereq)
+                self.logStorage.push(self.logReq)
+                self.logStorage.push(self.logBereq)
 
                 self.logReq = {}
                 self.logBereq = {}
 
         if vxid > 0:
-            if requestType == 'b':
-                self.logBereq[tag] = data.rstrip('\x00')
-            elif requestType == 'c':
-                self.logReq[tag] = data.rstrip('\x00')
+            if (requestType == 'c' or requestType == 'b') and tag in self.Tags:
+                print 'requestType: %s, tag: %s' % (requestType, tag)
+                if requestType == 'c':
+                    self.logReq[ self.MapTagToZipKinField[tag] ] = data.rstrip('\x00')
+                elif requestType == 'b':
+                    self.logBereq[ self.MapTagToZipKinField[tag] ] = data.rstrip('\x00')
 
     # separate, may be we can do bulk sql inserts later on
     def pushLogForVxId(self, vxid):
