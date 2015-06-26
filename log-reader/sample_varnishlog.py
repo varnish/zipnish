@@ -7,17 +7,18 @@ class LogDataManager:
         self.logBereq = {}
 
     def addLogItem(self, vxid, requestType, tag, data):
-        print "vxid: %d, type: %s, tag: %s, data: %s" % (vxid, requestType, tag, data)
+
+        if tag.find('URL') > -1:
+            print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
 
         if type == 'b' and tag == 'Begin':
             self.logReq = {}
             self.logBereq = {}
         elif tag == 'End':
-
-            print self.logReq
-            print self.logBereq
-
             if requestType == 'c':
+                #print self.logReq
+                #print self.logBereq
+
                 self.logBereq = {}
                 self.logReq = {}
 
@@ -68,7 +69,7 @@ class LogReader:
 def main(sharedMemoryLog):
     try:
         # connect to varnish log
-        vap = varnishapi.VarnishLog()
+        vap = varnishapi.VarnishLog(['-g', 'request'])
 
         # connect to varnishapi and begin logging
         # logDataManager
