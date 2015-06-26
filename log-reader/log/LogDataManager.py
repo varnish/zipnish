@@ -19,8 +19,8 @@ class LogDataManager:
                 #print self.logReq
                 #print self.logBereq
 
-                self.logStorage.push(self.logReq)
-                self.logStorage.push(self.logBereq)
+                self.logStorage.push('c', self.logReq)
+                self.logStorage.push('b', self.logBereq)
 
                 self.logReq = {}
                 self.logBereq = {}

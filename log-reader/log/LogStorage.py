@@ -7,13 +7,14 @@ class LogStorage:
         self.rows = []
         self.minNumOfRecordsForFlush = 5
 
-    def push(self, obj):
-        self.rows.append([ obj['Timestamp'] ])
+    def push(self, requestType, obj):
+
+        self.rows.append([ obj['BereqURL'] ])
 
         if len(self.rows) > self.minNumOfRecordsForFlush:
             self.flush()
 
     def flush(self):
-        print tabulate(self.rows)
+        print tabulate(self.rows, ['BereqURL'])
         self.rows = []
 
