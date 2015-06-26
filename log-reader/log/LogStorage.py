@@ -5,17 +5,13 @@ from tabulate import tabulate
 class LogStorage:
     def __init__(self):
         self.rows = []
-        self.headers = ['URL']
         self.minNumOfRecordsForFlush = 5
 
-    def push(self, requestType, obj):
+    def push(self, requestType, row):
 
-        if requestType == 'c':
-            self.rows.append([ obj['ReqURL'] ])
-        elif requestType == 'b':
-            self.rows.append([ obj['BereqURL'] ])
+        self.rows.append(row)
 
-        if len(self.rows) > self.minNumOfRecordsForFlush:
+        if len(self.rows) >= self.minNumOfRecordsForFlush:
             self.flush()
 
     def flush(self):
