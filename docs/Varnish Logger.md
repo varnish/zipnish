@@ -6,7 +6,7 @@ Running the varnish logger script.
 
 > &gt; cd log-reader
 
-> &gt; python sample_varnishlog.py
+> &gt; python reader_varnishlog.py
 
 
 Essentially the following varnishlog should give us required information needed for ZipKin log.
