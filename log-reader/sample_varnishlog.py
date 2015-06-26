@@ -8,16 +8,15 @@ class LogDataManager:
 
     def addLogItem(self, vxid, requestType, tag, data):
 
-        if tag.find('URL') > -1:
-            print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
+        #print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
 
-        if type == 'b' and tag == 'Begin':
+        if type == 'c' and tag == 'Begin':
             self.logReq = {}
             self.logBereq = {}
         elif tag == 'End':
-            if requestType == 'c':
-                #print self.logReq
-                #print self.logBereq
+            if requestType == 'b':
+                print self.logReq
+                print self.logBereq
 
                 self.logBereq = {}
                 self.logReq = {}
