@@ -1,7 +1,7 @@
 ## Solution Steps ##
 
 1. Install ZipKin and have it up and running
-2. Feed false data to mysqlite database.
+2. Feed false data to mysql database.
 3. Replace false data generation layer with python varnish logger.
 
 
