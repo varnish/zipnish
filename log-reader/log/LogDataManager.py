@@ -2,9 +2,10 @@ import varnishapi,time,os,sys,syslog,traceback
 
 # LogDataManager responsible for recording of log data
 class LogDataManager:
-    def __init__(self):
+    def __init__(self, logStorage):
         self.logReq = {}
         self.logBereq = {}
+        self.logStorage = logStorage
 
     def addLogItem(self, vxid, requestType, tag, data):
 

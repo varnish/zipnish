@@ -1,5 +1,5 @@
 import varnishapi,os,sys,syslog,traceback
-from log import LogReader, LogDataManager
+from log import LogReader, LogDataManager, LogStorage
 
 # called when the program starts up
 def main(sharedMemoryLog):
@@ -21,8 +21,11 @@ def main(sharedMemoryLog):
         syslog.syslog(syslog.LOG_ERR, traceback.format_exc())
 
 if __name__ == '__main__':
+    # log data storage
+    logStorage = LogStorage()
+
     # manages log data
-    logDataManager = LogDataManager()
+    logDataManager = LogDataManager(logStorage)
 
     # shared memory log reader
     shmLog = LogReader(logDataManager)
