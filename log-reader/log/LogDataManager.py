@@ -23,11 +23,19 @@ class LogDataManager:
             self.logStorage.push(self.logRow)
             self.logRow = {}
 
+
         if tag in self.Tags:
             self.logRow[ self.MapTagToZipKinField[tag] ] = data.rstrip('\x00')
 
+        elif tag == 'Timestamp':
+            split = data.split(': ', 1)
+            timestamp = split[1].rstrip('\x00')
+            timeValues = timestamp.split(' ')
+
+            self.logRow[ 'timestamp-' + split[0] ] = timeValues[0]
+
         elif tag == 'ReqHeader' or tag == 'BereqHeader':
-            split = data.split(': ')
+            split = data.split(': ', 1)
             value = split[1].rstrip('\x00')
 
             if split[0] == 'X-Varnish':
@@ -51,8 +59,6 @@ class LogDataManager:
 
                 self.logRow['ipv4'] = ipv4
                 self.logRow['port'] = port
-
-                print tag + ': ' + split[1]
 
     # separate, may be we can do bulk sql inserts later on
     def pushLogForVxId(self, vxid):
