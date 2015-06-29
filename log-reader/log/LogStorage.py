@@ -5,7 +5,7 @@ from tabulate import tabulate
 class LogStorage:
     def __init__(self):
         self.rows = []
-        self.minNumOfRecordsForFlush = 5
+        self.minNumOfRecordsForFlush = 1
 
     def push(self, row):
 
@@ -15,6 +15,7 @@ class LogStorage:
             self.flush()
 
     def flush(self):
+        print
         print self.rows
         self.rows = []
 
