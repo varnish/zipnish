@@ -32,7 +32,8 @@ class LogDataManager:
             timestamp = split[1].rstrip('\x00')
             timeValues = timestamp.split(' ')
 
-            self.logRow[ 'timestamp-' + split[0] ] = timeValues[0]
+            self.logRow[ 'timestamp-abs-' + split[0] ] = timeValues[0]
+            self.logRow[ 'timestamp-duration-' + split[0] ] = timeValues[0]
 
         elif tag == 'ReqHeader' or tag == 'BereqHeader':
             split = data.split(': ', 1)
