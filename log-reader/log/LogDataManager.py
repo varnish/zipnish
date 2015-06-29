@@ -7,7 +7,7 @@ class LogDataManager:
         self.logBereq = {}
         self.logStorage = logStorage
 
-        self.Tags = ['ReqURL', 'BereqURL']
+        self.Tags = ['ReqURL', 'BereqURL', 'ReqHeader', 'BereqHeader']
         self.MapTagToZipKinField = {
                 'ReqURL': 'span_name',
                 'BereqURL': 'span_name'
@@ -33,8 +33,14 @@ class LogDataManager:
 
         if vxid > 0:
             if (requestType == 'c' or requestType == 'b') and tag in self.Tags:
-                print 'requestType: %s, tag: %s' % (requestType, tag)
-                if requestType == 'c':
+                if tag == 'ReqHeader' or tag == 'BereqHeader':
+                    split = data.split(': ')
+
+                    if split[0] == 'X-Varnish':
+                        self.logReq['span_id'] = split[1].rstrip('\x00')
+                        self.logBereq['trace_id'] = self.logReq['span_id']
+                    #print tag + ' - ' + split[0] + ' -> ' + split[1]
+                elif requestType == 'c':
                     self.logReq[ self.MapTagToZipKinField[tag] ] = data.rstrip('\x00')
                 elif requestType == 'b':
                     self.logBereq[ self.MapTagToZipKinField[tag] ] = data.rstrip('\x00')
