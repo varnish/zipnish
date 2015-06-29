@@ -25,6 +25,7 @@ class LogDataManager:
 
         if tag in self.Tags:
             self.logRow[ self.MapTagToZipKinField[tag] ] = data.rstrip('\x00')
+
         elif tag == 'ReqHeader' or tag == 'BereqHeader':
             split = data.split(': ')
             value = split[1].rstrip('\x00')
@@ -32,8 +33,13 @@ class LogDataManager:
             if split[0] == 'X-Varnish':
                 self.logRow['span_id'] = value
                 self.logRow['trace_id'] = value
+
             elif split[0] == 'X-Varnish-Parent':
                 self.logRow['parent_id'] = value
+
+            elif split[0] == 'X-Varnish-Debug':
+                self.logRow['debug'] = value
+
             elif split[0] == 'Host':
                 ipv4 = value
                 port = 0
