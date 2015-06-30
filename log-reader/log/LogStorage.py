@@ -31,7 +31,7 @@ class LogStorage:
             row['parent_id'] = 0
 
         if row['request_type'] == 'c':
-            # client request considered for, span processing
+            # client request considered for span
             row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
             row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
             row['timestamp-duration-Resp'] = self.convertDuration(row['timestamp-duration-Resp'])
@@ -55,6 +55,16 @@ class LogStorage:
             self.spans.append( span )
 
         elif row['request_type'] == 'b':
+            # backend request considered for annotations
+            row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
+            row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
+            row['timestamp-duration-Bereq'] = self.convertDuration(row['timestamp-duration-Bereq'])
+            row['timestamp-abs-Bereq'] = self.convertTimestamp(row['timestamp-abs-Bereq'])
+            row['timestamp-duration-Beresp'] = self.convertDuration(row['timestamp-duration-Beresp'])
+            row['timestamp-abs-Beresp'] = self.convertTimestamp(row['timestamp-abs-Beresp'])
+            row['timestamp-duration-BerespBody'] = self.convertDuration(row['timestamp-duration-BerespBody'])
+            row['timestamp-abs-BerespBody'] = self.convertTimestamp(row['timestamp-abs-BerespBody'])
+
             print 'Backend Request, process client start, server recieve, server send, client recieve'
             print
 
