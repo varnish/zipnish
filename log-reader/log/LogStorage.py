@@ -8,8 +8,8 @@ class LogStorage:
         self.spans = []
         self.annotations = []
 
-        self.minNumOfSpansToFlush = 1
-        self.minNumOfAnnotationsToFlush = 1
+        self.minNumOfSpansToFlush = 2
+        self.minNumOfAnnotationsToFlush = 4
 
     def push(self, row):
         # process row to attach data to span / annotation
@@ -47,11 +47,13 @@ class LogStorage:
                 'created_ts': row['timestamp-abs-Start']
             }
 
+            # Server Recieve
             self.spans.append( copy.copy(span) )
 
             span['duration'] = row['timestamp-duration-Resp']
             span['created_ts'] = row['timestamp-abs-Resp']
 
+            # Server Response
             self.spans.append( span )
 
         elif row['request_type'] == 'b':
@@ -65,14 +67,41 @@ class LogStorage:
             row['timestamp-duration-BerespBody'] = self.convertDuration(row['timestamp-duration-BerespBody'])
             row['timestamp-abs-BerespBody'] = self.convertTimestamp(row['timestamp-abs-BerespBody'])
 
-            print 'Backend Request, process client start, server recieve, server send, client recieve'
+            annotation = {\
+                'span_id': row['span_id'], \
+                'trace_id': row['trace_id'], \
+                'span_name': row['span_name'], \
+                'service_name': '', \
+                'value': 'cs', \
+                'ipv4': row['ipv4'], \
+                'port': row['port'], \
+                'a_timestamp': row['timestamp-abs-Start'], \
+                'duration': row['timestamp-duration-Start']
+            }
 
-            print row['timestamp-abs-Start']
-            print row['timestamp-abs-Bereq']
-            print row['timestamp-abs-Beresp']
-            print row['timestamp-abs-BerespBody']
+            # Client Start
+            self.annotations.append( copy.copy(annotation) )
 
-            print
+            annotation['a_timestamp'] = row['timestamp-abs-Bereq']
+            annotation['duration'] = row['timestamp-duration-Bereq']
+            annotation['value'] = 'sr'
+
+            # Server Recieve
+            self.annotations.append( copy.copy(annotation) )
+
+            annotation['a_timestamp'] = row['timestamp-abs-Beresp']
+            annotation['duration'] = row['timestamp-duration-Beresp']
+            annotation['value'] = 'ss'
+
+            # Server Response
+            self.annotations.append( copy.copy(annotation) )
+
+            annotation['a_timestamp'] = row['timestamp-abs-BerespBody']
+            annotation['duration'] = row['timestamp-duration-BerespBody']
+            annotation['value'] = 'cr'
+
+            # Client Recieve
+            self.annotations.append( copy.copy(annotation) )
 
     def convertTimestamp(self, timestamp):
         # probably varnish GMT-0, need to confirm it later
