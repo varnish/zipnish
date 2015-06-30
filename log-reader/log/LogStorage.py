@@ -9,10 +9,15 @@ class LogStorage:
 
     def push(self, row):
 
-        self.rows.append(row)
+        # will result in one or more rows based on timestamp values and requestType
+        processedRows = self.preProcess(row)
 
         if len(self.rows) >= self.minNumOfRecordsForFlush:
             self.flush()
+
+    def preProcess(self, row):
+        # preprocess row data
+        pass
 
     def flush(self):
         print
