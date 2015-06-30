@@ -8,19 +8,21 @@ class LogStorage:
         self.spans = []
         self.annotations = []
 
-        self.minNumOfSpanRecordsForFlush = 1
-        self.minNumOfAnnotationRecordsForFlush = 1
+        self.minNumOfSpansToFlush = 1
+        self.minNumOfAnnotationsToFlush = 1
 
     def push(self, row):
+        # process row to attach data to span / annotation
+        self.process(row)
 
-        # will result in one or more rows based on timestamp values and requestType
-        processedRows = self.preProcess(row)
+        if len(self.spans) >= self.minNumOfSpansToFlush:
+            self.flushSpans()
 
-        if len(self.spans) >= self.minNumOfRecordsForFlush or len(self.annotations) >= self.minNumOfAnnotationRecordsForFlush:
-            self.flush()
+        if len(self.annotations) >= self.minNumOfAnnotationsToFlush:
+            self.flushAnnotations()
 
-    def preProcess(self, row):
-        # preprocess row data
+    def process(self, row):
+        # process row data
         if row['request_type'] == 'c':
             print 'Client Request, process client start and client recieve'
             print row['timestamp-abs-Start'] + ', ' + row['timestamp-abs-Resp']
@@ -28,7 +30,10 @@ class LogStorage:
             print 'Backend Request, process client start, server recieve, server send, client recieve'
             print
 
-    def flush(self):
-        print
-        print self.rows
-        self.rows = []
+    def flushSpans(self):
+        print self.spans
+        self.spans = []
+
+    def flushAnnotations(self):
+        print self.annotations
+        self.annotations = []
