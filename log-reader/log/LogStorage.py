@@ -23,9 +23,32 @@ class LogStorage:
 
     def process(self, row):
         # process row data
+
+        if 'debug' not in row:
+            row['debug'] = 0
+
+        if 'parent_id' not in row:
+            row['parent_id'] = 0
+
         if row['request_type'] == 'c':
-            print 'Client Request, process client start and client recieve'
-            print row['timestamp-abs-Start'] + ', ' + row['timestamp-abs-Resp']
+            # client request considered for, span processing
+            span = {\
+                'span_id': row['span_id'], \
+                'parent_id': row['parent_id'], \
+                'trace_id': row['trace_id'], \
+                'span_name': row['span_name'], \
+                'debug': row['debug'], \
+                'duration': row['timestamp-duration-Start'], \
+                'created_ts': row['timestamp-abs-Start']
+            }
+
+            self.spans.append( copy.copy(span) )
+
+            span['duration'] = row['timestamp-duration-Resp']
+            span['created_ts'] = row['timestamp-abs-Resp']
+
+            self.spans.append( span )
+
         elif row['request_type'] == 'b':
             print 'Backend Request, process client start, server recieve, server send, client recieve'
             print
