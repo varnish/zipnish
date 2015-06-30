@@ -17,7 +17,10 @@ class LogStorage:
 
     def preProcess(self, row):
         # preprocess row data
-        pass
+        if row['request_type'] == 'c':
+            print 'Client request'
+        elif row['request_type'] == 'b':
+            print 'Backend Request'
 
     def flush(self):
         print
