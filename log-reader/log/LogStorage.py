@@ -32,9 +32,10 @@ class LogStorage:
 
         if row['request_type'] == 'c':
             # client request considered for, span processing
-
-            row['timestamp-duration-Start'] = row['timestamp-duration-Start'].replace('.', '')
-            row['timestamp-abs-Start'] = row['timestamp-abs-Start'].replace('.', '')
+            row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
+            row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
+            row['timestamp-duration-Resp'] = self.convertDuration(row['timestamp-duration-Resp'])
+            row['timestamp-abs-Resp'] = self.convertTimestamp(row['timestamp-abs-Resp'])
 
             span = {\
                 'span_id': row['span_id'], \
@@ -56,6 +57,17 @@ class LogStorage:
         elif row['request_type'] == 'b':
             print 'Backend Request, process client start, server recieve, server send, client recieve'
             print
+
+    def convertTimestamp(self, timestamp):
+        return timestamp.replace('.', '')
+
+    def convertDuration(self, duration):
+        duration = duration.replace('.', '').lstrip('0')
+
+        if len(duration) == 0:
+            duration = 0
+
+        return duration
 
     def flushSpans(self):
         print self.spans
