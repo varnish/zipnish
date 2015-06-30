@@ -75,6 +75,7 @@ class LogStorage:
             print
 
     def convertTimestamp(self, timestamp):
+        # probably varnish GMT-0, need to confirm it later
         return int(float(timestamp))
 
     def convertDuration(self, duration):
