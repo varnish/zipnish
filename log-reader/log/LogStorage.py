@@ -67,23 +67,18 @@ class LogStorage:
 
             print 'Backend Request, process client start, server recieve, server send, client recieve'
 
-            print row['timestamp-abs-Start'] + ' -> ' + row['timestamp-duration-Start']
-            print row['timestamp-abs-Bereq'] + ' -> ' + row['timestamp-duration-Bereq']
-            print row['timestamp-abs-Beresp'] + ' -> ' + row['timestamp-duration-Beresp']
-            print row['timestamp-abs-BerespBody'] + ' -> ' + row['timestamp-duration-BerespBody']
+            print row['timestamp-abs-Start']
+            print row['timestamp-abs-Bereq']
+            print row['timestamp-abs-Beresp']
+            print row['timestamp-abs-BerespBody']
 
             print
 
     def convertTimestamp(self, timestamp):
-        return timestamp.replace('.', '')
+        return int(float(timestamp))
 
     def convertDuration(self, duration):
-        duration = duration.replace('.', '').lstrip('0')
-
-        if len(duration) == 0:
-            duration = '0'
-
-        return duration
+        return int(float(duration))
 
     def flushSpans(self):
         print self.spans
