@@ -113,9 +113,27 @@ class LogStorage:
         return int(float(duration))
 
     def flushSpans(self):
-        print self.spans
+        self.printTable(self.spans)
         self.spans = []
 
     def flushAnnotations(self):
-        print self.annotations
+        self.printTable(self.annotations)
         self.annotations = []
+
+    def printTable(self, rows):
+        output = {\
+                    'span_id': [], \
+                    'span_name': [], \
+                    'trace_id': [] \
+                }
+
+        for dictionary in rows:
+            for key, value in dictionary.iteritems():
+                if key in output:
+                    output[ key ].append( value )
+
+        print tabulate(output, output.keys())
+        print
+
+
+
