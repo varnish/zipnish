@@ -123,17 +123,29 @@ class LogStorage:
     def printTable(self, rows):
         output = {\
                     'span_id': [], \
+                    'trace_id': [], \
                     'span_name': [], \
-                    'trace_id': [] \
+                    'duration': [] \
                 }
+
+        if 'a_timestamp' in rows[0]:
+            #output['service_name'] = []
+            output['value'] = []
+            output['ipv4'] = []
+            output['port'] = []
+            output['a_timestamp'] = []
+        else:
+            output['parent_id'] = []
+            output['debug'] = []
+            output['created_ts'] = []
+
 
         for dictionary in rows:
             for key, value in dictionary.iteritems():
                 if key in output:
                     output[ key ].append( value )
 
-        print tabulate(output, output.keys())
+        print tabulate(output, output.keys(), tablefmt="fancy_grid")
         print
-
 
 
