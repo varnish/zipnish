@@ -32,6 +32,10 @@ class LogStorage:
 
         if row['request_type'] == 'c':
             # client request considered for, span processing
+
+            row['timestamp-duration-Start'] = row['timestamp-duration-Start'].replace('.', '')
+            row['timestamp-abs-Start'] = row['timestamp-abs-Start'].replace('.', '')
+
             span = {\
                 'span_id': row['span_id'], \
                 'parent_id': row['parent_id'], \
