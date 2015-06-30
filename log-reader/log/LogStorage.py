@@ -79,6 +79,8 @@ class LogStorage:
         return int(float(timestamp))
 
     def convertDuration(self, duration):
+        # this one is the most important value, below conversion gives us
+        # value in seconds, milliseconds through would be better
         return int(float(duration))
 
     def flushSpans(self):
