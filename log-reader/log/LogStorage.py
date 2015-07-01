@@ -162,7 +162,6 @@ class LogStorage:
             output['port'] = []
             output['a_timestamp'] = []
         else:
-            output['link'] = []
             output['parent_id'] = []
             output['debug'] = []
             output['created_ts'] = []
