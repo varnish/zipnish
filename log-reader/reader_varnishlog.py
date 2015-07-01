@@ -11,18 +11,6 @@ from log import LogDatabase, LogStorage
 # called when the program starts up
 def main(sharedMemoryLog):
     try:
-        # connection parameters to database
-        dbParams = {\
-                        'host':     'localhost', \
-                        'db':       'zipkin', \
-                        'user':     'zipkin', \
-                        'passwd':   'kinect' \
-                    }
-
-        # connect to log database
-        logDatabase = LogDatabase(**dbParams)
-        return
-
         # connect to varnish log
         vap = varnishapi.VarnishLog(['-g', 'request'])
 
@@ -40,8 +28,19 @@ def main(sharedMemoryLog):
         syslog.syslog(syslog.LOG_ERR, traceback.format_exc())
 
 if __name__ == '__main__':
+    # connection parameters to database
+    dbParams = {\
+                    'host':     'localhost', \
+                    'db':       'zipkin', \
+                    'user':     'zipkin', \
+                    'passwd':   'kinect' \
+                }
+
+    # connect to log database
+    logDatabase = LogDatabase(**dbParams)
+
     # log data storage
-    logStorage = LogStorage()
+    logStorage = LogStorage(logDatabase)
 
     # manages log data
     logDataManager = LogDataManager(logStorage)
