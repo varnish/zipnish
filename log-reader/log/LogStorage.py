@@ -1,6 +1,8 @@
 import time
 import copy
 
+# tabulate, collections used for visual printing data validation
+from collections import OrderedDict
 from tabulate import tabulate
 
 # LogStorage - read and do basic processing of incoming data
@@ -171,7 +173,10 @@ class LogStorage:
                 if key in output:
                     output[ key ].append( value )
 
-        print tabulate(output, output.keys(), tablefmt="fancy_grid")
+        headers = sorted(output.keys())
+        od = OrderedDict(sorted(output.items()))
+
+        print tabulate(od, headers, tablefmt="fancy_grid")
         print
 
 
