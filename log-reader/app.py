@@ -34,7 +34,8 @@ if __name__ == '__main__':
                     'db':       'zipkin', \
                     'user':     'zipkin', \
                     'passwd':   'kinect', \
-                    'truncateTables': True \
+                    'keep_alive': True, \
+                    'truncate_tables': True \
                 }
 
     # connect to log database
