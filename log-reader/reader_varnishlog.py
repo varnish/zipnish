@@ -1,4 +1,10 @@
-import varnishapi,os,sys,syslog,traceback
+# basic stuff required for logging / debugging
+import os, sys, syslog, traceback
+
+# varnishapi to interact with varnishlog
+import varnishapi
+
+# log module to manage data flow coming in from varnishlog into ZipKin database
 from log import LogReader, LogDataManager, LogStorage
 
 # called when the program starts up
