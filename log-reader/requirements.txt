@@ -1,2 +1,4 @@
+MySQL-python==1.2.5
+simplemysql==1.0
 tabulate==0.7.5
 wheel==0.24.0
