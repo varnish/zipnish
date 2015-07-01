@@ -92,6 +92,7 @@ class LogStorage:
                 clientRequestVxId = self.requestKeyValStore[ row['span_id'] ]
                 del self.requestKeyValStore[ row['span_id'] ]
                 row['span_id'] = clientRequestVxId
+                row['trace_id'] = clientRequestVxId
 
 
             annotation = {\
