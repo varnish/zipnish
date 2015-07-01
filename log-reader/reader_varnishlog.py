@@ -33,7 +33,8 @@ if __name__ == '__main__':
                     'host':     'localhost', \
                     'db':       'zipkin', \
                     'user':     'zipkin', \
-                    'passwd':   'kinect' \
+                    'passwd':   'kinect', \
+                    'truncateTables': True \
                 }
 
     # connect to log database
