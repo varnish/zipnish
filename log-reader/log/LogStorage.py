@@ -159,7 +159,7 @@ class LogStorage:
                 }
 
         if 'a_timestamp' in rows[0]:
-            #output['service_name'] = []
+            output['service_name'] = []
             output['value'] = []
             output['ipv4'] = []
             output['port'] = []
