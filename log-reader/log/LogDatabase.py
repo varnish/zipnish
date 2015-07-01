@@ -6,7 +6,7 @@ class LogDatabase:
         self.dbParams = keyVals
 
         # table information
-        self.tablesPrefix = 'zipkin_'
+        self.tablePrefix = 'zipkin_'
         self.tables = ['spans', 'annotations']
 
         # connect to database
@@ -27,9 +27,12 @@ class LogDatabase:
     def getDB(self):
         return self.conn
 
-    def insert(self, table, rows):
-        print "Table: " + table
-        print rows
+    def insert(self, tableName, rows):
+        table = self.tablePrefix + tableName
+        if len(rows) > 0:
+            for row in rows:
+                self.db.insert(table, row);
+            self.db.commit()
 
     # truncate data in tables related to our application
     def truncateTables(self):
@@ -38,7 +41,7 @@ class LogDatabase:
         if self.db is not None and self.db.is_open():
             for tableName in self.tables:
                 # table prefix + table name
-                table = self.tablesPrefix + tableName
+                table = self.tablePrefix + tableName
 
                 print 'truncating table -> ' + table
 
