@@ -1,5 +1,6 @@
 import time
 import copy
+
 from tabulate import tabulate
 
 # LogStorage - read and do basic processing of incoming data
@@ -44,7 +45,7 @@ class LogStorage:
                 'span_name': row['span_name'], \
                 'debug': row['debug'], \
                 'duration': row['timestamp-duration-Start'], \
-                'created_ts': row['timestamp-abs-Start']
+                'created_ts': row['timestamp-abs-Start'] \
             }
 
             # Server Recieve
@@ -76,7 +77,7 @@ class LogStorage:
                 'ipv4': row['ipv4'], \
                 'port': row['port'], \
                 'a_timestamp': row['timestamp-abs-Start'], \
-                'duration': row['timestamp-duration-Start']
+                'duration': row['timestamp-duration-Start'] \
             }
 
             # Client Start
