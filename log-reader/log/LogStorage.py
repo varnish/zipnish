@@ -99,7 +99,7 @@ class LogStorage:
                 'span_id': row['span_id'], \
                 'trace_id': row['trace_id'], \
                 'span_name': row['span_name'], \
-                'service_name': '', \
+                'service_name': row['span_name'], \
                 'value': 'cs', \
                 'ipv4': row['ipv4'], \
                 'port': row['port'], \
@@ -133,7 +133,7 @@ class LogStorage:
 
     def convertTimestamp(self, timestamp):
         # probably varnish GMT-0, need to confirm it later
-        return int(float(timestamp))
+        return int(float(timestamp)) * 1000000
 
     def convertDuration(self, duration):
         # this one is the most important value, below conversion gives us
@@ -147,7 +147,7 @@ class LogStorage:
 
     def flushAnnotations(self):
         #self.printTable(self.annotations)
-        self.db.insert('annotations', self.spans)
+        self.db.insert('annotations', self.annotations)
         self.annotations = []
 
     def printTable(self, rows):
