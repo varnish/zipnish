@@ -5,7 +5,8 @@ import os, sys, syslog, traceback
 import varnishapi
 
 # log module to manage data flow coming in from varnishlog into ZipKin database
-from log import LogReader, LogDataManager, LogStorage
+from log import LogReader, LogDataManager
+from log import LogDatabase, LogStorage
 
 # called when the program starts up
 def main(sharedMemoryLog):
