@@ -141,13 +141,13 @@ class LogStorage:
         return int(float(duration))
 
     def flushSpans(self):
-        self.printTable(self.spans)
-        #self.db.insert('spans', self.spans)
+        #self.printTable(self.spans)
+        self.db.insert('spans', self.spans)
         self.spans = []
 
     def flushAnnotations(self):
-        self.printTable(self.annotations)
-        #self.db.insert('annotations', self.spans)
+        #self.printTable(self.annotations)
+        self.db.insert('annotations', self.spans)
         self.annotations = []
 
     def printTable(self, rows):

@@ -27,19 +27,20 @@ class LogDatabase:
     def getDB(self):
         return self.conn
 
-    def insert(self, table, **params):
-        print params
+    def insert(self, table, rows):
+        print "Table: " + table
+        print rows
 
     # truncate data in tables related to our application
     def truncateTables(self):
-        print 'Truncating tables'
+        print 'Truncating Tables:'
 
         if self.db is not None and self.db.is_open():
             for tableName in self.tables:
-                print 'truncating table: ' + table
-
                 # table prefix + table name
                 table = self.tablesPrefix + tableName
+
+                print 'truncating table -> ' + table
 
                 # delete table, and commit changes to database
                 self.db.delete(table)
