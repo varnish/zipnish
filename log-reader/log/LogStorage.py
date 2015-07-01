@@ -6,11 +6,25 @@ from tabulate import tabulate
 # LogStorage - read and do basic processing of incoming data
 class LogStorage:
     def __init__(self, db):
+        # connection to database
         self.db = db
+
+        # request key value storage,
+        # stores relationships between Client Request and Backend Request
+        # client VxId => client link
+        # This enables us to pick up Client VxId when we recieve a backend request
+        self.requestKeyValStore = {}
+
+        # Database spans
         self.spans = []
+
+        # database annotations
         self.annotations = []
 
+        # minimum number of span data points before flushing data to database
         self.minNumOfSpansToFlush = 2
+
+        # minimum number of annotation data points before flushing data to database
         self.minNumOfAnnotationsToFlush = 4
 
     def push(self, row):
