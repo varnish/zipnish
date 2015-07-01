@@ -175,9 +175,9 @@ class LogStorage:
                     output[ key ].append( value )
 
         headers = sorted(output.keys())
-        od = OrderedDict(sorted(output.items()))
+        orderedDictionary = OrderedDict(sorted(output.items()))
 
-        print tabulate(od, headers, tablefmt="fancy_grid")
+        print tabulate(orderedDictionary, headers, tablefmt="fancy_grid")
         print
 
 
