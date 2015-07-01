@@ -1,8 +1,8 @@
-## Solution Steps ##
+## Next Steps ##
 
-1. Install ZipKin and have it up and running
-2. Feed false data to mysql database.
-3. Replace false data generation layer with python varnish logger.
+1. Mimic data flow with parent headers etc. just as zip kin uses inside you application.
+2. Make the application function as close to ZipKin as possible.
+3. 
 
 
 ## Tracking Micro-Services via Varnish Cache ##
