@@ -94,6 +94,9 @@ class LogStorage:
                 row['span_id'] = clientRequestVxId
                 row['trace_id'] = clientRequestVxId
 
+            if row['ipv4'] is not None:
+                row['ipv4'] = self.convertIP2Integer(row['ipv4'])
+
 
             annotation = {\
                 'span_id': row['span_id'], \
@@ -130,6 +133,10 @@ class LogStorage:
 
             # Client Recieve
             self.annotations.append( copy.copy(annotation) )
+
+    def convertIP2Integer(self, ip):
+        parts = ip.split('.')
+        return (int(parts[0]) << 24) + (int(parts[1]) << 16) + (int(parts[2]) << 8) + int(parts[3])
 
     def convertTimestamp(self, timestamp):
         # probably varnish GMT-0, need to confirm it later
