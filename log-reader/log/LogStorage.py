@@ -45,6 +45,7 @@ class LogStorage:
                 'trace_id': row['trace_id'], \
                 'span_name': row['span_name'], \
                 'debug': row['debug'], \
+                'link': row['link'], \
                 'duration': row['timestamp-duration-Start'], \
                 'created_ts': row['timestamp-abs-Start'] \
             }
@@ -116,10 +117,12 @@ class LogStorage:
 
     def flushSpans(self):
         self.printTable(self.spans)
+        #self.db.insert('spans', self.spans)
         self.spans = []
 
     def flushAnnotations(self):
         self.printTable(self.annotations)
+        #self.db.insert('annotations', self.spans)
         self.annotations = []
 
     def printTable(self, rows):
@@ -137,10 +140,10 @@ class LogStorage:
             output['port'] = []
             output['a_timestamp'] = []
         else:
+            output['link'] = []
             output['parent_id'] = []
             output['debug'] = []
             output['created_ts'] = []
-
 
         for dictionary in rows:
             for key, value in dictionary.iteritems():

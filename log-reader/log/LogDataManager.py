@@ -18,22 +18,31 @@ class LogDataManager:
 
         if tag == 'Begin':
             self.logRow = {}
+
         elif tag == 'End':
             self.logRow['request_type'] = requestType
             self.logStorage.push(self.logRow)
+
             self.logRow = {}
 
 
         if tag in self.Tags:
             self.logRow[ self.MapTagToZipKinField[tag] ] = data.rstrip('\x00')
 
+        elif tag == 'Link':
+            value = data.rstrip('\x00')
+            value = value[6:]
+            value = value[:value.find(' ')].strip(' ')
+
+            self.logRow['link'] = value
+
         elif tag == 'Timestamp':
             split = data.split(': ', 1)
             timestamp = split[1].rstrip('\x00')
             timeValues = timestamp.split(' ')
 
-            self.logRow[ 'timestamp-abs-' + split[0] ] = timeValues[0]
-            self.logRow[ 'timestamp-duration-' + split[0] ] = timeValues[2]
+            self.logRow['timestamp-abs-' + split[0]] = timeValues[0]
+            self.logRow['timestamp-duration-' + split[0]] = timeValues[2]
 
         elif tag == 'ReqHeader' or tag == 'RespHeader' or tag == 'BereqHeader' or tag == 'BerespHeader':
             split = data.split(': ', 1)
@@ -61,7 +70,3 @@ class LogDataManager:
                 self.logRow['ipv4'] = ipv4
                 self.logRow['port'] = port
 
-    # separate, may be we can do bulk sql inserts later on
-    def pushLogForVxId(self, vxid):
-        # sql query for insertion
-        return

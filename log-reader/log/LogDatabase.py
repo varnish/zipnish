@@ -15,3 +15,6 @@ class LogDatabase:
 
     def getConnection(self):
         return self.conn
+
+    def insert(self, table, **params):
+        print params
