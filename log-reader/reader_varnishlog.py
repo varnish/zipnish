@@ -11,6 +11,18 @@ from log import LogDatabase, LogStorage
 # called when the program starts up
 def main(sharedMemoryLog):
     try:
+        # connection parameters to database
+        dbParams = {\
+                        'host':     'localhost', \
+                        'db':       'zipkin', \
+                        'user':     'zipkin', \
+                        'passwd':   'kinect' \
+                    }
+
+        # connect to log database
+        logDatabase = LogDatabase(**dbParams)
+        return
+
         # connect to varnish log
         vap = varnishapi.VarnishLog(['-g', 'request'])
 
