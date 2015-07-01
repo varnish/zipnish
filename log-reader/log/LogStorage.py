@@ -53,13 +53,15 @@ class LogStorage:
             row['timestamp-duration-Resp'] = self.convertDuration(row['timestamp-duration-Resp'])
             row['timestamp-abs-Resp'] = self.convertTimestamp(row['timestamp-abs-Resp'])
 
+            # add backend request link as key, add reference to client request
+            self.requestKeyValStore[row['link']] = row['span_id']
+
             span = {\
                 'span_id': row['span_id'], \
                 'parent_id': row['parent_id'], \
                 'trace_id': row['trace_id'], \
                 'span_name': row['span_name'], \
                 'debug': row['debug'], \
-                'link': row['link'], \
                 'duration': row['timestamp-duration-Start'], \
                 'created_ts': row['timestamp-abs-Start'] \
             }
@@ -83,6 +85,12 @@ class LogStorage:
             row['timestamp-abs-Beresp'] = self.convertTimestamp(row['timestamp-abs-Beresp'])
             row['timestamp-duration-BerespBody'] = self.convertDuration(row['timestamp-duration-BerespBody'])
             row['timestamp-abs-BerespBody'] = self.convertTimestamp(row['timestamp-abs-BerespBody'])
+
+            if row['span_id'] in self.requestKeyValStore:
+                clientRequestVxId = self.requestKeyValStore[ row['span_id'] ]
+                del self.requestKeyValStore[ row['span_id'] ]
+                row['span_id'] = clientRequestVxId
+
 
             annotation = {\
                 'span_id': row['span_id'], \
