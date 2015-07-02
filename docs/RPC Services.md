@@ -31,6 +31,8 @@ Try the following commands on your command line / bash.
 > npm install
 ```
 
+``npm install`` will install the modules required to run the service.
+
 ***Creating Services***
 
 A generic web-service code is available inside ``rpc-service`` on root.
