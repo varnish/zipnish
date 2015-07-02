@@ -39,13 +39,13 @@ A generic web-service code is available inside ``rpc-service`` on root.
 
 Initiate a parent service using Node.js command,
 
-``node app.js --port 5000 --address 127.0.0.1 --service 'Parent'``
+``node app.js --port 9000 --address 127.0.0.1 --service 'Parent'``
 
 ***Command line parameters***
 
 | Name        | Value           | Status    | Example |
 | ------------- |-------------| -----|-----|----|
-| port      | integer > 0 | required | --port 5000 |
+| port      | integer > 0 | required | --port 9000 |
 | address      | ip-address / domain name to a web-service      |   required | --address 127.0.0.1 |
 | service | A string to specify service name to run.      |    required |  --service 'Fetch News' |
 | call | repeat argument to make call to multiple RPC-services in parallel. This can be url to an external service as well, just think of it as specifying a URL for web-service. e.g.      |     | --call 127.0.0.1:5001/ |
