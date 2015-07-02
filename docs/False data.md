@@ -1,3 +1,7 @@
+False data document although irrelevant as of now.
+But it remains here for understandability reason, for example, if one 
+might want to extract certain code snippets e.g. generating timestamps
+etc.
 
 ***DB Schema***
 
