@@ -50,8 +50,9 @@ class LogStorage:
 
         if row['request_type'] == 'c':
             # client request considered for span
-            row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
             row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
+            row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
+
             row['timestamp-duration-Resp'] = self.convertDuration(row['timestamp-duration-Resp'])
             row['timestamp-abs-Resp'] = self.convertTimestamp(row['timestamp-abs-Resp'])
 
@@ -146,7 +147,13 @@ class LogStorage:
     def convertDuration(self, duration):
         # this one is the most important value, below conversion gives us
         # value in seconds, milliseconds through would be better
-        return int(float(duration))
+        duration = duration.replace('.', '').lstrip('0')
+
+        if len(duration) > 0:
+            duration = int(duration)
+        else:
+            duration = 0
+        return duration
 
     def flushSpans(self):
         #self.printTable(self.spans)
