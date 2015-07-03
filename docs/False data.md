@@ -1,10 +1,10 @@
 False data document although irrelevant as of now.
-But it remains here for understandability reason, for example, if one 
+
+But it remains here for understandability reason, for example, if one
 might want to extract certain code snippets e.g. generating timestamps
 etc.
 
 ***DB Schema***
-
 Spans
 
 ```
@@ -43,7 +43,7 @@ int ( time.time() * 1000000 )
 
 ***Process***
 
-1. Start from span table. 
+1. Start from span table.
  * Generate 19 digit unique number.
  * Insert that unique number into -> span_id
    * if **parent_id** is available from headers insert it, otherwise leave it NULL
