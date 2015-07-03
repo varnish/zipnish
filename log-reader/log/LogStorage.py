@@ -140,7 +140,8 @@ class LogStorage:
 
     def convertTimestamp(self, timestamp):
         # probably varnish GMT-0, need to confirm it later
-        return int(float(timestamp)) * 1000000
+        return int(timestamp.replace('.', ''))
+        #return int(float(timestamp)) * 1000000
 
     def convertDuration(self, duration):
         # this one is the most important value, below conversion gives us
