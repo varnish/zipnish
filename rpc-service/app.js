@@ -17,6 +17,12 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
   var indentLevel = req.params.indentLevel ? parseInt(req.params.indentLevel) : 0,
       service = services.findService('/' + req.params.serviceName, servicesIndex);
 
+
+  var randomTimeInSeconds;
+
+  // wait between 0 - 1.5 records before delivering any results back
+  randomDelayTimeInSeconds = (Math.random() * 1.5).toFixed(2) * 1000;
+
   if (service) {
 
     console.log(Array(80).join('-'));
@@ -46,19 +52,29 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       if (service.children.flow === 'serial') {
 
         async.series(funcs, function (err, results) {
-          res.send();
+
+          timers.setTimeout(function() {
+            res.send();
+          }, randomDelayTimeInSeconds);
+
         });
 
       } else if (service.children.flow === 'parallel') {
 
         async.parallel(funcs, function (err, results) {
-          res.send();
+
+          timers.setTimeout(function() {
+            res.send();
+          }, randomDelayTimeInSeconds);
+
         });
 
       }
     } else {
 
-      res.send();
+      timers.setTimeout(function() {
+        res.send();
+      }, randomDelayTimeInSeconds);
 
     }
 
