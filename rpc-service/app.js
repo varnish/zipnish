@@ -12,6 +12,12 @@ var app = express(),
 
 var servicesIndex = servicesParser.parseServices(argv.services);
 
+function getRandomTimeForDelay()
+{
+  // wait between 0 - 1.5 records before delivering any results back
+  return (Math.random() * 1.5).toFixed(2) * 1000;
+}
+
 app.get('/:serviceName/:indentLevel?', function (req, res) {
 
   var indentLevel = req.params.indentLevel ? parseInt(req.params.indentLevel) : 0,
@@ -22,8 +28,6 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
 
   date = new Date();
 
-  // wait between 0 - 1.5 records before delivering any results back
-  randomDelayTimeInSeconds = (Math.random() * 1.5).toFixed(2) * 1000;
 
   if (service) {
 
@@ -41,7 +45,9 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
           return function (next) {
 
             http.get('http://' + argv.address +':'+ argv['proxy-port'] + path, function (res) {
-              next();
+              timers.setTimeout(function() {
+                next();
+              }, getRandomTimeForDelay());
             });
 
           };
@@ -54,21 +60,13 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       if (service.children.flow === 'serial') {
 
         async.series(funcs, function (err, results) {
-
-          timers.setTimeout(function() {
-            res.send();
-          }, randomDelayTimeInSeconds);
-
+          res.send();
         });
 
       } else if (service.children.flow === 'parallel') {
 
         async.parallel(funcs, function (err, results) {
-
-          timers.setTimeout(function() {
-            res.send();
-          }, randomDelayTimeInSeconds);
-
+          res.send();
         });
 
       }
@@ -76,7 +74,7 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
 
       timers.setTimeout(function() {
         res.send();
-      }, randomDelayTimeInSeconds);
+      }, getRandomTimeForDelay());
 
     }
 
