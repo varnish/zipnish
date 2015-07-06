@@ -1,4 +1,5 @@
-var http = require('http'),
+var timers = require('timers'),
+    http = require('http'),
     querystring = require('querystring'),
     async = require('async'),
     express = require('express');
@@ -31,7 +32,6 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
 
           return function (next) {
 
-            //http.get('http://' + argv.address +':'+ argv['proxy-port'] + path + '/' + urlParams, function (res) {
             http.get('http://' + argv.address +':'+ argv['proxy-port'] + path, function (res) {
               next();
             });
