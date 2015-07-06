@@ -46,7 +46,12 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
 
             console.log('x-varnish', req.headers['x-varnish']);
 
-            http.get('http://' + argv.address +':'+ argv['proxy-port'] + path, function (res) {
+            http.get({
+              'hostname': argv['address'],
+              'port': argv['proxy-port'],
+              'path': path,
+              'agent': false
+            } , function (res) {
               timers.setTimeout(function() {
                 next();
               }, getRandomTimeForDelay());
