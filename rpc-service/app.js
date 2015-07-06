@@ -38,23 +38,30 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       var funcs = [],
           urlParams = (indentLevel + 1);
 
+      var X_Varnish = req.headers['x-varnish'];
+
       for (var i = 0; i < service.children.urls.length; i++) {
 
         funcs.push(function(path) {
 
           return function (next) {
-
-            console.log('x-varnish', req.headers['x-varnish']);
-
             http.get({
               'hostname': argv['address'],
               'port': argv['proxy-port'],
               'path': path,
-              'agent': false
+              'agent': false,
+              'headers': {
+                'X-Varnish-Parent': X_Varnish
+              }
             } , function (res) {
+
+              //console.log('X-Varnish', X_Varnish);
+              console.log('Headers', req.headers);
+
               timers.setTimeout(function() {
                 next();
               }, getRandomTimeForDelay());
+
             });
 
           };
