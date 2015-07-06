@@ -18,15 +18,17 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       service = services.findService('/' + req.params.serviceName, servicesIndex);
 
 
-  var randomTimeInSeconds;
+  var randomTimeInSeconds, date;
+
+  date = new Date();
 
   // wait between 0 - 1.5 records before delivering any results back
   randomDelayTimeInSeconds = (Math.random() * 1.5).toFixed(2) * 1000;
 
   if (service) {
 
-    console.log(Array(80).join('-'));
-    console.log(Array(indentLevel * 3).join(' '), service.label, '->', service.url);
+    console.log(Array(30).join('-'));
+    console.log(date.getMinutes() + ':' + date.getSeconds(), Array(indentLevel * 3).join(' '), service.label, '->', service.url);
 
     if (service.children) {
       var funcs = [],
