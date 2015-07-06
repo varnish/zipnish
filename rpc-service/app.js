@@ -28,7 +28,7 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
   if (service) {
 
     console.log(Array(30).join('-'));
-    console.log(date.getMinutes() + ':' + date.getSeconds(), Array(indentLevel * 3).join(' '), service.label, '->', service.url);
+    console.log(date.getMinutes() + ':' + date.getSeconds() + ':' + date.getMilliseconds(), Array(indentLevel * 3).join(' '), service.label, '->', service.url);
 
     if (service.children) {
       var funcs = [],
