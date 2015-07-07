@@ -90,12 +90,22 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       if (service.children.flow === 'serial') {
 
         async.series(funcs, function (err, results) {
+
+          for (var key in headers) {
+            res.setHeader(key, headers[key]);
+          }
+
           res.send();
         });
 
       } else if (service.children.flow === 'parallel') {
 
         async.parallel(funcs, function (err, results) {
+
+          for (var key in headers) {
+            res.setHeader(key, headers[key]);
+          }
+
           res.send();
         });
       }
@@ -103,6 +113,11 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
     } else {
 
       timers.setTimeout(function() {
+
+        for (var key in headers) {
+          res.setHeader(key, headers[key]);
+        }
+
         res.send();
       }, getRandomTimeForDelay());
 
