@@ -30,11 +30,13 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
 
   if (service) {
 
+    /*
     console.log(Array(10).join('-'),
                 date.getMinutes() + ':' + date.getSeconds() + ':' + date.getMilliseconds(), 
 
                 Array(indentLevel * 3).join(' '), 
                 service.label, '->', service.url);
+    */
 
     var X_Varnish, X_Varnish_Trace, headers;
 
@@ -50,6 +52,9 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       'X-Varnish-Trace': X_Varnish_Trace,
       'X-Varnish-Parent': X_Varnish
     };
+
+    //console.log('trace =', X_Varnish_Trace, ', id =', X_Varnish, service.url);
+    console.log(req.headers['x-varnish'], req.headers['x-varnish-parent'], service.url);
 
     if (service.children) {
       var funcs = [],
@@ -68,7 +73,7 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
               'headers': headers
             } , function (res) {
 
-              console.log('Path=', path, 'X-Varnish=', X_Varnish, 'X-Varnish-Trace=', X_Varnish_Trace);
+              //console.log('trace =', X_Varnish_Trace, ', id =', X_Varnish, path);
 
               timers.setTimeout(function() {
                 next();
@@ -81,8 +86,6 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
         }( service.children.urls[i]) );
       }
 
-      //console.log('>> flow', '-', service.children.flow);
-
       if (service.children.flow === 'serial') {
 
         async.series(funcs, function (err, results) {
@@ -94,8 +97,8 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
         async.parallel(funcs, function (err, results) {
           res.send();
         });
-
       }
+
     } else {
 
       timers.setTimeout(function() {
