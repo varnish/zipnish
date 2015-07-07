@@ -49,12 +49,12 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
     }
 
     headers = {
-      'X-Varnish-Trace': X_Varnish_Trace,
-      'X-Varnish-Parent': X_Varnish
+      'x-varnish-trace': X_Varnish_Trace,
+      'x-varnish-parent': X_Varnish
     };
 
     //console.log('trace =', X_Varnish_Trace, ', id =', X_Varnish, service.url);
-    console.log(req.headers['x-varnish'], req.headers['x-varnish-parent'], service.url);
+    console.log('trace = %s, parent = %s, id = %s, url = %s', req.headers['x-varnish-trace'], req.headers['x-varnish-parent'], req.headers['x-varnish'], service.url);
 
     if (service.children) {
       var funcs = [],
