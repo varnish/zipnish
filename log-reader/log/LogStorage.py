@@ -62,6 +62,14 @@ class LogStorage:
             if 'trace_id' not in row:
                 row['trace_id'] = row['span_id']
 
+            # TODO: this needs to be looked into further, this check needs to be documented
+            # and elaborated upon why we have done this
+            # probably because parent the top most span, which starts the trace
+            # needs to have it's varnish VxID come from the backend request, and not from the 
+            # client request
+            if row['parent_id'] == row['trace_id']:
+                row['parent_id'] = None
+
             span = {\
                 'span_id': row['span_id'], \
                 'parent_id': row['parent_id'], \
