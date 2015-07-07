@@ -59,6 +59,9 @@ class LogStorage:
             # add backend request link as key, add reference to client request
             self.requestKeyValStore[row['link']] = row['span_id']
 
+            if 'trace_id' not in row:
+                row['trace_id'] = row['span_id']
+
             span = {\
                 'span_id': row['span_id'], \
                 'parent_id': row['parent_id'], \
