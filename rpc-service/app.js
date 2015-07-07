@@ -28,17 +28,32 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
 
   date = new Date();
 
-
   if (service) {
 
-    console.log(Array(30).join('-'));
-    console.log(date.getMinutes() + ':' + date.getSeconds() + ':' + date.getMilliseconds(), Array(indentLevel * 3).join(' '), service.label, '->', service.url);
+    console.log(Array(10).join('-'),
+                date.getMinutes() + ':' + date.getSeconds() + ':' + date.getMilliseconds(), 
+
+                Array(indentLevel * 3).join(' '), 
+                service.label, '->', service.url);
+
+    var X_Varnish, X_Varnish_Trace, headers;
+
+    X_Varnish = req.headers['x-varnish'];
+
+    if (req.headers['x-varnish-trace']) {
+      X_Varnish_Trace = req.headers['x-varnish-trace'];
+    } else {
+      X_Varnish_Trace = X_Varnish;
+    }
+
+    headers = {
+      'X-Varnish-Trace': X_Varnish_Trace,
+      'X-Varnish-Parent': X_Varnish
+    };
 
     if (service.children) {
       var funcs = [],
           urlParams = (indentLevel + 1);
-
-      var X_Varnish = req.headers['x-varnish'];
 
       for (var i = 0; i < service.children.urls.length; i++) {
 
@@ -50,13 +65,10 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
               'port': argv['proxy-port'],
               'path': path,
               'agent': false,
-              'headers': {
-                'X-Varnish-Parent': X_Varnish
-              }
+              'headers': headers
             } , function (res) {
 
-              //console.log('X-Varnish', X_Varnish);
-              console.log('Headers', req.headers);
+              console.log('Path=', path, 'X-Varnish=', X_Varnish, 'X-Varnish-Trace=', X_Varnish_Trace);
 
               timers.setTimeout(function() {
                 next();
