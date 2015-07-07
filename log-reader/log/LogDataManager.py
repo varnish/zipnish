@@ -50,6 +50,8 @@ class LogDataManager:
 
             if split[0] == 'X-Varnish':
                 self.logRow['span_id'] = value
+
+            elif split[0] == 'X-Varnish-Trace':
                 self.logRow['trace_id'] = value
 
             elif split[0] == 'X-Varnish-Parent':
