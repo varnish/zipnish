@@ -104,7 +104,9 @@ class LogStorage:
                 clientRequestVxId = self.requestKeyValStore[ row['span_id'] ]
                 del self.requestKeyValStore[ row['span_id'] ]
                 row['span_id'] = clientRequestVxId
-                row['trace_id'] = clientRequestVxId
+
+            if 'trace_id' not in row:
+                row['trace_id'] = row['span_id']
 
             if row['ipv4'] is not None:
                 row['ipv4'] = self.convertIP2Integer(row['ipv4'])
