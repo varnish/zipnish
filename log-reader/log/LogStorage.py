@@ -83,11 +83,12 @@ class LogStorage:
             # Server Recieve
             self.spans.append( copy.copy(span) )
 
-            span['duration'] = row['timestamp-duration-Resp']
-            span['created_ts'] = row['timestamp-abs-Resp']
+            if row['parent_id'] is not None:
+                span['duration'] = row['timestamp-duration-Resp']
+                span['created_ts'] = row['timestamp-abs-Resp']
 
-            # Server Response
-            self.spans.append( span )
+                # Server Response
+                self.spans.append( span )
 
         elif row['request_type'] == 'b':
             # backend request considered for annotations
