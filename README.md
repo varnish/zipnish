@@ -10,9 +10,8 @@ Below shows an expanded overview of services calls in call chain.
 
 1. Mimic data flow with parent headers etc. just as zip kin uses inside you application.
 2. Make the application function as close to ZipKin as possible.
-3. Copy the ZipKin user-interface folder and try to use the user interface of ZipKin to display your data. That way no work has to be performed on the frontend UI part. 
-4. This way we will also be able to re-use any opensource UI updates that happen inside ZipKin.
-5. Document functionality implemented. The flow of the system.
+3. Use ZipKin user-interface to display information.
+4. Document functionality implemented. The flow of the system.
 
 
 ## Tracking Micro-Services via Varnish Cache ##
