@@ -1,3 +1,8 @@
+## RPC Logging Result ##
+
+![RPC Services](images/services-expanded.png)
+
+
 ## Next Steps ##
 
 1. Mimic data flow with parent headers etc. just as zip kin uses inside you application.
