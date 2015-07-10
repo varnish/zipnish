@@ -1,8 +1,8 @@
-## Services Logging Result ##
+## RPC Logging Result ##
 
 Below shows an expanded overview of services calls in call chain.
 
-![Services Expanded](images/services-expanded.png)
+![rpc call chain](images/services-expanded.png)
 
 
 
