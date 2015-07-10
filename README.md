@@ -7,6 +7,11 @@ Below shows an expanded overview of services calls in call chain.
 ## Code Documentation ##
 
 * [Varnish API](docs/code/Varnish API.md)
+* Headers
+* Reader
+* Data Manager
+* Buffer
+* Storage
 
 ## Next Steps ##
 
