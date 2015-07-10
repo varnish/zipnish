@@ -8,10 +8,10 @@ Below shows an expanded overview of services calls in call chain.
 
 * [Varnish API](docs/code/Varnish API.md)
 * [Headers](docs/code/Headers.md)
-* Reader
-* Data Manager
-* Buffer
-* Storage
+* [Reader](docs/code/Reader.md)
+* [Data Manager](docs/code/Data Manager.md)
+* [Buffer](docs/code/Buffer.md)
+* [Storage](docs/code/Storage.md)
 
 ## Next Steps ##
 
