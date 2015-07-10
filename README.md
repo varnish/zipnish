@@ -6,7 +6,7 @@ Below shows an expanded overview of services calls in call chain.
 
 ## Code Documentation ##
 
-* (Varnish API)[docs/code/Varnish API.md]
+* [Varnish API](docs/code/Varnish API.md)
 
 ## Next Steps ##
 
