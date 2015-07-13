@@ -8,4 +8,4 @@ Log data for client / backend request is read inside `addLogItem()` function.
 
 `addLogItem()` is a dictionary (key: value structure). Values are read in based upon tag value.
 
-Upon encountering `tag == 'End'` logItem is send to log storage to be recorded.
+Upon encountering `tag == 'End'` logItem is send to [Log Storage](Storage.md) to be recorded.
