@@ -6,4 +6,6 @@ Data manager recieves the following set of fields as argument to it's addLogItem
 
 Log data for client / backend request is read inside `addLogItem()` function.
 
-`addLogItem()` is a dictionary (key: value structure).
+`addLogItem()` is a dictionary (key: value structure). Values are read in based upon tag value.
+
+Upon encountering `tag == 'End'` logItem is send to log storage to be recorded.
