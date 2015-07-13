@@ -7,4 +7,5 @@ Span and Annotation arrays work like a buffer. We can specify the minimal number
 Current limitations are,
 
 **Minimum number of spans before flushing:** 2
+
 **Minimum number of annotations before flushing:** 4
