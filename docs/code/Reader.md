@@ -1,6 +1,6 @@
 Reader is responsible for reading Varnish Shared Memory Log.
 
-It reads in,
+It reads the following fields.
 
 | Name  | Description  |
 |---|---|---|
