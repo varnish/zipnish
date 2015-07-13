@@ -6,5 +6,5 @@ It reads in,
 |---|---|---|
 | VxID  | Unique Varnish Request ID. It is not unique between varnish restarts.  |
 | Request Type  | Request can be (client / backend)  |
-| Tag  |   |
+| Tag  |  e.g. ReqHeader / RespHeader / BereqHeader / BerespHeader |
 | Data  |   |
