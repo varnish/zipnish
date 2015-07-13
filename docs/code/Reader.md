@@ -8,3 +8,6 @@ It reads the following fields.
 | Request Type  | Request can be (client / backend)  |
 | Tag  |  e.g. Begin, End, Link, Timestamp, ReqHeader, RespHeader, BereqHeader, BerespHeader |
 | Data  | Contains information related to Tag above.  |
+
+
+After reading above fields, Reader passes above fields to [Data Manager](Data Manager.md)
