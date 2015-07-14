@@ -6,3 +6,5 @@
 | X-Varnish-Debug  |  0 or 1. For now value doesn't signify anything special. It needs to comply with ZipKin, but we'll probably look int this later. |
 
 **Flow**
+
+When a RPC call makes a call to another RPC call down the chain. These headers are passed along *X-Varnish-Trace* and *X-Varnish-Parent*.
