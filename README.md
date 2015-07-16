@@ -6,6 +6,8 @@ Below shows an expanded overview of services calls in call chain.
 
 ## System Level View ##
 
+A system level view of how everything comes together.
+
 ![system diagram](images/system-diagram.png)
 
 ## Code Documentation ##
