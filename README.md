@@ -4,6 +4,10 @@ Below shows an expanded overview of services calls in call chain.
 
 ![rpc call chain](images/services-expanded.png)
 
+## System Level View ##
+
+![system diagram](images/system-diagram.png)
+
 ## Code Documentation ##
 
 * [Varnish API](docs/code/Varnish API.md)
