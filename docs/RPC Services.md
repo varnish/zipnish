@@ -49,3 +49,6 @@ Initiate a parent service using Node.js command,
 | address      | ip-address / domain name to a web-service      |   required | --address 127.0.0.1 |
 | service | A string to specify service name to run.      |    required |  --service 'Fetch News' |
 | services | A string services to run. ``[service-url]:[Service Name][=>[serial or parallel]:[one or more service url's separated by comma ,]]      |    required |  --service 'Fetch News' |
+
+
+Additionally the [Dummy API](https://github.com/espebra/dummy-api) can also be used. It uses a little different headers subtracting out `Varnish-` from headers.
