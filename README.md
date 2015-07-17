@@ -10,6 +10,11 @@ A system level view of how everything comes together.
 
 ![system diagram](images/system-diagram.png)
 
+#### User Interface ####
+
+User interface will use the UI files (styles, scripts and templates) from ZipKin.
+
+
 #### Code Documentation ####
 
 * [Varnish API](docs/code/Varnish API.md)
