@@ -9,3 +9,9 @@ User interface for log reader.
 `> cd ui/resources`
 
 `> bower install`
+
+#####System#####
+
+*app* directory contains application. Written in flask.
+
+*ui* directory contains user interface for application.
