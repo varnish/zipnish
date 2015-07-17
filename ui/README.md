@@ -14,4 +14,4 @@ User interface for log reader.
 
 **[app](app/)** directory contains application. Written in flask.
 
-**[ui](ui/)** directory contains user interface for application.
+**[user interface](ui/)** directory contains user interface for application.
