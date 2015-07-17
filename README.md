@@ -14,6 +14,7 @@ A system level view of how everything comes together.
 
 User interface will use the UI files (styles, scripts and templates) from ZipKin.
 
+[Link to UI](ui/)
 
 #### Code Documentation ####
 
