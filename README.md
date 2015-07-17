@@ -1,16 +1,16 @@
-## RPC Logging Result ##
+#### RPC Logging Result ####
 
 Below shows an expanded overview of services calls in call chain.
 
 ![rpc call chain](images/services-expanded.png)
 
-## System Level View ##
+#### System Level View ####
 
 A system level view of how everything comes together.
 
 ![system diagram](images/system-diagram.png)
 
-## Code Documentation ##
+#### Code Documentation ####
 
 * [Varnish API](docs/code/Varnish API.md)
 * [Headers](docs/code/Headers.md)
@@ -19,7 +19,7 @@ A system level view of how everything comes together.
 * [Buffer](docs/code/Buffer.md)
 * [Storage](docs/code/Storage.md)
 
-## Next Steps ##
+#### Next Steps ####
 
 1. Mimic data flow with parent headers etc. just as zip kin uses inside you application.
 2. Make the application function as close to ZipKin as possible.
@@ -27,7 +27,7 @@ A system level view of how everything comes together.
 4. Document functionality implemented. The flow of the system.
 
 
-## Tracking Micro-Services via Varnish Cache ##
+#### Tracking Micro-Services via Varnish Cache ####
 
 Running ``./script.sh`` should start a web-server on port 8080
 
@@ -46,6 +46,6 @@ Varnish Cache would run on port **6081** by default. The default.vcl file connec
 * [Varnish Logger](docs/Varnish Logger.md)
 
 
-#### Machine Used ####
+##### Machine Used #####
 
 Debian 8.1 / **specifically** Linux debian 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt9-3~deb8u1 (2015-04-24) x86_64 GNU/Linux
