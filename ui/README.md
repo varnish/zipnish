@@ -4,7 +4,7 @@ User interface for log reader.
 
 [http://bower.io/#install-bower](http://bower.io/#install-bower)
 
-#####Installing Frontend Dependencie.#####
+#####Installing Frontend Dependencies#####
 
 `> cd ui/resources`
 
