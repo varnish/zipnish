@@ -6,11 +6,11 @@
 2. Run the UI without API calls.
 3. Connect each API call one by one with Flask interface.
 
-#####Running the UI#####
+#####Application Server#####
 
 The following command will load the configuration and run the application.
 
-`$> APP_CONFIG={ENVOIRNMENT_NAME} python manage.py`
+`$> APP_CONFIG={ENVOIRNMENT_NAME} python manage.py runserver`
 
 If envoirnment variable `APP_CONFIG` is not set. Application assumes `default` which is registered as `development` inside [config.py](config.py)
 
