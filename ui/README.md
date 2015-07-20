@@ -2,6 +2,9 @@
 
 #####Solution Process#####
 
+1. Mimic API calls for ZipKin inside Flask interface.
+2. Run the UI without API calls.
+3. Connect each API call one by one with Flask interface.
 
 
 #####ZipKin/Scala Reference#####
