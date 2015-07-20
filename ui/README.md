@@ -10,9 +10,9 @@
 
 The following command will load the configuration and run the application.
 
-`$> ENV={ENVOIRNMENT_NAME} python app.py`
+`$> APP_CONFIG={ENVOIRNMENT_NAME} python app.py`
 
-If envoirnment variable `ENV` is not set. Application assumes `development` as the default value for envoirnment variable.
+If envoirnment variable `APP_CONFIG` is not set. Application assumes `development` as the default value for envoirnment variable.
 
 #####ZipKin/Scala Reference#####
 
