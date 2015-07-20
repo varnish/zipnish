@@ -1,3 +1,5 @@
+import os
+
 # we should initialize python package based on envoirnment variable
 
 # load configuration
