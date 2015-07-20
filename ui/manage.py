@@ -7,7 +7,5 @@ from flask.ext.script import Manager
 app = create_app(os.getenv('APP_CONFIG') or 'default')
 manager = Manager(app)
 
-print manager
-
 if __name__ == '__main__':
     manager.run()
