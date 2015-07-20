@@ -29,5 +29,10 @@ Activate virtual envoirnment for python using,
 
 Save current set of python application requirements using,
 
-`$> python freeze > requirements.txt`
+`$> pip freeze > requirements.txt`
 
+Use the following to install required libraries for application to run,
+
+This will read (-r flag) the requirements.txt file and install the required dependencies.
+
+`$>pip install -r requirements.txt`
