@@ -1,5 +1,13 @@
 User interface for log reader.
 
+#####ZipKin/Scala Reference#####
+
+Backend for ZipKin web interface is written using Scala.
+
+It can be found on the following link,
+
+[https://github.com/openzipkin/zipkin/tree/master/zipkin-web/src/main/scala/com/twitter/zipkin/common](https://github.com/openzipkin/zipkin/tree/master/zipkin-web/src/main/scala/com/twitter/zipkin/common)
+
 #####Install bower (if not already installed)#####
 
 [http://bower.io/#install-bower](http://bower.io/#install-bower)
@@ -16,7 +24,7 @@ User interface for log reader.
 
 **[user interface](ui/)** directory contains user interface for application.
 
-####Configure Virtual Envoirnment####
+#####Configure Virtual Envoirnment#####
 Inside this *ui* directory, run the following command.
 
 `$> virtualenv venv`
