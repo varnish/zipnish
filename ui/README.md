@@ -14,6 +14,15 @@ The following command will load the configuration and run the application.
 
 If envoirnment variable `APP_CONFIG` is not set. Application assumes `default` which is registered as `development` inside [config.py](config.py)
 
+#####Application Shell#####
+
+To run application inside a command line shell using the following.
+
+`$> APP_CONFIG={ENVOIRNMENT_NAME} python manage.py runserver`
+
+With this you will be able to interact with application variables, example: `app`
+
+
 #####ZipKin/Scala Reference#####
 
 Backend for ZipKin web interface is written using Scala.
