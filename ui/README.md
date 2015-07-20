@@ -6,6 +6,13 @@
 2. Run the UI without API calls.
 3. Connect each API call one by one with Flask interface.
 
+#####Running the UI#####
+
+The following command will load the configuration and run the application.
+
+`$> ENV={ENVOIRNMENT_NAME} python app.py`
+
+If envoirnment variable `ENV` is not set. Application assumes `development` as the default value for envoirnment variable.
 
 #####ZipKin/Scala Reference#####
 
