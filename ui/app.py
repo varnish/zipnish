@@ -1,17 +1,10 @@
-import os
 from flask import Flask
+from config import config
+
+print config
 
 # create Flask application
 app = Flask(__name__)
-
-# load configuration
-environ = 'development'
-
-if 'ENV' in os.environ.keys():
-    environ = os.environ['ENV']
-
-#print 'environ=' + environ
-
 
 @app.route('/')
 def index():
