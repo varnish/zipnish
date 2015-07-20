@@ -1,10 +1,16 @@
+import os
 from flask import Flask
 
 # create Flask application
 app = Flask(__name__)
 
-# basic configuration settings
-app.config['DEBUG'] = True
+# load configuration
+environ = 'development'
+
+if 'ENV' in os.environ.keys():
+    environ = os.environ['ENV']
+
+#print 'environ=' + environ
 
 
 @app.route('/')
