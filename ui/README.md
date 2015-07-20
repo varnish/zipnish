@@ -1,4 +1,8 @@
-User interface for log reader.
+#User interface for log reader.#
+
+#####Solution Process#####
+
+
 
 #####ZipKin/Scala Reference#####
 
