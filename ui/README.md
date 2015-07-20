@@ -22,3 +22,8 @@ Inside this *ui* directory, run the following command.
 `> virtualenv venv`
 
 This should give us a python virtual envoirnment.
+
+Activate virtual envoirnment for python using,
+
+`> . venv/bin/activate`
+
