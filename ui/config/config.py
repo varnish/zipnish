@@ -2,6 +2,10 @@ class Config(object):
     DEBUG = False
     TESTING = False
 
+    @staticmethod
+    def init_app(app):
+        pass
+
 class ProductionConfig(Config):
     pass
 
