@@ -1,14 +1,11 @@
-from flask import Flask
-from config import config
+#!/usr/bin/env python
+import os
 
-print config
+from app import create_app
 
-# create Flask application
-app = Flask(__name__)
+app = create_app(os.getenv('APP_CONFIG') or 'default')
 
-@app.route('/')
-def index():
-    return 'Here we come'
+print app
 
 if __name__ == '__main__':
     app.run()
