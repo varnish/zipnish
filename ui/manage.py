@@ -10,4 +10,4 @@ manager = Manager(app)
 print manager
 
 if __name__ == '__main__':
-    app.run()
+    manager.run()
