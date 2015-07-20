@@ -8,6 +8,4 @@ environ = 'development'
 if 'ENV' in os.environ.keys():
     environ = os.environ['ENV']
 
-print 'environ=' + environ
-
-
+config = environ
