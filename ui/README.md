@@ -15,3 +15,10 @@ User interface for log reader.
 **[app](app/)** directory contains application. Written in flask.
 
 **[user interface](ui/)** directory contains user interface for application.
+
+####Configure Virtual Envoirnment####
+Inside this *ui* directory, run the following command.
+
+`> virtualenv venv`
+
+This should give us a python virtual envoirnment.
