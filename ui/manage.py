@@ -2,7 +2,7 @@
 import os
 
 from app import create_app
-from flask.ext.script import Manager
+from flask.ext.script import Shell, Manager
 
 app = create_app(os.getenv('APP_CONFIG') or 'default')
 manager = Manager(app)
