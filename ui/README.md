@@ -6,9 +6,9 @@ User interface for log reader.
 
 #####Installing Frontend Dependencies#####
 
-`> cd ui/resources`
+`$> cd ui/resources`
 
-`> bower install`
+`$> bower install`
 
 #####System#####
 
@@ -19,11 +19,15 @@ User interface for log reader.
 ####Configure Virtual Envoirnment####
 Inside this *ui* directory, run the following command.
 
-`> virtualenv venv`
+`$> virtualenv venv`
 
 This should give us a python virtual envoirnment.
 
 Activate virtual envoirnment for python using,
 
-`> . venv/bin/activate`
+`$> . venv/bin/activate`
+
+Save current set of python application requirements using,
+
+`$> python freeze > requirements.txt`
 
