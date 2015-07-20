@@ -35,4 +35,4 @@ Use the following to install required libraries for application to run,
 
 This will read (-r flag) the requirements.txt file and install the required dependencies.
 
-`$>pip install -r requirements.txt`
+`$> pip install -r requirements.txt`
