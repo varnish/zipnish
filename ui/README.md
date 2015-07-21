@@ -9,7 +9,7 @@
 #####Environment Variables#####
 
 |  Name 	|  Default 	|  Required 	|  Comments 	|
-|---	|---	|---	|---	|
+|---	|---	|:---:	|---	|
 | APP_CONFIG  	|  development 	|  no 	|   values: development / testing / production. 	|
 | DB_USER  	|   	|  yes 	|   	|
 | DB_PASS  	|   	|  yes 	|   	|
