@@ -14,6 +14,10 @@ db = SQLAlchemy()
 def create_app(config_name):
     app = Flask(__name__)
 
+    # configure application
     app.config.from_object(config[config_name])
+
+    # initialize extensions
+    db.init_app(app)
 
     return app
