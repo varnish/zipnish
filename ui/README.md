@@ -1,12 +1,10 @@
 ####User interface for log reader.####
-
 <br />
 #####Solution Process#####
 
 1. Mimic API calls for ZipKin inside Flask interface.
 2. Run the UI without API calls.
 3. Connect each API call one by one with Flask interface.
-
 <br />
 #####Environment Variables#####
 
@@ -20,7 +18,6 @@ Most of the environment variables specified below are used inside [config.py](co
 | DB_HOST  	|   	|  yes 	|  database host 	|
 | DB_PORT  	|   	|  yes 	|  database port 	|
 | DB_NAME  	|   	|  yes 	|  database name 	|
-
 <br />
 #####Application Server#####
 
@@ -33,7 +30,6 @@ Envoirnment variables can be temporarily passed to a running webserver as follow
 Otherwise you need to setup environment variables separately and run the web server using,
 
 `$> python manage.py runserver`
-
 <br />
 #####Application Shell#####
 
@@ -46,7 +42,6 @@ To run application inside a command line shell using the following.
 `$> python manage.py shell`
 
 With this you will be able to interact with application variables, example: `app`, `db` in application context.
-
 <br />
 #####ZipKin/Scala Reference#####
 
@@ -67,14 +62,12 @@ It can be found on the following link,
 `$> cd ui/resources`
 
 `$> bower install`
-
 <br />
 #####System#####
 
 **[app](app/)** directory contains application. Written in flask.
 
 **[user interface](ui/)** directory contains user interface for application.
-
 <br />
 #####Configure Virtual Envoirnment#####
 
