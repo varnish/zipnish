@@ -39,7 +39,9 @@ Otherwise you need to setup environment variables separately and run the web ser
 
 To run application inside a command line shell using the following.
 
-Note: before running the command below. It's important to set envoirnment variables, as outlined in section under Application Server.
+> **Note:**
+> Before running the command below. It's important to set envoirnment variables, as outlined in section under
+> Application Server.
 
 `$> python manage.py shell`
 
