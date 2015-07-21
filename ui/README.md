@@ -11,11 +11,11 @@
 |  Name 	|  Default 	|  Required 	|  Comments 	|
 |---	|---	|---	|---	|
 | APP_CONFIG  	|  development 	|  no 	|   values: development / testing / production. 	|
-| DB_USER  	|   	|   	|   	|
-| DB_PASS  	|   	|   	|   	|
-| DB_HOST  	|   	|   	|   	|
-| DB_PORT  	|   	|   	|   	|
-| DB_NAME  	|   	|   	|   	|
+| DB_USER  	|   	|  yes 	|   	|
+| DB_PASS  	|   	|  yes 	|   	|
+| DB_HOST  	|   	|  yes 	|   	|
+| DB_PORT  	|   	|  yes 	|   	|
+| DB_NAME  	|   	|  yes 	|   	|
 
 #####Application Server#####
 
