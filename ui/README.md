@@ -39,9 +39,11 @@ Otherwise you need to setup environment variables separately and run the web ser
 
 To run application inside a command line shell using the following.
 
-`$> APP_CONFIG={ENVOIRNMENT_NAME} python manage.py runserver`
+Note: before running the command below. It's important to set envoirnment variables, as outlined in section under Application Server.
 
-With this you will be able to interact with application variables, example: `app`
+`$> python manage.py shell`
+
+With this you will be able to interact with application variables, example: `app`, `db` in application context.
 
 
 #####ZipKin/Scala Reference#####
