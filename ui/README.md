@@ -8,6 +8,8 @@
 
 #####Environment Variables#####
 
+Most of the environment variables specified below are used inside [config.py](config.py)
+
 |  Name 	|  Default 	|  Required 	|  Comments 	|
 |---	|---	|:---:	|---	|
 | APP_CONFIG  	|  development 	|  no 	|   values: development / testing / production. 	|
@@ -19,11 +21,12 @@
 
 #####Application Server#####
 
-The following command will load the configuration and run the application.
+Before you run the app, it is required to set some environment variables as listed above.
 
-`$> APP_CONFIG={ENVOIRNMENT_NAME} python manage.py runserver`
 
-If envoirnment variable `APP_CONFIG` is not set. Application assumes `default` which is registered as `development` inside [config.py](config.py)
+
+`$> python manage.py runserver`
+
 
 #####Application Shell#####
 
