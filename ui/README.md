@@ -1,10 +1,12 @@
 ####User interface for log reader.####
 
+
 #####Solution Process#####
 
 1. Mimic API calls for ZipKin inside Flask interface.
 2. Run the UI without API calls.
 3. Connect each API call one by one with Flask interface.
+
 
 #####Environment Variables#####
 
@@ -19,11 +21,16 @@ Most of the environment variables specified below are used inside [config.py](co
 | DB_PORT  	|   	|  yes 	|  database port 	|
 | DB_NAME  	|   	|  yes 	|  database name 	|
 
+
 #####Application Server#####
 
 Before you run the app, it is required to set some environment variables as listed above.
 
+Envoirnment variables can be temporarily passed to a running webserver as follows,
 
+`$> APP_CONFIG=development DB_USER=zipkin DB_PASS=kinect DB_HOST=127.0.0.1 DB_PORT=3306 DB_NAME=zipkin python manage.py runserver`
+
+Otherwise you need to setup environment variables separately and run the web server using,
 
 `$> python manage.py runserver`
 
