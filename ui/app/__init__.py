@@ -21,7 +21,13 @@ def create_app(config_name):
     db.init_app(app)
 
     # connect blueprints
+
+    # /api
     from .api import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/api')
+
+    # /traces
+    from .traces import traces as traces_blueprint
+    app.register_blueprint(traces_blueprint, url_prefix='/traces')
 
     return app
