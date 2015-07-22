@@ -22,12 +22,17 @@ def create_app(config_name):
 
     # connect blueprints
 
+    # /traces
+    from .traces import traces as traces_blueprint
+    app.register_blueprint(traces_blueprint, url_prefix='/traces')
+
+    # /aggregate
+    from .aggregate import aggregate as aggregate_blueprint
+    app.register_blueprint(aggregate_blueprint, url_prefix='/aggregate')
+
     # /api
     from .api import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/api')
 
-    # /traces
-    from .traces import traces as traces_blueprint
-    app.register_blueprint(traces_blueprint, url_prefix='/traces')
 
     return app
