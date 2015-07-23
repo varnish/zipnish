@@ -22,9 +22,13 @@ def create_app(config_name):
 
     # connect blueprints
 
-    # public interface
+    # /app
+    from .application import application as app_blueprint
+    application.register_blueprint(app_blueprint, url_prefix='/app')
+
+    # /public
     from .public import public as public_blueprint
-    app.register_blueprint(public_blueprint, url_prefix='/')
+    app.register_blueprint(public_blueprint, url_prefix='/public')
 
     # /traces
     from .traces import traces as traces_blueprint
