@@ -30,6 +30,10 @@ def create_app(config_name):
     from .public import public as public_blueprint
     app.register_blueprint(public_blueprint, url_prefix='/public')
 
+    # /
+    from .index import index as index_blueprint
+    app.register_blueprint(index_blueprint, url_prefix='/')
+
     # /traces
     from .traces import traces as traces_blueprint
     app.register_blueprint(traces_blueprint, url_prefix='/traces')
