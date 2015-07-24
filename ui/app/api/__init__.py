@@ -20,8 +20,9 @@ from . import annotations
 # dependencies
 from . import dependencies
 
-#
 # traces
+from . import traces
+
 # services
 # annotations
 
