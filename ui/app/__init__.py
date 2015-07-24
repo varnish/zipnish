@@ -23,8 +23,8 @@ def create_app(config_name):
     # connect blueprints
 
     # /app
-    from .application import application as app_blueprint
-    application.register_blueprint(app_blueprint, url_prefix='/app')
+    from .application import application as application_blueprint
+    application.register_blueprint(application_blueprint, url_prefix='/app')
 
     # /public
     from .public import public as public_blueprint
