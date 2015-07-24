@@ -10,4 +10,6 @@ api = Blueprint('api', __name__)
 # spans
 # annotations
 # dependencies
+
 # pin
+from . import pin
