@@ -3,7 +3,11 @@ from flask import Blueprint
 api = Blueprint('api', __name__)
 
 #
-# Blueprints to create
+# end-points to create
+
+# query
+from . import query
+
 #
 # traces
 # services
