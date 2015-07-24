@@ -11,10 +11,12 @@ from . import query
 # services
 from . import services
 
+# spans
+from . import spans
+
 #
 # traces
 # services
-# spans
 # annotations
 # dependencies
 
