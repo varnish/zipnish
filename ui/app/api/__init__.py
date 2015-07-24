@@ -8,6 +8,9 @@ api = Blueprint('api', __name__)
 # query
 from . import query
 
+# services
+from . import services
+
 #
 # traces
 # services
