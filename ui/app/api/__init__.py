@@ -17,11 +17,13 @@ from . import spans
 # annotations
 from . import annotations
 
+# dependencies
+from . import dependencies
+
 #
 # traces
 # services
 # annotations
-# dependencies
 
 # pin
 from . import pin
