@@ -3,4 +3,4 @@ from . import aggregate
 
 @aggregate.route('/', methods=['GET'])
 def app():
-    return '/app'
+    return '/aggregate'
