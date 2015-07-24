@@ -14,6 +14,9 @@ from . import services
 # spans
 from . import spans
 
+# annotations
+from . import annotations
+
 #
 # traces
 # services
