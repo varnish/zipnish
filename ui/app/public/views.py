@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect
 from . import public
 
-@public.route('/')
+@public.route('/', methods=['GET'])
 def public():
     return '/public'
