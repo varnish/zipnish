@@ -1,6 +1,10 @@
 # web framework
 from flask import Flask
 
+# mustache template
+from pystache import TemplateSpec
+from flask.ext.mustache import FlaskMustache
+
 # extensions
 from flask.ext.sqlalchemy import SQLAlchemy
 
