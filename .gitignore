@@ -4,3 +4,4 @@ ui/venv
 node_modules
 *.pyc
 venv
+*.swp
