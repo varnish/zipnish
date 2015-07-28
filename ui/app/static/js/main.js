@@ -24,7 +24,7 @@ $.extend({
 });
 
 requirejs.config({
-  baseUrl: '/app/libs',
+  baseUrl: '/static/libs',
   paths: {
     'component_data': '../js/component_data',
     'component_ui': '../js/component_ui',
