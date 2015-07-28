@@ -70,6 +70,10 @@ It can be found on the following link,
 
 `$> bower install`
 
+to upgrade an existing version of bower use
+
+`$> npm update -g bower`
+
 <br />
 #####System#####
 
