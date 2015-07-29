@@ -75,6 +75,11 @@ to upgrade an existing version of bower use
 `$> npm update -g bower`
 
 <br />
+
+#####Compiling CSS Code#####
+
+Go into **src/ui** at the root level [src/ui](../src/ui/)
+
 #####System#####
 
 **[app](app/)** directory contains application. Written in flask.
