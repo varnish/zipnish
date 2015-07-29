@@ -81,6 +81,7 @@ to upgrade an existing version of bower use
 
 #####Other Important Directories#####
 
+**[static](app/static/)** static resources, viewable by public.
 **[templates](app/templates/)** contains html file templates which compatible with [Flask Jinja](http://jinja.pocoo.org/).
 
 <br />
