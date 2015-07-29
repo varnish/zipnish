@@ -31,7 +31,12 @@ module.exports = function (grunt) {
 			},
 
 			watch: {
-
+				configFiles: {
+					files: ['Gruntfile.js'],
+					options: {
+						reload: true
+					}
+				}
 			}
 		}
 	});
