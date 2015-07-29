@@ -87,9 +87,10 @@ at the command line:
 These commands will install dependencies at a global level.
 
 `$> npm install -g sass`
-`$> npm install -g compass`
-`$> npm install -g grunt`
 
+`$> npm install -g compass`
+
+`$> npm install -g grunt`
 
 Next you will need to install package level dependencies. Use the following command.
 
@@ -97,11 +98,11 @@ Next you will need to install package level dependencies. Use the following comm
 
 Previous command will read [package.json](../src/ui/package.json) and install the required dependencies with the right versions.
 
-To generate Development version of bootstrap css use,
+To generate the development version of bootstrap.css use,
 
 `$> grunt dev`
 
-alternatively you can generate a distribution version of css using,
+Alternatively to generate a distribution version of bootstrap.css use,
 
 `$> grunt dist`
 
