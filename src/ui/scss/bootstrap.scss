@@ -6,5 +6,6 @@
 .navbar-brand {
 	img {
 		height: $navbar-height;
+		margin-top: -$navbar-padding-vertical;
 	}
 }
