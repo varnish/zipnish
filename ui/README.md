@@ -80,6 +80,18 @@ to upgrade an existing version of bower use
 
 Go into **src/ui** at the root level [src/ui](../src/ui/)
 
+at the command line:
+
+To generate Development version of bootstrap css use,
+
+`$> grunt dev`
+
+alternatively you can generate a distribution version of css using,
+
+`$> grunt dist`
+
+Bootstrap generated using the above commands take into account customizations we have made to the default bootstrap files.
+
 #####System#####
 
 **[app](app/)** directory contains application. Written in flask.
