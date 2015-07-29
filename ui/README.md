@@ -79,7 +79,7 @@ to upgrade an existing version of bower use
 
 **[app](app/)** directory contains application. Written in flask.
 
-Various other directory inside the application.
+#####Other Important Directories#####
 
 **[templates](app/templates/)** contains html file templates which compatible with [Flask Jinja](http://jinja.pocoo.org/).
 
