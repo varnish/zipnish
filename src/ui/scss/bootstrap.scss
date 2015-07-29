@@ -16,4 +16,5 @@
 
 .well {
 	border-radius: 0;
+	@include box-shadow(none);
 }
