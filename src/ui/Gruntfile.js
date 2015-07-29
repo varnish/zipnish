@@ -34,7 +34,8 @@ module.exports = function (grunt) {
 				configFiles: {
 					files: ['Gruntfile.js'],
 					options: {
-						reload: true
+						reload: true,
+						spawn: false
 					}
 				},
 
@@ -42,7 +43,8 @@ module.exports = function (grunt) {
 					files: ['scss/*.scss'],
 					tasks: ['clean:bootstrap', 'sass:dev'],
 					options: {
-						livereload: true
+						livereload: true,
+						spawn: false
 					}
 				}
 			}
