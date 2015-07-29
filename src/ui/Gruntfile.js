@@ -8,8 +8,19 @@ module.exports = function (grunt) {
 		},
 
 		sass: {
+			dev: {
+				options: {
+					compass: true,
+					style: 'expanded'
+				},
+				files: {
+					'ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
+				}
+			},
+
 			dist: {
 				options: {
+					compass: true,
 					style: 'expanded'
 				},
 				files: {
