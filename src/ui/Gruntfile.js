@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 			dist: {
 				options: {
 					compass: true,
-					style: 'expanded'
+					style: 'compressed'
 				},
 				files: {
 					'ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
