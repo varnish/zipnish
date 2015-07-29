@@ -24,4 +24,8 @@
 		@include appearance(none);
 		@include border-radius(0);
 	}
+
+	input[type=text] {
+		@include border-radius(0);
+	}
 }
