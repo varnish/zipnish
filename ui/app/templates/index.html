@@ -3,9 +3,21 @@
 {% block content %}
 <div class="row well well-sm">
 	<form class="form-inline" role="form">
-		<select data-placeholder="Service Name" class="form-control input-sm" style="width: 234px;" name="serviceName" id="serviceName">
-			<option value=""></option>
-		</select>
+
+		<div class="form-group">
+			<select 
+				data-placeholder="Service Name" 
+				class="form-control input-sm" style="width: 234px;" name="serviceName" id="serviceName">
+				<option value=""></option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<select data-placeholder="Span Name" class="form-control input-sm" style="width: 180px;" name="spanName" id="spanName">
+				<option value="all">all</option>
+			</select>
+		</div>
+
 	</form>
 </div>
 {% endblock %}
