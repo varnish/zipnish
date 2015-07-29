@@ -17,4 +17,8 @@
 .well {
 	border-radius: 0;
 	@include box-shadow(none);
+
+	select {
+		@include appearance(none);
+	}
 }
