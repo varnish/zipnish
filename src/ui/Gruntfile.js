@@ -11,25 +11,27 @@ module.exports = function (grunt) {
 			dev: {
 				options: {
 					compass: true,
+					sourcemap: 'none',
 					style: 'expanded'
 				},
 				files: {
-					'ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
+					'../../ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
 				}
 			},
 
 			dist: {
 				options: {
 					compass: true,
+					sourcemap: 'none',
 					style: 'compressed'
 				},
 				files: {
-					'ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
+					'../../ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
 				}
 			},
 
 			watch: {
-				
+
 			}
 		}
 	});
@@ -38,7 +40,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('dist', ['sass:dist']);
 
 	// Development
-	grunt.registerTask('dev', ['sass:dev']);
+	grunt.registerTask('dev', ['clean:bootstrap', 'sass:dev']);
 
 	// Load NPM Tasks
 	grunt.loadNpmTasks('grunt-contrib-clean');
