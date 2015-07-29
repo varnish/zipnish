@@ -81,7 +81,7 @@ to upgrade an existing version of bower use
 
 Various other directory inside the application.
 
-**[templates](app/templates/)** contains html file templates which compatible with flask-jinja.
+**[templates](app/templates/)** contains html file templates which compatible with [Flask Jinja](http://jinja.pocoo.org/).
 
 <br />
 #####Configure Virtual Envoirnment#####
