@@ -78,6 +78,16 @@ to upgrade an existing version of bower use
 
 #####Compiling CSS Code#####
 
+**Note:** In case you do not have sass, compass, grunt available. Please use the below commands to install them.
+
+These commands will install dependencies at a global level.
+
+`$> npm install -g sass`
+`$> npm install -g compass`
+`$> npm install -g grunt`
+
+
+
 Go into **src/ui** at the root level [src/ui](../src/ui/)
 
 at the command line:
