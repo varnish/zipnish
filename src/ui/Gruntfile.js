@@ -26,6 +26,10 @@ module.exports = function (grunt) {
 				files: {
 					'ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
 				}
+			},
+
+			watch: {
+				
 			}
 		}
 	});
