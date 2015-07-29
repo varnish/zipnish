@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 			},
 
 			templates: {
-				files: ['../../ui/templates/*.html'],
+				files: ['../../ui/app/templates/*.html'],
 				options: {
 					livereload: true,
 					spawn: false
