@@ -78,6 +78,10 @@ to upgrade an existing version of bower use
 
 #####Compiling CSS Code#####
 
+Go into **src/ui** at the root level [src/ui](../src/ui/)
+
+at the command line:
+
 **Note:** In case you do not have sass, compass, grunt available. Please use the below commands to install them.
 
 These commands will install dependencies at a global level.
@@ -87,10 +91,11 @@ These commands will install dependencies at a global level.
 `$> npm install -g grunt`
 
 
+Next you will need to install package level dependencies. Use the following command.
 
-Go into **src/ui** at the root level [src/ui](../src/ui/)
+`$> npm install`
 
-at the command line:
+Previous command will read [package.json](../src/ui/package.json) and install the required dependencies with the right versions.
 
 To generate Development version of bootstrap css use,
 
