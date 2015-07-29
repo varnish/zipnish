@@ -1,0 +1,14 @@
+{
+  "name": "vmsm-ui",
+  "version": "1.0.0",
+  "description": "Varnish Micro Service Monitor - User Interface",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vmsm"
+  ],
+  "author": "Muhammad Adeel",
+  "license": "Varnish Software License"
+}
