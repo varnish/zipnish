@@ -2,3 +2,9 @@
 
 @import "variables";
 @import "bootswatch";
+
+.navbar-brand {
+	img {
+		height: $navbar-height;
+	}
+}
