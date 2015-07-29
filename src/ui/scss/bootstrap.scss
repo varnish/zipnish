@@ -9,6 +9,10 @@
 	border-bottom: 1px solid $gray-lighter;
 
 	.navbar-brand {
+
+		font-size: 21px;
+		line-height: 22px;
+
 		img {
 			height: $navbar-height * 0.95;
 			margin-top: -$navbar-padding-vertical;
