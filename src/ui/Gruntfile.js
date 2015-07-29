@@ -36,6 +36,14 @@ module.exports = function (grunt) {
 					options: {
 						reload: true
 					}
+				},
+
+				css: {
+					files: 'scss/*.scss',
+					tasks: ['clean:bootstrap', 'sass:dev'],
+					options: {
+						livereload: true
+					}
 				}
 			}
 		}
