@@ -79,7 +79,9 @@ to upgrade an existing version of bower use
 
 **[app](app/)** directory contains application. Written in flask.
 
-**[user interface](ui/)** directory contains user interface for application.
+Various other directory inside the application.
+
+**[templates](app/templates/)** contains html file templates which compatible with flask-jinja.
 
 <br />
 #####Configure Virtual Envoirnment#####
