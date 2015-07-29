@@ -30,8 +30,13 @@ module.exports = function (grunt) {
 		}
 	});
 
+	// Distribution
+	grunt.registerTask('dist', ['sass:dist']);
+
+	// Development
 	grunt.registerTask('dev', ['sass:dev']);
 
+	// Load NPM Tasks
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
