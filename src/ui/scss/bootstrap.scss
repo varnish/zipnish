@@ -21,5 +21,6 @@
 
 	select {
 		@include appearance(none);
+		@include border-radius(0);
 	}
 }
