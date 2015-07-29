@@ -345,3 +345,15 @@ input[type="checkbox"] {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.well select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.well input[type=text] {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
