@@ -334,6 +334,14 @@ input[type="checkbox"] {
 .navbar {
   border-bottom: 1px solid #eeeeee;
 }
+.navbar .navbar-brand {
+  font-size: 21px;
+  line-height: 22px;
+  color: #333333;
+}
+.navbar .navbar-brand:hover {
+  color: #333333;
+}
 .navbar .navbar-brand img {
   height: 42.75px;
   margin-top: -12px;
@@ -353,6 +361,12 @@ input[type="checkbox"] {
   border-radius: 0;
 }
 .well input[type=text] {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.well button {
+  padding: 5px 12px;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
