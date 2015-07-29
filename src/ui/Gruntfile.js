@@ -47,6 +47,14 @@ module.exports = function (grunt) {
 					livereload: true,
 					spawn: false
 				}
+			},
+
+			templates: {
+				files: ['../../ui/templates/*.html'],
+				options: {
+					livereload: true,
+					spawn: false
+				}
 			}
 		}
 	});
@@ -63,5 +71,5 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default Task
-	grunt.registerTask('default', ['watch:css']);
+	grunt.registerTask('default', ['watch']);
 };
