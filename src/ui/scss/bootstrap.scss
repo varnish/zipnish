@@ -37,4 +37,8 @@
 	input[type=text] {
 		@include border-radius(0);
 	}
+
+	button {
+		@include border-radius(0);
+	}
 }
