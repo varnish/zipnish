@@ -5,6 +5,17 @@ module.exports = function (grunt) {
 
 		clean: {
 			bootstrap: ['ui/app/static/css/bootstrap.css']
+		},
+
+		sass: {
+			dist: {
+				options: {
+					style: 'expanded'
+				},
+				files: {
+					'ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
+				}
+			}
 		}
 	});
 
