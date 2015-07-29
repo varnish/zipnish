@@ -61,5 +61,5 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default Task
-	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('default', ['watch:css']);
 };
