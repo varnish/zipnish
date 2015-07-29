@@ -28,24 +28,24 @@ module.exports = function (grunt) {
 				files: {
 					'../../ui/app/static/css/bootstrap.css': 'scss/bootstrap.scss'
 				}
+			}
+		},
+
+		watch: {
+			configFiles: {
+				files: ['Gruntfile.js'],
+				options: {
+					reload: true,
+					spawn: false
+				}
 			},
 
-			watch: {
-				configFiles: {
-					files: ['Gruntfile.js'],
-					options: {
-						reload: true,
-						spawn: false
-					}
-				},
-
-				css: {
-					files: ['scss/*.scss'],
-					tasks: ['clean:bootstrap', 'sass:dev'],
-					options: {
-						livereload: true,
-						spawn: false
-					}
+			css: {
+				files: ['scss/*.scss'],
+				tasks: ['clean:bootstrap', 'sass:dev'],
+				options: {
+					livereload: true,
+					spawn: false
 				}
 			}
 		}
