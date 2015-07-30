@@ -29,10 +29,15 @@
 	border-radius: 0;
 	@include box-shadow(none);
 
+	.chosen-container-single {
+		.chosen-single {
+			line-height: 30px;
+		}
+	}
+
 	select {
 		@include appearance(none);
 		@include border-radius(0);
-		line-height: normal;
 	}
 
 	input[type=text] {
