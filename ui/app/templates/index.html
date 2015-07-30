@@ -55,17 +55,17 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-body">
-        <h4>Service names</h4>
+        <h4>Select a Service</h4>
         <p style="margin-bottom: 1.5em;">First off you have select a service to lookup by. All traces are indexed by service names. Once that is done you have three options to pick from. See notes on each below.</p>
 
-        <h5 class="text-left">Lookups by span name</h5>
+        <h5 class="text-left">Lookup by span name</h5>
     	<p>Span names are generally thrift method names or Rails endpoints. This allows you to look up traces
       that accessed a particular part of the service.</p>
 
-      	<h5 class="text-left">Lookups by annotation</h5>
+      	<h5 class="text-left">Lookup by annotation</h5>
       	<p>An annotation is a point in time in the trace. It is assigned a string value, this is what you can look up by in this field. Could be things like <strong style="font-weight:500;">finagle.timeout</strong></p>
 
-      	<h5 class="text-left">Lookups by key/value</h5>
+      	<h5 class="text-left">Lookup by key/value</h5>
       	<p>Key / value annotations are just extra metadata attached to a trace. This could be things like the url hit, response codes or exceptions. See below for a few examples.</p>
 
 		<table class="table table-striped">
@@ -77,8 +77,8 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>tfe.uri</td>
-				<td>/1/trends/available.json?lang=en</td>
+				<td>request.uri</td>
+				<td>/1/trends/available.json?lang=no</td>
 			</tr>
 			<tr>
 				<td>http.responsecode</td>
