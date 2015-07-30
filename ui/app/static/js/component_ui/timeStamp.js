@@ -19,7 +19,7 @@ define(
       }
 
       this.setDateTime = function(time) {
-        this.$date.val(time.format("MM-DD-YYYY"));
+        this.$date.val(time.format("DD-MM-YYYY"));
         this.$time.val(time.format("HH:mm"));
       }
 
