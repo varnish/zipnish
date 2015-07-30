@@ -43,6 +43,11 @@
 	input[type=text] {
 		@include border-radius(0);
 
+		&.date-input {
+			text-align: center;
+			width: 7em;
+		}
+
 		&.time-input {
 			text-align: center;
 			width: 5em;
