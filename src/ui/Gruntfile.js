@@ -32,6 +32,13 @@ module.exports = function (grunt) {
 		},
 
 		watch: {
+			options: {
+				livereload: {
+					host: '10.0.2.15',
+					port: 35729
+				}
+			},
+
 			configFiles: {
 				files: ['Gruntfile.js'],
 				options: {
