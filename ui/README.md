@@ -92,6 +92,10 @@ These commands will install dependencies at a global level.
 
 `$> npm install -g grunt`
 
+On linux you can try,
+
+`$> npm install -g grunt-cli`
+
 Next you will need to install package level dependencies. Use the following command.
 
 `$> npm install`
