@@ -34,6 +34,25 @@ Otherwise you need to setup environment variables separately and run the web ser
 
 `$> python manage.py runserver`
 
+To run python server on a custom port use the following command,
+
+`$> python manage.py runserver -p [CUSTOM PORT NUMBER]`
+
+Similar to above, the following set of options can be utilized:
+
+| Short  	| Long  	|  Description 	|
+|---	|---	|---	|
+| -?  	|  --help 	|   	|
+| -h  	|  --host 	|   HOST	|
+| -p  	|  --port 	|   PORT	|
+|   	|  --threaded 	|   	|
+|   	|  --processes 	|  PROCESSES 	|
+|   	|  --passthrough-errors 	|   	|
+| -d  	|  --debug 	|   enable the Werkzeug debugger (DO NOT use in production code)	|
+| -D  	|  --no-debug 	| disable the Werkzeug debugger  	|
+| -r  	|  --reload 	| monitor Python files for changes (DO NOT use in production code) 	|
+| -R  	|  --no-reload 	|  do not monitor Python files for changes 	|
+
 <br />
 #####Application Shell#####
 
@@ -91,6 +110,10 @@ These commands will install dependencies at a global level.
 `$> npm install -g compass`
 
 `$> npm install -g grunt`
+
+On linux you can try,
+
+`$> npm install -g grunt-cli`
 
 Next you will need to install package level dependencies. Use the following command.
 
