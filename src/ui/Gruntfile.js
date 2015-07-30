@@ -32,19 +32,12 @@ module.exports = function (grunt) {
 		},
 
 		watch: {
-			options: {
-				livereload: {
-					host: '10.0.2.15',
-					port: 35729
-				}
-			},
-
 			configFiles: {
 				files: ['Gruntfile.js'],
 				options: {
 					reload: true,
 					spawn: false,
-          livereload: false
+          livereload: true
 				}
 			},
 
@@ -53,6 +46,7 @@ module.exports = function (grunt) {
 				tasks: ['clean:bootstrap', 'sass:dev'],
 				options: {
 					spawn: false,
+          livereload: true
 				}
 			},
 
@@ -60,6 +54,7 @@ module.exports = function (grunt) {
 				files: ['../../ui/app/templates/*.html'],
 				options: {
 					spawn: false,
+          livereload: true
         }
 			}
 		}
@@ -75,8 +70,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-contrib-livereload');
 
 	// Default Task
-	grunt.registerTask('default', ['connect']);
+	grunt.registerTask('default', ['livereload-start', 'regarde', 'livereload']);
 };
