@@ -32,7 +32,7 @@ define(
       }
 
       this.timeChanged = function () {
-        var time = moment(this.$date.val(), "MM-DD-YYYY");
+        var time = moment(this.$date.val(), "DD-MM-YYYY");
         time.add(moment.duration(this.$time.val()));
         this.setTimestamp(moment.utc(time));
       }
@@ -41,7 +41,7 @@ define(
         this.init();
         this.on(this.$time, "change", this.timeChanged);
         this.$date
-          .datepicker({format: 'mm-dd-yyyy'})
+          .datepicker({format: 'dd-mm-yyyy'})
           .on("changeDate", this.dateChanged.bind(this));
       });
     }
