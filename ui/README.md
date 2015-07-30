@@ -50,7 +50,7 @@ Similar to above, the following set of options can be utilized:
 |   	|  --passthrough-errors 	|   	|
 | -d  	|  --debug 	|   enable the Werkzeug debugger (DO NOT use in production code)	|
 | -D  	|  --no-debug 	| disable the Werkzeug debugger  	|
-| -r  	|  --reload 	| monitor Python files for changes (not 100{'const': True, 'help': 'monitor Python files for changes (not 100% safe for production use)', 'option_strings': ['-r', '--reload'], 'dest': 'use_reloader', 'required': False, 'nargs': 0, 'choices': None, 'default': None, 'prog': 'manage.py runserver', 'container': <argparse._ArgumentGroup object at 0x7fa888689850>, 'type': None, 'metavar': None}afe for production use)  	|
+| -r  	|  --reload 	| monitor Python files for changes (DO NOT use in production code) 	|
 | -R  	|  --no-reload 	|  do not monitor Python files for changes 	|
 
 <br />
