@@ -81,3 +81,13 @@
 		@include border-radius(0);
 	}
 }
+
+#infoPanel {
+	table {
+		font-size: 14px;
+
+		th {
+			text-transform: uppercase;
+		}
+	}
+}
