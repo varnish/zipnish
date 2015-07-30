@@ -34,9 +34,18 @@ Otherwise you need to setup environment variables separately and run the web ser
 
 `$> python manage.py runserver`
 
-to run python server on a custom port use the following command,
+To run python server on a custom port use the following command,
 
 `$> python manage.py runserver -p [CUSTOM PORT NUMBER]`
+
+Similar to above, the following set of options can be utilized:
+
+| Short  	| Long  	|  Description 	|
+|---	|---	|---	|
+| -?  	|  --help 	|   	|
+| -h  	|  --host 	|   HOST	|
+| -p  	|  --port 	|   PORT	|
+|   	|   	|   	|
 
 <br />
 #####Application Shell#####
