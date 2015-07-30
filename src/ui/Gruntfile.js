@@ -43,7 +43,8 @@ module.exports = function (grunt) {
 				files: ['Gruntfile.js'],
 				options: {
 					reload: true,
-					spawn: false
+					spawn: false,
+          livereload: false
 				}
 			},
 
@@ -51,17 +52,15 @@ module.exports = function (grunt) {
 				files: ['scss/*.scss'],
 				tasks: ['clean:bootstrap', 'sass:dev'],
 				options: {
-					livereload: true,
-					spawn: false
+					spawn: false,
 				}
 			},
 
 			templates: {
 				files: ['../../ui/app/templates/*.html'],
 				options: {
-					livereload: true,
-					spawn: false
-				}
+					spawn: false,
+        }
 			}
 		}
 	});
@@ -76,6 +75,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-connect');
 
 	// Default Task
 	grunt.registerTask('default', ['watch']);
