@@ -33,6 +33,12 @@
 		.chosen-single {
 			line-height: 30px;
 			border-radius: 0;
+
+			div {
+				b {
+					background-position: 0 5px;
+				}
+			}
 		}
 	}
 
