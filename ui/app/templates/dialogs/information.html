@@ -1,0 +1,48 @@
+<!-- help panel for different lookup options -->
+<div class="modal fade" id="infoPanel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h4>Select a Service</h4>
+        <p style="margin-bottom: 1.5em;">First off you have select a service to lookup by. All traces are indexed by service names. Once that is done you have three options to pick from. See notes on each below.</p>
+
+        <h5 class="text-left">Lookup by span name</h5>
+    	<p>Span names are generally thrift method names or Rails endpoints. This allows you to look up traces
+      that accessed a particular part of the service.</p>
+
+      	<h5 class="text-left">Lookup by annotation</h5>
+      	<p>An annotation is a point in time in the trace. It is assigned a string value, this is what you can look up by in this field. Could be things like <strong style="font-weight:500;">finagle.timeout</strong></p>
+
+      	<h5 class="text-left">Lookup by key/value</h5>
+      	<p>Key / value annotations are just extra metadata attached to a trace. This could be things like the url hit, response codes or exceptions. See below for a few examples.</p>
+
+		<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Key</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>request.uri</td>
+				<td>/1/trends/available.json?lang=no</td>
+			</tr>
+			<tr>
+				<td>http.responsecode</td>
+				<td>500 Internal Server Error</td>
+			</tr>
+		</tbody>
+		</table>
+
+        <h5>Dates and limits</h5>
+        <p>VMSM allows you to pick a point in time to help us guide the selection of traces. When doing a lookup
+          we return traces before that point in time up until the limit number of results.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
