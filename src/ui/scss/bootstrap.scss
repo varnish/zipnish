@@ -42,6 +42,11 @@
 
 	input[type=text] {
 		@include border-radius(0);
+
+		&.time-input {
+			text-align: center;
+			width: 5em;
+		}
 	}
 
 	button {
