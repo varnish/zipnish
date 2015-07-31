@@ -1,8 +1,8 @@
 <!-- trace lookup form -->
 <form class="form-inline" role="form">
 	<div class="form-group">
-		<select 
-			data-placeholder="Service Name" 
+		<select
+			data-placeholder="Service Name"
 			class="form-control input-sm" style="width: 400px;" name="serviceName" id="serviceName">
 			<option value=""></option>
 
@@ -18,11 +18,9 @@
 		<select data-placeholder="Span Name" class="form-control input-sm" style="width: 250px;" name="spanName" id="spanName">
 			<option value="all"></option>
 
-			<option value="">Option Value 1</option>
-			<option value="">Option Value 2</option>
-			<option value="">Option Value 3</option>
-			<option value="">Option Value 4</option>
-			<option value="">Option Value 5</option>
+      {%- for span_name in spans %}
+      <option value="{{ span_name }}<">{{ span_name }}</option>
+      {%- endfor %}
 		</select>
 	</div>
 
