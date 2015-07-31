@@ -6,9 +6,11 @@ from .. import db
 @index.route('/', methods=['GET'])
 def index():
     connection = db.engine.connect()
+
+    # populate spans
+    spans = []
     result = connection.execute("SELECT DISTINCT span_name FROM zipkin_spans")
 
-    spans = []
     for row in result:
         spans.append( row['span_name'] )
 
