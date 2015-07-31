@@ -1,7 +1,5 @@
 import os
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -24,6 +22,15 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     DEBUG = True
+
+    DB_HOST = os.environ.get('DB_HOST') or '127.0.0.1'
+    DB_PORT = os.environ.get('DB_PORT') or 3306
+    DB_USER = os.environ.get('DB_USER') or 'zipkin'
+    DB_PASS = os.environ.get('DB_PASS') or 'kinect'
+    DB_NAME = os.environ.get('DB_NAME') or 'zipkin'
+
+    SQLALCHEMY_DATABASE_URI = "mysql+mysqldb://{}:{}@{}:{}/{}".\
+            format(DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME)
 
 class TestingConfig(Config):
     TESTING = True
