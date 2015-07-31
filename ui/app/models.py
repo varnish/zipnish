@@ -15,14 +15,14 @@ class Spans(db.Model):
 
 class Annotations(db.Model):
     __tablename__ = 'zipkin_annotations'
-    span_id = db.Column(db.Integer)
+    span_id = db.Column(db.Integer, primary_key=True)
     trace_id = db.Column(db.Integer)
     span_name = db.Column(db.String(255))
     service_name = db.Column(db.String(255))
     value = db.Column(db.Text)
     ipv4 = db.Column(db.Integer)
     port = db.Column(db.Integer)
-    a_timestamp = db.Column(db.Integer)
+    a_timestamp = db.Column(db.Integer, primary_key=True)
     duration = db.Column(db.Integer)
 
     def __repr__(self):
