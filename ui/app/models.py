@@ -9,3 +9,6 @@ class Spans(db.Model):
     debug = db.Column(db.Integer)
     duration = db.Column(db.Integer)
     created_ts = db.Column(db.Integer)
+
+class Annotations(db.Model):
+    __tablename__ = 'zipkin_annotations'
