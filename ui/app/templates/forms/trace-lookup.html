@@ -6,11 +6,9 @@
 			class="form-control input-sm" style="width: 400px;" name="serviceName" id="serviceName">
 			<option value=""></option>
 
-			<option value="">Service Value 1</option>
-			<option value="">Service Value 2</option>
-			<option value="">Service Value 3</option>
-			<option value="">Service Value 4</option>
-			<option value="">Service Value 5</option>
+      {%- for service_name in services %}
+      <option value="{{ service_name }}<">{{ service_name }}</option>
+      {%- endfor %}
 		</select>
 	</div>
 
