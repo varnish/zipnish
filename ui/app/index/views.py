@@ -5,6 +5,7 @@ from .. import db
 
 @index.route('/', methods=['GET'])
 def index():
+    # get database engine connection
     connection = db.engine.connect()
 
     # populate spans
@@ -14,6 +15,14 @@ def index():
     for row in result:
         spans.append( row['span_name'] )
 
+    # populate services
+    services = []
+    result = connection.execute("SELECT DISTINCT service_name FROM zipkin_annotations")
+
+    for row in result:
+        services.append( row['service_name'] )
+
+    # close connection
     connection.close()
 
-    return render_template('index.html', spans=spans)
+    return render_template('index.html', spans=spans, services=services)
