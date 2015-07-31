@@ -24,3 +24,6 @@ class Annotations(db.Model):
     port = db.Column(db.Integer)
     a_timestamp = db.Column(db.Integer)
     duration = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Annotation %r - %r>' % (self.span_name, self.service_name)
