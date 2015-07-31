@@ -10,6 +10,9 @@ class Spans(db.Model):
     duration = db.Column(db.Integer)
     created_ts = db.Column(db.Integer)
 
+    def __repr__(self):
+        return '<Span %r>' % self.span_name
+
 class Annotations(db.Model):
     __tablename__ = 'zipkin_annotations'
     span_id = db.Column(db.Integer)
