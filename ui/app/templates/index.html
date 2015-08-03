@@ -9,13 +9,7 @@
 
 </div>
 
-{% if not queryResults %}
-<div class="row">
-	<div class="alert alert-info" id="help-msg">
-		<p>Please select the criteria for your trace lookup.</p>
-	</div>
-</div>
-{% endif %}
+{% include 'messages/no-results.html' %}
 
 {% include 'dialogs/information.html' %}
 
