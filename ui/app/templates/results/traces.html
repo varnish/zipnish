@@ -1,16 +1,20 @@
 <ul id="traces">
 
-  <li clas"trace"
-    data-traceId=""
-    data-duration=""
-    data-timestamp=""
-    data-service-percentage="">
+  <li class="trace"
+    data-traceId="*traceId"
+    data-duration="*duration"
+    data-timestamp="*timestamp"
+    data-service-percentage="*servicePercentage">
 
-    <a href="/traces/">
+    <a href="/traces/*traceIdLink">
       <div class="bar-block">
-        <span class="bar-graphic" style="width:;"></span>
-        <span class="bar-label">duration</span>
-        <span class="bar-label">span count</span>
+        <span class="bar-graphic" style="width:graphicWidth%;"></span>
+        <span class="bar-label">*duration</span>
+        <span class="bar-label">*span count</span>
+      </div>
+      <div class="bar-block">
+        <span class="bar-graphic" style="width:%;"></span>
+        <span class="bar-label">*serviceName *servicePercentage%</span>
       </div>
     </a>
 
