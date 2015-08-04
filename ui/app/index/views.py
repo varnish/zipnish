@@ -5,6 +5,10 @@ from .. import db
 
 @index.route('/', methods=['GET'])
 def index():
+    # read in GET request values
+    spanName = request.args.get('spanName')
+    serviceName = request.args.get('serviceName')
+
     # get database engine connection
     connection = db.engine.connect()
 
