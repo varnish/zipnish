@@ -1,18 +1,19 @@
+from time import time
 from flask import request, redirect, render_template
-from . import index
 
+from . import index
 from .. import db
 
 @index.route('/', methods=['GET'])
 def index():
-    # read in GET request values
+    # read GET values
     spanName = request.args.get('spanName')
     serviceName = request.args.get('serviceName')
     timestamp = request.args.get('timestamp')
+    limit = request.args.get('limit')
 
-    if timestamp.strip() == '':
-        timestamp = 'current_time'
-
+    if timestamp is None or timestamp.strip() == '':
+        timestamp = int(time() * 1000000)
 
     # get database engine connection
     connection = db.engine.connect()
@@ -36,4 +37,5 @@ def index():
 
     return render_template('index.html', \
             spans=spans, services=services, \
-            get_SpanName=spanName, get_ServiceName=serviceName, get_Timestamp=timestamp)
+            get_SpanName=spanName, get_ServiceName=serviceName, \
+            get_Timestamp=timestamp, get_Limit=limit)
