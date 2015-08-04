@@ -18,6 +18,13 @@ def index():
     # get database engine connection
     connection = db.engine.connect()
 
+    # query results
+    results = None
+
+    # query database based on query parameters if service is given
+    if serviceName is not None:
+        results = [1]
+
     # populate spans
     spans = []
     result = connection.execute("SELECT DISTINCT span_name FROM zipkin_spans")
@@ -36,6 +43,7 @@ def index():
     connection.close()
 
     return render_template('index.html', \
+            results=results, \
             spans=spans, services=services, \
             get_SpanName=spanName, get_ServiceName=serviceName, \
             get_Timestamp=timestamp, get_Limit=limit)
