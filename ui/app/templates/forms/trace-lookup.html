@@ -21,16 +21,6 @@
 	<div class="form-group">
 		<select data-placeholder="Span Name" class="form-control input-sm" style="width: 250px;" name="spanName" id="spanName">
 			<option value="all"></option>
-
-      {%- for span_name in spans %}
-      <option
-           value="{{ span_name }}"
-           {% if span_name == get_SpanName %} selected="selected"{% endif %}>
-
-            {{ span_name }}
-
-      </option>
-      {%- endfor %}
 		</select>
 	</div>
 
