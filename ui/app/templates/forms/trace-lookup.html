@@ -7,7 +7,13 @@
 			<option value=""></option>
 
       {%- for service_name in services %}
-      <option value="{{ service_name }}"{% if service_name == getServiceName %} selected="selected"{% endif %}>{{ service_name }}</option>
+      <option
+          value="{{ service_name }}"
+          {% if service_name == get_ServiceName %} selected="selected"{% endif %}>
+
+            {{ service_name }}
+
+      </option>
       {%- endfor %}
 		</select>
 	</div>
@@ -17,12 +23,19 @@
 			<option value="all"></option>
 
       {%- for span_name in spans %}
-      <option value="{{ span_name }}"{% if span_name == getSpanName %} selected="selected"{% endif %}>{{ span_name }}</option>
+      <option
+           value="{{ span_name }}"
+           {% if span_name == get_SpanName %} selected="selected"{% endif %}>
+
+            {{ span_name }}
+
+      </option>
       {%- endfor %}
 		</select>
 	</div>
 
 	<div id="time-stamp" class="form-group">
+    {{ get_Timestamp }}
       <label for="timeStamp">&nbsp; End Time &nbsp;</label>
       <input class="form-control input-sm date-input" type="text">
       <input class="form-control input-sm time-input" type="text">
