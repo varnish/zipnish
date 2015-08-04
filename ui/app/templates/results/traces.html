@@ -2,10 +2,10 @@
 <ul id="traces">
   {% for trace in results %}
   <li class="trace"
-    data-traceId="*traceId"
-    data-duration="*duration"
-    data-timestamp="*timestamp"
-    data-service-percentage="*servicePercentage">
+      data-traceId="{{ trace['trace_id'] }}"
+      data-duration="*duration"
+      data-timestamp="*timestamp"
+      data-service-percentage="*servicePercentage">
 
     <a href="/traces/*traceIdLink">
       <div class="bar-block">
