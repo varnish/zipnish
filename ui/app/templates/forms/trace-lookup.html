@@ -7,7 +7,7 @@
 			<option value=""></option>
 
       {%- for service_name in services %}
-      <option value="{{ service_name }}<">{{ service_name }}</option>
+      <option value="{{ service_name }}"{% if service_name == getServiceName %} selected="selected"{% endif %}>{{ service_name }}</option>
       {%- endfor %}
 		</select>
 	</div>
@@ -17,7 +17,7 @@
 			<option value="all"></option>
 
       {%- for span_name in spans %}
-      <option value="{{ span_name }}<">{{ span_name }}</option>
+      <option value="{{ span_name }}"{% if span_name == getSpanName %} selected="selected"{% endif %}>{{ span_name }}</option>
       {%- endfor %}
 		</select>
 	</div>
