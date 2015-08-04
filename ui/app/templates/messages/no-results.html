@@ -1,5 +1,11 @@
-{% if not results %}
+{% if results == None %}
 <div class="alert alert-info" id="help-msg">
   <p>Please select the criteria for your trace lookup.</p>
+</div>
+{% endif %}
+
+{% if results != None %}
+<div class="alert alert-info" id="help-msg">
+  <p>No traces found.</p>
 </div>
 {% endif %}
