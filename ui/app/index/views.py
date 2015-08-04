@@ -29,4 +29,4 @@ def index():
     # close connection
     connection.close()
 
-    return render_template('index.html', spans=spans, services=services, spanName=spanName, serviceName=serviceName)
+    return render_template('index.html', spans=spans, services=services, getSpanName=spanName, getServiceName=serviceName)
