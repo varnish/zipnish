@@ -1,6 +1,6 @@
-{% if results %}
+{% if results|length > 0 %}
 <ul id="traces">
-
+  {% for trace in results %}
   <li class="trace"
     data-traceId="*traceId"
     data-duration="*duration"
@@ -11,7 +11,7 @@
       <div class="bar-block">
         <span class="bar-graphic" style="width:graphicWidth%;"></span>
         <span class="bar-label">*duration</span>
-        <span class="bar-label">*span count</span>
+        <span class="bar-label">{{ trace['span_count'] }}</span>
       </div>
       <div class="bar-block">
         <span class="bar-graphic" style="width:%;"></span>
@@ -31,6 +31,6 @@
     </div>
 
   </li>
-
+  {% endfor %}
 </ul>
 {% endif %}
