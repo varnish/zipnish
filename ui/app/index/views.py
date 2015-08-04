@@ -13,7 +13,10 @@ def index():
     timestamp = request.args.get('timestamp')
     limit = request.args.get('limit') or ''
 
+    formSubmitted = True
+
     if timestamp is None or timestamp.strip() == '':
+        formSubmitted = False
         timestamp = int(time() * 1000000)
 
     # get database engine connection
@@ -23,8 +26,8 @@ def index():
     queryResults = None
 
     # query database based on query parameters if service is given
-    if serviceName is not None:
-        results = []
+    if formSubmitted:
+        queryResults = []
 
     # populate services
     services = []
