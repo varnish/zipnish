@@ -8,6 +8,11 @@ def index():
     # read in GET request values
     spanName = request.args.get('spanName')
     serviceName = request.args.get('serviceName')
+    timestamp = request.args.get('timestamp')
+
+    if timestamp.strip() == '':
+        timestamp = 'current_time'
+
 
     # get database engine connection
     connection = db.engine.connect()
@@ -29,4 +34,6 @@ def index():
     # close connection
     connection.close()
 
-    return render_template('index.html', spans=spans, services=services, getSpanName=spanName, getServiceName=serviceName)
+    return render_template('index.html', \
+            spans=spans, services=services, \
+            get_SpanName=spanName, get_ServiceName=serviceName, get_Timestamp=timestamp)
