@@ -35,16 +35,15 @@
 	</div>
 
 	<div id="time-stamp" class="form-group">
-    {{ get_Timestamp }}
       <label for="timeStamp">&nbsp; End Time &nbsp;</label>
       <input class="form-control input-sm date-input" type="text">
       <input class="form-control input-sm time-input" type="text">
-      <input class="" id="timestamp" name="timestamp" type="hidden" value="{{timestamp}}">
+      <input id="timestamp" name="timestamp" type="hidden" value="{{get_Timestamp}}">
     </div>
 
     <div class="form-group">
       <label for="limit">&nbsp; Limit &nbsp;</label>
-      <input class="form-control input-sm" id="limit" name="limit" type="text" value="{{limit}}">
+      <input class="form-control input-sm" id="limit" name="limit" type="text" value="{{get_Limit}}">
     </div>
 
 	&nbsp;
