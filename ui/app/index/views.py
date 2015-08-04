@@ -25,12 +25,12 @@ def index():
     connection = db.engine.connect()
 
     # query results
-    queryResults = None
+    traceResults = None
 
     # query database based on query parameters if service is given
     if formSubmitted:
         # query results that would be sent over to view
-        queryResults = []
+        traceResults = []
 
         # find all traces to which related to this service
         query = "SELECT DISTINCT trace_id \
@@ -45,16 +45,21 @@ def index():
 
         if len(traceIds) > 0:
             # find the number of DISTINCT spans, that above service connects with
-            query = "SELECT COUNT(DISTINCT span_id) as numSpans \
+            query = "SELECT COUNT(DISTINCT span_id) as span_count, trace_id \
                     FROM zipkin_spans \
                     WHERE \
                     trace_id IN (%s)" % (",".join(str(traceId) for traceId in traceIds))
             result = connection.execute(query)
 
             for row in result:
-                numSpans = row['numSpans']
+                trace = {}
 
-        return str(numSpans)
+                trace['span_count'] = row['span_count']
+                trace['trace_id'] = row['trace_id']
+
+                traceResults.append( trace )
+
+        #return json.dumps(traceResults)
 
     # populate services
     services = []
@@ -79,7 +84,7 @@ def index():
     connection.close()
 
     return render_template('index.html', \
-            results=queryResults, \
+            results=traceResults, \
             services=services, spans=spans, \
             get_SpanName=spanName, get_ServiceName=serviceName, \
             get_Timestamp=timestamp, get_Limit=limit)
