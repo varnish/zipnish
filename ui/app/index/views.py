@@ -3,7 +3,7 @@ from . import index
 
 from .. import db
 
-@index.route('/', methods=['GET', 'POST'])
+@index.route('/', methods=['GET'])
 def index():
     # get database engine connection
     connection = db.engine.connect()
