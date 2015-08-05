@@ -11,19 +11,21 @@
       <div class="bar-block">
         <span class="bar-graphic" style="width:graphicWidth%;"></span>
         <span class="bar-label">*duration</span>
-        <span class="bar-label">{{ trace['span_count'] }}</span>
+        <span class="bar-label">{{ trace['spanCount'] }}</span>
       </div>
       <div class="bar-block">
         <span class="bar-graphic" style="width:%;"></span>
-        <span class="bar-label">*serviceName *servicePercentage%</span>
+        <span class="bar-label">{{ trace['serviceName'] }} *servicePercentage%</span>
       </div>
     </a>
 
     <div class="trace-details services">
+      {% for serviceDuration in trace['serviceDurations'] %}
       <span class="label label-default service-filter-label"
             data-service-name="*name">
-        *name x *count *max ms
+        {{ serviceDuration['name'] }} x *count *max ms
       </span>
+      {% endfor %}
     </div>
 
     <div class="trace-details timestamp pull-right">
