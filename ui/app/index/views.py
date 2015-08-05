@@ -45,7 +45,7 @@ def index():
 
         if len(traceIds) > 0:
             # find the number of DISTINCT spans, that above service connects with
-            query = "SELECT COUNT(DISTINCT span_id) as span_count, trace_id \
+            query = "SELECT COUNT(DISTINCT span_id) as spanCount, parent_id, trace_id \
                     FROM zipkin_spans \
                     WHERE \
                     trace_id IN (%s)" % (",".join(str(traceId) for traceId in traceIds))
@@ -54,8 +54,23 @@ def index():
             for row in result:
                 trace = {}
 
-                trace['span_count'] = row['span_count']
+                trace['serviceName'] = serviceName
+                trace['spanCount'] = row['spanCount']
                 trace['trace_id'] = row['trace_id']
+
+                servicesQuery = "SELECT service_name, a_timestamp \
+                        FROM zipkin_annotations \
+                        WHERE trace_id = %s AND \
+                        `value` IN ('cs', 'sr', 'ss', 'cr') \
+                        ORDER BY service_name ASC" % (row['trace_id'])
+                servicesResult = connection.execute(servicesQuery)
+
+                for serviceRow in servicesResult:
+                    serviceRow['service_name']
+
+                return query
+
+            #difference between client_recieve and client_send is the amount of time a service takes
 
                 traceResults.append( trace )
 
