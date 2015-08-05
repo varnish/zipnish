@@ -47,7 +47,8 @@ def index():
             # find the number of DISTINCT spans, that above service connects with
             query = "SELECT COUNT(DISTINCT span_id) as spanCount, parent_id, trace_id \
                     FROM zipkin_spans \
-                    WHERE \
+                    GROUP BY trace_id \
+                    HAVING \
                     trace_id IN (%s)" % (",".join(str(traceId) for traceId in traceIds))
             result = connection.execute(query)
 
