@@ -58,17 +58,23 @@ def index():
                 trace['spanCount'] = row['spanCount']
                 trace['trace_id'] = row['trace_id']
 
-                servicesQuery = "SELECT service_name, a_timestamp \
+                servicesQuery = "SELECT service_name, `value`, a_timestamp \
                         FROM zipkin_annotations \
                         WHERE trace_id = %s AND \
                         `value` IN ('cs', 'sr', 'ss', 'cr') \
                         ORDER BY service_name ASC" % (row['trace_id'])
                 servicesResult = connection.execute(servicesQuery)
 
+                services = {}
+                service = None
                 for serviceRow in servicesResult:
-                    serviceRow['service_name']
+                    if serviceRow['service_name'] not in services:
+                        services[serviceRow['service_name']] = {}
+                        service = services[serviceRow['service_name']]
 
-                return query
+                    service[serviceRow['value']] = serviceRow['a_timestamp']
+
+                return json.dumps(services)
 
             #difference between client_recieve and client_send is the amount of time a service takes
 
