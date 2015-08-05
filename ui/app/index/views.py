@@ -74,7 +74,15 @@ def index():
 
                     service[serviceRow['value']] = serviceRow['a_timestamp']
 
-                return json.dumps(services)
+                serviceDurations = []
+
+                for key in services:
+                    if 'cs' in services[key]:
+                        service = services[key]
+                        serviceDurations.append({
+                                'name': key,
+                                'duration': service['cr'] - service['cs']
+                            })
 
             #difference between client_recieve and client_send is the amount of time a service takes
 
