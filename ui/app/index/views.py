@@ -95,7 +95,14 @@ def index():
                     # adding up duration to get total duration time
                     duration = duration + serviceDuration
 
+                # total duration for a trace
                 trace['duration'] = duration
+
+                # service durations
+
+                # sort service durations
+                serviceDurations = sorted(serviceDurations, key=lambda x: x['name'])
+
                 trace['serviceDurations'] = serviceDurations
 
                 traceResults.append( trace )
