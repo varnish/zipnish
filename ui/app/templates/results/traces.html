@@ -10,7 +10,7 @@
     <a href="/traces/{{ trace['trace_id'] }}?serviceName={{ serviceName }}">
       <div class="bar-block">
         <span class="bar-graphic" style="width:graphicWidth%;"></span>
-        <span class="bar-label">{{ trace['duration'] }}</span>
+        <span class="bar-label">{{ (trace['duration'] / 1000)|round|int }} ms</span>
         <span class="bar-label">{{ trace['spanCount'] }}</span>
       </div>
       <div class="bar-block">
