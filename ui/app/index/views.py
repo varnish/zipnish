@@ -89,6 +89,8 @@ def index():
                                 'duration': service['ss'] - service['sr']
                             })
 
+                trace['serviceDurations'] = serviceDurations
+
                 traceResults.append( trace )
 
         #return json.dumps(traceResults)
