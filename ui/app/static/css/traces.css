@@ -128,6 +128,7 @@
 
 #traces li div span.label {
   -webkit-transition: .3s;
+  margin-right: 3px;
 }
 
 #traces li div p {
