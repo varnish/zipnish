@@ -77,14 +77,17 @@ def index():
                 serviceDurations = []
 
                 for key in services:
-                    if 'cs' in services[key]:
-                        service = services[key]
+                    service = services[key]
+                    if 'cs' in service:
                         serviceDurations.append({
                                 'name': key,
                                 'duration': service['cr'] - service['cs']
                             })
-
-            #difference between client_recieve and client_send is the amount of time a service takes
+                    else:
+                        serviceDurations.append({
+                                'name': key,
+                                'duration': service['ss'] - service['sr']
+                            })
 
                 traceResults.append( trace )
 
