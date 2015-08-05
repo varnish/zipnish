@@ -10,7 +10,7 @@
     <a href="/traces/{{ trace['trace_id'] }}?serviceName={{ serviceName }}">
       <div class="bar-block">
         <span class="bar-graphic" style="width:graphicWidth%;"></span>
-        <span class="bar-label">*duration</span>
+        <span class="bar-label">{{ trace['duration'] }}</span>
         <span class="bar-label">{{ trace['spanCount'] }}</span>
       </div>
       <div class="bar-block">
@@ -23,7 +23,7 @@
       {% for serviceDuration in trace['serviceDurations'] %}
       <span class="label label-default service-filter-label"
             data-service-name="*name">
-        {{ serviceDuration['name'] }} x *count {{ serviceDuration['duration'] / 1000 }} ms
+        {{ serviceDuration['name'] }} x *count {{ (serviceDuration['duration'] / 1000)|round|int }} ms
       </span>
       {% endfor %}
     </div>
