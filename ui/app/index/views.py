@@ -75,21 +75,27 @@ def index():
 
                     service[serviceRow['value']] = serviceRow['a_timestamp']
 
+                duration = 0
+                serviceDuration = 0
                 serviceDurations = []
 
                 for key in services:
                     service = services[key]
                     if 'cs' in service:
-                        serviceDurations.append({
-                                'name': key,
-                                'duration': service['cr'] - service['cs']
-                            })
+                        serviceDuration = service['cr'] - service['cs']
                     else:
-                        serviceDurations.append({
-                                'name': key,
-                                'duration': service['ss'] - service['sr']
-                            })
+                        serviceDuration = service['ss'] - service['sr']
 
+                    # service duration
+                    serviceDurations.append({
+                            'name': key,
+                            'duration': serviceDuration
+                        })
+
+                    # adding up duration to get total duration time
+                    duration = duration + serviceDuration
+
+                trace['duration'] = duration
                 trace['serviceDurations'] = serviceDurations
 
                 traceResults.append( trace )
