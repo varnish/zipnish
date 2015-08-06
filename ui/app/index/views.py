@@ -95,11 +95,11 @@ def index():
                     service = services[key]
                     if 'cs' in service:
                         minTimestamp = min(service['cr'], minTimestamp)
-                        maxTimestamp = max(service['cr'], maxTimestamp)
+                        maxTimestamp = max(service['cs'], maxTimestamp)
 
                         serviceDuration = service['cr'] - service['cs']
                     else:
-                        minTimestamp = min(service['ss'], minTimestamp)
+                        minTimestamp = min(service['sr'], minTimestamp)
                         maxTimestamp = max(service['ss'], maxTimestamp)
 
                         serviceDuration = service['ss'] - service['sr']
@@ -122,8 +122,11 @@ def index():
                 serviceDurations = sorted(serviceDurations, key=lambda x: x['name'])
 
                 trace['serviceDurations'] = serviceDurations
-                trace['serviceTimestampMin'] = minTimestamp / 1000000
-                trace['serviceTimestampMax'] = maxTimestamp / 1000000
+
+                trace['serviceTimestampMin'] = minTimestamp
+                trace['serviceTimestampMax'] = maxTimestamp
+
+                trace['servicesTotalDuration'] = (maxTimestamp - minTimestamp)
 
                 traceResults.append( trace )
 
