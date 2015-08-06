@@ -51,7 +51,8 @@ def index():
                     FROM zipkin_spans \
                     GROUP BY trace_id \
                     HAVING \
-                    trace_id IN (%s)" \
+                    trace_id IN (%s) \
+                    ORDER BY created_ts ASC" \
                     % (",".join(str(traceId) for traceId in traceIds))
             result = connection.execute(query)
 
