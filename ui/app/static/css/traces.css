@@ -77,8 +77,7 @@
   position: relative;
   line-height: 20px;
   padding: 0px;
-  margin: 2px 0;
-  background-color: rgba(255, 255, 255, .75);
+  margin: 4px 0;
 
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -122,8 +121,6 @@
 }
 
 #traces li:hover .bar-label {
-  color: #FFF;
-  background-color: rgba(0,132,180,.35);
 }
 
 #traces li div span.label {
@@ -170,6 +167,5 @@
 }
 
 #traces li:hover .timestamp .label {
-  background-color: #FFF;
   color: #666;
 }
