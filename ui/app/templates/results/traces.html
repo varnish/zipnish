@@ -27,7 +27,7 @@
       {% for serviceDuration in trace['serviceDurations'] %}
       <span class="label label-default service-filter-label"
             data-service-name="*name">
-        {{ (serviceDuration['duration'] / 1000)|round|int }} ms
+        <span class="service-duration-time">{{ (serviceDuration['duration'] / 1000)|round|int }}<span class="measurement-indicator">ms</span></span>
         {{ serviceDuration['name'] }} x 1
       </span>
       {% endfor %}
