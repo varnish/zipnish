@@ -60,6 +60,7 @@ def index():
                 trace['serviceName'] = serviceName
                 trace['spanCount'] = row['spanCount']
                 trace['trace_id'] = row['trace_id']
+                trace['startTime'] = row['created_ts']
 
                 servicesQuery = "SELECT service_name, `value`, a_timestamp \
                         FROM zipkin_annotations \
