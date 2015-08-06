@@ -1,3 +1,4 @@
+import sys
 import json
 import time
 
@@ -75,6 +76,7 @@ def index():
 
                 services = {}
                 service = None
+
                 for serviceRow in servicesResult:
                     if serviceRow['service_name'] not in services:
                         services[serviceRow['service_name']] = {}
@@ -86,11 +88,20 @@ def index():
                 serviceDuration = 0
                 serviceDurations = []
 
+                minTimestamp = sys.maxint
+                maxTimestamp = 0
+
                 for key in services:
                     service = services[key]
                     if 'cs' in service:
+                        minTimestamp = min(service['cr'], minTimestamp)
+                        maxTimestamp = max(service['cr'], maxTimestamp)
+
                         serviceDuration = service['cr'] - service['cs']
                     else:
+                        minTimestamp = min(service['ss'], minTimestamp)
+                        maxTimestamp = max(service['ss'], maxTimestamp)
+
                         serviceDuration = service['ss'] - service['sr']
 
                     # service duration
