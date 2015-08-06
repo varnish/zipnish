@@ -11,6 +11,15 @@
   color: #fff;
 }
 
+.trace-details .service-duration-time {
+
+}
+
+.trace-details .service-duration-time .measurement-indicator {
+  vertical-align: sub;
+  font-size: 75%;
+}
+
 .service-filter-remove {
   cursor: pointer;
   border-radius: 0;
