@@ -1,6 +1,6 @@
 import json
+import time
 
-from time import time
 from urllib import unquote
 from flask import request, redirect, render_template
 
@@ -19,7 +19,7 @@ def index():
 
     if timestamp is None or timestamp.strip() == '':
         formSubmitted = False
-        timestamp = int(time() * 1000000)
+        timestamp = int(time.time() * 1000000)
 
     # get database engine connection
     connection = db.engine.connect()
@@ -60,7 +60,9 @@ def index():
                 trace['serviceName'] = serviceName
                 trace['spanCount'] = row['spanCount']
                 trace['trace_id'] = row['trace_id']
-                trace['startTime'] = row['created_ts']
+
+                startTime = (int(row['created_ts']) / 1000000)
+                trace['startTime'] = time.strftime('%m-%d-%YT%H:%M:%S', time.gmtime(startTime))
 
                 servicesQuery = "SELECT service_name, `value`, a_timestamp \
                         FROM zipkin_annotations \
