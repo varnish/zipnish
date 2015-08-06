@@ -7,6 +7,10 @@
   padding-right: 0;
 }
 
+.trace-details .service-filter-label:hover {
+  color: #fff;
+}
+
 .service-filter-remove {
   cursor: pointer;
   border-radius: 0;
@@ -33,9 +37,8 @@
 
 #traces li {
   display: block;
-  padding: 5px;
-  padding-bottom: 20px;
-  margin: 0 0 20px 0;
+  padding: 2px 5px 25px 5px;
+  margin: 0 0 10px 0;
   list-style: none;
 
   -webkit-border-radius: 0px;
@@ -123,7 +126,7 @@
 
 #traces li div span.label {
   -webkit-transition: .3s;
-  margin-right: 3px;
+  margin-right: 1px;
 }
 
 #traces li div p {
@@ -144,6 +147,10 @@
 #traces li .timestamp {
   width: 19%;
   text-align: right;
+}
+
+#traces li .services .label {
+  padding: .4em .4em .3em .6em;
 }
 
 #traces li:hover .services .label {
