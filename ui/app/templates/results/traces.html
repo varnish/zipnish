@@ -16,6 +16,7 @@
         <span class="bar-graphic" style="width:graphicWidth%;"></span>
         <span class="bar-label">{{ (trace['servicesTotalDuration']) }} ms</span>
         <span class="bar-label">{{ trace['spanCount'] }} spans</span>
+        <time class="bar-label timeago" datetime="{{ trace['startTime'] }}">{{ trace['startTime'] }}</time>
       </div>
       <div class="bar-block">
         <span class="bar-graphic" style="width:%;"></span>
