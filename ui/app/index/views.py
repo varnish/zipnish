@@ -1,4 +1,5 @@
 import sys
+import string
 import json
 import time
 
@@ -126,7 +127,7 @@ def index():
                 trace['serviceTimestampMin'] = minTimestamp
                 trace['serviceTimestampMax'] = maxTimestamp
 
-                trace['servicesTotalDuration'] = (maxTimestamp - minTimestamp)
+                trace['servicesTotalDuration'] = '{:.3f}'.format((maxTimestamp - minTimestamp) / 1000)
 
                 traceResults.append( trace )
 
