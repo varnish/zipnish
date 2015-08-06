@@ -106,10 +106,9 @@
 
 #traces li .bar-label {
   position: relative;
-  margin-left: 6px;
-  padding: 2px 4px;
+  margin-left: 6px 6px 6px 0px;
+  padding: 2px 4px 2px 0px;
   color: #0084B4;
-  font-weight: bold;
   z-index: 1;
 
   -webkit-border-radius: 0px;
@@ -139,7 +138,7 @@
 }
 
 #traces li .services {
-  width: 80%;
+  width: 100%;
 }
 
 #traces li .timestamp {
