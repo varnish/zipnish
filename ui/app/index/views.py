@@ -122,6 +122,8 @@ def index():
                 serviceDurations = sorted(serviceDurations, key=lambda x: x['name'])
 
                 trace['serviceDurations'] = serviceDurations
+                trace['serviceTimestampMin'] = minTimestamp / 1000000
+                trace['serviceTimestampMax'] = maxTimestamp / 1000000
 
                 traceResults.append( trace )
 
