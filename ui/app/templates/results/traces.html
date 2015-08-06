@@ -8,9 +8,13 @@
       data-service-percentage="*servicePercentage">
 
     <a href="/traces/{{ trace['trace_id'] }}?serviceName={{ trace['serviceName'] }}">
+      <!--<div class="trace-details timestamp">
+        <time class="label timeago" datetime="{{ trace['startTime'] }}">{{ trace['startTime'] }}</time>
+        </div>-->
+
       <div class="bar-block">
         <span class="bar-graphic" style="width:graphicWidth%;"></span>
-        <span class="bar-label">{{ trace['duration']/1000|round(3) }} ms</span>
+        <span class="bar-label">{{ trace['duration']/1000|round(3) }}ms</span>
         <span class="bar-label">{{ trace['spanCount'] }} spans</span>
       </div>
       <div class="bar-block">
@@ -23,13 +27,10 @@
       {% for serviceDuration in trace['serviceDurations'] %}
       <span class="label label-default service-filter-label"
             data-service-name="*name">
-        {{ serviceDuration['name'] }} x *count {{ (serviceDuration['duration'] / 1000)|round|int }} ms
+        {{ (serviceDuration['duration'] / 1000)|round|int }} ms
+        {{ serviceDuration['name'] }} x 1
       </span>
       {% endfor %}
-    </div>
-
-    <div class="trace-details timestamp pull-right">
-      <time class="label timeago" datetime="{{ trace['startTime'] }}">{{ trace['startTime'] }}</time>
     </div>
 
   </li>
