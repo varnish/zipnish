@@ -7,7 +7,7 @@
       data-timestamp="*timestamp"
       data-service-percentage="*servicePercentage">
 
-    <a href="/traces/{{ trace['trace_id'] }}?serviceName={{ serviceName }}">
+    <a href="/traces/{{ trace['trace_id'] }}?serviceName={{ trace['serviceName'] }}">
       <div class="bar-block">
         <span class="bar-graphic" style="width:graphicWidth%;"></span>
         <span class="bar-label">{{ (trace['duration'] / 1000)|round|int }} ms</span>
