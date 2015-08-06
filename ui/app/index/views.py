@@ -35,7 +35,9 @@ def index():
         # find all traces to which related to this service
         query = "SELECT DISTINCT trace_id \
                 FROM zipkin_annotations \
-                WHERE service_name = '%s'" % (serviceName)
+                WHERE service_name = '%s' \
+                ORDER BY a_timestamp DESC \
+                LIMIT 0, %s" % (serviceName, limit)
 
         traceIds = []
         resultTraceIds = connection.execute(query)
@@ -49,8 +51,7 @@ def index():
                     FROM zipkin_spans \
                     GROUP BY trace_id \
                     HAVING \
-                    trace_id IN (%s) \
-                    ORDER BY created_ts DESC " \
+                    trace_id IN (%s)" \
                     % (",".join(str(traceId) for traceId in traceIds))
             result = connection.execute(query)
 
