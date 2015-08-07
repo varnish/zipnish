@@ -45,8 +45,9 @@
 }
 
 #traces li {
+  position: relative;
   display: block;
-  padding: 2px 5px 25px 5px;
+  padding: 2px 5px 10px 0px;
   margin: 0 0 10px 0;
   list-style: none;
 
@@ -59,19 +60,22 @@
   -webkit-transition: background-color .3s;
 }
 
-#traces li:after {
-  content: '';
-  display: block;
-  width: 75%;
-  margin: 15px auto -35px;
-}
-
 #traces li:first-child {
   margin-top: 0px;
 }
 
 #traces li:hover {
   background-color: rgba(221,238,246,1);
+}
+
+#traces li:after {
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  content: ' ';
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid #e3e3e3;
 }
 
 
@@ -122,6 +126,9 @@
   padding: 2px 4px 2px 0px;
   color: #0084B4;
   z-index: 1;
+
+  display: inline-block;
+  min-width: 100px;
 
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
