@@ -54,7 +54,7 @@ def index():
                     GROUP BY trace_id \
                     HAVING \
                     trace_id IN (%s) \
-                    ORDER BY created_ts ASC" \
+                    ORDER BY created_ts DESC" \
                     % (",".join(str(traceId) for traceId in traceIds))
             result = connection.execute(query)
 
