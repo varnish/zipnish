@@ -78,6 +78,9 @@
   border-bottom: 1px solid #e3e3e3;
 }
 
+#traces li:last-child:after {
+  border-bottom: 0;
+}
 
 #traces li div {
   display: block;
