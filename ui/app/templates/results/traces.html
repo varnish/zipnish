@@ -12,16 +12,16 @@
         <span class="glyphicon glyphicon-arrow-right"></span>
         <span class="bar-label">{{ trace['spanCount'] }} spans</span>
 
-        <span class="bar-label">{{ trace['serviceName'] }} {{ trace['selectedServicePercentage'] }}%</span>
+        <span class="glyphicon glyphicon-time"></span>
+        <span class="bar-label">{{ (trace['servicesTotalDuration']) }} ms</span>
       </div>
 
 
       <div class="bar-block">
-        <span class="glyphicon glyphicon-time"></span>
-        <span class="bar-label">{{ (trace['servicesTotalDuration']) }} ms</span>
-
         <span class="glyphicon glyphicon-calendar"></span>
         <time class="bar-label timeago" datetime="{{ trace['startTime'] }}">{{ trace['startTime'] }}</time>
+
+        <span class="bar-label">{{ trace['serviceName'] }} {{ trace['selectedServicePercentage'] }}%</span>
       </div>
     </a>
 
