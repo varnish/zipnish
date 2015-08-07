@@ -11,6 +11,7 @@
       <div class="bar-block">
         <span class="bar-graphic" style="width:graphicPercentage%;"></span>
         <span class="bar-label">{{ trace['spanCount'] }} spans</span>
+        <span class="glyphicon glyphicon-time"></span>
         <span class="bar-label">{{ (trace['servicesTotalDuration']) }} ms</span>
         <time class="bar-label timeago" datetime="{{ trace['startTime'] }}">{{ trace['startTime'] }}</time>
       </div>
