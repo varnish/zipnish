@@ -66,7 +66,7 @@ def index():
                 trace['trace_id'] = row['trace_id']
 
                 startTime = (int(row['created_ts']) / 1000000)
-                trace['startTime'] = time.strftime('%m-%d-%YT%H:%M:%S', time.gmtime(startTime))
+                trace['startTime'] = time.strftime('%m-%d-%YT%H:%M:%S%z', time.gmtime(startTime))
 
                 servicesQuery = "SELECT service_name, `value`, a_timestamp \
                         FROM zipkin_annotations \
