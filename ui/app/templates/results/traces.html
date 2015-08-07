@@ -3,19 +3,15 @@
   {% for trace in results %}
   <li class="trace"
       data-traceId="{{ trace['trace_id'] }}"
-      data-duration="*duration"
-      data-timestamp="*timestamp"
+      data-duration="{{ trace['servicesTotalDuration'] }}"
+      data-timestamp="{{ trace['startTime'] }}"
       data-service-percentage="*servicePercentage">
 
     <a href="/traces/{{ trace['trace_id'] }}?serviceName={{ trace['serviceName'] }}">
-      <!--<div class="trace-details timestamp">
-        <time class="label timeago" datetime="{{ trace['startTime'] }}">{{ trace['startTime'] }}</time>
-        </div>-->
-
       <div class="bar-block">
         <span class="bar-graphic" style="width:graphicWidth%;"></span>
-        <span class="bar-label">{{ (trace['servicesTotalDuration']) }} ms</span>
         <span class="bar-label">{{ trace['spanCount'] }} spans</span>
+        <span class="bar-label">{{ (trace['servicesTotalDuration']) }} ms</span>
         <time class="bar-label timeago" datetime="{{ trace['startTime'] }}">{{ trace['startTime'] }}</time>
       </div>
       <div class="bar-block">
