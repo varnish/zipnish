@@ -7,6 +7,7 @@ from urllib import unquote
 from flask import request, redirect, render_template
 
 from . import index
+from ..utils import GenerateTraceURLId
 from .. import db
 
 @index.route('/', methods=['GET'])
@@ -88,7 +89,10 @@ def index():
 
                 trace['serviceName'] = serviceName
                 trace['spanCount'] = row['spanCount']
-                trace['trace_id'] = row['trace_id']
+                trace['trace_id_long'] = row['trace_id']
+                trace['trace_id'] = GenerateTraceURLId(row['trace_id'])
+
+                return trace['trace_id']
 
                 startTime = (int(row['created_ts']) / 1000000)
                 trace['startTime'] = time.strftime('%m-%d-%YT%H:%M:%S%z', time.gmtime(startTime))
