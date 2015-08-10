@@ -42,7 +42,10 @@ def index():
         where = ''
 
         if serviceName is not None and len(serviceName) > 0:
-            where += " service_name = '%s' "
+            where += " service_name = '%s' " % serviceName
+
+        if timestamp is not None and len(timestamp) > 0:
+            where += " a_timestamp < %s " % a_timestamp
 
         # attach where clause only if there is a criteria
         if len(where) > 0:
@@ -57,7 +60,7 @@ def index():
         query += " LIMIT 0, %s"
 
         # format search results
-        query = query % (serviceName, limit)
+        query = query % (limit)
 
         traceIds = []
         resultTraceIds = connection.execute(query)
