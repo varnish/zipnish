@@ -1,4 +1,4 @@
-{% if results|length > 0 %}
+{% if results and results|length > 0 %}
 <ul id="traces">
   {% for trace in results %}
   <li class="trace"

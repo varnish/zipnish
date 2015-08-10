@@ -2,7 +2,7 @@
 <div class="alert alert-info" id="help-msg">
   <p>Please select the criteria for your trace lookup.</p>
 </div>
-{% elif results|length == 0 %}
+{% elif results and results|length == 0 %}
 <div class="alert alert-info" id="help-msg">
   <p>No traces found for choosen criteria.</p>
 </div>
