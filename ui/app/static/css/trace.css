@@ -143,9 +143,17 @@
   font-weight: 300;
 }
 
+#trace-controls .nav-pills li a {
+  padding: 5px 10px 10px 5px;
+}
+
 #trace-controls .nav-pills .badge {
   background: #428bca;
   border-radius:0;
+}
+
+#trace-controls .form-inline {
+  margin-left: 5px;
 }
 
 #spanPanel #binaryAnnotations td.value {
