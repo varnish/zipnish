@@ -129,27 +129,52 @@
 #trace-container .span.depth-5 .duration { background: rgba(66, 146, 198, 1); }
 
 #trace-controls form {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 /* hide the fact that these are links */
-#trace-controls .nav-pills a {
+#trace-controls .trace-stats {
+  margin-top: 5px;
+}
+#trace-controls .trace-stats {
   color: #000;
   cursor: default;
   background: rgba(0, 0, 0, 0);
 }
 
-#trace-controls .nav-pills strong {
+#trace-controls .trace-stats strong {
   font-weight: 300;
 }
 
-#trace-controls .nav-pills li a {
-  padding: 5px 10px 10px 5px;
+#trace-controls .trace-stats .key {
+  display: inline-block;
 }
 
-#trace-controls .nav-pills .badge {
-  background: #428bca;
+#trace-controls .trace-stats .key:last-child {
+  margin-right: 0;
+}
+
+#trace-controls .trace-stats .key:last-child .badge {
+  margin-right: 0;
+}
+
+#trace-controls .col-sm-4 {
+  padding-left: 0;
+}
+
+#trace-controls .col-sm-8 {
+  padding-right: 5px;
+}
+
+#trace-controls .trace-stats {
+  text-align: right;
+}
+
+#trace-controls .trace-stats .badge {
   border-radius:0;
+  display: inline-block;
+  margin-right: 15px;
+  padding: 7px 7px;
 }
 
 #trace-controls .form-inline {
