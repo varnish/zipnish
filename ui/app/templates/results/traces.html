@@ -31,7 +31,7 @@
       <span class="label label-default service-filter-label"
             data-service-name="*name">
         <span class="service-duration-time">{{ (serviceDuration['duration'] / 1000)|int }}<span class="measurement-indicator">ms</span></span>
-        {{ serviceDuration['name'] }} x 1
+        {{ serviceDuration['name'] }} x {{ serviceDuration['count'] }}
       </span>
       {% endfor %}
     </div>
