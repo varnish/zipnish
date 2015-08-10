@@ -104,6 +104,10 @@ def index():
                     if serviceRow['service_name'] not in services:
                         services[serviceRow['service_name']] = {}
                         service = services[serviceRow['service_name']]
+                        service['count'] = 0
+
+                    if serviceRow['value'] == 'sr':
+                        service['count'] += 1
 
                     service[serviceRow['value']] = serviceRow['a_timestamp']
 
@@ -135,6 +139,7 @@ def index():
                     # service duration
                     serviceDurations.append({
                             'name': key,
+                            'count': service['count'],
                             'duration': serviceDuration
                         })
 
