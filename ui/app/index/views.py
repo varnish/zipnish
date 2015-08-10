@@ -39,22 +39,22 @@ def index():
                 FROM zipkin_annotations "
 
         # where
-        where = ''
+        whereQuery = ''
 
         if serviceName is not None and len(serviceName) > 0:
-            where += " service_name = '%s' " % serviceName
+            whereQuery += " service_name = '%s' " % serviceName
 
         if timestamp is not None and len(timestamp) > 0:
-            where += " AND a_timestamp < %s " % timestamp
+            whereQuery += " AND a_timestamp < %s " % timestamp
 
         # attach where clause only if there is a criteria
-        if len(where) > 0:
-            where = " WHERE %s " % where
-            query += where
+        if len(whereQuery) > 0:
+            whereQuery = " WHERE %s " % whereQuery
+            query += whereQuery
 
         # order by
-        order_by = " ORDER BY a_timestamp DESC"
-        query += order_by
+        orderByQuery = " ORDER BY a_timestamp DESC"
+        query += orderByQuery
 
         # limit search results
         limitQuery = ""
