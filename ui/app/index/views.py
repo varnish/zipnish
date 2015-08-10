@@ -36,11 +36,22 @@ def index():
 
         # find all traces to which related to this service
         query = "SELECT DISTINCT trace_id \
-                FROM zipkin_annotations \
-                WHERE service_name = '%s'"
+                FROM zipkin_annotations "
+
+        # where
+        where = ''
+
+        if serviceName is not None and len(serviceName) > 0:
+            where += " service_name = '%s' "
+
+        # attach where clause only if there is a criteria
+        if len(where) > 0:
+            where = " WHERE %s" % where
+            query += where
 
         # order by
-        query += " ORDER BY a_timestamp DESC"
+        order_by = " ORDER BY a_timestamp DESC"
+        query += order_by
 
         # limit search results
         query += " LIMIT 0, %s"
