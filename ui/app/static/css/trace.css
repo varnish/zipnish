@@ -139,8 +139,13 @@
   background: rgba(0, 0, 0, 0);
 }
 
+#trace-controls .nav-pills strong {
+  font-weight: 300;
+}
+
 #trace-controls .nav-pills .badge {
   background: #428bca;
+  border-radius:0;
 }
 
 #spanPanel #binaryAnnotations td.value {
