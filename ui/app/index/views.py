@@ -49,7 +49,7 @@ def index():
 
         # attach where clause only if there is a criteria
         if len(where) > 0:
-            where = " WHERE %s" % where
+            where = " WHERE %s " % where
             query += where
 
         # order by
@@ -57,10 +57,11 @@ def index():
         query += order_by
 
         # limit search results
-        query += " LIMIT 0, %s"
+        limitQuery = ""
 
-        # format search results
-        query = query % (limit)
+        if limit is not None:
+            limitQuery += " LIMIT 0, %s" % limit
+            query += limitQuery
 
         traceIds = []
         resultTraceIds = connection.execute(query)
