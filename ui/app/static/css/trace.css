@@ -160,3 +160,8 @@
   word-break: break-all;
   max-width: 75%;
 }
+
+#trace-controls .form-inline button {
+  border-radius: 0;
+  box-shadow: none;
+}
