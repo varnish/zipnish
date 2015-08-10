@@ -37,9 +37,16 @@ def index():
         # find all traces to which related to this service
         query = "SELECT DISTINCT trace_id \
                 FROM zipkin_annotations \
-                WHERE service_name = '%s' \
-                ORDER BY a_timestamp DESC \
-                LIMIT 0, %s" % (serviceName, limit)
+                WHERE service_name = '%s'"
+
+        # order by
+        query += " ORDER BY a_timestamp DESC"
+
+        # limit search results
+        query += " LIMIT 0, %s"
+
+        # format search results
+        query = query % (serviceName, limit)
 
         traceIds = []
         resultTraceIds = connection.execute(query)
