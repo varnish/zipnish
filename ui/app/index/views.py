@@ -45,7 +45,7 @@ def index():
             where += " service_name = '%s' " % serviceName
 
         if timestamp is not None and len(timestamp) > 0:
-            where += " a_timestamp < %s " % a_timestamp
+            where += " AND a_timestamp < %s " % timestamp
 
         # attach where clause only if there is a criteria
         if len(where) > 0:
