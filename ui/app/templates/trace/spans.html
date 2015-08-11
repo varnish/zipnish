@@ -1,5 +1,6 @@
+{% for spanId, spanInfo in spans.iteritems() %}
 <div
-  id="*spanId"
+  id="{{ spanId }}"
   class="span service-span depth-*depthClass"
   data-keys="id,spanName,serviceNames,serviceName,durationStr,duration"
   data-id="*spanId"
@@ -15,12 +16,16 @@
   <div class="handle">
     <div class="service-name" style="margin-left: *depthpx">
       <span class="expanded">+</span>
-      *serviceName
+      {{ spanInfo['serviceName'] }}
     </div>
   </div>
 
   <div class="duration-container">
+
+    <div class="time-marker time-marker-*index">.</div>
+
   </div>
 
 
 </div>
+{% endfor %}
