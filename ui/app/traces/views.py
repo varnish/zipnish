@@ -5,7 +5,7 @@ from .. import db
 
 import sys
 
-from ..utils import ParseTraceURLId
+from ..utils import ParseTraceURLId, findTraceDepth
 
 
 @traces.route('/<hex_trace_id>', methods=['GET'])
@@ -55,16 +55,19 @@ def traces(hex_trace_id):
     totalServices = len(service_names)
 
     # find depth information
-    query = "SELECT span_id, parent_id \
-                FROM zipkin_spans \
-                WHERE trace_id = %s" % traceId
+    query = "SELECT DISTINCT span_id, parent_id \
+            FROM zipkin_spans \
+            WHERE trace_id = %s" % traceId
     depthResults = connection.execute(query)
 
-    depthRows = []
+    depthRows = {}
     for row in depthResults:
-        depthRows.append(row)
+        depthRows[row['span_id']] = row['parent_id']
+
+    totalDepth = findTraceDepth(depthRows)
 
     return render_template('trace.html', \
             totalDuration=totalDuration, \
             totalSpans=totalSpans, \
-            totalServices=totalServices)
+            totalServices=totalServices, \
+            totalDepth=totalDepth)
