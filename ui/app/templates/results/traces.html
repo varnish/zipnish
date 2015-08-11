@@ -7,7 +7,7 @@
       data-timestamp="{{ trace['startTime'] }}"
       data-service-percentage="{{ trace['selectedServicePercentage'] }}">
 
-    <a href="/traces/{{ trace['trace_id'] }}?serviceName={{ trace['serviceName'] }}{% if trace['trace_id_long'] < 1 %}&n=1{% endif %}">
+    <a href="/traces/{{ trace['trace_id'] }}?serviceName={{ trace['serviceName'] }}">
       <div class="bar-block">
         <span class="glyphicon glyphicon-arrow-right"></span>
         <span class="bar-label">{{ trace['spanCount'] }} spans</span>
