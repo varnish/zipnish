@@ -5,7 +5,7 @@ from .. import db
 
 import sys
 
-from ..utils import ParseTraceURLId, findTraceDepth
+from ..utils import ParseTraceURLId, findTraceDepth, generateTimeMarkers
 
 
 @traces.route('/<hex_trace_id>', methods=['GET'])
@@ -66,15 +66,8 @@ def traces(hex_trace_id):
 
     totalDepth = findTraceDepth(depthRows)
 
-    # create time markers
-    timeSeq = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
-    timeMarkers = []
-
-    for index in range(len(timeSeq)):
-        timeMarkers.append({
-                'index': index,
-                'time': timeSeq[index] * totalDuration
-            })
+    # generate time markers
+    timeMarkers = generateTimeMarkers(totalDuration)
 
     return render_template('trace.html', \
             totalDuration=totalDuration, \
