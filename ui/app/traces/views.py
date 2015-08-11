@@ -11,16 +11,17 @@ def traces(hex_trace_id):
     # hex trace_id converted to long
     traceId = str(ParseTraceURLId(hex_trace_id))
 
+    # get database engine connection
+    connection = db.engine.connect()
+
     # find the number of DISTINCT spans, that above service connects with
-    query = "SELECT COUNT(DISTINCT span_name) as spanCount, COUNT(DISTINCT service_name) as serviceCount  \
+    query = "SELECT *  \
             FROM zipkin_annotations \
-            GROUP BY trace_id, span_name, service_name \
-            HAVING \
+            WHERE \
             trace_id = %s \
             ORDER BY a_timestamp DESC" \
             % str(traceId)
-    result = connection.execute(query)
-
+    resultAnnotations = connection.execute(query)
 
 
     return render_template('trace.html')
