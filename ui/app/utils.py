@@ -11,3 +11,6 @@ def GenerateTraceURLId(idLong):
     hexStr += format(idLong       & 0xff, 'x')
 
     return hexStr
+
+def ParseTraceURLId(hexString):
+    pass
