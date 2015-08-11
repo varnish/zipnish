@@ -1,0 +1,8 @@
+<div id="timeLabel" class="span">
+  <div class="handle">Services</div>
+  <div class="duration-container">
+    {% for item in timeMarkers %}
+    <div class="time-marker time-marker-{{ item['index'] }}">{{ '%.3f' | format(item['time']) }} ms</div>
+    {% endfor %}
+  </div>
+</div>
