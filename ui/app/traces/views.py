@@ -60,8 +60,9 @@ def traces(hex_trace_id):
                 WHERE trace_id = %s" % traceId
     depthResults = connection.execute(query)
 
+    depthRows = []
     for row in depthResults:
-        pass
+        depthRows.append(row)
 
     return render_template('trace.html', \
             totalDuration=totalDuration, \
