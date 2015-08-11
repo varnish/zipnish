@@ -12,12 +12,12 @@ def traces(hex_trace_id):
     traceId = str(ParseTraceURLId(hex_trace_id))
 
     # find the number of DISTINCT spans, that above service connects with
-    query = "SELECT COUNT(DISTINCT span_id) as spanCount, parent_id, created_ts, trace_id \
-            FROM zipkin_spans \
-            GROUP BY trace_id \
+    query = "SELECT COUNT(DISTINCT span_name) as spanCount, COUNT(DISTINCT service_name) as serviceCount  \
+            FROM zipkin_annotations \
+            GROUP BY trace_id, span_name, service_name \
             HAVING \
-            trace_id IN (%s) \
-            ORDER BY created_ts DESC" \
+            trace_id = %s \
+            ORDER BY a_timestamp DESC" \
             % str(traceId)
     result = connection.execute(query)
 
