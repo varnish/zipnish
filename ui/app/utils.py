@@ -52,3 +52,16 @@ def findTraceDepth(dictionary):
         return 0
 
     return findSpanDepth(1, root_span_id, parent_ids, dictionary)
+
+def generateTimeMarkers(duration):
+    timeSeq = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+    timeMarkers = []
+
+    for index in range(len(timeSeq)):
+        timeMarkers.append({
+                'index': index,
+                'time': timeSeq[index] * duration
+            })
+
+    return timeMarkers
+
