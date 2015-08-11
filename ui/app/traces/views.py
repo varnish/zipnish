@@ -54,6 +54,15 @@ def traces(hex_trace_id):
     totalSpans = len(span_ids)
     totalServices = len(service_names)
 
+    # find depth information
+    query = "SELECT span_id, parent_id \
+                FROM zipkin_spans \
+                WHERE trace_id = %s" % traceId
+    depthResults = connection.execute(query)
+
+    for row in depthResults:
+        pass
+
     return render_template('trace.html', \
             totalDuration=totalDuration, \
             totalSpans=totalSpans, \
