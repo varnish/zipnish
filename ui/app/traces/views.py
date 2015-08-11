@@ -3,6 +3,8 @@ from flask import render_template, request, redirect
 from . import traces
 from .. import db
 
+import sys
+
 from ..utils import ParseTraceURLId
 
 
@@ -22,6 +24,16 @@ def traces(hex_trace_id):
             ORDER BY a_timestamp DESC" \
             % str(traceId)
     resultAnnotations = connection.execute(query)
+
+    for row in resultAnnotations:
+        span_id = row['span_id']
+        trace_id = row['trace_id']
+        span_name = row['span_name']
+        service_name = row['service_name']
+        value = row['value']
+        ipv4 = row['ipv4']
+        port = row['port']
+        a_timestamp = row['a_timestamp']
 
 
     return render_template('trace.html')
