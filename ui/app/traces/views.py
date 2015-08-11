@@ -5,7 +5,7 @@ from .. import db
 
 import sys
 
-from ..utils import ParseTraceURLId, findTraceDepth, generateTimeMarkers
+from ..utils import ParseTraceURLId, findTraceDepth, generateTraceTimeMarkers
 
 
 @traces.route('/<hex_trace_id>', methods=['GET'])
@@ -16,12 +16,12 @@ def traces(hex_trace_id):
     # get database engine connection
     connection = db.engine.connect()
 
-    # find the number of DISTINCT spans, that above service connects with
+    # find trace information
     query = "SELECT *  \
             FROM zipkin_annotations \
             WHERE \
             trace_id = %s \
-            ORDER BY a_timestamp DESC" \
+            ORDER BY a_timestamp ASC, service_name ASC" \
             % str(traceId)
     resultAnnotations = connection.execute(query)
 
@@ -30,6 +30,8 @@ def traces(hex_trace_id):
 
     span_ids = []
     service_names = []
+
+    spans = {}
 
     for row in resultAnnotations:
         span_id = row['span_id']
@@ -46,13 +48,19 @@ def traces(hex_trace_id):
 
         if span_id not in span_ids:
             span_ids.append(span_id)
+            spans[span_id] = {}
 
         if service_name not in service_names:
             service_names.append(service_name)
 
+        spans[span_id]['spanId'] = span_id
+        spans[span_id]['serviceName'] = service_name
+
     totalDuration = (maxTimestamp - minTimestamp) / 1000
     totalSpans = len(span_ids)
     totalServices = len(service_names)
+
+    #return str(spans)
 
     # find depth information
     query = "SELECT DISTINCT span_id, parent_id \
@@ -74,4 +82,5 @@ def traces(hex_trace_id):
             totalSpans=totalSpans, \
             totalServices=totalServices, \
             totalDepth=totalDepth, \
-            timeMarkers=timeMarkers)
+            timeMarkers=timeMarkers, \
+            spans=spans)
