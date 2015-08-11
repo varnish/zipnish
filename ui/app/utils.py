@@ -1,3 +1,5 @@
+import sys
+
 def GenerateTraceURLId(idLong):
     hexStr = ''
 
@@ -13,4 +15,4 @@ def GenerateTraceURLId(idLong):
     return hexStr
 
 def ParseTraceURLId(hexString):
-    pass
+    return int(hexString, 16)
