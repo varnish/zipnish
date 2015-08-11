@@ -67,7 +67,7 @@ def traces(hex_trace_id):
     totalDepth = findTraceDepth(depthRows)
 
     # generate time markers
-    timeMarkers = generateTimeMarkers(totalDuration)
+    timeMarkers = generateTraceTimeMarkers(totalDuration)
 
     return render_template('trace.html', \
             totalDuration=totalDuration, \
