@@ -29,6 +29,7 @@ def traces(hex_trace_id):
     maxTimestamp = 0
 
     span_ids = []
+    service_names = []
 
     for row in resultAnnotations:
         span_id = row['span_id']
@@ -46,9 +47,14 @@ def traces(hex_trace_id):
         if span_id not in span_ids:
             span_ids.append(span_id)
 
+        if service_name not in service_names:
+            service_names.append(service_name)
+
     totalDuration = (maxTimestamp - minTimestamp) / 1000
     totalSpans = len(span_ids)
+    totalServices = len(service_names)
 
     return render_template('trace.html', \
             totalDuration=totalDuration, \
-            totalSpans=totalSpans)
+            totalSpans=totalSpans, \
+            totalServices=totalServices)
