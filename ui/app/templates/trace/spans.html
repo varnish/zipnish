@@ -22,7 +22,9 @@
 
   <div class="duration-container">
 
-    <div class="time-marker time-marker-*index">.</div>
+    {% for item in timeMarkers %}
+    <div class="time-marker time-marker-{{ item['index'] }}">.</div>
+    {% endfor %}
 
   </div>
 
