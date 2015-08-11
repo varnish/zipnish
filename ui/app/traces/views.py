@@ -28,6 +28,8 @@ def traces(hex_trace_id):
     minTimestamp = sys.maxint
     maxTimestamp = 0
 
+    span_ids = []
+
     for row in resultAnnotations:
         span_id = row['span_id']
         trace_id = row['trace_id']
@@ -41,7 +43,12 @@ def traces(hex_trace_id):
         minTimestamp = min(a_timestamp, minTimestamp)
         maxTimestamp = max(a_timestamp, maxTimestamp)
 
-    duration = (maxTimestamp - minTimestamp) / 1000
+        if span_id not in span_ids:
+            span_ids.append(span_id)
+
+    totalDuration = (maxTimestamp - minTimestamp) / 1000
+    totalSpans = len(span_ids)
 
     return render_template('trace.html', \
-            duration=duration)
+            totalDuration=totalDuration, \
+            totalSpans=totalSpans)
