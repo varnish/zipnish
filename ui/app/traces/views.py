@@ -25,6 +25,9 @@ def traces(hex_trace_id):
             % str(traceId)
     resultAnnotations = connection.execute(query)
 
+    minTimestamp = sys.maxint
+    maxTimestamp = 0
+
     for row in resultAnnotations:
         span_id = row['span_id']
         trace_id = row['trace_id']
@@ -35,5 +38,10 @@ def traces(hex_trace_id):
         port = row['port']
         a_timestamp = row['a_timestamp']
 
+        minTimestamp = min(a_timestamp, minTimestamp)
+        maxTimestamp = max(a_timestamp, maxTimestamp)
 
-    return render_template('trace.html')
+    duration = (maxTimestamp - minTimestamp) / 1000
+
+    return render_template('trace.html', \
+            duration=duration)
