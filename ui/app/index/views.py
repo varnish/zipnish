@@ -14,7 +14,10 @@ from .. import db
 def index():
     # read GET values
     spanName = request.args.get('spanName')
-    serviceName = request.args.get('serviceName') or unquote(request.cookies.get('last-serviceName'))
+
+    lastServiceName = request.cookies.get('last-serviceName')
+    serviceName = request.args.get('serviceName') or '' if lastServiceName is None else unquote(lastServiceName)
+
     timestamp = request.args.get('timestamp')
     limit = request.args.get('limit') or 10
 

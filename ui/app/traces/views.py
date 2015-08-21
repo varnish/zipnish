@@ -55,6 +55,7 @@ def traces(hex_trace_id):
 
         spans[span_id]['spanId'] = span_id
         spans[span_id]['serviceName'] = service_name
+        spans[span_id]['spanName'] = span_name
 
     totalDuration = (maxTimestamp - minTimestamp) / 1000
     totalSpans = len(span_ids)
