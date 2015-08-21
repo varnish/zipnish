@@ -5,4 +5,18 @@
     spans['{{ key }}'] = '{{ value }}'
   {% endfor %}
 
+  var annotations = [];
+
+  {% for row in annotations %}
+    annotations.push({
+      'span_id': "{{ row['span_id'] }}",
+      'span_name': "{{ row['span_name'] }}",
+      'service_name': "{{ row['service_name'] }}",
+      'value': "{{ row['value'] }}",
+      'ipv4': "{{ row['ipv4'] }}",
+      'port': "{{ row['port'] }}",
+      'a_timestamp': "{{ row['a_timestamp'] }}"
+    });
+  {% endfor %}
+
 </script>
