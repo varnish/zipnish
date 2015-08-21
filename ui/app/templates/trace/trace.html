@@ -1,0 +1,8 @@
+<script type="text/javascript">
+var spanParentObj = {};
+{% for key, value in spanParentDict.iteritems() -%}
+
+  spans['{{ key }}'] = '{{ value }}';
+
+{%- endfor %}
+</script>
