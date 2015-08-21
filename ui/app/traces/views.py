@@ -75,11 +75,23 @@ def traces(hex_trace_id):
 
     totalDepth = findTraceDepth(depthRows)
 
+    # fetch all annotations related to this trace
+    query = "SELECT span_id, span_name, service_name, \
+            value, ipv4, port, a_timestamp \
+            FROM `zipkin_annotations` \
+            WHERE trace_id = %s" % traceId
+    allAnnotations = connection.execute(query)
+
+    annotations = []
+    for row in allAnnotations:
+        annotations.append( row )
+
     # generate time markers
     timeMarkers = generateTraceTimeMarkers(totalDuration)
 
     return render_template('trace.html', \
             spanParentDict=depthRows,
+            annotations=annotations,
             totalDuration=totalDuration, \
             totalSpans=totalSpans, \
             totalServices=totalServices, \
