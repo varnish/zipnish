@@ -79,6 +79,7 @@ def traces(hex_trace_id):
     timeMarkers = generateTraceTimeMarkers(totalDuration)
 
     return render_template('trace.html', \
+            spanParentDict=depthRows,
             totalDuration=totalDuration, \
             totalSpans=totalSpans, \
             totalServices=totalServices, \
