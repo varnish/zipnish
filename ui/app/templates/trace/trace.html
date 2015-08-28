@@ -44,11 +44,19 @@
     });
   {% endfor %}
 
+
+  // will be filled on page laod
+  var spanStructure;
+
   window.addEventListener('load', traceLoaded);
 
   function traceLoaded() {
     // template for span row
     var spanRowTemplate;
+
+
+    // fill span structure with span information
+    fillSpanStructure();
 
     // #trace-container DOM node
     var $traceContainer = $('#trace-container');
@@ -66,7 +74,37 @@
     var services;
 
     services = serviceTree(spanParentObj, sortedAnnotations);
+  }
 
+  function fillSpanStructure() {
+    var spanObjects = {};
+
+    for (var key in spanParentObj) {
+      spanObjects[key] = getSpanInformation(key);
+    }
+
+    spanStructure = spanObjects;
+  }
+
+  function getSpanInformation(key)
+  {
+    var i, len, obj;
+
+    len = annotations.length;
+
+    for (i = 0; i < len; i++) {
+      if (annotations['span_id'] == key) {
+        obj = {
+          'span_id': key,
+          'span_name': annotations['span_name'],
+          'parent_id': spanParentObj[key]
+        };
+
+        break;
+      }
+    }
+
+    return obj;
   }
 
   function serviceTree(spanParentObj, sortedAnnotations) {
