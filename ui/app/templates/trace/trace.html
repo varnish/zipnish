@@ -75,26 +75,31 @@
 
     spans = createSpanTree();
 
-    console.log('spans', spans);
     printSpanTree(spans);
   }
 
 
   function printSpanTree(spans) {
 
-    var obj, str;
+    var i, j;
+    var obj, str, childrenLength;
 
     str = '';
 
     for (var key in spans) {
-      console.log(key);
       obj = spans[key];
 
-      for (var i = 0; i < obj.depth; i++) {
-        str += '   ';
+      for (i = 0; i < obj.depth; i++) {
+        str += ' ';
       }
 
       console.log(str, obj.span_name);
+
+      childrenLength = obj.children.length;
+
+      for (j = 0; j < childrenLength; j++) {
+        printSpanTree( obj['children'] );
+      }
     }
   }
 
@@ -152,6 +157,7 @@
       'id': rootSpanId,
       'parent_id': 'None',
       'span_name': spanInfo['span_name'],
+      'services': getSpanServices(rootSpanId),
       'depth': 0,
       'children': getChildNodes(rootSpanId, 1)
     };
@@ -162,9 +168,10 @@
   }
 
   function getChildNodes(spanId, depth) {
-    var children = [];
+    var children;
     var childSpanIds;
 
+    children = [];
     childSpanIds = getChildSpanIds( spanId );
 
     var i, len, childSpanId, spanInfo;
@@ -179,12 +186,36 @@
         'id': childSpanId,
         'parent_id': spanId,
         'span_name': spanInfo['span_name'],
+        'services': getSpanServices(spanId),
         'depth': depth,
         'children': getChildNodes(childSpanId, depth + 1)
       });
     }
 
     return children;
+  }
+
+  function getSpanServices(spanId) {
+    var i, len, annotation, services;
+
+    len = annotations.length;
+    services = [];
+
+    for (i = 0; i < len; i++) {
+      annotation = annotations[i];
+
+      if (annotation['span_id'] == spanId) {
+        services.push({
+          'service_name': annotation['service_name'],
+          'value': annotation['value'],
+          'ipv4': annotation['ipv4'],
+          'port': annotation['port'],
+          'a_timestamp': annotation['a_timestamp']
+        });
+      }
+    }
+
+    return services;
   }
 
   function getChildSpanIds(parentSpanId) {
