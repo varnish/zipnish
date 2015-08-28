@@ -9,7 +9,7 @@
      parent most span
   */
   {% for key, value in spanParentDict.iteritems() %}
-    spans['{{ key }}'] = '{{ value }}'
+    spanParentObj['{{ key }}'] = '{{ value }}'
   {% endfor %}
 
   var annotations = [];
