@@ -1,6 +1,13 @@
 <script type="text/javascript">
   var spanParentObj = {};
 
+  /*
+     These spans represent span_id as key,
+     whose value equals parent_id of the span
+
+     In case parent_id is None, it indicates the
+     parent most span
+  */
   {% for key, value in spanParentDict.iteritems() %}
     spans['{{ key }}'] = '{{ value }}'
   {% endfor %}
