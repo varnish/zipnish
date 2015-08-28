@@ -12,6 +12,13 @@
     spanParentObj['{{ key }}'] = '{{ value }}'
   {% endfor %}
 
+  /*
+     Fill in annotations structure.
+
+     Annotation structure should contain all information we require
+     for building simple annotations inside trace view
+  */
+
   var annotations = [];
 
   {% for row in annotations %}
@@ -25,5 +32,7 @@
       'a_timestamp': "{{ row['a_timestamp'] }}"
     });
   {% endfor %}
+
+
 
 </script>
