@@ -62,6 +62,11 @@
     // sorted annotations by timestamp ASC
     sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
 
+    // structure used to display trace information
+    var structure;
+
+    structure = [];
+
     for (var i = 0; i < sortedAnnotations.length; i++) {
 
       // append spans to trace container
