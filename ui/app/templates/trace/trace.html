@@ -42,6 +42,9 @@
   window.addEventListener('load', traceLoaded);
 
   function traceLoaded() {
+    var spanRowTemplate;
+
+    spanRowTemplate = $('#span-row-template').html();
 
     // Custom sort annotations structure by timestamp value ASC
     var sortedAnnotations;
