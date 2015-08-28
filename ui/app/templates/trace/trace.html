@@ -67,6 +67,9 @@
 
     services = summarizeServices(spanParentObj, sortedAnnotations);
 
+    console.log('services', services);
+    return;
+
     for (var i = 0; i < services.length; i++) {
 
       // append spans to trace container
