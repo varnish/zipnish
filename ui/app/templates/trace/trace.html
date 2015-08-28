@@ -74,6 +74,8 @@
     var services;
 
     services = serviceTree();
+
+    console.log('services', services);
   }
 
   function fillSpanStructure() {
@@ -90,13 +92,14 @@
   {
     var i, len, obj;
 
+    obj = {};
     len = annotations.length;
 
     for (i = 0; i < len; i++) {
-      if (annotations['span_id'] == key) {
+      if (annotations[i]['span_id'] == key) {
         obj = {
           'span_id': key,
-          'span_name': annotations['span_name'],
+          'span_name': annotations[i]['span_name'],
           'parent_id': spanParentObj[key]
         };
 
@@ -120,12 +123,17 @@
       }
     }
 
-    var tree = {};
+    var tree = {}, spanInfo;
+
+    spanInfo = spanStructure[rootSpanId];
+
+    console.log('spanInfo', spanInfo);
 
     // fill structure for root tree node
     tree[rootSpanId] = {
       'id': rootSpanId,
       'parent_id': 'None',
+      'span_name': spanInfo['span_name'],
       'depth': 0,
       'children': getChildNodes(rootSpanId, 1)
     };
@@ -139,18 +147,20 @@
 
     childSpanIds = getChildSpanIds( spanId );
 
-    var i, len, childSpanId;
+    var i, len, childSpanId, spanInfo;
 
     len = childSpanIds.length;
 
     for (var i = 0; i < len; i++) {
       childSpanId = childSpanIds[i];
+      spanInfo = spanStructure[childSpanId];
 
       children.push({
         'id': childSpanId,
         'parent_id': spanId,
+        'span_name': spanInfo['span_name'],
         'depth': depth,
-        'children': getChildNodes(rootSpanId, depth + 1)
+        'children': getChildNodes(childSpanId, depth + 1)
       });
     }
 
