@@ -20,6 +20,9 @@ define(
     return initialize;
 
     function initialize() {
+
+      console.log('trace initialization');
+
       FilterAllServicesUI.attachTo('#filterAllServices', {totalServices: $('.trace-details.services span').length});
       FullPageSpinnerUI.attachTo('#fullPageSpinner');
       ServiceFilterSearchUI.attachTo('#serviceFilterSearch');
