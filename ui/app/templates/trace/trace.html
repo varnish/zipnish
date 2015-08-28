@@ -42,7 +42,11 @@
   window.addEventListener('load', traceLoaded);
 
   function traceLoaded() {
+    // template for span row
     var spanRowTemplate;
+
+    // #trace-container DOM node
+    var $traceContainer = $('#trace-container');
 
     // fetching and creating template for span row
     spanRowTemplate = _.template($('#span-row-template').html());
