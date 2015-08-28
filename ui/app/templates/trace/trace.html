@@ -44,7 +44,8 @@
   function traceLoaded() {
     var spanRowTemplate;
 
-    spanRowTemplate = $('#span-row-template').html();
+    // fetching and creating template for span row
+    spanRowTemplate = _.template($('#span-row-template').html());
 
     // Custom sort annotations structure by timestamp value ASC
     var sortedAnnotations;
