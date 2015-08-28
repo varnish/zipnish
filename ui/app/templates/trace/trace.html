@@ -73,9 +73,29 @@
     // services used to display trace information
     var services;
 
-    services = serviceTree();
+    spans = createSpanTree();
 
-    console.log('services', services);
+    console.log('spans', spans);
+    printSpanTree(spans);
+  }
+
+
+  function printSpanTree(spans) {
+
+    var obj, str;
+
+    str = '';
+
+    for (var key in spans) {
+      console.log(key);
+      obj = spans[key];
+
+      for (var i = 0; i < obj.depth; i++) {
+        str += '   ';
+      }
+
+      console.log(str, obj.span_name);
+    }
   }
 
   function fillSpanStructure() {
@@ -110,7 +130,7 @@
     return obj;
   }
 
-  function serviceTree() {
+  function createSpanTree() {
 
     var rootSpanId;
 
@@ -127,8 +147,6 @@
 
     spanInfo = spanStructure[rootSpanId];
 
-    console.log('spanInfo', spanInfo);
-
     // fill structure for root tree node
     tree[rootSpanId] = {
       'id': rootSpanId,
@@ -137,6 +155,8 @@
       'depth': 0,
       'children': getChildNodes(rootSpanId, 1)
     };
+
+    console.log('tree', tree);
 
     return tree;
   }
@@ -179,12 +199,6 @@
     }
 
     return spanIds;
-  }
-
-  function spanTree(spanParentObj) {
-    var tree = {}, len;
-
-    return tree;
   }
 
 </script>
