@@ -62,45 +62,33 @@
     // sorted annotations by timestamp ASC
     sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
 
-    // servcies used to display trace information
+    // services used to display trace information
     var services;
 
-    services = summarizeServices(spanParentObj, sortedAnnotations);
+    services = serviceTree(spanParentObj, sortedAnnotations);
 
-    console.log('services', services);
-    return;
-
-    for (var i = 0; i < services.length; i++) {
-
-      // append spans to trace container
-      $traceContainer.append( spanRowTemplate(structure[i]) );
-
-      console.log(sortedAnnotations[i].service_name + " > " + sortedAnnotations[i].span_name);
-    }
   }
 
-  function summarizeServices(spanParentObj, sortedAnnotations) {
-    var services = {}, serviceName, annotation;
+  function serviceTree(spanParentObj, sortedAnnotations) {
 
-    for (var i = sortedAnnotations.length - 1; i >= 0; i--) {
-      annotation = sortedAnnotations[i];
-      serviceName = annotation['service_name'];
+    var rootSpanId;
 
-      // if service is not inside services then create it
-      if (!services[serviceName]) {
-        services[serviceName] = {
-          'annotations': []
-        };
+    rootSpanId = '';
+
+    for (var key in spanParentObj) {
+      if (spanParentObj[key] == 'None') {
+        rootSpanId = key;
+        break;
       }
-
-      services[serviceName]['annotations'].push({
-        'service_name': serviceName,
-        'span_name': annotation['span_name']
-      });
-
     }
 
-    return services;
+    console.log('rootSpanId', rootSpanId);
+  }
+
+  function spanTree(spanParentObj) {
+    var tree = {}, len;
+
+    return tree;
   }
 
 </script>
