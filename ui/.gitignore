@@ -1,5 +1,5 @@
 *.log
 node_modules
 app/static/libs/
-app/static/css/bootstrap.css
+#app/static/css/bootstrap.css
 
