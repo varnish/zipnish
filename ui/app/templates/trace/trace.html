@@ -1,12 +1,45 @@
 <script id="span-row-template" type="template/underscore" charset="utf-8">
-<div id="<%= span_id %>">
-  <div class="handle">
-    <div class="service-name">
-      <span class="expander">+</span>
-      <%= service_name %>
+
+  <div
+    id="<%= id %>"
+    class="span service-span depth-<%= depth %> highlight"
+    data-keys="id,spanName,serviceNames,serviceName,durationStr,duration"
+
+    data-id="<%= id %>"
+    data-parent-id="<%= parent_id %>"
+    data-span-name="<%= span_name %>"
+    data-service-name="parturient"
+    data-service-names="parturient"
+    data-duration-str="107.000ms"
+    data-duration="107000"
+    data-children="<%= childrenString %>">
+
+    <div class="handle">
+      <div class="service-name" style="margin-left: 10px">
+        <span class="expander">-</span>
+        parturient
+      </div>
+    </div>
+
+    <div class="duration-container">
+      <div class="time-marker time-marker-0">.</div>
+      <div class="time-marker time-marker-1">.</div>
+      <div class="time-marker time-marker-2">.</div>
+      <div class="time-marker time-marker-3">.</div>
+      <div class="time-marker time-marker-4">.</div>
+      <div class="time-marker time-marker-5">.</div>
+
+      <div class="duration" style="left: 0.0%; width: 100.0%">
+        107.000ms : <%= span_name %>
+        <div class="annotation core" style="left: 0.0%; width: 8px" title="Server Receive" data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration" data-endpoint="234.72.52.180:5411" data-value="Server Receive" data-timestamp="1439284406165000" data-relative-time="" data-service-name="parturient" data-duration=""></div>
+        <div data-original-title="libero" class="annotation" style="left: 0.0%; width: 8px" title="" data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration" data-endpoint="234.72.52.180:5411" data-value="libero" data-timestamp="1439284406165000" data-relative-time="" data-service-name="parturient" data-duration=""></div>
+        <div data-original-title="rhoncus" class="annotation" style="left: 2.803738%; width: 8px" title="" data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration" data-endpoint="234.72.52.180:5411" data-value="rhoncus" data-timestamp="1439284406168000" data-relative-time="3.000ms" data-service-name="parturient" data-duration=""></div>
+        <div data-original-title="montes" class="annotation" style="left: 6.542056%; width: 8px" title="" data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration" data-endpoint="234.72.52.180:5411" data-value="montes" data-timestamp="1439284406172000" data-relative-time="7.000ms" data-service-name="parturient" data-duration=""></div>
+        <div class="annotation core" style="left: 100.0%; width: 8px" title="Server Send" data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration" data-endpoint="234.72.52.180:5411" data-value="Server Send" data-timestamp="1439284406272000" data-relative-time="107.000ms" data-service-name="parturient" data-duration=""></div>
+      </div>
     </div>
   </div>
-</div>
+
 </script>
 
 <script type="text/javascript">
@@ -54,18 +87,9 @@
   window.addEventListener('load', traceLoaded);
 
   function traceLoaded() {
-    // template for span row
-    var spanRowTemplate;
-
 
     // fill span structure with span information
     fillSpanStructure();
-
-    // #trace-container DOM node
-    var $traceContainer = $('#trace-container');
-
-    // fetching and creating template for span row
-    spanRowTemplate = _.template($('#span-row-template').html());
 
     // sorted annotations by timestamp ASC
     sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
@@ -76,14 +100,49 @@
     spans = createSpanTree();
 
     // printSpanTree(spans);
+    console.log('spans', spans);
 
     // render output into DOM
+    console.log('render start');
     render(spans);
+    console.log('render finish');
   }
 
   // render DOM structure
   function render(spans) {
 
+    // template for span row
+    var spanRowTemplate, span;
+    var children, childrenStr;
+
+    // fetching and creating template for span row
+    spanRowTemplate = _.template($('#span-row-template').html());
+
+    // #trace-container DOM node
+    var $traceContainer = $('#trace-container');
+
+    for (var key in spans) {
+      span = spans[key];
+
+      children = [];
+      childrenStr = '';
+
+      if (span['children']) {
+        for (var childKey in span['children']) {
+          children.push( childKey );
+        }
+
+        childrenStr = children.join(',');
+      }
+
+      $traceContainer.append(spanRowTemplate({
+        id: span['id'],
+        parent_id: span['parent_id'],
+        span_name: span['span_name'],
+        depth: span['depth'],
+        childrenString: childrenStr
+      }));
+    }
   }
 
 
@@ -170,7 +229,7 @@
       'children': getChildNodes(rootSpanId, 1)
     };
 
-    console.log('tree', tree);
+    //console.log('tree', tree);
 
     return tree;
   }
