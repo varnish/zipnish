@@ -41,7 +41,9 @@
 
     sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
 
-    console.log('sortedAnnotations', sortedAnnotations);
+    for (var i = 0; i < sortedAnnotations.length; i++) {
+      console.log(sortedAnnotations[i].service_name + " > " + sortedAnnotations[i].span_name);
+    }
   }
 
 
