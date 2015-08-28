@@ -48,6 +48,9 @@
   // will be filled on page laod
   var spanStructure;
 
+  // Custom sort annotations structure by timestamp value ASC
+  var sortedAnnotations;
+
   window.addEventListener('load', traceLoaded);
 
   function traceLoaded() {
@@ -64,16 +67,13 @@
     // fetching and creating template for span row
     spanRowTemplate = _.template($('#span-row-template').html());
 
-    // Custom sort annotations structure by timestamp value ASC
-    var sortedAnnotations;
-
     // sorted annotations by timestamp ASC
     sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
 
     // services used to display trace information
     var services;
 
-    services = serviceTree(spanParentObj, sortedAnnotations);
+    services = serviceTree();
   }
 
   function fillSpanStructure() {
@@ -107,7 +107,7 @@
     return obj;
   }
 
-  function serviceTree(spanParentObj, sortedAnnotations) {
+  function serviceTree() {
 
     var rootSpanId;
 
@@ -125,13 +125,50 @@
     // fill structure for root tree node
     tree[rootSpanId] = {
       'id': rootSpanId,
+      'parent_id': 'None',
       'depth': 0,
-      'children': [],
+      'children': getChildNodes(rootSpanId, 1)
     };
 
-
-
     return tree;
+  }
+
+  function getChildNodes(spanId, depth) {
+    var children = [];
+    var childSpanIds;
+
+    childSpanIds = getChildSpanIds( spanId );
+
+    var i, len, childSpanId;
+
+    len = childSpanIds.length;
+
+    for (var i = 0; i < len; i++) {
+      childSpanId = childSpanIds[i];
+
+      children.push({
+        'id': childSpanId,
+        'parent_id': spanId,
+        'depth': depth,
+        'children': getChildNodes(rootSpanId, depth + 1)
+      });
+    }
+
+    return children;
+  }
+
+  function getChildSpanIds(parentSpanId) {
+    var spanIds;
+
+    spanIds = [];
+
+    for (var key in spanParentObj) {
+      if (spanParentObj[key] == parentSpanId) {
+        spanIds.push( key );
+      }
+    }
+
+    return spanIds;
   }
 
   function spanTree(spanParentObj) {
