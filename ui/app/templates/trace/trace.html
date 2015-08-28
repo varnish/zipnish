@@ -33,6 +33,9 @@
     });
   {% endfor %}
 
+  window.addEventListener('load', traceLoaded);
+
+  function traceLoaded() {
   /*
 
      Custom sort annotations structure by timestamp value ASC
@@ -43,6 +46,9 @@
   sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
 
   console.log('sortedAnnotations', sortedAnnotations);
+
+
+  }
 
 
 
