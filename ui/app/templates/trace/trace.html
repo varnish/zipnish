@@ -36,18 +36,12 @@
   window.addEventListener('load', traceLoaded);
 
   function traceLoaded() {
-  /*
+    // Custom sort annotations structure by timestamp value ASC
+    var sortedAnnotations;
 
-     Custom sort annotations structure by timestamp value ASC
+    sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
 
-  */
-  var sortedAnnotations;
-
-  sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
-
-  console.log('sortedAnnotations', sortedAnnotations);
-
-
+    console.log('sortedAnnotations', sortedAnnotations);
   }
 
 
