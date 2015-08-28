@@ -120,7 +120,18 @@
       }
     }
 
-    console.log('rootSpanId', rootSpanId);
+    var tree = {};
+
+    // fill structure for root tree node
+    tree[rootSpanId] = {
+      'id': rootSpanId,
+      'depth': 0,
+      'children': [],
+    };
+
+
+
+    return tree;
   }
 
   function spanTree(spanParentObj) {
