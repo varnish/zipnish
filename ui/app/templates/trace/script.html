@@ -84,6 +84,9 @@
   // Custom sort annotations structure by timestamp value ASC
   var sortedAnnotations;
 
+  // template for span row
+  var spanRowTemplate;
+
   window.addEventListener('load', traceLoaded);
 
   function traceLoaded() {
@@ -99,50 +102,73 @@
 
     spans = createSpanTree();
 
+    // fetching and creating template for span row
+    spanRowTemplate = _.template($('#span-row-template').html());
+
     // printSpanTree(spans);
     console.log('spans', spans);
 
     // render output into DOM
     console.log('render start');
-    render(spans);
+
+    // render span tree
+    var rootSpanId;
+
+    rootSpanId = getRootSpanId();
+    render(spans[rootSpanId]);
+
     console.log('render finish');
   }
 
   // render DOM structure
-  function render(spans) {
+  function render(span) {
 
     // template for span row
-    var spanRowTemplate, span;
+    var span;
     var children, childrenStr;
 
-    // fetching and creating template for span row
-    spanRowTemplate = _.template($('#span-row-template').html());
+    // templated HTML
+    var templateHTML;
 
     // #trace-container DOM node
     var $traceContainer = $('#trace-container');
 
-    for (var key in spans) {
-      span = spans[key];
+    // children nodes to span
+    var i, childrenLen, childSpans;
 
-      children = [];
-      childrenStr = '';
+    children = [];
+    childrenStr = '';
 
-      if (span['children']) {
-        for (var childKey in span['children']) {
-          children.push( childKey );
-        }
+    childrenLen = span['children'] ? span['children'].length : 0;
 
-        childrenStr = children.join(',');
+    // iterator over child spans
+    if (childrenLen > 0) {
+      for (i = 0; i < childrenLen; i++) {
+        children.push( span['children'][i]['id'] );
       }
 
-      $traceContainer.append(spanRowTemplate({
-        id: span['id'],
-        parent_id: span['parent_id'],
-        span_name: span['span_name'],
-        depth: span['depth'],
-        childrenString: childrenStr
-      }));
+      childrenStr = children.join(',');
     }
+
+    templateHTML = spanRowTemplate({
+      id: span['id'],
+      parent_id: span['parent_id'] == 'None' ? '' : span['parent_id'],
+      span_name: span['span_name'],
+      depth: span['depth'],
+      childrenString: childrenStr
+    });
+
+    $traceContainer.append(templateHTML);
+
+    console.log('childrenLen', childrenLen, span);
+
+    // iterator over child spans
+    if (childrenLen > 0) {
+      for (i = 0; i < childrenLen; i++) {
+        render( span['children'][i] );
+      }
+    }
+
   }
 
 
@@ -154,6 +180,11 @@
     str = '';
 
     for (var key in spans) {
+
+      if (!spans.hasOwnProperty(key)) {
+        continue;
+      }
+
       obj = spans[key];
 
       for (i = 0; i < obj.depth; i++) {
@@ -174,6 +205,11 @@
     var spanObjects = {};
 
     for (var key in spanParentObj) {
+
+      if (!spanParentObj.hasOwnProperty(key)) {
+        continue;
+      }
+
       spanObjects[key] = getSpanInformation(key);
     }
 
@@ -202,6 +238,26 @@
     return obj;
   }
 
+  function getRootSpanId() {
+
+    var rootSpanId;
+
+    rootSpanId = '';
+
+    for (var key in spanParentObj) {
+      if (!spanParentObj.hasOwnProperty(key)) {
+        continue;
+      }
+
+      if (spanParentObj[key] == 'None') {
+        rootSpanId = key;
+        break;
+      }
+    }
+
+    return rootSpanId;
+  }
+
   function createSpanTree() {
 
     var rootSpanId;
@@ -209,6 +265,10 @@
     rootSpanId = '';
 
     for (var key in spanParentObj) {
+      if (!spanParentObj.hasOwnProperty(key)) {
+        continue;
+      }
+
       if (spanParentObj[key] == 'None') {
         rootSpanId = key;
         break;
@@ -291,6 +351,10 @@
     spanIds = [];
 
     for (var key in spanParentObj) {
+      if (!spanParentObj.hasOwnProperty(key)) {
+        continue;
+      }
+
       if (spanParentObj[key] == parentSpanId) {
         spanIds.push( key );
       }
