@@ -1,5 +1,5 @@
 <script id="span-row-template" type="template/underscore" charset="utf-8">
-<div id="<%= spanId %>">
+<div id="<%= span_id %>">
 
 </div>
 </script>
@@ -54,9 +54,14 @@
     // Custom sort annotations structure by timestamp value ASC
     var sortedAnnotations;
 
+    // sorted annotations by timestamp ASC
     sortedAnnotations = _.sortBy(annotations, 'a_timestamp');
 
     for (var i = 0; i < sortedAnnotations.length; i++) {
+
+      // append spans to trace container
+      $traceContainer.append( spanRowTemplate(sortedAnnotations[i]) );
+
       console.log(sortedAnnotations[i].service_name + " > " + sortedAnnotations[i].span_name);
     }
   }
