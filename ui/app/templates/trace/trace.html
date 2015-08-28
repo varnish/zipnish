@@ -75,7 +75,7 @@
 
     spans = createSpanTree();
 
-    printSpanTree(spans);
+    // printSpanTree(spans);
   }
 
 
@@ -95,7 +95,7 @@
 
       console.log(str, obj.span_name);
 
-      childrenLength = obj.children.length;
+      childrenLength = obj.children ? obj.children.length : 0;
 
       for (j = 0; j < childrenLength; j++) {
         printSpanTree( obj['children'] );
