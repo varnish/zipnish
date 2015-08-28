@@ -67,6 +67,11 @@
 
     structure = [];
 
+    // span tree, we can build a tree structure based on parent / child span relationships
+    var spanTree;
+
+    spanTree = [];
+
     for (var i = 0; i < sortedAnnotations.length; i++) {
 
       // append spans to trace container
