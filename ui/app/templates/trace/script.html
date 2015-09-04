@@ -228,10 +228,30 @@
 
   }
 
+  var servicesValueTextDict = {
+    'sr': 'Server Recieve',
+    'ss': 'Server Sent',
+    'cr': 'Client Recieve',
+    'cs': 'Client Send'
+  };
+
   function preProcessServices(services) {
+    var processed, tmp;
 
+    processed = [];
+
+    for (var i = services.length; i >= 0; i--) {
+      tmp = services[i];
+
+      if (servicesValueTextDict[ tmp['value'] ]) {
+        tmp['value'] = servicesValueTextDict[ tmp['value'] ]
+      }
+
+      processed.push(tmp);
+    }
+
+    return processed;
   }
-
 
   function printSpanTree(spans) {
 
