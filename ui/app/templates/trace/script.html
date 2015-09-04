@@ -149,7 +149,14 @@
     // fetching and creating template for span row
     spanRowTemplate = _.template($('#span-row-template').html());
 
-    console.log('spans', spans);
+    console.log(spans['3216375559391978259']['children'][0]['span_name']);
+    console.table(spans['3216375559391978259']['children'][0]['services']);
+
+    console.log(spans['3216375559391978259']['children'][1]['span_name']);
+    console.table(spans['3216375559391978259']['children'][1]['services']);
+
+    console.log(spans['3216375559391978259']['children'][2]['span_name']);
+    console.table(spans['3216375559391978259']['children'][2]['services']);
 
     // render output into DOM
     console.log('render start');
@@ -243,9 +250,9 @@
     $traceContainer.append(templateHTML);
 
     // iterator over child spans
-    if (childrenLen > 0) {
+    if (childrenLen > 0 && span['depth'] < 1) {
       for (i = 0; i < childrenLen; i++) {
-        // render( span['children'][i] );
+        render( span['children'][i] );
       }
     }
 
@@ -465,7 +472,7 @@
         'id': childSpanId,
         'parent_id': spanId,
         'span_name': spanInfo['span_name'],
-        'services': getSpanServices(spanId),
+        'services': getSpanServices(childSpanId),
         'depth': depth,
         'children': getChildNodes(childSpanId, depth + 1)
       });
