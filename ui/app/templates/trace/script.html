@@ -243,7 +243,7 @@
     // iterator over child spans
     if (childrenLen > 0) {
       for (i = 0; i < childrenLen; i++) {
-        render( span['children'][i] );
+        // render( span['children'][i] );
       }
     }
 
@@ -302,8 +302,11 @@
         tmp = services[i];
 
         if (servicesValueTextDict[ tmp['value'] ]) {
-          tmp['value'] = servicesValueTextDict[ tmp['value'] ]
+          tmp['class'] = 'annotation core';
+          tmp['value'] = servicesValueTextDict[ tmp['value'] ];
           tmp['ipv4'] = convertInt2IP( tmp['ipv4'] );
+        } else {
+          tmp['class'] = 'annotation';
         }
 
         processed.push(tmp);
