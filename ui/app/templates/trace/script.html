@@ -129,7 +129,7 @@
   var sortedAnnotations;
 
   // template for span row
-  var spanRowTemplate;
+  var spanRowTemplate, traceStartTime;
 
   window.addEventListener('load', traceLoaded);
 
@@ -158,10 +158,32 @@
     var rootSpanId;
 
     rootSpanId = getRootSpanId();
+
+    // calculate trace start time
+    traceStartTime = calculateTraceStartTime(spans[rootSpanId]);
+
     console.log('rootSpan', spans[rootSpanId]);
     render(spans[rootSpanId]);
 
     console.log('render finish');
+  }
+
+  // calculate trace start time
+  function calculateTraceStartTime(rootSpan) {
+    var services, service, minTimestamp;
+
+    minTimestamp = 0;
+    services = rootSpan['services'];
+
+    if (services) {
+      minTimestamp = 0x20000000000000;
+
+      for (var i = 0; i < services.length; i++) {
+        minTimestamp = Math.min(minTimestamp, services[i].a_timestamp);
+      }
+    }
+
+    return minTimestamp;
   }
 
   // render DOM structure
@@ -207,6 +229,7 @@
       parent_id: span['parent_id'] == 'None' ? '' : span['parent_id'],
 
       marginLeft: 10 + (span['depth'] * 5),
+      leftPosition: calculateServiceLeftPosition(span['services']),
       spanWidth: calculateServiceWidth(totalServicesDuration),
       totalDuration: totalServicesDuration,
       totalDurationMilliSeconds: totalServicesDuration / 1000,
@@ -229,6 +252,10 @@
       }
     }
 
+  }
+
+  function calculateServiceLeftPosition(services) {
+    console.log('services', services);
   }
 
   function calculateServiceWidth(totalServicesDuration) {
