@@ -42,8 +42,8 @@
             data-endpoint="<%= service.ipv4 %>:<%= service.port %>"
             data-value="<%= service.value %>"
             data-timestamp="<%= service.a_timestamp %>"
-            data-relative-time=""
-            data-service-name="parturient"
+            data-relative-time="<%= service.relativeTimestamp %>"
+            data-service-name="<%= service.service_name %>"
             data-duration=""></div>
 
         <% }); %>
@@ -313,6 +313,7 @@
           tmp['class'] = 'annotation';
         }
 
+        tmp['relativeTimestamp'] = Math.abs(tmp['a_timestamp'] - spanStartTimestamp ) / 1000 + 'ms';
         tmp['leftPosition'] = calculateLeftPosition( tmp['a_timestamp'], spanStartTimestamp );
 
         processed.push(tmp);
