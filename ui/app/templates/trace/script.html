@@ -40,7 +40,7 @@
             style="left: 0.0%; width: 8px"
             title="<%= service.service_name %>"
             data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration"
-            data-endpoint="234.72.52.180:5411"
+            data-endpoint="<%= service.ipv4 %>:<%= service.port %>"
             data-value="<%= service.value %>"
             data-timestamp="<%= service.a_timestamp %>"
             data-relative-time=""
