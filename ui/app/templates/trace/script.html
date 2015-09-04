@@ -240,15 +240,19 @@
 
     processed = [];
 
-    for (var i = services.length; i >= 0; i--) {
-      tmp = services[i];
+    if (services) {
+      for (var i = services.length - 1; i >= 0; i--) {
+        tmp = services[i];
 
-      if (servicesValueTextDict[ tmp['value'] ]) {
-        tmp['value'] = servicesValueTextDict[ tmp['value'] ]
+        if (servicesValueTextDict[ tmp['value'] ]) {
+          tmp['value'] = servicesValueTextDict[ tmp['value'] ]
+        }
+
+        processed.push(tmp);
       }
-
-      processed.push(tmp);
     }
+
+    console.log('processed', processed);
 
     return processed;
   }
