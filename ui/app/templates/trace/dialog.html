@@ -1,0 +1,32 @@
+<div class='modal fade' id='spanPanel'>
+  <div class='modal-dialog modal-lg'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+        <h4 class='modal-title'></h4>
+        <h5>Service: <span class='service-names'></span></h5>
+      </div>
+      <div class='modal-body'>
+        <table id='annotations' class='table table-striped'>
+          <thead>
+          <tr>
+            <th>Date Time</th>
+            <th>Relative Time</th>
+            <th>Service</th>
+            <th>Annotation</th>
+            <th>Host</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td data-key='timestamp-human' class="local-datetime"></td>
+              <td data-key='relativeTime'></td>
+              <td data-key='serviceName'></td>
+              <td data-key='value'></td>
+              <td data-key='endpoint'></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
