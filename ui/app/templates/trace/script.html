@@ -231,7 +231,7 @@
 
       span_name: span['span_name'],
       service_name: span['services'][0]['service_name'],
-      services: span['services'],
+      services: services,
       depth: span['depth'],
       childrenString: childrenStr
     };
@@ -317,10 +317,15 @@
 
         processed.push(tmp);
       }
-
     }
 
+    processed = processed.sort(sortServices);
+
     return processed;
+  }
+
+  function sortServices(serviceA, serviceB) {
+    return serviceA.a_timestamp - serviceB.a_timestamp ;
   }
 
   function timestampHumanReadable(ts) {
