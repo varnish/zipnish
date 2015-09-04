@@ -30,7 +30,7 @@
       <div class="time-marker time-marker-4">.</div>
       <div class="time-marker time-marker-5">.</div>
 
-      <div class="duration" style="left: 0.0%; width: 100.0%">
+      <div class="duration" style="left: 0.0%; width: <%= spanWidth %>%">
         <%= totalDurationMilliSeconds %>ms : <%= span_name %>
 
         <% _.each(services, function(service) { %>
@@ -201,12 +201,16 @@
 
     console.log('span total duration', span);
 
+
     templateObj = {
       id: span['id'],
       parent_id: span['parent_id'] == 'None' ? '' : span['parent_id'],
+
       marginLeft: 10 + (span['depth'] * 5),
+      spanWidth: calculateServiceWidth(totalServicesDuration),
       totalDuration: totalServicesDuration,
       totalDurationMilliSeconds: totalServicesDuration / 1000,
+
       span_name: span['span_name'],
       service_name: span['services'][0]['service_name'],
       services: span['services'],
@@ -225,6 +229,10 @@
       }
     }
 
+  }
+
+  function calculateServiceWidth(totalServicesDuration) {
+    return ((totalServicesDuration/1000) / totalDuration) * 100;
   }
 
   function calculateTotalServicesDuration(services) {
