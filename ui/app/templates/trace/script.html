@@ -30,7 +30,7 @@
       <div class="time-marker time-marker-4">.</div>
       <div class="time-marker time-marker-5">.</div>
 
-      <div class="duration" style="left: 0.0%; width: <%= spanWidth %>%">
+      <div class="duration" style="left: <%= leftPosition %>%; width: <%= spanWidth %>%">
         <%= totalDurationMilliSeconds %>ms : <%= span_name %>
 
         <% _.each(services, function(service) { %>
@@ -160,20 +160,18 @@
     rootSpanId = getRootSpanId();
 
     // calculate trace start time
-    traceStartTime = calculateTraceStartTime(spans[rootSpanId]);
+    traceStartTime = calculateSpanStartTime(spans[rootSpanId]['services']);
 
-    console.log('rootSpan', spans[rootSpanId]);
     render(spans[rootSpanId]);
 
     console.log('render finish');
   }
 
   // calculate trace start time
-  function calculateTraceStartTime(rootSpan) {
-    var services, service, minTimestamp;
+  function calculateSpanStartTime(services) {
+    var minTimestamp;
 
     minTimestamp = 0;
-    services = rootSpan['services'];
 
     if (services) {
       minTimestamp = 0x20000000000000;
@@ -221,9 +219,6 @@
     services = preProcessServices( span['services'] );
     totalServicesDuration = calculateTotalServicesDuration( span['services'] );
 
-    console.log('span total duration', span);
-
-
     templateObj = {
       id: span['id'],
       parent_id: span['parent_id'] == 'None' ? '' : span['parent_id'],
@@ -255,7 +250,12 @@
   }
 
   function calculateServiceLeftPosition(services) {
-    console.log('services', services);
+    var servicesStartPosition, timestampDiff;
+
+    servicesStartPosition = calculateSpanStartTime(services);
+    timestampDiff = servicesStartPosition - traceStartTime;
+
+    return ((timestampDiff/1000) / totalDuration) * 100;
   }
 
   function calculateServiceWidth(totalServicesDuration) {
