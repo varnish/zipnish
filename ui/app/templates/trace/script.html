@@ -246,13 +246,14 @@
 
         if (servicesValueTextDict[ tmp['value'] ]) {
           tmp['value'] = servicesValueTextDict[ tmp['value'] ]
+          tmp['ipv4'] = convertInt2IP( tmp['ipv4'] );
         }
 
         processed.push(tmp);
       }
-    }
 
-    console.log('processed', processed);
+      console.log('processed', processed[0]);
+    }
 
     return processed;
   }
@@ -429,6 +430,16 @@
 
     return services;
   }
+
+  function convertInt2IP(ipInt) {
+      var part1 = ipInt & 255;
+      var part2 = ((ipInt >> 8) & 255);
+      var part3 = ((ipInt >> 16) & 255);
+      var part4 = ((ipInt >> 24) & 255);
+
+      return part4 + "." + part3 + "." + part2 + "." + part1;
+  }
+
 
   function getChildSpanIds(parentSpanId) {
     var spanIds;
