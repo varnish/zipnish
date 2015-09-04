@@ -1,5 +1,4 @@
 <script id="span-row-template" type="template/underscore" charset="utf-8">
-  
 
   <div
     style="display:block;"
@@ -10,14 +9,14 @@
     data-id="<%= id %>"
     data-parent-id="<%= parent_id %>"
     data-span-name="<%= span_name %>"
-    data-service-name="parturient"
-    data-service-names="parturient"
+    data-service-name="<%= service_name %>"
+    data-service-names="<%= service_name %>"
     data-duration-str="107.000ms"
     data-duration="107000"
     data-children="<%= childrenString %>">
 
     <div class="handle">
-      <div class="service-name" style="margin-left: 10px">
+      <div class="service-name" style="margin-left: <%= marginLeft %>px">
         <span class="expander">-</span>
         <%= service_name %>
       </div>
@@ -49,8 +48,6 @@
 
         <% }); %>
 
-        <div class="annotation core" style="left: 0.0%; width: 8px" title="Server Receive" data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration" data-endpoint="234.72.52.180:5411" data-value="Server Receive" data-timestamp="1439284406165000" data-relative-time="" data-service-name="parturient" data-duration=""></div>
-        <div class="annotation core" style="left: 100.0%; width: 8px" title="Server Send" data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration" data-endpoint="234.72.52.180:5411" data-value="Server Send" data-timestamp="1439284406272000" data-relative-time="107.000ms" data-service-name="parturient" data-duration=""></div>
       </div>
     </div>
   </div>
@@ -67,13 +64,6 @@
     </div>
 
     <div class="duration-container">
-      <div class="time-marker time-marker-0">.</div>
-      <div class="time-marker time-marker-1">.</div>
-      <div class="time-marker time-marker-2">.</div>
-      <div class="time-marker time-marker-3">.</div>
-      <div class="time-marker time-marker-4">.</div>
-      <div class="time-marker time-marker-5">.</div>
-
       <div class="duration" style="left: 0.0%; width: 100.0%">
         107.000ms : porta
         <div class="annotation core" style="left: 0.0%; width: 8px" title="Server Receive" data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration" data-endpoint="234.72.52.180:5411" data-value="Server Receive" data-timestamp="1439284406165000" data-relative-time="" data-service-name="parturient" data-duration=""></div>
@@ -156,7 +146,6 @@
     // fetching and creating template for span row
     spanRowTemplate = _.template($('#span-row-template').html());
 
-    // printSpanTree(spans);
     console.log('spans', spans);
 
     // render output into DOM
@@ -208,6 +197,7 @@
 
     templateObj = {
       id: span['id'],
+      marginLeft: 10 + (span['depth'] * 5),
       parent_id: span['parent_id'] == 'None' ? '' : span['parent_id'],
       span_name: span['span_name'],
       service_name: span['services'][0]['service_name'],
