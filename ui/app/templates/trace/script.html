@@ -41,6 +41,7 @@
             data-endpoint="<%= service.ipv4 %>:<%= service.port %>"
             data-value="<%= service.value %>"
             data-timestamp="<%= service.a_timestamp %>"
+            data-timestamp-human="<%= service.timestampHuman %>"
             data-relative-time="<%= service.relativeTimestamp %>"
             data-service-name="<%= service.service_name %>"
             data-duration=""></div>
@@ -314,12 +315,13 @@
         if (servicesValueTextDict[ tmp['value'] ]) {
           tmp['class'] = 'annotation core';
           tmp['value'] = servicesValueTextDict[ tmp['value'] ];
-          tmp['ipv4'] = convertInt2IP( tmp['ipv4'] );
         } else {
           tmp['class'] = 'annotation';
         }
 
+        tmp['ipv4'] = convertInt2IP( tmp['ipv4'] );
         tmp['relativeTimestamp'] = Math.abs(tmp['a_timestamp'] - spanStartTimestamp ) / 1000 + 'ms';
+        tmp['timestampHuman'] = tmp['a_timestamp'];
         tmp['leftPosition'] = calculateLeftPosition( tmp['a_timestamp'], spanStartTimestamp, totalServicesDuration);
 
         processed.push(tmp);
