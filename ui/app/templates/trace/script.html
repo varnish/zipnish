@@ -37,11 +37,11 @@
           <div class="<%= service.class %>"
             style="left: <%= service.leftPosition %>%; width: 8px"
             title="<%= service.value %>"
-            data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration"
+            data-keys="endpoint,value,timestamp,human-timestamp,relativeTime,serviceName,duration"
             data-endpoint="<%= service.ipv4 %>:<%= service.port %>"
             data-value="<%= service.value %>"
             data-timestamp="<%= service.a_timestamp %>"
-            data-timestamp-human="<%= service.timestampHuman %>"
+            data-human-timestamp="<%= service.timestampHuman %>"
             data-relative-time="<%= service.relativeTimestamp %>"
             data-service-name="<%= service.service_name %>"
             data-duration=""></div>
@@ -148,15 +148,6 @@
 
     // fetching and creating template for span row
     spanRowTemplate = _.template($('#span-row-template').html());
-
-    console.log(spans['3216375559391978259']['children'][0]['span_name']);
-    console.table(spans['3216375559391978259']['children'][0]['services']);
-
-    console.log(spans['3216375559391978259']['children'][1]['span_name']);
-    console.table(spans['3216375559391978259']['children'][1]['services']);
-
-    console.log(spans['3216375559391978259']['children'][2]['span_name']);
-    console.table(spans['3216375559391978259']['children'][2]['services']);
 
     // render output into DOM
     console.log('render start');
@@ -321,7 +312,7 @@
 
         tmp['ipv4'] = convertInt2IP( tmp['ipv4'] );
         tmp['relativeTimestamp'] = Math.abs(tmp['a_timestamp'] - spanStartTimestamp ) / 1000 + 'ms';
-        tmp['timestampHuman'] = tmp['a_timestamp'];
+        tmp['timestampHuman'] = timestampHumanReadable(tmp['a_timestamp']);
         tmp['leftPosition'] = calculateLeftPosition( tmp['a_timestamp'], spanStartTimestamp, totalServicesDuration);
 
         processed.push(tmp);
@@ -330,6 +321,14 @@
     }
 
     return processed;
+  }
+
+  function timestampHumanReadable(ts) {
+    var d = new Date();
+
+    d.setTime(ts);
+
+    return d.toUTCString();
   }
 
   function printSpanTree(spans) {
