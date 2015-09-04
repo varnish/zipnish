@@ -11,8 +11,8 @@
     data-span-name="<%= span_name %>"
     data-service-name="<%= service_name %>"
     data-service-names="<%= service_name %>"
-    data-duration-str="107.000ms"
-    data-duration="107000"
+    data-duration-str="<%= totalDurationMilliSeconds %>ms"
+    data-duration="<%= totalDuration %>"
     data-children="<%= childrenString %>">
 
     <div class="handle">
@@ -31,7 +31,7 @@
       <div class="time-marker time-marker-5">.</div>
 
       <div class="duration" style="left: 0.0%; width: 100.0%">
-        107.000ms : <%= span_name %>
+        <%= totalDurationMilliSeconds %>ms : <%= span_name %>
 
         <% _.each(services, function(service) { %>
 
@@ -84,6 +84,9 @@
 </script>
 
 <script type="text/javascript">
+  // total trace duration
+  var totalDuration = {{ totalDuration }};
+
   var spanParentObj = {};
 
   /*
@@ -191,14 +194,19 @@
       childrenStr = children.join(',');
     }
 
-    var templateObj, services;
+    var templateObj, totalServicesDuration, services;
 
     services = preProcessServices( span['services'] );
+    totalServicesDuration = calculateTotalServicesDuration( span['services'] );
+
+    console.log('span total duration', span);
 
     templateObj = {
       id: span['id'],
-      marginLeft: 10 + (span['depth'] * 5),
       parent_id: span['parent_id'] == 'None' ? '' : span['parent_id'],
+      marginLeft: 10 + (span['depth'] * 5),
+      totalDuration: totalServicesDuration,
+      totalDurationMilliSeconds: totalServicesDuration / 1000,
       span_name: span['span_name'],
       service_name: span['services'][0]['service_name'],
       services: span['services'],
@@ -217,6 +225,29 @@
       }
     }
 
+  }
+
+  function calculateTotalServicesDuration(services) {
+    var minTimestamp, maxTimestamp;
+
+    maxTimestamp = 0;
+    minTimestamp = 0;
+
+    if (services) {
+      var len;
+
+      minTimestamp = 0x20000000000000;
+      maxTimestamp = -0x20000000000000;
+
+      len = services.length;
+
+      for (var i = 0; i < len; i++) {
+        minTimestamp = Math.min(minTimestamp, services[i]['a_timestamp']);
+        maxTimestamp = Math.max(maxTimestamp, services[i]['a_timestamp']);
+      }
+    }
+
+    return (maxTimestamp - minTimestamp);
   }
 
   var servicesValueTextDict = {
@@ -243,7 +274,6 @@
         processed.push(tmp);
       }
 
-      console.log('processed', processed[0]);
     }
 
     return processed;
