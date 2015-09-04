@@ -35,9 +35,9 @@
 
         <% _.each(services, function(service) { %>
 
-          <div class="annotation core"
-            style="left: 0.0%; width: 8px"
-            title="<%= service.service_name %>"
+          <div class="<%= service.class %>"
+            style="left: <%= service.leftPosition %>%; width: 8px"
+            title="<%= service.value %>"
             data-keys="endpoint,value,timestamp,relativeTime,serviceName,duration"
             data-endpoint="<%= service.ipv4 %>:<%= service.port %>"
             data-value="<%= service.value %>"
@@ -214,10 +214,12 @@
       childrenStr = children.join(',');
     }
 
-    var templateObj, totalServicesDuration, services;
+    var templateObj, totalServicesDuration, services, spanStartTimestamp;
 
-    services = preProcessServices( span['services'] );
     totalServicesDuration = calculateTotalServicesDuration( span['services'] );
+    spanStartTimestamp = calculateSpanStartTime( span['services'] );
+
+    services = preProcessServices( spanStartTimestamp, span['services'] );
 
     templateObj = {
       id: span['id'],
@@ -250,12 +252,14 @@
   }
 
   function calculateServiceLeftPosition(services) {
-    var servicesStartPosition, timestampDiff;
+    var servicesStartTimestamp, timestampDiff;
 
-    servicesStartPosition = calculateSpanStartTime(services);
-    timestampDiff = servicesStartPosition - traceStartTime;
+    servicesStartTimestamp = calculateSpanStartTime(services);
+    return calculateLeftPosition(servicesStartTimestamp, traceStartTime);
+  }
 
-    return ((timestampDiff/1000) / totalDuration) * 100;
+  function calculateLeftPosition(timestampA, timestampB) {
+    return ((Math.abs(timestampA - timestampB)/1000) / totalDuration) * 100;
   }
 
   function calculateServiceWidth(totalServicesDuration) {
@@ -292,7 +296,7 @@
     'cs': 'Client Send'
   };
 
-  function preProcessServices(services) {
+  function preProcessServices(spanStartTimestamp, services) {
     var processed, tmp;
 
     processed = [];
@@ -308,6 +312,8 @@
         } else {
           tmp['class'] = 'annotation';
         }
+
+        tmp['leftPosition'] = calculateLeftPosition( tmp['a_timestamp'], spanStartTimestamp );
 
         processed.push(tmp);
       }
