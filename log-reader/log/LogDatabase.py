@@ -18,7 +18,7 @@ class LogDatabase:
                     keep_alive=keyVals['keep_alive'] \
                 )
 
-        if 'truncate_tables' in keyVals:
+        if 'truncate_tables' in keyVals and keyVals['truncate_tables'] == True:
             self.truncateTables()
 
     def getParams(self):
