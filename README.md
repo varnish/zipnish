@@ -32,6 +32,11 @@ User interface will use the UI files (styles, scripts and templates) from ZipKin
 3. Use ZipKin user-interface to display information.
 4. Document functionality implemented. The flow of the system.
 
+##### Machine Used #####
+
+Import sql schema into zipkin database using the following,
+
+`mysql -u USERNAME -p DATABASE < log-reader/mysql.sql`
 
 #### Tracking Micro-Services via Varnish Cache ####
 
