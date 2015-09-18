@@ -413,7 +413,7 @@
         continue;
       }
 
-      if (spanParentObj[key] == 'None') {
+      if (spanParentObj[key] == 'None' || spanParentObj[key] == 0) {
         rootSpanId = key;
         break;
       }
@@ -433,7 +433,7 @@
         continue;
       }
 
-      if (spanParentObj[key] == 'None') {
+      if (spanParentObj[key] == 'None' || spanParentObj[key] == 0) {
         rootSpanId = key;
         break;
       }
@@ -452,8 +452,6 @@
       'depth': 0,
       'children': getChildNodes(rootSpanId, 1)
     };
-
-    //console.log('tree', tree);
 
     return tree;
   }
