@@ -103,10 +103,10 @@ class LogStorage:
             indexRight = row['begin'].index(' ', indexLeft)
             clientSpanId = row['begin'][indexLeft:indexRight]
 
-            print "Before: " + str(self.spans)
-            print "replace client span id -> " + clientSpanId + " WITH " + row["span_id"]
+            # print "Before: " + str(self.spans)
+            # print "replace client span id -> " + clientSpanId + " WITH " + row["span_id"]
             self.replaceClientSpanId(clientSpanId, row['span_id'])
-            print "After: "  + str(self.spans)
+            # print "After: "  + str(self.spans)
 
             if len(self.spans) >= self.minNumOfSpansToFlush:
                 self.flushSpans()
