@@ -1,8 +1,13 @@
-#### RPC Logging Result ####
+#### Screenshots ####
 
-Below shows an expanded overview of services calls in call chain.
+Lookup
+![service lookup](images/service-lookup.png)
 
-![rpc call chain](images/services-expanded.png)
+Search Results
+![services drilldown view](images/services-drilldown-view.png)
+
+Annotations
+![service annotations](images/service-annotation-view.png)
 
 #### System Level View ####
 
