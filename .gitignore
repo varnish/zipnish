@@ -6,3 +6,4 @@ node_modules
 venv
 *.swp
 .gitignore
+.vagrant
