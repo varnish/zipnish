@@ -5,3 +5,4 @@ node_modules
 *.pyc
 venv
 *.swp
+.gitignore
