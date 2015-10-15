@@ -3,9 +3,25 @@
   sudo: True
   apt: update_cache=yes name=mysql-client
 
+- name: install python-dev
+  sudo: True
+  apt: name=python-dev
+
+- name: install libmysqlclient-dev
+  sudo: True
+  apt: name=libmysqlclient-dev
+
 - name: install python2.7
   sudo: True
   apt: name=python2.7
+
+- name: install virtualenv
+  sudo: True
+  apt: name=python-virtualenv
+
+- name: install python-mysqldb
+  sudo: True
+  apt: name=python-mysqldb
 
 - name: install python-pip
   sudo: True

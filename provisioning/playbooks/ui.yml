@@ -1,4 +1,8 @@
 ---
+- name: install libmysqlclient-dev
+  sudo: True
+  apt: name=libmysqlclient-dev
+
 - name: install python2.7
   sudo: True
   apt: name=python2.7
@@ -6,3 +10,14 @@
 - name: install python-pip
   sudo: True
   apt: name=python-pip
+
+- name: install virtualenv
+  sudo: True
+  apt: name=python-virtualenv
+
+- name: install python-mysqldb
+  sudo: True
+  apt: name=python-mysqldb
+
+- name: install ui requirements listed in requirements.txt
+  pip: virtualenv=/vagrant/ui/venv requirements=/vagrant/ui/requirements.txt
