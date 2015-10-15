@@ -1,1 +1,4 @@
 ---
+- name: install nodejs
+  sudo: True
+  apt: update_cache=yes name=nodejs

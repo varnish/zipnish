@@ -1,1 +1,4 @@
 ---
+- name: install mysql-client
+  sudo: True
+  apt: update_cache=yes name=mysql-client

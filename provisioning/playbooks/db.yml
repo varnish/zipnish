@@ -1,1 +1,6 @@
 ---
+- name: install mysql-server
+  sudo: yes
+  apt: name=mysql-server update_cache=yes
+  notify:
+    - restart mysql-server
