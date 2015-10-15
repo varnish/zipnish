@@ -1,5 +1,5 @@
 backend default {
-    .host = "i192.168.33.14";
+    .host = "192.168.33.14";
     .port = "9000";
 }
 

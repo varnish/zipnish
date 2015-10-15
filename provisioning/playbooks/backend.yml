@@ -47,3 +47,9 @@
   apt: name=varnish update_cache=yes
   notify:
     - restart varnish
+
+- name: copy default.vcl configuration
+  sudo: True
+  copy: force=yes src=files/backend/default.vcl dest=/etc/varnish/default.vcl
+  notify:
+    - restart varnish
