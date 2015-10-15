@@ -1,0 +1,29 @@
+---
+
+- name: Database Playbook
+  hosts: db
+  tasks:
+    - include: playbooks/db.yml
+  handlers:
+    - include: handlers/db.yml
+
+- name: Backend Playbook (Varnish + Log Reader)
+  hosts: backend
+  tasks:
+    - include: playbooks/backend.yml
+  handlers:
+    - include: handlers/backend.yml
+
+- name: Example Application Playbook
+  hosts: exampleapp
+  tasks:
+    - include: playbooks/exampleapp.yml
+  handlers:
+    - include: handlers/exampleapp.yml
+
+- name: User Interface Playbook
+  hosts: ui
+  tasks:
+    - include: playbooks/ui.yml
+  handlers:
+    - include: handlers/ui.yml
