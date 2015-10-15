@@ -3,9 +3,9 @@
   sudo: True
   apt: update_cache=yes name=mysql-client
 
-- name: install python-dev
+- name: install libpython-dev
   sudo: True
-  apt: name=python-dev
+  apt: name=libpython-dev
 
 - name: install libmysqlclient-dev
   sudo: True
