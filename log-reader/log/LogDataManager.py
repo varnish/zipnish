@@ -18,6 +18,7 @@ class LogDataManager:
 
         if tag == 'Begin':
             self.logRow = {}
+            self.logRow['begin'] = data
 
         elif tag == 'End':
             self.logRow['request_type'] = requestType
@@ -48,7 +49,9 @@ class LogDataManager:
             split = data.split(': ', 1)
             value = split[1].rstrip('\x00')
 
-            if split[0] == 'X-Varnish':
+            split[0] = split[0].lower()
+
+            if split[0] == 'x-varnish':
                 self.logRow['span_id'] = value
 
             elif split[0] == 'x-varnish-trace':
@@ -57,10 +60,10 @@ class LogDataManager:
             elif split[0] == 'x-varnish-parent':
                 self.logRow['parent_id'] = value
 
-            elif split[0] == 'X-Varnish-Debug':
+            elif split[0] == 'x-varnish-debug':
                 self.logRow['debug'] = value
 
-            elif split[0] == 'Host':
+            elif split[0] == 'host':
                 ipv4 = value
                 port = 0
 

@@ -54,8 +54,11 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       'x-varnish-parent': X_Varnish
     };
 
-    //console.log('trace =', X_Varnish_Trace, ', id =', X_Varnish, service.url);
-    console.log('trace = %s, parent = %s, id = %s, url = %s', req.headers['x-varnish-trace'], req.headers['x-varnish-parent'], req.headers['x-varnish'], service.url);
+    console.log('trace = %s, parent = %s, id = %s, url = %s',
+                req.headers['x-varnish-trace'],
+                req.headers['x-varnish-parent'],
+                req.headers['x-varnish'],
+                service.url);
 
     if (service.children) {
       var funcs = [],
@@ -71,10 +74,8 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
               'port': argv['proxy-port'],
               'path': path,
               'agent': false,
-              'headers': headers
+              //'headers': headers
             } , function (res) {
-
-              //console.log('trace =', X_Varnish_Trace, ', id =', X_Varnish, path);
 
               timers.setTimeout(function() {
                 next();
@@ -92,7 +93,7 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
         async.series(funcs, function (err, results) {
 
           for (var key in headers) {
-            res.setHeader(key, headers[key]);
+            //res.setHeader(key, headers[key]);
           }
 
           res.send();
@@ -103,7 +104,7 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
         async.parallel(funcs, function (err, results) {
 
           for (var key in headers) {
-            res.setHeader(key, headers[key]);
+            //res.setHeader(key, headers[key]);
           }
 
           res.send();
@@ -115,7 +116,7 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       timers.setTimeout(function() {
 
         for (var key in headers) {
-          res.setHeader(key, headers[key]);
+          //res.setHeader(key, headers[key]);
         }
 
         res.send();

@@ -11,12 +11,6 @@ class LogStorage:
         # connection to database
         self.db = db
 
-        # request key value storage,
-        # stores relationships between Client Request and Backend Request
-        # client VxId => client link
-        # This enables us to pick up Client VxId when we recieve a backend request
-        self.requestKeyValStore = {}
-
         # Database spans
         self.spans = []
 
@@ -33,9 +27,6 @@ class LogStorage:
         # process row to attach data to span / annotation
         self.process(row)
 
-        if len(self.spans) >= self.minNumOfSpansToFlush:
-            self.flushSpans()
-
         if len(self.annotations) >= self.minNumOfAnnotationsToFlush:
             self.flushAnnotations()
 
@@ -49,6 +40,7 @@ class LogStorage:
             row['parent_id'] = 0
 
         if row['request_type'] == 'c':
+
             # client request considered for span
             row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
             row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
@@ -57,7 +49,6 @@ class LogStorage:
             row['timestamp-abs-Resp'] = self.convertTimestamp(row['timestamp-abs-Resp'])
 
             # add backend request link as key, add reference to client request
-            self.requestKeyValStore[row['link']] = row['span_id']
 
             if 'trace_id' not in row:
                 row['trace_id'] = row['span_id']
@@ -67,8 +58,6 @@ class LogStorage:
             # probably because parent the top most span, which starts the trace
             # needs to have it's varnish VxID come from the backend request, and not from the 
             # client request
-            if row['parent_id'] == row['trace_id']:
-                row['parent_id'] = None
 
             span = {\
                 'span_id': row['span_id'], \
@@ -83,6 +72,8 @@ class LogStorage:
             # Server Recieve
             self.spans.append( copy.copy(span) )
 
+            #print "CLIENT -> " + row['span_name'] + ("; span_id: " + str(row['span_id']) + "; parent_id: " + str(row['parent_id']))
+
             if row['parent_id'] is not None:
                 span['duration'] = row['timestamp-duration-Resp']
                 span['created_ts'] = row['timestamp-abs-Resp']
@@ -91,6 +82,7 @@ class LogStorage:
                 self.spans.append( span )
 
         elif row['request_type'] == 'b':
+
             # backend request considered for annotations
             row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
             row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
@@ -101,17 +93,25 @@ class LogStorage:
             row['timestamp-duration-BerespBody'] = self.convertDuration(row['timestamp-duration-BerespBody'])
             row['timestamp-abs-BerespBody'] = self.convertTimestamp(row['timestamp-abs-BerespBody'])
 
-            if row['span_id'] in self.requestKeyValStore:
-                clientRequestVxId = self.requestKeyValStore[ row['span_id'] ]
-                del self.requestKeyValStore[ row['span_id'] ]
-                row['span_id'] = clientRequestVxId
-
             if 'trace_id' not in row:
                 row['trace_id'] = row['span_id']
 
             if row['ipv4'] is not None:
                 row['ipv4'] = self.convertIP2Integer(row['ipv4'])
 
+            indexLeft = row['begin'].index(' ') + 1
+            indexRight = row['begin'].index(' ', indexLeft)
+            clientSpanId = row['begin'][indexLeft:indexRight]
+
+            print "Before: " + str(self.spans)
+            print "replace client span id -> " + clientSpanId + " WITH " + row["span_id"]
+            self.replaceClientSpanId(clientSpanId, row['span_id'])
+            print "After: "  + str(self.spans)
+
+            if len(self.spans) >= self.minNumOfSpansToFlush:
+                self.flushSpans()
+
+            #print "BACKEND -> " + row['span_name'] + ("; span_id: " + str(row['span_id']) + ", parent_id: " + str(row['parent_id']))
 
             annotation = {\
                 'span_id': row['span_id'], \
@@ -149,6 +149,18 @@ class LogStorage:
             # Client Recieve
             self.annotations.append( copy.copy(annotation) )
 
+    def replaceClientSpanId(self, clientSpanId, backendSpanId):
+        for spanIndex in range(len(self.spans)):
+            spanRow = self.spans[spanIndex]
+            #print "spanRow => " + str(spanRow['span_id']) + " == " + clientSpanId + " > " + str(spanRow['span_id'] == clientSpanId)
+
+            if spanRow['span_id'] == clientSpanId:
+                if spanRow['trace_id'] == spanRow['span_id']:
+                    spanRow['trace_id'] = backendSpanId
+
+                spanRow['span_id'] = backendSpanId
+                self.spans[spanIndex] = spanRow
+
     def convertIP2Integer(self, ip):
         parts = ip.split('.')
         return (int(parts[0]) << 24) + (int(parts[1]) << 16) + (int(parts[2]) << 8) + int(parts[3])
@@ -170,6 +182,7 @@ class LogStorage:
         return duration
 
     def flushSpans(self):
+        print "flushing spans"
         #self.printTable(self.spans)
         self.db.insert('spans', self.spans)
         self.spans = []

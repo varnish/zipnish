@@ -49,10 +49,14 @@ def index():
             whereQuery += " service_name = '%s' " % serviceName
 
         if spanName is not None and len(spanName) > 0 and spanName != 'all':
-            whereQuery += " AND span_name = '%s' " % spanName
+            if len(whereQuery) > 0:
+                whereQuery += " AND "
+            whereQuery += " span_name = '%s' " % spanName
 
         if timestamp is not None and len(timestamp) > 0:
-            whereQuery += " AND a_timestamp < %s " % timestamp
+            if len(whereQuery) > 0:
+                whereQuery += " AND "
+            whereQuery += " a_timestamp < %s " % timestamp
 
         # attach where clause only if there is a criteria
         if len(whereQuery) > 0:
