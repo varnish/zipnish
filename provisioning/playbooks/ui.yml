@@ -3,6 +3,10 @@
   sudo: True
   apt: name=libmysqlclient-dev
 
+- name: install libpython-dev
+  sudo: True
+  apt: name=libpython-dev
+
 - name: install python2.7
   sudo: True
   apt: name=python2.7
