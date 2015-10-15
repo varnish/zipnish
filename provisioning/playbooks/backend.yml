@@ -26,3 +26,24 @@
 - name: install python-pip
   sudo: True
   apt: name=python-pip
+
+- name: install log-reader requirements.txt
+  pip: virtualenv=/vagrant/log-reader/venv requirements=/vagrant/log-reader/requirements.txt
+
+- name: install apt-transport-https
+  sudo: True
+  apt: name=apt-transport-https
+
+- name: add varnish-cache.org GPG-key
+  sudo: True
+  apt_key: url=https://repo.varnish-cache.org/GPG-key.txt state=present
+
+- name: add varnish-cache.org repository
+  sudo: True
+  apt_repository: repo="deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.1" state=present
+
+- name: install varnish-cache
+  sudo: True
+  apt: name=varnish update_cache=yes
+  notify:
+    - restart varnish

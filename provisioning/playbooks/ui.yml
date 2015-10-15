@@ -23,5 +23,5 @@
   sudo: True
   apt: name=python-mysqldb
 
-- name: install ui requirements listed in requirements.txt
+- name: install user-interfaces requirements.txt
   pip: virtualenv=/vagrant/ui/venv requirements=/vagrant/ui/requirements.txt
