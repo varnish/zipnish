@@ -20,6 +20,10 @@ function getRandomTimeForDelay()
   return 0;
 }
 
+app.get('/', function (req, res) {
+  res.status(200).send('rpc-service');
+});
+
 app.get('/:serviceName/:indentLevel?', function (req, res) {
 
   var indentLevel = req.params.indentLevel ? parseInt(req.params.indentLevel) : 0,
