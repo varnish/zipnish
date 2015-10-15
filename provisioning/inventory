@@ -1,0 +1,4 @@
+ui ansible_port=2200 ansible_host=127.0.0.1
+db ansible_port=2201 ansible_host=127.0.0.1
+backend ansible_port=2202 ansible_host=127.0.0.1
+exampleapp ansible_port=2203 ansible_host=127.0.0.1
