@@ -1,1 +1,3 @@
 ---
+- name: restart exampleapp
+  command: "/vagrant/script.sh"

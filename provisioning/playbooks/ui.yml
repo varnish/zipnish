@@ -25,3 +25,26 @@
 
 - name: install user-interfaces requirements.txt
   pip: virtualenv=/vagrant/ui/venv requirements=/vagrant/ui/requirements.txt
+
+- name: install nodejs
+  sudo: True
+  apt: update_cache=yes name=nodejs state=present
+
+- name: link nodejs to node
+  sudo: True
+  file: src=/usr/bin/nodejs dest=/usr/local/bin/node state=link
+
+- name: install npm
+  sudo: True
+  apt: name=npm state=present
+
+- name: install bower
+  sudo: True
+  npm: name=bower global=yes state=present
+
+- name: install bower dependencies
+  command: /usr/local/bin/bower install
+  args:
+    chdir: /vagrant/ui/
+  tags:
+    - install-bower-json

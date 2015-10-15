@@ -1,4 +1,11 @@
 ---
 - name: install nodejs
   sudo: True
-  apt: update_cache=yes name=nodejs
+  apt: update_cache=yes name=nodejs state=present
+
+- name: install npm
+  sudo: True
+  apt: name=npm state=present
+
+- name: install npm packages for exampleapp
+  npm: path=/vagrant/rpc-service/
