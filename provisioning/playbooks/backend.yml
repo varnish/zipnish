@@ -2,3 +2,7 @@
 - name: install mysql-client
   sudo: True
   apt: update_cache=yes name=mysql-client
+
+- name: install python2.7
+  sudo: True
+  apt: name=python2.7

@@ -1,1 +1,4 @@
 ---
+- name: install python2.7
+  sudo: True
+  apt: name=python2.7
