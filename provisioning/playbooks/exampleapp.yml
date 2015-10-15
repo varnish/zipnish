@@ -3,6 +3,10 @@
   sudo: True
   apt: update_cache=yes name=nodejs state=present
 
+- name: link nodejs to node
+  sudo: True
+  file: src=/usr/bin/nodejs dest=/usr/local/bin/node state=link
+
 - name: install npm
   sudo: True
   apt: name=npm state=present
