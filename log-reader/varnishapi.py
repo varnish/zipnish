@@ -7,28 +7,28 @@ import sys,getopt
 class VSC_level_desc(Structure):
   _fields_ = [
               ("verbosity" ,c_uint),        #unsigned verbosity;
-              ("label", c_char_p),          #const char *label;		/* label */
-              ("sdesc", c_char_p),          #const char *sdesc;		/* short description */
-              ("ldesc", c_char_p),          #const char *ldesc;		/* long description */
+              ("label", c_char_p),          #const char *label;     /* label */
+              ("sdesc", c_char_p),          #const char *sdesc;     /* short description */
+              ("ldesc", c_char_p),          #const char *ldesc;     /* long description */
              ]
 
 class VSC_type_desc(Structure):
   _fields_ = [
-              ("label", c_char_p),          #const char *label;		/* label */
-              ("sdesc", c_char_p),          #const char *sdesc;		/* short description */
-              ("ldesc", c_char_p),          #const char *ldesc;		/* long description */
+              ("label", c_char_p),          #const char *label;     /* label */
+              ("sdesc", c_char_p),          #const char *sdesc;     /* short description */
+              ("ldesc", c_char_p),          #const char *ldesc;     /* long description */
              ]
 
 class VSM_fantom(Structure):
   _fields_ = [
-              ("chunk", c_void_p),             #struct VSM_chunk	*chunk;
-              ("b", c_void_p),                 #void			*b;		/* first byte of payload */
-              ("e", c_void_p),                 #void			*e;		/* first byte past payload */
-              #("priv", c_uint),               #uintptr_t		priv;		/* VSM private */
-              ("priv", c_void_p),              #uintptr_t		priv;		/* VSM private */
-              ("_class", c_char * 8),          #char			class[VSM_MARKER_LEN];
-              ("type", c_char * 8),            #char			type[VSM_MARKER_LEN];
-              ("ident", c_char * 128),         #char			ident[VSM_IDENT_LEN];
+              ("chunk", c_void_p),             #struct VSM_chunk    *chunk;
+              ("b", c_void_p),                 #void            *b;     /* first byte of payload */
+              ("e", c_void_p),                 #void            *e;     /* first byte past payload */
+              #("priv", c_uint),               #uintptr_t       priv;       /* VSM private */
+              ("priv", c_void_p),              #uintptr_t       priv;       /* VSM private */
+              ("_class", c_char * 8),          #char            class[VSM_MARKER_LEN];
+              ("type", c_char * 8),            #char            type[VSM_MARKER_LEN];
+              ("ident", c_char * 128),         #char            ident[VSM_IDENT_LEN];
              ]
 
 
@@ -42,19 +42,19 @@ class VSC_section(Structure):
 
 class VSC_desc(Structure):
   _fields_ = [
-              ("name", c_char_p),                 #const char *name;		/* field name			*/
-              ("fmt", c_char_p),                  #const char *fmt;		/* field format ("uint64_t")	*/
-              ("flag", c_int),                    #int flag;			/* 'c' = counter, 'g' = gauge	*/
-              ("sdesc", c_char_p),                #const char *sdesc;		/* short description		*/
-              ("ldesc", c_char_p),                #const char *ldesc;		/* long description		*/
+              ("name", c_char_p),                 #const char *name;        /* field name           */
+              ("fmt", c_char_p),                  #const char *fmt;     /* field format ("uint64_t")    */
+              ("flag", c_int),                    #int flag;            /* 'c' = counter, 'g' = gauge   */
+              ("sdesc", c_char_p),                #const char *sdesc;       /* short description        */
+              ("ldesc", c_char_p),                #const char *ldesc;       /* long description     */
               ("level", POINTER(VSC_level_desc)), #const struct VSC_level_desc *level;
              ]
 
 class VSC_point(Structure):
   _fields_ = [
-              ("desc", POINTER(VSC_desc)),        #const struct VSC_desc *desc;	/* point description		*/
-              #("ptr", c_void_p),                 #const volatile void *ptr;	/* field value			*/
-              ("ptr", POINTER(c_ulonglong)),      #const volatile void *ptr;	/* field value			*/
+              ("desc", POINTER(VSC_desc)),        #const struct VSC_desc *desc; /* point description        */
+              #("ptr", c_void_p),                 #const volatile void *ptr;    /* field value          */
+              ("ptr", POINTER(c_ulonglong)),      #const volatile void *ptr;    /* field value          */
               ("section", POINTER(VSC_section)),  #const struct VSC_section *section;
              ]
 
@@ -219,16 +219,26 @@ class LIBVARNISHAPI13:
         #self.VSLQ_Dispatch.argtypes = (c_void_p, CFUNCTYPE ,c_void_p)
         
 class VSLUtil:
-    def tag2VarName(self, tag, data):
+    def tag2Var(self, tag, data):
+        ret = {'key':'','val':'','vkey':''}
         if not self.__tags.has_key(tag):
-            return ''
+            return ret
         
         r =  self.__tags[tag]
+        ret['vkey'] = r.split(' ',1)[-1].split('.',1)[0]
         if   r == '':
-            return ''
+            return ret
         elif r[-1:] == '.':
-          return r + data.split(':',1)[0]
-        return (r)
+            spl = data.split(': ',1)
+            ret['key'] = r + spl[0]
+            ret['val'] = spl[1]
+        else:
+            ret['key'] = r
+            ret['val'] = data
+        return (ret)
+    
+    def tag2VarName(self, tag, data):
+        return self.tag2Var(tag, data)['key']
     
     __tags = {
         'Debug'          : '',
@@ -338,13 +348,13 @@ class VarnishAPI:
         
     def ArgDefault(self, op, arg):
         if   op == "n":
-            #ƒCƒ“ƒXƒ^ƒ“ƒXŽw’è
+            #ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹æŒ‡å®š
             i = self.lib.VSM_n_Arg(self.vsm, arg)
             if i <= 0:
                 error = "%s" % self.lib.VSM_Error(self.vsm)
                 return(i)
         elif op == "N":
-            #VSMƒtƒ@ƒCƒ‹Žw’è
+            #VSMãƒ•ã‚¡ã‚¤ãƒ«æŒ‡å®š
             i = self.lib.VSM_N_Arg(self.vsm, arg)
             if i <= 0:
                 error = "%s" % self.lib.VSM_Error(self.vsm)
@@ -410,6 +420,11 @@ class VarnishStat(VarnishAPI):
         self.lib.VSC_Iter(self.vsm, None, VSC_iter_f(self.__getstat), None);
         return self.__buf
         
+    def Fini(self):
+        if self.vsm:
+            self.lib.VSM_Delete(self.vsm)
+            self.vsm = 0
+
 
 class VarnishLog(VarnishAPI):
     def __init__(self, opt = '', sopath = 'libvarnishapi.so.1'):
@@ -451,10 +466,10 @@ class VarnishLog(VarnishAPI):
             return(i)
             
         if   op == "d":
-            #æ“ª‚©‚ç
+            #å…ˆé ­ã‹ã‚‰
             self.d_opt = 1
         elif op == "g":
-            #ƒOƒ‹[ƒsƒ“ƒOŽw’è
+            #ã‚°ãƒ«ãƒ¼ãƒ”ãƒ³ã‚°æŒ‡å®š
             self.__g_arg =  self.__VSLQ_Name2Grouping(arg)
             if   self.__g_arg == -2:
                 error = "Ambiguous grouping type: %s" % (arg)
@@ -463,12 +478,12 @@ class VarnishLog(VarnishAPI):
                 error = "Unknown grouping type: %s" % (arg)
                 return(self.__g_arg)
         #elif op == "P":
-        #    #PIDŽw’è‚Í‘Î‰ž‚µ‚È‚¢
+        #    #PIDæŒ‡å®šã¯å¯¾å¿œã—ãªã„
         elif op == "q":
             #VSL-query
             self.__q_arg = arg
         elif op == "r":
-            #ƒoƒCƒiƒŠƒtƒ@ƒCƒ‹
+            #ãƒã‚¤ãƒŠãƒªãƒ•ã‚¡ã‚¤ãƒ«
             self.__r_arg = arg
         else:
             #default

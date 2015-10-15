@@ -2,7 +2,8 @@ var timers = require('timers'),
     http = require('http'),
     querystring = require('querystring'),
     async = require('async'),
-    express = require('express');
+    express = require('express'),
+    colors = require('colors/safe');
 
 var services = require('./services'),
     servicesParser = require('./services/parser');
@@ -54,11 +55,15 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
       'x-varnish-parent': X_Varnish
     };
 
-    console.log('trace = %s, parent = %s, id = %s, url = %s',
-                req.headers['x-varnish-trace'],
-                req.headers['x-varnish-parent'],
-                req.headers['x-varnish'],
-                service.url);
+    var logInfo = '';
+
+    logInfo += 'url: ' + colors.bgGreen(service.url) + '\n';
+
+    logInfo += 'trace: ' + colors.yellow(req.headers['x-varnish-trace']) + ', ';
+    logInfo += 'parent: ' + colors.cyan(req.headers['x-varnish-parent']) + ', ';
+    logInfo += 'id: ' + colors.gray(req.headers['x-varnish']);
+
+    console.log(logInfo);
 
     if (service.children) {
       var funcs = [],
@@ -111,7 +116,7 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
         });
       }
 
-    } else {
+    // } else {
 
       timers.setTimeout(function() {
 

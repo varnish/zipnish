@@ -31,9 +31,9 @@ if __name__ == '__main__':
     # connection parameters to database
     dbParams = {\
                     'host':     'localhost', \
-                    'db':       'zipkin', \
-                    'user':     'zipkin', \
-                    'passwd':   'kinect', \
+                    'db':       'vmsm', \
+                    'user':     'vmsm', \
+                    'passwd':   'vmsm', \
                     'keep_alive': True, \
                     'truncate_tables': True \
                 }

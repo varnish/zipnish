@@ -1,8 +1,16 @@
-#### RPC Logging Result ####
+#### Presentation ####
+[Varnish Microservices 2.0](http://www.slideshare.net/Varnish_software/microservices-20)
 
-Below shows an expanded overview of services calls in call chain.
+#### Screenshots ####
 
-![rpc call chain](images/services-expanded.png)
+Lookup
+![service lookup](images/service-lookup.png)
+
+Search Results
+![services drilldown view](images/services-drilldown-view.png)
+
+Annotations
+![service annotations](images/service-annotation-view.png)
 
 #### System Level View ####
 
@@ -31,7 +39,6 @@ User interface will use the UI files (styles, scripts and templates) from ZipKin
 2. Make the application function as close to ZipKin as possible.
 3. Use ZipKin user-interface to display information.
 4. Document functionality implemented. The flow of the system.
-
 
 #### Tracking Micro-Services via Varnish Cache ####
 
