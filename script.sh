@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# current bash directory
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # terminate any existing node web services
 NODE_SERVICES=$(ps au | grep node | grep -v 'grep' | awk '{print $2}')
 
@@ -15,7 +18,7 @@ fi
 
 
 # Change directory to rpc-service/
-cd rpc-service
+cd "${DIR}/rpc-service"
 
 node app.js --port 9000 --proxy-port 6081 --address 192.168.33.14 --service 'Process Order' \
             --services '/process-order:Process Order=>serial:/fetch-customer,/fetch-products,/get-payment-information' \
