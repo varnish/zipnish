@@ -1,5 +1,3 @@
 ---
-- name: start exampleapp
-  script: ./script.sh &
-  args:
-    chdir: /vagrant
+- name: start exampleapp as daemon
+  shell: daemon -- /vagrant/script.sh

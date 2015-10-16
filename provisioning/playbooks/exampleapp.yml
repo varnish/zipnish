@@ -3,6 +3,10 @@
   sudo: True
   apt: update_cache=yes name=nodejs state=present
 
+- name: install daemon
+  sudo: True
+  apt: name=daemon state=present
+
 - name: link nodejs to node
   sudo: True
   file: src=/usr/bin/nodejs dest=/usr/local/bin/node state=link
@@ -13,4 +17,6 @@
 
 - name: install npm packages for exampleapp
   npm: path=/vagrant/rpc-service/
-  notify: start exampleapp
+
+- name: start exampleapp as daemon
+  shell: daemon -- /vagrant/script.sh
