@@ -40,7 +40,7 @@
 
 - name: add varnish-cache.org repository
   sudo: True
-  apt_repository: repo="deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.1" state=present
+  apt_repository: repo="deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.0" state=present
 
 - name: install varnish-cache
   sudo: True
