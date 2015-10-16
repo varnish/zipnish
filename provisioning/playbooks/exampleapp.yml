@@ -13,3 +13,4 @@
 
 - name: install npm packages for exampleapp
   npm: path=/vagrant/rpc-service/
+  notify: start exampleapp
