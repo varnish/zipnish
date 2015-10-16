@@ -53,3 +53,7 @@
   copy: force=yes src=files/backend/default.vcl dest=/etc/varnish/default.vcl
   notify:
     - restart varnish
+
+- name: ensure varnish is running
+  sudo: True
+  service: name=varnish state=running

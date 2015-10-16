@@ -18,5 +18,9 @@
 - name: install npm packages for exampleapp
   npm: path=/vagrant/rpc-service/
 
-- name: start exampleapp as daemon
-  shell: daemon -- /vagrant/script.sh
+- name: install pm2
+  sudo: True
+  npm: name=pm2 global=yes
+
+- name: run exampleapp using pm2
+  shell: pm2 start --watch node /vagrant/rpc-service/app.js -- {{ lookup('file', 'files/exampleapp/process-order') }}
