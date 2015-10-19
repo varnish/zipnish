@@ -71,5 +71,5 @@
 
 - name: start user-interface service
   sudo: yes
-  command: systemctl status user-interface.service
+  command: systemctl start user-interface
 
