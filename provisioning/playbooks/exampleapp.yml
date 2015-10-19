@@ -23,4 +23,7 @@
   npm: name=pm2 global=yes
 
 - name: run exampleapp using pm2
-  shell: pm2 start --watch node /vagrant/rpc-service/app.js -- {{ lookup('file', 'files/exampleapp/process-order') }}
+  shell:
+    pm2 start --watch /vagrant/rpc-service/app.js 
+    -- {{ lookup('file', 'files/exampleapp/process-order') }}
+    --port 9000 --proxy-port 6081 --address 192.168.33.14
