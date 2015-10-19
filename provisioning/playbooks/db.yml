@@ -26,3 +26,10 @@
   mysql_user: name=microservice password='AWe*apei9ue$s1u' host=% priv=microservice.*:ALL
   notify:
     - restart mysql
+
+- name: copy schema.sql into /tmp
+  copy: src=files/db/schema.sql dest=/tmp
+
+- name: import mysql schema
+  sudo: yes
+  mysql_db: state=import name=microservice target=/tmp/schema.sql
