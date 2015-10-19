@@ -12,3 +12,17 @@
   copy: mode=0644 src=files/db/mysqld.cnf dest=/etc/mysql/mysql.conf.d/mysqld.cnf
   notify:
     - restart mysql
+
+- name: install python-mysqldb module
+  sudo: yes
+  apt: name=python-mysqldb
+
+- name: create microservice database
+  sudo: yes
+  mysql_db: name=microservice state=present
+
+- name: add microservice user
+  sudo: yes
+  mysql_user: name=microservice password='AWe*apei9ue$s1u' host=% priv=microservice.*:ALL
+  notify:
+    - restart mysql
