@@ -1,0 +1,7 @@
+[Unit]
+Description=User interface service daemon (run python flask app)
+
+[Service]
+WorkingDirectory=/vagrant/ui/
+Environment=APP_CONFIG=development DB_NAME=microservice DB_USER=microservice DB_PASS=AWe*apei9ue$s1u DB_HOST=192.168.33.12 DB_PORT=3306
+ExecStart= /vagrant/ui/venv/bin/python /vagrant/ui/manage.py runserver --port 5000 --host 192.168.33.11 --reload
