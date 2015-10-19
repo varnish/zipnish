@@ -31,5 +31,5 @@
   copy: src=files/db/schema.sql dest=/tmp
 
 - name: import mysql schema
-  sudo: yes
   mysql_db: state=import name=microservice target=/tmp/schema.sql
+  ignore_errors: yes
