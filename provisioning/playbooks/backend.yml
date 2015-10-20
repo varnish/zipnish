@@ -57,3 +57,4 @@
 - name: ensure varnish is running
   sudo: True
   service: name=varnish state=running
+
