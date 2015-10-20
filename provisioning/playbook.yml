@@ -3,6 +3,7 @@
 - name: Database Playbook
   hosts: db
   tasks:
+    - include_vars: vars/db.yml
     - include: playbooks/db.yml
   handlers:
     - include: handlers/db.yml
@@ -10,6 +11,7 @@
 - name: Backend Playbook (Varnish + Log Reader)
   hosts: backend
   tasks:
+    - include_vars: vars/backend.yml
     - include: playbooks/backend.yml
   handlers:
     - include: handlers/backend.yml
@@ -24,6 +26,7 @@
 - name: User Interface Playbook
   hosts: ui
   tasks:
+    - include_vars: vars/db.yml
     - include: playbooks/ui.yml
   handlers:
     - include: handlers/ui.yml
