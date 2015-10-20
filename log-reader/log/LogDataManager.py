@@ -14,7 +14,7 @@ class LogDataManager:
 
     def addLogItem(self, vxid, requestType, tag, data):
 
-        #print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
+        # print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
 
         if tag == 'Begin':
             self.logRow = {}

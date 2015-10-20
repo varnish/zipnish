@@ -84,14 +84,30 @@ class LogStorage:
         elif row['request_type'] == 'b':
 
             # backend request considered for annotations
-            row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
-            row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
-            row['timestamp-duration-Bereq'] = self.convertDuration(row['timestamp-duration-Bereq'])
-            row['timestamp-abs-Bereq'] = self.convertTimestamp(row['timestamp-abs-Bereq'])
-            row['timestamp-duration-Beresp'] = self.convertDuration(row['timestamp-duration-Beresp'])
-            row['timestamp-abs-Beresp'] = self.convertTimestamp(row['timestamp-abs-Beresp'])
-            row['timestamp-duration-BerespBody'] = self.convertDuration(row['timestamp-duration-BerespBody'])
-            row['timestamp-abs-BerespBody'] = self.convertTimestamp(row['timestamp-abs-BerespBody'])
+            
+            if 'timestamp-duration-Start' in row and len(row['timestamp-duration-Start']) > 0:
+                row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
+            
+            if 'timestamp-abs-Start' in row and len(row['timestamp-abs-Start']) > 0:
+                row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
+            
+            if 'timestamp-duration-Bereq' in row and len(row['timestamp-duration-Bereq']) > 0:
+                row['timestamp-duration-Bereq'] = self.convertDuration(row['timestamp-duration-Bereq'])
+            
+            if 'timestamp-abs-Bereq' in row and len(row['timestamp-abs-Bereq']) > 0:
+                row['timestamp-abs-Bereq'] = self.convertTimestamp(row['timestamp-abs-Bereq'])
+            
+            if 'timestamp-duration-Beresp' in row and len(row['timestamp-duration-Beresp']) > 0:
+                row['timestamp-duration-Beresp'] = self.convertDuration(row['timestamp-duration-Beresp'])
+            
+            if 'timestamp-abs-Beresp' in row and len(row['timestamp-abs-Beresp']) > 0:
+                row['timestamp-abs-Beresp'] = self.convertTimestamp(row['timestamp-abs-Beresp'])
+            
+            if 'timestamp-duration-BerespBody' in row and len(row['timestamp-duration-BerespBody']) > 0:
+                row['timestamp-duration-BerespBody'] = self.convertDuration(row['timestamp-duration-BerespBody'])
+            
+            if 'timestamp-abs-BerespBody' in row and len(row['timestamp-abs-BerespBody']) > 0:
+                row['timestamp-abs-BerespBody'] = self.convertTimestamp(row['timestamp-abs-BerespBody'])
 
             if 'trace_id' not in row:
                 row['trace_id'] = row['span_id']
@@ -103,7 +119,7 @@ class LogStorage:
             indexRight = row['begin'].index(' ', indexLeft)
             clientSpanId = row['begin'][indexLeft:indexRight]
 
-           # print "Before: " + str(self.spans)
+            # print "Before: " + str(self.spans)
             # print "replace client span id -> " + clientSpanId + " WITH " + row["span_id"]
             self.replaceClientSpanId(clientSpanId, row['span_id'])
             # print "After: "  + str(self.spans)
@@ -182,13 +198,13 @@ class LogStorage:
         return duration
 
     def flushSpans(self):
-        print "flushing spans"
-        #self.printTable(self.spans)
+        # print "flushing spans"
+        # self.printTable(self.spans)
         self.db.insert('spans', self.spans)
         self.spans = []
 
     def flushAnnotations(self):
-        #self.printTable(self.annotations)
+        # self.printTable(self.annotations)
         self.db.insert('annotations', self.annotations)
         self.annotations = []
 
