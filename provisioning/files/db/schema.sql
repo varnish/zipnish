@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS zipkin_spans (
   created_ts BIGINT
 );
 
-ALTER TABLE zipkin_spans ADD PRIMARY KEY(span_id);
+ALTER TABLE zipkin_spans ADD INDEX(span_id);
 ALTER TABLE zipkin_spans ADD INDEX(trace_id);
 ALTER TABLE zipkin_spans ADD INDEX(span_name(64));
 ALTER TABLE zipkin_spans ADD INDEX(created_ts);
