@@ -28,6 +28,7 @@
   hosts: ui
   tasks:
     - include_vars: vars/db.yml
+    - include_vars: vars/ui.yml
     - include: playbooks/ui.yml
   handlers:
     - include: handlers/ui.yml
