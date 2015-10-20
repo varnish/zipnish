@@ -219,26 +219,16 @@ class LIBVARNISHAPI13:
         #self.VSLQ_Dispatch.argtypes = (c_void_p, CFUNCTYPE ,c_void_p)
         
 class VSLUtil:
-    def tag2Var(self, tag, data):
-        ret = {'key':'','val':'','vkey':''}
+    def tag2VarName(self, tag, data):
         if not self.__tags.has_key(tag):
-            return ret
+            return ''
         
         r =  self.__tags[tag]
-        ret['vkey'] = r.split(' ',1)[-1].split('.',1)[0]
         if   r == '':
-            return ret
+            return ''
         elif r[-1:] == '.':
-            spl = data.split(': ',1)
-            ret['key'] = r + spl[0]
-            ret['val'] = spl[1]
-        else:
-            ret['key'] = r
-            ret['val'] = data
-        return (ret)
-    
-    def tag2VarName(self, tag, data):
-        return self.tag2Var(tag, data)['key']
+          return r + data.split(':',1)[0]
+        return (r)
     
     __tags = {
         'Debug'          : '',
@@ -348,13 +338,13 @@ class VarnishAPI:
         
     def ArgDefault(self, op, arg):
         if   op == "n":
-            #インスタンス指定
+            #�C���X�^���X�w��
             i = self.lib.VSM_n_Arg(self.vsm, arg)
             if i <= 0:
                 error = "%s" % self.lib.VSM_Error(self.vsm)
                 return(i)
         elif op == "N":
-            #VSMファイル指定
+            #VSM�t�@�C���w��
             i = self.lib.VSM_N_Arg(self.vsm, arg)
             if i <= 0:
                 error = "%s" % self.lib.VSM_Error(self.vsm)
@@ -420,11 +410,6 @@ class VarnishStat(VarnishAPI):
         self.lib.VSC_Iter(self.vsm, None, VSC_iter_f(self.__getstat), None);
         return self.__buf
         
-    def Fini(self):
-        if self.vsm:
-            self.lib.VSM_Delete(self.vsm)
-            self.vsm = 0
-
 
 class VarnishLog(VarnishAPI):
     def __init__(self, opt = '', sopath = 'libvarnishapi.so.1'):
@@ -466,10 +451,10 @@ class VarnishLog(VarnishAPI):
             return(i)
             
         if   op == "d":
-            #先頭から
+            #�擪����
             self.d_opt = 1
         elif op == "g":
-            #グルーピング指定
+            #�O���[�s���O�w��
             self.__g_arg =  self.__VSLQ_Name2Grouping(arg)
             if   self.__g_arg == -2:
                 error = "Ambiguous grouping type: %s" % (arg)
@@ -478,12 +463,12 @@ class VarnishLog(VarnishAPI):
                 error = "Unknown grouping type: %s" % (arg)
                 return(self.__g_arg)
         #elif op == "P":
-        #    #PID指定は対応しない
+        #    #PID�w���͑Ή����Ȃ�
         elif op == "q":
             #VSL-query
             self.__q_arg = arg
         elif op == "r":
-            #バイナリファイル
+            #�o�C�i���t�@�C��
             self.__r_arg = arg
         else:
             #default
