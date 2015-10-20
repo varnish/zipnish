@@ -59,6 +59,7 @@
   service: name=varnish state=running
 
 - name: install siege
+  sudo: yes
   apt: name=siege
 
 - name: install siege-varnish service
