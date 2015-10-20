@@ -1,8 +1,8 @@
 ---
 
-- db_host: 192.168.33.12
-- db_name: microservice
+db_host: 192.168.33.12
+db_name: microservice
 
-- db_user: microservice
-- db_user_host: %
-- db_pass: AWe*apei9ue$s1u
+db_user: microservice
+db_user_host: '%'
+db_pass: AWe*apei9ue$s1u

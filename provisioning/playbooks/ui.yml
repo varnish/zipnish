@@ -49,7 +49,7 @@
 
 - name: copy user-interface service into systemd
   sudo: yes
-  templates: src=templates/ui/user-interface.service.j2 dest=/etc/systemd/system/user-interface.service mode=0751
+  template: src=templates/ui/user-interface.service.j2 dest=/etc/systemd/system/user-interface.service mode=0751
 
 - name: start user-interface service
   sudo: yes
