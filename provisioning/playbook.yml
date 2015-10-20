@@ -19,6 +19,7 @@
 - name: Example Application Playbook
   hosts: exampleapp
   tasks:
+    - include_vars: vars/exampleapp.yml
     - include: playbooks/exampleapp.yml
   handlers:
     - include: handlers/exampleapp.yml
