@@ -1,4 +1,8 @@
 ---
+- name: install mysql client
+  sudo: yes
+  apt: name=mysql-client
+
 - name: install libmysqlclient-dev
   sudo: True
   apt: name=libmysqlclient-dev
@@ -53,5 +57,5 @@
 
 - name: start user-interface service
   sudo: yes
-  command: systemctl start user-interface
+  service: name=user-interface state=restarted
 

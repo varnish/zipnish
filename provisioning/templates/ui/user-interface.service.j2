@@ -3,5 +3,5 @@ Description=User interface service daemon (run python flask app)
 
 [Service]
 WorkingDirectory=/vagrant/ui/
-Environment=APP_CONFIG=development DB_NAME={{ db_name }} DB_USER={{ db_user }} DB_PASS={{ db_host }} DB_HOST={{ db_host }} DB_PORT={{ db_port }}
+Environment=APP_CONFIG=development DB_NAME={{ db_name }} DB_USER={{ db_user }} DB_PASS={{ db_pass }} DB_HOST={{ db_host }} DB_PORT={{ db_port }}
 ExecStart= /vagrant/ui/venv/bin/python /vagrant/ui/manage.py runserver --port 5000 --host 192.168.33.11 --reload
