@@ -35,7 +35,7 @@ if __name__ == '__main__':
                     'user':     'microservice', \
                     'passwd':   'f4D6G5JxDV7cTB5', \
                     'keep_alive': True, \
-                    'truncate_tables': True \
+                    'truncate_tables': False \
                 }
 
     # connect to log database
