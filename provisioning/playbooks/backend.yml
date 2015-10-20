@@ -58,3 +58,13 @@
   sudo: True
   service: name=varnish state=running
 
+- name: install siege
+  apt: name=siege
+
+- name: install siege-varnish service
+  sudo: yes
+  template: force=yes mode=0751 src=templates/backend/siege-varnish.service.j2 dest=/etc/systemd/system/siege-varnish.service
+
+- name: restart siege-varnish service
+  sudo: yes
+  service: name=siege-varnish state=restarted
