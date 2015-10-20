@@ -1,8 +1,4 @@
 ---
-- name: install mysql-client
-  sudo: True
-  apt: update_cache=yes name=mysql-client
-
 - name: install libpython-dev
   sudo: True
   apt: name=libpython-dev
@@ -28,6 +24,7 @@
   apt: name=python-pip
 
 - name: install log-reader requirements.txt
+  sudo: yes
   pip: virtualenv=/vagrant/log-reader/venv requirements=/vagrant/log-reader/requirements.txt
 
 - name: install apt-transport-https
@@ -69,3 +66,13 @@
 - name: restart siege-varnish service
   sudo: yes
   service: name=siege-varnish state=restarted
+
+- name: install log-reader service
+  sudo: yes
+  template: force=yes mode=0751 src=templates/backend/log-reader.service.j2 dest=/etc/systemd/system/log-reader.service
+
+- name: restart log-reader service
+  sudo: yes
+  service: name=log-reader state=restarted
+  notify:
+    - restart log-reader

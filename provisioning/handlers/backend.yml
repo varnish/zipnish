@@ -2,3 +2,6 @@
 - name: restart varnish
   sudo: True
   service: name=varnish state=restarted
+- name: restart log-reader
+  sudo: True
+  service: name=log-reader state=restarted
