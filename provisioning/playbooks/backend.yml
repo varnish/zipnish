@@ -50,7 +50,7 @@
 
 - name: copy default.vcl configuration
   sudo: True
-  copy: force=yes src=files/backend/default.vcl dest=/etc/varnish/default.vcl
+  template: force=yes src=files/backend/default.vcl.j2 dest=/etc/varnish/default.vcl
   notify:
     - restart varnish
 

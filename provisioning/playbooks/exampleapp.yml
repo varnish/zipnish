@@ -26,4 +26,4 @@
   shell:
     pm2 start --watch /vagrant/rpc-service/app.js 
     -- {{ lookup('file', 'files/exampleapp/process-order') }}
-    --port 9000 --proxy-port 6081 --address 192.168.33.14
+    --port {{ exampleapp_host }}  --proxy-port {{ varnish_port }} --address {{ exampleapp_host}}

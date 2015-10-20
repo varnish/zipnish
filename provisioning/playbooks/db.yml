@@ -9,7 +9,7 @@
 
 - name: copy mysqld.cnf
   sudo: yes
-  copy: mode=0644 src=files/db/mysqld.cnf dest=/etc/mysql/mysql.conf.d/mysqld.cnf
+  template: mode=0644 src=templates/db/mysqld.cnf.j2 dest=/etc/mysql/mysql.conf.d/mysqld.cnf
   notify:
     - restart mysql
 
@@ -17,13 +17,14 @@
   sudo: yes
   apt: name=python-mysqldb
 
-- name: create microservice database
+- name: create database
   sudo: yes
-  mysql_db: name=microservice state=present
+  mysql_db: name={{ db_name }} state=present
+- debug: msg=Created the {{ db_name }} database
 
 - name: add microservice user
   sudo: yes
-  mysql_user: name=microservice password='AWe*apei9ue$s1u' host=% priv=microservice.*:ALL
+  mysql_user: name={{ db_name }} password={{ db_pass }} host={{ db_user_host }} priv={{ db_name }}.*:ALL
   notify:
     - restart mysql
 
@@ -31,5 +32,5 @@
   copy: src=files/db/schema.sql dest=/tmp
 
 - name: import mysql schema
-  mysql_db: state=import name=microservice target=/tmp/schema.sql
+  mysql_db: state=import name={{ db_name }} target=/tmp/schema.sql
   ignore_errors: yes

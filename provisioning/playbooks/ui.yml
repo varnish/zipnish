@@ -46,28 +46,10 @@
   command: /usr/local/bin/bower install
   args:
     chdir: /vagrant/ui/
-  tags:
-    - install-bower-json
-
-# - name: run user interface
-#   command: venv/bin/python manage.py runserver --port 5000 --host 192.168.33.11 --reload
-#   async: true
-#   poll: 0
-#   args:
-#     chdir: /vagrant/ui/
-#   environment:
-#     APP_CONFIG: development
-#     DB_NAME: microservice
-#     DB_USER: microservice
-#     DB_PASS: AWe*apei9ue$s1u
-#     DB_HOST: 192.168.33.12
-#     DB_PORT: 3306
-#     
-#     
 
 - name: copy user-interface service into systemd
   sudo: yes
-  copy: src=files/ui/user-interface.service dest=/etc/systemd/system/ mode=0751
+  templates: src=templates/ui/user-interface.service.j2 dest=/etc/systemd/system/user-interface.service mode=0751
 
 - name: start user-interface service
   sudo: yes
