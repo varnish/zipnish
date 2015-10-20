@@ -12,7 +12,8 @@
   "dependencies": {
     "async": "^1.2.1",
     "express": "^4.12.4",
-    "minimist": "^1.1.1"
+    "minimist": "^1.1.1",
+    "node-syslog": "^1.2.0"
   },
   "devDependencies": {
     "colors": "^1.1.2"

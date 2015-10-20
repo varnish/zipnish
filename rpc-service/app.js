@@ -3,7 +3,11 @@ var timers = require('timers'),
     querystring = require('querystring'),
     async = require('async'),
     express = require('express'),
-    colors = require('colors/safe');
+    colors = require('colors/safe'),
+    Syslog = require('node-syslog');
+
+// initialize syslog
+Syslog.init("node-syslog", Syslog.LOG_PID | Syslog.LOG_ODELAY, Syslog.LOG_LOCAL0);
 
 var services = require('./services'),
     servicesParser = require('./services/parser');
@@ -79,7 +83,7 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
 
           return function (next) {
             http.get({
-              'hostname': argv['address'],
+              'hostname': argv['proxy-address'],
               'port': argv['proxy-port'],
               'path': path,
               'agent': false,
@@ -139,12 +143,6 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
 
 });
 
-var server = app.listen(argv.port, argv.address, function() {
+Syslog.log(Syslog.LOG_INFO, 'port: ' + argv.port + ', address: ' + argv.address);
 
-  var address = server.address().address,
-    port = server.address().port;
-
-  console.log(argv.service + ' server listening at http://%s:%d', address, port);
-  console.log('');
-
-});
+var server = app.listen(argv.port, argv.address);
