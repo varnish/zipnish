@@ -17,6 +17,11 @@ var app = express(),
 
 var servicesIndex = servicesParser.parseServices(argv.services);
 
+var proxyAddress, proxyPort;
+
+proxyPort = argv['proxy-port'];
+proxyAddress = argv['proxy-address'];
+
 function getRandomTimeForDelay()
 {
   // wait between 0 - 1.5 records before delivering any results back
@@ -33,8 +38,11 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
   var indentLevel = req.params.indentLevel ? parseInt(req.params.indentLevel) : 0,
       service = services.findService('/' + req.params.serviceName, servicesIndex);
 
+  // Syslog.log(Syslog.LOG_INFO, JSON.stringify(servicesIndex));
 
   var randomTimeInSeconds, date;
+
+  // Syslog.log(Syslog.LOG_INFO, 'req.params.service -> ' + req.params.serviceName + ' -> ' + JSON.stringify(service));
 
   date = new Date();
 
@@ -71,24 +79,32 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
     logInfo += 'parent: ' + colors.cyan(req.headers['x-varnish-parent']) + ', ';
     logInfo += 'id: ' + colors.gray(req.headers['x-varnish']);
 
-    console.log(logInfo);
+    // console.log(logInfo);
 
     if (service.children) {
       var funcs = [],
           urlParams = (indentLevel + 1);
 
+      // Syslog.log(Syslog.LOG_INFO, 'service.children.urls -> ' + JSON.stringify(service.children.urls));
+
+      // Syslog.log(Syslog.LOG_INFO, 'service.children.urls -> ' + JSON.stringify(service.children.urls) + 
+      //           ' address: ' + argv['proxy-address'] + ', port: ' + argv['proxy-port']);
+
       for (var i = 0; i < service.children.urls.length; i++) {
+
 
         funcs.push(function(path) {
 
           return function (next) {
             http.get({
-              'hostname': argv['proxy-address'],
-              'port': argv['proxy-port'],
+              'hostname': proxyAddress,
+              'port': proxyPort,
               'path': path,
               'agent': false,
-              //'headers': headers
+              'headers': headers
             } , function (res) {
+
+              // Syslog.log(Syslog.LOG_INFO, 'response from ' + proxyAddress + ':' + proxyPort + path)
 
               timers.setTimeout(function() {
                 next();
@@ -99,14 +115,17 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
           };
 
         }( service.children.urls[i]) );
+
       }
+
+      // Syslog.log(Syslog.LOG_INFO, 'flow -> ' + service.children.flow + ', funcs -> ' + funcs);
 
       if (service.children.flow === 'serial') {
 
         async.series(funcs, function (err, results) {
 
           for (var key in headers) {
-            //res.setHeader(key, headers[key]);
+            // res.setHeader(key, headers[key]);
           }
 
           res.send();
@@ -117,19 +136,19 @@ app.get('/:serviceName/:indentLevel?', function (req, res) {
         async.parallel(funcs, function (err, results) {
 
           for (var key in headers) {
-            //res.setHeader(key, headers[key]);
+            // res.setHeader(key, headers[key]);
           }
 
           res.send();
         });
       }
 
-    // } else {
+    } else {
 
       timers.setTimeout(function() {
 
         for (var key in headers) {
-          //res.setHeader(key, headers[key]);
+          // res.setHeader(key, headers[key]);
         }
 
         res.send();
