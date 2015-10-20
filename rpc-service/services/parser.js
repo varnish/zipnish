@@ -18,7 +18,6 @@ module.exports.parseService = function(argService)
 {
   var serviceURLAndLabel, startIdx, endIdx, hasChildrenServices;
 
-
   hasChildrenServices = false;
   endIdx = argService.indexOf('=>');
 
