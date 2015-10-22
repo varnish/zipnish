@@ -1,3 +1,16 @@
+#### Demo Environment ####
+
+You need to have [Vagrant](https://www.vagrantup.com/) and [Ansible](http://www.ansible.com/) already installed.
+
+`$> git clone https://github.com/varnish/varnish-microservice-monitor.git`
+
+`$> cd varnish-microservice-monitor/provisioning`
+
+`$> vagrant up`
+
+`$> ansible-playbook playbook.yml`
+
+
 #### Presentation ####
 [Varnish Microservices 2.0](http://www.slideshare.net/Varnish_software/microservices-20)
 
