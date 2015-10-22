@@ -2,14 +2,17 @@
 
 You need to have [Vagrant](https://www.vagrantup.com/) and [Ansible](http://www.ansible.com/) already installed.
 
-`$> git clone https://github.com/varnish/varnish-microservice-monitor.git`
+```
+$> git clone https://github.com/varnish/varnish-microservice-monitor.git`
 
-`$> cd varnish-microservice-monitor/provisioning`
+$> cd varnish-microservice-monitor/provisioning`
 
-`$> vagrant up`
+$> vagrant up`
 
-`$> ansible-playbook playbook.yml`
+$> ansible-playbook playbook.yml
+```
 
+Once the above task finish you would be able to see the user interface on: [http://192.168.33.11:5000/](http://192.168.33.11:5000/)
 
 #### Presentation ####
 [Varnish Microservices 2.0](http://www.slideshare.net/Varnish_software/microservices-20)
