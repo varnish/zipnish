@@ -1,16 +1,11 @@
-ui ansible_ssh_port=2200 ansible_ssh_host=127.0.0.1
-db ansible_ssh_port=2201 ansible_ssh_host=127.0.0.1
-backend ansible_ssh_port=2202 ansible_ssh_host=127.0.0.1
-exampleapp ansible_ssh_port=2203 ansible_ssh_host=127.0.0.1
-
 [ui]
-ui
+192.168.33.11
 
 [db]
-db
+192.168.33.12
 
 [backend]
-backend
+192.168.33.13
 
 [exampleapp]
-exampleapp
+192.168.33.14
