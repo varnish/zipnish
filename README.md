@@ -3,7 +3,7 @@
 You need to have [Vagrant](https://www.vagrantup.com/) and [Ansible](http://www.ansible.com/) already installed.
 
 ```
-$> git clone https://github.com/varnish/varnish-microservice-monitor.git`
+$> git clone https://github.com/varnish/varnish-microservice-monitor.git
 
 $> cd varnish-microservice-monitor/provisioning`
 
