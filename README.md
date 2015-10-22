@@ -5,9 +5,9 @@ You need to have [Vagrant](https://www.vagrantup.com/) and [Ansible](http://www.
 ```
 $> git clone https://github.com/varnish/varnish-microservice-monitor.git
 
-$> cd varnish-microservice-monitor/provisioning`
+$> cd varnish-microservice-monitor/provisioning
 
-$> vagrant up`
+$> vagrant up
 
 $> ansible-playbook playbook.yml
 ```
