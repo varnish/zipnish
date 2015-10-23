@@ -1,3 +1,0 @@
----
-# tasks file for varnish-cache
-- include: install.yml

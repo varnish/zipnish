@@ -10,5 +10,5 @@
     - python-mysqldb
     - python-pip
     - apt-transport-https
-    - varnish-cache
+    - varnish
     - siege
