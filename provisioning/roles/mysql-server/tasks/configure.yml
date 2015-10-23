@@ -4,6 +4,13 @@
     name: "{{ servers.db.database }}"
     state: present
 
+- name: create user for database
+  mysql_user:
+    host: "{{ servers.db.host }}"
+    name: "{{ servers.db.username }}"
+    password: "{{ servers.db.password }}"
+    priv: "{{ servers.db.database }}.*:ALL"
+
 # change root password
 # create microservice db & user
 # - name: add microservice user

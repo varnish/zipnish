@@ -5,6 +5,7 @@ servers:
 
   db:
     ip: 192.168.33.12
+    host: '%'
     database: microservice
     username: microservice
     password: WqPv5fBSLgnskM7
