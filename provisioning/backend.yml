@@ -1,0 +1,14 @@
+---
+- name: Backend
+  hosts: backend
+  sudo: yes
+  roles:
+    - libpython-dev
+    - libmysqlclient-dev
+    - python
+    - python-virtualenv
+    - python-mysqldb
+    - python-pip
+    - apt-transport-https
+    - varnish-cache
+    - siege
