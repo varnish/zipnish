@@ -1,0 +1,13 @@
+---
+- name: ensure mysql daemon is started
+  service:
+    name: mysql
+    state: started
+
+- name: configure mysql daemon (mysqld.cnf)
+  template:
+    mode: 0644
+    src: mysqld.cnf.j2
+    dest: "{{ servers.db.mysql.dest }}"
+  notify:
+    - restart mysql-server
