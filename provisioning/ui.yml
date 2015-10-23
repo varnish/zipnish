@@ -1,0 +1,15 @@
+---
+- name: User Interface
+  hosts: ui
+  sudo: yes
+  roles:
+    - mysql-client
+    - libmysqlclient-dev
+    - libpython-dev
+    - python
+    - python-pip
+    - python-virtualenv
+    - python-mysqldb
+    - nodejs
+    - npm
+    - bower
