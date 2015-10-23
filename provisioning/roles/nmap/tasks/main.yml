@@ -1,0 +1,3 @@
+---
+# tasks file for nmap
+- include: install.yml

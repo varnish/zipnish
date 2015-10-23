@@ -1,0 +1,5 @@
+---
+- name: install nmap
+  apt:
+    name: nmap
+    state: present
