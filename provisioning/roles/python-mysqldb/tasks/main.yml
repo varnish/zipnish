@@ -1,0 +1,3 @@
+---
+# tasks file for python-mysqldb
+- include: install.yml
