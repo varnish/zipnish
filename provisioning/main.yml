@@ -1,0 +1,6 @@
+---
+
+- include: db.yml
+- include: backend.yml
+- include: exampleapp.yml
+- include: ui.yml
