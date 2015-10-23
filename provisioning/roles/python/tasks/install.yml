@@ -1,0 +1,5 @@
+---
+- name: install python
+  apt:
+    name: python2.7
+    state: present

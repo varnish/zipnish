@@ -1,0 +1,3 @@
+---
+# tasks file for python
+- include: install.yml
