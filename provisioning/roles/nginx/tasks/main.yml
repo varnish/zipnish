@@ -1,0 +1,3 @@
+---
+# tasks file for nginx
+- include: install.yml
