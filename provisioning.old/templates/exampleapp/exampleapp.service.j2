@@ -1,0 +1,8 @@
+[Unit]
+Description=Example application
+
+[Service]
+WorkingDirectory=/vagrant/rpc-service/
+ExecStart= /usr/local/bin/node app.js \
+--port {{ exampleapp_port }}  --address {{ exampleapp_host }} \
+--proxy-port {{ varnish_port }} --proxy-address {{ varnish_address }} {% include 'files/exampleapp/process-order' %}
