@@ -1,0 +1,7 @@
+---
+- name: Database
+  hosts: db
+  sudo: yes
+  roles:
+    - mysql-server
+    - python-mysqldb
