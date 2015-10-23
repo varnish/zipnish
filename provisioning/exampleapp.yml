@@ -1,0 +1,8 @@
+---
+- name: Example Application
+  hosts: exampleapp
+  sudo: yes
+  roles:
+    - httpie
+    - nodejs
+    - npm
