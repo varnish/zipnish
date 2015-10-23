@@ -1,0 +1,3 @@
+---
+# tasks file for python-virtualenv
+- include: install.yml
