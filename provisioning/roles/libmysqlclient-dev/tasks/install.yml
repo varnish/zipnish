@@ -1,0 +1,5 @@
+---
+- name: install libmysqlclient-dev
+  apt:
+    name: libmysqlclient-dev
+    state: present
