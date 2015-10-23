@@ -1,0 +1,3 @@
+---
+# tasks file for libpython-dev
+- include: install.yml

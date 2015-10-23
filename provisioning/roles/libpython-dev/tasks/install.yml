@@ -1,0 +1,5 @@
+---
+- name: install libpython-dev
+  apt:
+    name: libpython-dev
+    state: present
