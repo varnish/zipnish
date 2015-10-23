@@ -1,0 +1,4 @@
+---
+# tasks file for nodejs
+- include: install.yml
+- include: configure.yml

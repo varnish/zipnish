@@ -1,0 +1,6 @@
+---
+- name: link nodejs to node
+  file:
+    state: link
+    src: /usr/bin/nodejs
+    dest: /usr/local/bin/node
