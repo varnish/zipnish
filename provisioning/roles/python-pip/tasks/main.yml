@@ -1,0 +1,3 @@
+---
+# tasks file for python-pip
+- include: install.yml
