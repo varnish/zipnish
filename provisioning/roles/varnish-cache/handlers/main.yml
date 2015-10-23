@@ -1,0 +1,6 @@
+---
+# handlers file for varnish-cache
+- name: restart varnish-cache
+  service:
+    name: varnish
+    state: restarted

@@ -1,0 +1,15 @@
+---
+- name: add varnish cache apt-key
+  apt_key:
+    url: https://repo.varnish-cache.org/GPG-key.txt
+    state: present
+
+- name: add varnish-cache repository
+  apt_repository:
+    repo: 'deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.0'
+    state: present
+
+- name: install varnish-cache
+  apt:
+    name: varnish
+    update_cache: yes
