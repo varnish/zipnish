@@ -3,5 +3,6 @@
   hosts: db
   sudo: yes
   roles:
+    - nmap
     - mysql-server
     - python-mysqldb

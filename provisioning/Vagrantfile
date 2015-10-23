@@ -3,15 +3,15 @@ Vagrant.configure(2) do |config|
 	config.vm.box = 'ubuntu/vivid64'
 
 	# user interface
-	config.vm.define 'ui' do |ui|
-		ui.vm.hostname = 'ui'
-		ui.vm.network :private_network, ip: '192.168.75.11'
+	config.vm.define 'userinterface' do |userinterface|
+		userinterface.vm.hostname = 'userinterface'
+		userinterface.vm.network :private_network, ip: '192.168.75.11'
 	end
 
 	# database
-	config.vm.define 'db' do |db|
-		db.vm.hostname = 'db'
-		db.vm.network :private_network, ip: '192.168.75.12'
+	config.vm.define 'database' do |database|
+		database.vm.hostname = 'database'
+		database.vm.network :private_network, ip: '192.168.75.12'
 	end
 
 	# varnish cache, log reader
