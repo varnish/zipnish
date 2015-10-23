@@ -1,0 +1,15 @@
+---
+servers:
+  ui:
+    ip: 192.168.33.11
+
+  db:
+    ip: 192.168.33.12
+    mysql:
+      dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+
+  backend:
+    ip: 192.168.33.13
+
+  exampleapp:
+    ip: 192.168.33.14
