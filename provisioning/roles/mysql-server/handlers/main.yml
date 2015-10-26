@@ -4,3 +4,10 @@
   service:
     name: mysql
     state: restarted
+
+# import schema.sql on database creation
+- name: import schema.sql
+  mysql_db:
+    state: import
+    name: "{{ servers.db.database }}"
+    target: ~/schema.sql
