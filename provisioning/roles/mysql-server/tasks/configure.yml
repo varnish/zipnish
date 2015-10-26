@@ -10,21 +10,22 @@
     name: "{{ servers.db.username }}"
     password: "{{ servers.db.password }}"
     priv: "{{ servers.db.database }}.*:ALL"
+    state: present
 
-# change root password
-# create microservice db & user
-# - name: add microservice user
-#   mysql_user:
-#     name: {{ db}} password={{ db_pass }} host={{ db_user_host }} priv={{ db_name }}.*:ALL
+- name: ensure mysql daemon is started
+  service:
+    name: mysql
+    state: started
 
-# - name: ensure mysql daemon is started
-#   service:
-#     name: mysql
-#     state: started
+- name: configure mysql daemon (mysqld.cnf)
+  template:
+    src: mysqld.cnf.j2
+    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+  notify:
+    - restart mysql-server
 
-# - name: configure mysql daemon (mysqld.cnf)
-#   template:
-#     src: mysqld.cnf.j2
-#     dest: /etc/mysql/mysql.conf.d/mysqld.cnf
-#   notify:
-#     - restart mysql-server
+- name: copy schema.sql into ~/schema.sql
+  copy:
+    src: schema.sql
+    dest: ~/schema.sql
+    mode: 0600
