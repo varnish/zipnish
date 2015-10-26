@@ -1,5 +1,5 @@
 ---
 - name: install npm dependencies
-  when: path
+  when: path is defined
   npm:
     path: "{{ path }}"
