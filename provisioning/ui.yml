@@ -8,12 +8,15 @@
     - libpython-dev
     - python
     - python-virtualenv
+    - python-mysqldb
     - {
         role: python-pip,
         virtualenv: '/vagrant/ui/venv',
         requirements: '/vagrant/ui/requirements.txt'
       }
-    - python-mysqldb
     - nodejs
     - npm
-    - bower
+    - {
+        role: bower,
+        path: /vagrant/ui/
+      }
