@@ -1,3 +1,4 @@
 ---
 # tasks file for bower
 - include: install.yml
+- include: configure.yml

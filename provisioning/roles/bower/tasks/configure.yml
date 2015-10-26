@@ -1,0 +1,5 @@
+---
+- name: install bower dependencies
+  sudo: no
+  bower:
+    path: "{{ path }}"
