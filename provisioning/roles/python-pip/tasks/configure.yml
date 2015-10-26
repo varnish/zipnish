@@ -1,0 +1,5 @@
+---
+- name: install requirements.txt
+  pip:
+    virtualenv: "{{ virtualenv }}"
+    requirements: "{{ requirements }}"
