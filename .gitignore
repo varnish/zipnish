@@ -7,3 +7,4 @@ venv
 *.swp
 .gitignore
 .vagrant
+provisioning/facts-cache/
