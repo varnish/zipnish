@@ -1,33 +1,28 @@
 Vagrant.configure(2) do |config|
-
 	config.ssh.insert_key = false
+	config.vm.box = 'ubuntu/vivid64'
 
 	# user interface
-	config.vm.define "ui" do |ui|
-		ui.vm.hostname = "ui"
-		ui.vm.box = "ubuntu/vivid64"
-		ui.vm.network "private_network", ip: "192.168.33.11"
+	config.vm.define 'userinterface' do |userinterface|
+		userinterface.vm.hostname = 'userinterface'
+		userinterface.vm.network :private_network, ip: '192.168.75.11'
 	end
 
-	# mysql database
-	config.vm.define "db" do |db|
-		db.vm.hostname = "db"
-		db.vm.box = "ubuntu/vivid64"
-		db.vm.network "private_network", ip: "192.168.33.12"
+	# database
+	config.vm.define 'database' do |database|
+		database.vm.hostname = 'database'
+		database.vm.network :private_network, ip: '192.168.75.12'
 	end
 
-	# log reader + varnish
-	config.vm.define "backend" do |backend|
-		backend.vm.hostname = "backend"
-		backend.vm.box = "ubuntu/vivid64"
-		backend.vm.network "private_network", ip: "192.168.33.13"
+	# varnish cache, log reader
+	config.vm.define 'backend' do |backend|
+		backend.vm.hostname = 'backend'
+		backend.vm.network :private_network, ip: '192.168.75.13'
 	end
 
 	# example application
-	config.vm.define "exampleapp" do |app|
-		app.vm.hostname = "exampleapp"
-		app.vm.box = "ubuntu/vivid64"
-		app.vm.network "private_network", ip: "192.168.33.14"
+	config.vm.define 'exampleapp' do |exampleapp|
+		exampleapp.vm.hostname = 'exampleapp'
+		exampleapp.vm.network :private_network, ip: '192.168.75.14'
 	end
-
 end
