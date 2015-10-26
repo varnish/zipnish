@@ -4,5 +4,5 @@
   sudo: yes
   roles:
     - nmap
-    - mysql-server
     - python-mysqldb
+    - mysql-server
