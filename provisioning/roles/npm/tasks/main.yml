@@ -1,3 +1,4 @@
 ---
 # tasks file for npm
 - include: install.yml
+- include: configure.yml

@@ -1,0 +1,4 @@
+---
+- name: install npm dependencies
+  npm:
+    path: "{{ path }}"

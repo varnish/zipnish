@@ -5,4 +5,7 @@
   roles:
     - httpie
     - nodejs
-    - npm
+    - {
+    	role: npm,
+    	path: /vagrant/rpc-service/
+      }

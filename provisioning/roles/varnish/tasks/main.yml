@@ -1,3 +1,4 @@
 ---
 # tasks file for varnish
 - include: install.yml
+- include: configure.yml
