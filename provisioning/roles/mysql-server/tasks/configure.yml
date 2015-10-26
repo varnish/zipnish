@@ -29,3 +29,16 @@
     src: schema.sql
     dest: ~/schema.sql
     mode: 0600
+
+- name: import schema.sql into mysql database
+  mysql_db:
+    state: import
+    name: "{{ servers.db.database }}"
+    target: ~/schema.sql
+    creates: ~/schema-imported
+
+- name: create ~/schema-imported after schema.sql is imported
+  file:
+    path: ~/schema-imported
+    mode: 0600
+    state: touch
