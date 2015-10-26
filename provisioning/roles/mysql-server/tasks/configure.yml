@@ -1,8 +1,16 @@
 ---
+- name: copy schema.sql into ~/schema.sql
+  copy:
+    src: schema.sql
+    dest: ~/schema.sql
+    mode: 0600
+
 - name: create database
   mysql_db:
     name: "{{ servers.db.database }}"
     state: present
+  notify:
+    - import schema.sql
 
 - name: create user for database
   mysql_user:
@@ -23,22 +31,3 @@
     dest: /etc/mysql/mysql.conf.d/mysqld.cnf
   notify:
     - restart mysql-server
-
-- name: copy schema.sql into ~/schema.sql
-  copy:
-    src: schema.sql
-    dest: ~/schema.sql
-    mode: 0600
-
-- name: import schema.sql into mysql database
-  mysql_db:
-    state: import
-    name: "{{ servers.db.database }}"
-    target: ~/schema.sql
-    creates: ~/schema-imported
-
-- name: create ~/schema-imported after schema.sql is imported
-  file:
-    path: ~/schema-imported
-    mode: 0600
-    state: touch
