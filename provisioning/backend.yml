@@ -8,7 +8,11 @@
     - python
     - python-virtualenv
     - python-mysqldb
-    - python-pip
+    - {
+        role: python-pip,
+        virtualenv: '/vagrant/log-reader/venv',
+        requirements: '/vagrant/log-reader/requirements.txt'
+      }
     - apt-transport-https
     - varnish
     - siege
