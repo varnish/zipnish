@@ -7,8 +7,12 @@
     - libmysqlclient-dev
     - libpython-dev
     - python
-    - python-pip
     - python-virtualenv
+    - {
+        role: python-pip,
+        virtualenv: '/vagrant/ui/venv',
+        requirements: '/vagrant/ui/requirements.txt'
+      }
     - python-mysqldb
     - nodejs
     - npm
