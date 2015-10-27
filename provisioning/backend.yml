@@ -16,3 +16,4 @@
     - apt-transport-https
     - varnish
     - siege
+    - siege-varnish
