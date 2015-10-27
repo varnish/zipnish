@@ -30,10 +30,10 @@ def main(sharedMemoryLog):
 if __name__ == '__main__':
     # connection parameters to database
     dbParams = {\
-                    'host':     '192.168.33.12', \
+                    'host':     '192.168.75.12', \
                     'db':       'microservice', \
                     'user':     'microservice', \
-                    'passwd':   'f4D6G5JxDV7cTB5', \
+                    'passwd':   'WqPv5fBSLgnskM7', \
                     'keep_alive': True, \
                     'truncate_tables': False \
                 }
