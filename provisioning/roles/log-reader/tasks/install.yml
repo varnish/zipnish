@@ -1,0 +1,9 @@
+---
+- name: install log-reader service into systemd
+  template:
+    force: yes
+    mode: 0751
+    src: log-reader.service.j2
+    dest: /etc/systemd/system/log-reader.service
+  notify:
+    - restart log-reader

@@ -1,0 +1,3 @@
+---
+# tasks file for log-reader
+- include: install.yml

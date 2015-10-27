@@ -1,0 +1,6 @@
+---
+# handlers file for log-reader
+- name: restart log-reader
+  service:
+    name: log-reader
+    state: restarted
