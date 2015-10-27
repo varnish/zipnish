@@ -1,5 +1,11 @@
 ---
+- name: get directory listing for app/static/libs/
+  command: "ls {{ path }}/app/static/libs"
+  register: bower_libs
+
 - name: install bower dependencies
   sudo: no
+  when: not bower_libs
   bower:
     path: "{{ path }}"
+    state: present

@@ -9,3 +9,4 @@
     	role: npm,
     	path: /vagrant/rpc-service/
       }
+    - exampleapp

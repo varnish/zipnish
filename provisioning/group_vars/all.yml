@@ -2,9 +2,11 @@
 servers:
   ui:
     ip: 192.168.75.11
+    port: 9000
 
   db:
     ip: 192.168.75.12
+    port: 3306
     host: '%'
     database: microservice
     username: microservice
