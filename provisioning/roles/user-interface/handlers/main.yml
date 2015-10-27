@@ -1,0 +1,6 @@
+---
+# handlers file for user-interface
+- name: restart user-interface
+  service:
+    name: user-interface
+    state: restarted

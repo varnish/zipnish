@@ -1,0 +1,3 @@
+---
+# tasks file for user-interface
+- include: install.yml

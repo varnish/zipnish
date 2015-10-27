@@ -20,3 +20,4 @@
         role: bower,
         path: /vagrant/ui/
       }
+    - user-interface

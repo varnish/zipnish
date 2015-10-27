@@ -1,0 +1,8 @@
+---
+- name: install user-interface service into systemd
+  template:
+    mode: 0751
+    src: user-interface.service.j2
+    dest: /etc/systemd/system/user-interface.service
+  notify:
+    - restart user-interface
