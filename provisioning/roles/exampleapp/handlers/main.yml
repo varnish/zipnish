@@ -1,0 +1,6 @@
+---
+# handlers file for exampleapp
+- name: restart exampleapp
+  service:
+    name: exampleapp
+    state: restarted

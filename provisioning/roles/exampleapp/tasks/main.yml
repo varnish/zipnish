@@ -1,0 +1,3 @@
+---
+# tasks file for exampleapp
+- include: install.yml

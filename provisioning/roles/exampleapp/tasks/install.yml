@@ -1,0 +1,9 @@
+---
+- name: install exampleapp into systemd
+  template:
+    force: yes
+    mode: 0751
+    src: exampleapp.service.j2
+    dest: /etc/systemd/system/exampleapp.service
+  notify:
+    - restart exampleapp
