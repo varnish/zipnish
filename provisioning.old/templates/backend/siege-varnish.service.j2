@@ -1,5 +1,0 @@
-[Unit]
-Description=Run siege on varnish {{ varnish_address }}:{{ varnish_port }}/process-order
-
-[Service]
-ExecStart=/usr/bin/siege -t 1H -c 1 -d 1 {{ varnish_address }}:{{ varnish_port }}/process-order

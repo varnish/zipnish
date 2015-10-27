@@ -1,7 +1,0 @@
----
-
-exampleapp_host: 192.168.33.14
-exampleapp_port: 9000
-
-varnish_address: 192.168.33.13
-varnish_port: 6081
