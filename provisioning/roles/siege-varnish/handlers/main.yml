@@ -1,0 +1,6 @@
+---
+# handlers file for siege-varnish
+- name: restart siege-varnish
+  service:
+    name: siege-varnish
+    state: restarted

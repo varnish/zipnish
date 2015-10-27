@@ -1,0 +1,10 @@
+---
+# tasks file for siege-varnish
+- name: install siege-varnish service into systemd
+  template:
+    force: yes
+    mode: 0751
+    src: siege-varnish.service.j2
+    dest: /etc/systemd/system/siege-varnish.service
+  notify:
+    - restart siege-varnish

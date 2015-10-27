@@ -1,0 +1,5 @@
+[Unit]
+Description=Run siege on varnish {{ service.backend.ip }}:{{ service.backend.port }}/process-order
+
+[Service]
+ExecStart=/usr/bin/siege -t 1H -c 1 -d 1 {{ service.backend.ip }}:{{ service.backend.port }}/process-order
