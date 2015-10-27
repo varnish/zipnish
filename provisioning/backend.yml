@@ -17,3 +17,4 @@
     - varnish
     - siege
     - siege-varnish
+    - log-reader
