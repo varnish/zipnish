@@ -10,7 +10,7 @@
 
 - name: install bower dependencies
   sudo: no
-  when: not bower_libs
+  when: bower_libs.stdout == ""
   bower:
     path: "{{ path }}"
     state: present
