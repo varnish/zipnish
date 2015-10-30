@@ -9,7 +9,7 @@ $> cd varnish-microservice-monitor/provisioning
 
 $> vagrant up
 
-$> ansible-playbook playbook.yml
+$> ansible-playbook main.yml
 ```
 
 Once the above task finish you would be able to see the user interface on: [http://192.168.75.11:9000/](http://192.168.75.11:9000/)
