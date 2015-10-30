@@ -3,6 +3,7 @@
   hosts: backend
   sudo: yes
   roles:
+    - update-cache
     - libpython-dev
     - libmysqlclient-dev
     - python

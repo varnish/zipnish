@@ -3,6 +3,7 @@
   hosts: db
   sudo: yes
   roles:
+    - update-cache
     - nmap
     - python-mysqldb
     - mysql-server

@@ -3,6 +3,7 @@
   hosts: exampleapp
   sudo: yes
   roles:
+    - update-cache
     - httpie
     - nodejs
     - {

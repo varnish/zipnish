@@ -3,6 +3,7 @@
   hosts: ui
   sudo: yes
   roles:
+    - update-cache
     - mysql-client
     - libmysqlclient-dev
     - libpython-dev
