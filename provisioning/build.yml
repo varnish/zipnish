@@ -1,0 +1,14 @@
+---
+- name: Build
+  hosts: build
+  sudo: yes
+  roles:
+    - update-cache
+  tasks:
+    name: install requirements for building debian package
+    apt:
+      name: "{{ item }}"
+    with_items:
+      - build-essential
+      - devscripts
+      - debhelper

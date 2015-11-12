@@ -25,4 +25,10 @@ Vagrant.configure(2) do |config|
 		exampleapp.vm.hostname = 'exampleapp'
 		exampleapp.vm.network :private_network, ip: '192.168.75.14'
 	end
+
+	# package building machine
+	config.vm.define 'build' do |build|
+		build.vm.hostname = 'build'
+		build.vm.network :private_network, ip: '192.168.75.15'
+	end
 end

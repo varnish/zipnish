@@ -4,3 +4,4 @@
 - include: backend.yml
 - include: exampleapp.yml
 - include: ui.yml
+- include: build.yml
