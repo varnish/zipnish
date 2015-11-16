@@ -131,6 +131,7 @@ def index():
                 maxTimestamp = 0
 
                 selectedServiceDuration = 0
+                totalTraceDuration = 0
 
                 for key in services:
                     service = services[key]
@@ -148,6 +149,8 @@ def index():
                     if serviceName == key:
                         selectedServiceDuration = serviceDuration
 
+                    totalTraceDuration = max(totalTraceDuration, serviceDuration)
+
                     # service duration
                     serviceDurations.append({
                             'name': key,
@@ -155,11 +158,8 @@ def index():
                             'duration': serviceDuration
                         })
 
-                    # adding up duration to get total duration time
-                    duration = duration + serviceDuration
-
                 # total duration for a trace
-                trace['duration'] = duration
+                trace['duration'] = selectedServiceDuration
 
                 # service durations
 
@@ -171,11 +171,10 @@ def index():
                 #trace['serviceTimestampMin'] = minTimestamp
                 #trace['serviceTimestampMax'] = maxTimestamp
 
-                servicesTotalDuration = (maxTimestamp - minTimestamp) / 1000
-                trace['servicesTotalDuration'] = '{:.3f}'.format(servicesTotalDuration)
+                trace['servicesTotalDuration'] = '{:.3f}'.format(totalTraceDuration / 1000000)
 
-                selectedServicePercentage = int(((selectedServiceDuration / servicesTotalDuration) * 100) / 1000)
-                trace['selectedServicePercentage'] = selectedServicePercentage
+                selectedServicePercentage = float(float(selectedServiceDuration) / float(totalTraceDuration)) * 100.0
+                trace['selectedServicePercentage'] = '{:.2f}'.format(selectedServicePercentage)
 
                 traceResults.append( trace )
 
