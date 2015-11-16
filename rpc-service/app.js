@@ -26,7 +26,7 @@ function getRandomTimeForDelay()
 {
   // wait between 0 - 1.5 records before delivering any results back
   //return (Math.random() * 1.5).toFixed(2) * 1000;
-  return 0;
+  return 1 * 1000;
 }
 
 app.get('/', function (req, res) {
