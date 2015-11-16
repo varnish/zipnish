@@ -28,7 +28,7 @@ Before you run the app, it is required to set some environment variables as list
 
 Envoirnment variables can be temporarily passed to a running webserver as follows,
 
-`$> APP_CONFIG=development DB_USER=zipkin DB_PASS=kinect DB_HOST=127.0.0.1 DB_PORT=3306 DB_NAME=zipkin python manage.py runserver`
+`$> python manage.py runserver --host 192.168.75.11`
 
 Otherwise you need to setup environment variables separately and run the web server using,
 

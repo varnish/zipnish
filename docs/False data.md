@@ -73,7 +73,7 @@ In future if need following hash can be used, credits :point_down:
 sha256(varnish host IP, XID, timestamp) :clap: @espebra :clap:
 
 All root spans which start a trace.
-``SELECT * FROM zipkin_spans WHERE span_id IN (SELECT span_id FROM `zipkin_spans` WHERE `parent_id` IS NULL ORDER BY `parent_id` ASC)``
+``SELECT * FROM zipnish_spans WHERE span_id IN (SELECT span_id FROM `zipnish_spans` WHERE `parent_id` IS NULL ORDER BY `parent_id` ASC)``
 
 
 ***Additional Packages***
@@ -89,7 +89,7 @@ pip install mysql
 ***Assumptions***
 
 * Spans contains RPC calls. Each new span without a parent starts a trace.
-  * Span which starts a trace occurs only once inside zip_spans. It's first entry is marked by **sr** server recieve event.
+  * Span which starts a trace occurs only once inside zipnish_spans. It's first entry is marked by **sr** server recieve event.
 * Each RPC call has events such as, 
-  * **cs** - client send is marked by a first entry inside zipkin_spans
-  * **sr** - server recieve is marked by a second entry inside zipkin_spans
+  * **cs** - client send is marked by a first entry inside zipnish_spans
+  * **sr** - server recieve is marked by a second entry inside zipnish_spans

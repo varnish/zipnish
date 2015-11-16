@@ -40,7 +40,7 @@ def index():
 
         # find all traces to which related to this service
         query = "SELECT DISTINCT trace_id \
-                FROM zipkin_annotations "
+                FROM zipnish_annotations "
 
         # where
         whereQuery = ''
@@ -83,7 +83,7 @@ def index():
         if len(traceIds) > 0:
             # find the number of DISTINCT spans, that above service connects with
             query = "SELECT COUNT(DISTINCT span_id) as spanCount, parent_id, created_ts, trace_id \
-                    FROM zipkin_spans \
+                    FROM zipnish_spans \
                     GROUP BY trace_id \
                     HAVING \
                     trace_id IN (%s) \
@@ -103,7 +103,7 @@ def index():
                 trace['startTime'] = time.strftime('%m-%d-%YT%H:%M:%S%z', time.gmtime(startTime))
 
                 servicesQuery = "SELECT service_name, `value`, a_timestamp \
-                        FROM zipkin_annotations \
+                        FROM zipnish_annotations \
                         WHERE trace_id = %s AND \
                         `value` IN ('cs', 'sr', 'ss', 'cr') \
                         ORDER BY service_name ASC" % (row['trace_id'])
@@ -182,7 +182,7 @@ def index():
 
     # populate services
     services = []
-    result = connection.execute("SELECT DISTINCT service_name FROM zipkin_annotations")
+    result = connection.execute("SELECT DISTINCT service_name FROM zipnish_annotations")
 
     for row in result:
         services.append( row['service_name'] )
@@ -190,7 +190,7 @@ def index():
     spans = []
 
     if serviceName:
-        query = "SELECT DISTINCT span_name FROM zipkin_annotations WHERE service_name='%s'" % serviceName
+        query = "SELECT DISTINCT span_name FROM zipnish_annotations WHERE service_name='%s'" % serviceName
         result = connection.execute(query)
 
         for row in result:

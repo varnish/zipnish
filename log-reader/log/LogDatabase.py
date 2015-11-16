@@ -6,7 +6,7 @@ class LogDatabase:
         self.dbParams = keyVals
 
         # table information
-        self.tablePrefix = 'zipkin_'
+        self.tablePrefix = 'zipnish_'
         self.tables = ['spans', 'annotations']
 
         # connect to database

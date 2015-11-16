@@ -18,7 +18,7 @@ def traces(hex_trace_id):
 
     # find trace information
     query = "SELECT *  \
-            FROM zipkin_annotations \
+            FROM zipnish_annotations \
             WHERE \
             trace_id = %s \
             ORDER BY a_timestamp ASC, service_name ASC" \
@@ -65,7 +65,7 @@ def traces(hex_trace_id):
 
     # find depth information
     query = "SELECT DISTINCT span_id, parent_id \
-            FROM zipkin_spans \
+            FROM zipnish_spans \
             WHERE trace_id = %s" % traceId
     depthResults = connection.execute(query)
 
@@ -78,7 +78,7 @@ def traces(hex_trace_id):
     # fetch all annotations related to this trace
     query = "SELECT span_id, span_name, service_name, \
             value, ipv4, port, a_timestamp \
-            FROM `zipkin_annotations` \
+            FROM `zipnish_annotations` \
             WHERE trace_id = %s" % traceId
     allAnnotations = connection.execute(query)
 

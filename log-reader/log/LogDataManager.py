@@ -7,7 +7,7 @@ class LogDataManager:
         self.logStorage = logStorage
 
         self.Tags = ['ReqURL', 'BereqURL']
-        self.MapTagToZipKinField = {
+        self.MapTagToZipnishField = {
                 'ReqURL': 'span_name',
                 'BereqURL': 'span_name'
                 }
@@ -28,7 +28,7 @@ class LogDataManager:
 
 
         if tag in self.Tags:
-            self.logRow[ self.MapTagToZipKinField[tag] ] = data.rstrip('\x00')
+            self.logRow[ self.MapTagToZipnishField[tag] ] = data.rstrip('\x00')
 
         elif tag == 'Link':
             value = data.rstrip('\x00')

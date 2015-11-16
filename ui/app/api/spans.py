@@ -16,7 +16,7 @@ def spans():
     # query for results
     spans = []
     spansQuery = "SELECT DISTINCT span_name \
-            FROM zipkin_annotations \
+            FROM zipnish_annotations \
             WHERE service_name='%s'" % serviceName
 
     result = connection.execute(spansQuery)

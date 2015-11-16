@@ -1,5 +1,5 @@
 log-reader/venv
-zipkin/venv
+zipnish/venv
 ui/venv
 node_modules
 *.pyc
