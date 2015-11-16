@@ -223,7 +223,7 @@
       id: span['id'],
       parent_id: span['parent_id'] == 'None' ? '' : span['parent_id'],
 
-      marginLeft: 10 + (span['depth'] * 5),
+      marginLeft: 10 + (span['depth'] * 10),
       leftPosition: calculateServiceLeftPosition(span['services']),
       spanWidth: calculateServiceWidth(totalServicesDuration),
       totalDuration: totalServicesDuration,

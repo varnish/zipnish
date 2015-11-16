@@ -30,7 +30,7 @@
 }
 
 #trace-container .span .handle {
-  width: 150px;
+  width: 200px;
   overflow: hidden;
   white-space: nowrap;
   float: left;
@@ -65,7 +65,7 @@
 
 #trace-container .span .duration-container {
   position: relative;
-  margin-left: 155px;
+  margin-left: 205px;
 }
 
 #trace-container #timeLabel.span {
