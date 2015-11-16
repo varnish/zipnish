@@ -11,11 +11,11 @@ from config import config
 db = SQLAlchemy()
 
 # called from the main app to create an application instance
-def create_app(config_name):
+def create_app(config_path):
     app = Flask(__name__)
 
     # configure application
-    app.config.from_object(config[config_name])
+    app.config.from_pyfile(config_path, silent=True)
 
     # initialize extensions
     db.init_app(app)
