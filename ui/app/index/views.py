@@ -171,7 +171,7 @@ def index():
                 #trace['serviceTimestampMin'] = minTimestamp
                 #trace['serviceTimestampMax'] = maxTimestamp
 
-                trace['servicesTotalDuration'] = '{:.3f}'.format(totalTraceDuration / 1000000.0)
+                trace['servicesTotalDuration'] = '{:.3f}'.format(totalTraceDuration / 1000.0)
 
                 selectedServicePercentage = float(float(selectedServiceDuration) / float(totalTraceDuration)) * 100.0
                 trace['selectedServicePercentage'] = '{:.2f}'.format(selectedServicePercentage)
