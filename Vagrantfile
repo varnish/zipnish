@@ -26,9 +26,12 @@ Vagrant.configure(2) do |config|
 		exampleapp.vm.network :private_network, ip: '192.168.75.14'
 	end
 
-	# package building machine
-	config.vm.define 'build' do |build|
-		build.vm.hostname = 'build'
-		build.vm.network :private_network, ip: '192.168.75.15'
+	# package building machines
+
+	# ubuntu-vivid 64-bit (15.x)
+	config.vm.define 'build-ubuntu-vivid64' do |ubuntu|
+		ubuntu.vm.box = 'ubuntu/vivid64'
+		ubuntu.vm.hostname = 'build-ubuntu-vivid64'
+		ubuntu.vm.network :private_network, ip: '192.168.75.41'
 	end
 end

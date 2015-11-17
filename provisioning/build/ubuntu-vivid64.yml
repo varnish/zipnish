@@ -1,0 +1,56 @@
+---
+- name: Build for ubuntu-vivid 15.x 64-bit
+  hosts: build-ubuntu-vivid64
+  sudo: yes
+  tasks:
+    - name: update apt-cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: install requirements for building debian package
+      apt:
+        name: "{{ item }}"
+      with_items:
+        - gnupg
+        - packaging-dev
+        - pbuilder
+        - debootstrap
+        - ubuntu-dev-tools
+        - bzr-builddeb
+        - apt-file
+        - build-essential
+        - devscripts
+        - debhelper
+        - dh-make
+        - bzr-builddeb
+
+    - name: Add author information
+      copy:
+        src: files/ubuntu-vivid64/.bashrc
+        dest: '~/.bashrc'
+        force: yes
+
+    - name: source .bashrc
+      shell: '. ~/.bashrc'
+
+    - name: make zipkin-ui tar.gz
+      shell: 'tar czvf zipnish-ui.tar.gz /vagrant/ui/'
+      args:
+        creates: ~/zipnish-ui.tar.gz
+        chdir: ~/
+
+    - name: run dh-make
+      shell: 'bzr dh-make zipnish-ui 0.1 zipnish-ui.tar.gz'
+      args:
+        chdir: ~/
+
+    - name: remove support for emacs and example files
+      shell: 'rm -f *ex *EX'
+      args:
+        chdir: ~/zipnish-ui/debian
+
+    - name: build the debian package
+      shell: 'bzr builddeb -- -us -uc'
+      args:
+        chdir: ~/zipnish-ui/debian
