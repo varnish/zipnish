@@ -59,7 +59,9 @@ User interface will use the UI files (styles, scripts and templates) from ZipKin
 #### How to track ####
 
 If *X-VARNISH-TRACE* header is present use *X-VARNISH-TRACE* header
+
 	**otherwise** assign *X-VARNISH* header value to *X-VARNISH-TRACE*
 
 assign *X-VARNISH* header value to *X-VARNISH-PARENT*
+
 send *X-VARNISH-TRACE* and *X-VARNISH-PARENT* headers to any child request.
