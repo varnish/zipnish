@@ -15,7 +15,9 @@ set -e
 
 case "$1" in
     install|upgrade)
-	#apt-get update && apt-get install -y git libmysqlclient-dev python2.7 python2.7-dev libpython-dev python-virtualenv python-mysqldb python-pip
+	# only if could do something like this of the end user: apt-get update && apt-get install -y git libmysqlclient-dev python2.7 python2.7-dev libpython-dev python-virtualenv python-mysqldb python-pip
+	echo "Removing old zipnish-ui"
+	rm -rf /usr/share/zipnish/ui/
     ;;
 
     abort-upgrade)
