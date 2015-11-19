@@ -3,9 +3,9 @@
 You need to have [Vagrant](https://www.vagrantup.com/) and [Ansible](http://www.ansible.com/) already installed.
 
 ```
-$> git clone https://github.com/varnish/varnish-microservice-monitor.git
+$> git clone https://github.com/varnish/zipnish.git
 
-$> cd varnish-microservice-monitor/provisioning
+$> cd zipnish/provisioning
 
 $> vagrant up
 
@@ -51,7 +51,7 @@ User interface will use the UI files (styles, scripts and templates) from ZipKin
 
 #### Next Steps ####
 
-1. Mimic data flow with parent headers etc. just as zip kin uses inside you application.
+1. Mimic data flow with parent headers etc. just as ZipKin uses inside you application.
 2. Make the application function as close to ZipKin as possible.
 3. Use ZipKin user-interface to display information.
 4. Document functionality implemented. The flow of the system.
