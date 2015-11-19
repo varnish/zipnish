@@ -129,20 +129,20 @@ if __name__ == '__main__':
     vap = varnishapi.VarnishLog(varnish_log_args)
 
     callbacks = [fetch_varnish_log]
-    callback_runner = CallbackRunner(callbacks, error_callback, vap)
+    callback_runner = CallbackRunner(callbacks, error_callback, False, vap)
 
     try:
         log_database = LogDatabase(**__DB_PARAMS__)
         log_storage = LogStorage(log_database)
         log_data_manager = LogDataManager(log_storage)
+
+        log_cache_name = "default" if not cache_name else cache_name
+        log.info("Starting log reader for cache: %s" % log_cache_name)
+
+        callback_runner.run()
     except Exception as e:
         log.error(e)
         print "Error occurred: %s" % e.args[0]
         sys.exit(-1)
 
-    log_cache_name = "default" if not cache_name else cache_name
-    log.info("Starting log reader for cache: %s" % log_cache_name)
-    callback_runner.run()
-
-    raw_input("Press Enter to stop the sharade.\n")
     log.info("Log reader has stopped.")

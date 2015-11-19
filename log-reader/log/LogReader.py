@@ -6,7 +6,7 @@ from twisted.internet import reactor, defer
 
 class CallbackRunner(object):
 
-    def __init__(self, callbacks, err_back, *cb_args):
+    def __init__(self, callbacks, err_back, background, *cb_args):
         """
         Initialize the callback runner. Accepts a list of callbacks to be
         called in a chained manner through defereds.
@@ -20,11 +20,13 @@ class CallbackRunner(object):
         self.__callbacks = callbacks
         self.__err_back = err_back
         self.__args = cb_args
-
+        self.__background = background
         self.__reactor = reactor
-        crochet._main._reactor = self.__reactor
-        self.__event = threading.Event()
-        self.__start_reactor()
+
+        if background:
+            crochet._main._reactor = self.__reactor
+            self.__event = threading.Event()
+            self.__start_reactor()
 
     def __create_daemon_thread(self, *args, **kwargs):
         """
@@ -70,6 +72,7 @@ class CallbackRunner(object):
         self.__interval = interval
 
     def run(self):
+
         d = defer.execute(self.__callbacks[0], *self.__args)
         if not self.__err_back:
             self.__err_back = self.on_error
@@ -79,6 +82,9 @@ class CallbackRunner(object):
             d.addCallback(cb)
 
         self.__reactor.callLater(self.__interval, self.run)
+
+        if not self.__reactor.running:
+            self.__reactor.run()
 
     def stop(self):
         if self.__reactor.running:
