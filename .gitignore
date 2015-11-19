@@ -8,3 +8,4 @@ venv
 .gitignore
 .vagrant
 provisioning/facts-cache/
+tmp/
