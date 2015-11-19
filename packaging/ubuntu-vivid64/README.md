@@ -14,5 +14,16 @@ Choose single and hit confirm after that.
 $> rm -rf /vagrant/tmp/ui/zipnish-ui/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/debian/ /vagrant/tmp/ui/zipnish-ui/debian/
 $> cd /vagrant/tmp/ui/zipnish-ui/ && debuild -us -uc -i -b
 $> cd /vagrant/tmp/ui/ && rm -rf !(zipnish-ui_0.1-1_amd64.deb)
-$> sudo dpkg -i /vagrant/tmp/ui/zipnish-ui_0.1-1_amd64.deb
+# apt-get remove -y zipnish-ui
+# dpkg -i /vagrant/tmp/ui/zipnish-ui_0.1-1_amd64.deb
 ```
+
+
+
+**When you are repeatedly building and testing below is a time saver**
+
+
+$ rm -rf /vagrant/tmp/ui/zipnish-ui/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/debian/ /vagrant/tmp/ui/zipnish-ui/debian/ && cd /vagrant/tmp/ui/zipnish-ui/ && debuild -us -uc -i -b
+
+
+# cd /vagrant/tmp/ui && apt-get remove -y zipnish-ui && dpkg -i /vagrant/tmp/ui/zipnish-ui_0.1-1_amd64.deb
