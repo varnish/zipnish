@@ -23,7 +23,10 @@ case "$1" in
 
 	echo "Creating configuration file for zipnish-ui inside /etc/zipnish/ui.cfg"
 	mkdir -p /etc/zipnish/
-	touch /etc/zipnish/ui.cfg
+
+    if [ ! -f /etc/zipnish/ui.cfg ]; then
+        cp /usr/share/zipnish/ui/ui.cfg /etc/zipnish/ui.cfg
+    fi
 
 	echo "Creating virtual environment to install user interface dependencies."
 	cd /usr/share/zipnish/ui && virtualenv venv
