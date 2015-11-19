@@ -1,0 +1,16 @@
+Source: zipnish-ui
+Section: contrib/web
+Priority: optional
+Maintainer: Muhammad Adeel <adeel@varnish-software.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://github.com/varnish/zipnish
+Vcs-Git: git@github.com:varnish/zipnish.git
+Vcs-Browser: https://github.com/varnish/zipnish
+
+Package: zipnish-ui
+Architecture: any
+Pre-Depends: git, libmysqlclient-dev, python2.7, python2.7-dev, libpython-dev, python-virtualenv, python-mysqldb, python-pip
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: User interface for Zipnish
+ Let's you explore web requests as they are logged by Zipnish.
