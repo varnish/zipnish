@@ -32,11 +32,15 @@ case "$1" in
     # echo "#!/bin/sh\n/usr/share/zipnish/ui/venv/bin/python /usr/share/zipnish/ui/app.py &" > /usr/sbin/zipnish-ui
     # chmod 0755 /usr/sbin/zipnish-ui
 
-	echo "Creating virtual environment to install user interface dependencies."
-	cd /usr/share/zipnish/ui && virtualenv venv
-	cd /usr/share/zipnish/ui/venv/bin/ && chmod u+x activate && ./activate
-	/usr/share/zipnish/ui/venv/bin/pip install -r /usr/share/zipnish/ui/requirements.txt
+    touch /var/run/zipnish-ui.pid
+    chmod 0600 /var/run/zipnish-ui.pid
+
+    echo "Creating virtual environment to install user interface dependencies."
+    cd /usr/share/zipnish/ui && virtualenv venv
+    cd /usr/share/zipnish/ui/venv/bin/ && chmod u+x activate && ./activate
+    /usr/share/zipnish/ui/venv/bin/pip install -r /usr/share/zipnish/ui/requirements.txt
     ;;
+
 
     abort-upgrade|abort-remove|abort-deconfigure)
     ;;
