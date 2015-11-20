@@ -29,8 +29,8 @@ case "$1" in
     fi
 
     rm -rf /usr/sbin/zipnish-ui
-    echo "#!/bin/sh\n/usr/share/zipnish/ui/venv/bin/python /usr/share/zipnish/ui/app.py &" > /usr/sbin/zipnish-ui
-    chmod 0755 /usr/sbin/zipnish-ui
+    # echo "#!/bin/sh\n/usr/share/zipnish/ui/venv/bin/python /usr/share/zipnish/ui/app.py &" > /usr/sbin/zipnish-ui
+    # chmod 0755 /usr/sbin/zipnish-ui
 
 	echo "Creating virtual environment to install user interface dependencies."
 	cd /usr/share/zipnish/ui && virtualenv venv
