@@ -5,8 +5,8 @@
 # Required-Stop:     $local_fs $network $remote_fs $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-Short-Description:	 Zipnish user interface service
-Description:         Zipnish user interface service
+# Short-Description: Zipnish user interface service
+# Description:       Written in python mainly using the flask framework.
 #                    <...>
 #                    <...>
 ### END INIT INFO
@@ -19,7 +19,7 @@ Description:         Zipnish user interface service
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="zipnish-ui"
 NAME=zipnish-ui
-DAEMON=/usr/sbin/zipnish-ui
+DAEMON="/usr/share/zipnish/ui/app.py"
 DAEMON_ARGS=""
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
@@ -47,19 +47,7 @@ do_start()
 	#   0 if daemon has been started
 	#   1 if daemon was already running
 	#   2 if daemon could not be started
-	# start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test > /dev/null \
-	#	|| return 1
-	# start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- \
-	#	$DAEMON_ARGS \
-	#	|| return 2
-	# The above code will not work for interpreted scripts, use the next
-	# six lines below instead (Ref: #643337, start-stop-daemon(8) )
-	start-stop-daemon --start --quiet --pidfile $PIDFILE --startas $DAEMON \
-		--name $NAME --test > /dev/null \
-		|| return 1
-	start-stop-daemon --start --quiet --pidfile $PIDFILE --startas $DAEMON \
-		--name $NAME -- $DAEMON_ARGS \
-		|| return 2
+	start-stop-daemon --start --quiet --startas $DAEMON --name $NAME --background --pidfile $PIDFILE > /dev/null || return 1
 
 	# Add code here, if necessary, that waits for the process to be ready
 	# to handle requests from services started subsequently which depend
