@@ -26,12 +26,15 @@ Varnishlog data.
 mkdir -p %{_builddir}/var/log/zipnish/
 mkdir -p %{_builddir}/etc/zipnish/
 mkdir -p %{_builddir}/opt/zipnish/log/
+mkdir -p %{_builddir}/usr/lib/systemd/system/
 
 cp %{SOURCEURL0}/default.cfg %{_builddir}/etc/zipnish/zipnish.cfg
 cp %{SOURCEURL0}/app.py %{_builddir}/opt/zipnish/app.py
 cp %{SOURCEURL0}/varnishapi.py %{_builddir}/opt/zipnish/varnishapi.py
 cp %{SOURCEURL0}/requirements.txt %{_builddir}/etc/zipnish/requirements.cfg
 cp -r %{SOURCEURL0}/log %{_builddir}/opt/zipnish
+
+cp %{SOURCEURL0}/redhat/log-reader.service %{_builddir}/usr/lib/systemd/system/log-reader.service
 
 %{__pip_cmd} install simplemysql
 %{__pip_cmd} install crochet
@@ -52,6 +55,7 @@ exit 0
 %attr(0755,zipnish,zipnish) /opt/zipnish/app.py
 %attr(0755,zipnish,zipnish) /opt/zipnish/log
 %attr(0755,zipnish,zipnish) /opt/zipnish/varnishapi.py
+%attr(0755,root,root) /usr/lib/systemd/system/log-reader.service
 
 %pre
 # Create user and group
