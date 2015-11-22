@@ -71,7 +71,7 @@ class LogDatabase:
             for query in queryes:
                 self.db.query(query)
 
-        cursor.close()
+            self.db.commit()
 
     def getParams(self):
         return self.dbParams
