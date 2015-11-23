@@ -41,6 +41,8 @@ case "$1" in
     /usr/share/zipnish/ui/venv/bin/pip install -r /usr/share/zipnish/ui/requirements.txt
     ;;
 
+    service zipkin-ui start
+
 
     abort-upgrade|abort-remove|abort-deconfigure)
     ;;
