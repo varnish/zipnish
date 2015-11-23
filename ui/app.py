@@ -1,4 +1,3 @@
-#!/usr/share/zipnish/ui/venv/bin/python
 import os
 
 from app import create_app, db

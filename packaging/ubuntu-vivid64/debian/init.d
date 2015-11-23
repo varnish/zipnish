@@ -19,7 +19,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="zipnish-ui"
 NAME=zipnish-ui
-DAEMON="/usr/share/zipnish/ui/app.py"
+DAEMON="/usr/share/zipnish/ui/venv/bin/python /usr/share/zipnish/ui/app.py"
 DAEMON_ARGS=""
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
