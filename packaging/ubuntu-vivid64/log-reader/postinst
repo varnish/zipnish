@@ -1,5 +1,5 @@
 #!/bin/sh
-# postinst script for zipnish-ui
+# postinst script for zipnish
 #
 # see: dh_installdeb(1)
 
@@ -21,27 +21,25 @@ set -e
 case "$1" in
     configure)
 
-	echo "Creating configuration file for zipnish-ui inside /etc/zipnish/ui.cfg"
+	echo "Creating configuration file for zipnish inside /etc/zipnish/log-reader.cfg"
 	mkdir -p /etc/zipnish/
 
-    if [ ! -f /etc/zipnish/ui.cfg ]; then
-        cp /usr/share/zipnish/ui/ui.cfg /etc/zipnish/ui.cfg
+    if [ ! -f /etc/zipnish/log-reader.cfg ]; then
+        cp /usr/share/zipnish/log-reader/log-reader.cfg /etc/zipnish/log-reader.cfg
     fi
 
-    rm -rf /usr/sbin/zipnish-ui
-    # echo "#!/bin/sh\n/usr/share/zipnish/ui/venv/bin/python /usr/share/zipnish/ui/app.py &" > /usr/sbin/zipnish-ui
-    # chmod 0755 /usr/sbin/zipnish-ui
+    rm -rf /usr/sbin/zipnish
 
-    touch /var/run/zipnish-ui.pid
-    chmod 0600 /var/run/zipnish-ui.pid
+    touch /var/run/zipnish.pid
+    chmod 0600 /var/run/zipnish.pid
 
     echo "Creating virtual environment to install user interface dependencies."
-    cd /usr/share/zipnish/ui && virtualenv venv
-    cd /usr/share/zipnish/ui/venv/bin/ && chmod u+x activate && ./activate
-    /usr/share/zipnish/ui/venv/bin/pip install -r /usr/share/zipnish/ui/requirements.txt
+    cd /usr/share/zipnish/log-reader && virtualenv venv
+    cd /usr/share/zipnish/log-reader/venv/bin/ && chmod u+x activate && ./activate
+    /usr/share/zipnish/log-reader/venv/bin/pip install -r /usr/share/zipnish/log-reader/requirements.txt
 
-    # start zipnish-ui service
-    service zipnish-ui start
+    # start zipnish service
+    service zipnish start
 
     ;;
 

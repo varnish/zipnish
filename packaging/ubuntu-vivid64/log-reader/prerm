@@ -1,5 +1,5 @@
 #!/bin/sh
-# prerm script for zipnish-ui
+# prerm script for zipnish
 #
 # see: dh_installdeb(1)
 
@@ -20,8 +20,8 @@ set -e
 case "$1" in
     remove|upgrade|deconfigure)
 
-		echo "Removing zipnish-ui directory"
-		rm -rf /usr/share/zipnish/ui/
+		echo "Removing zipnish/log-reader directory"
+		rm -rf /usr/share/zipnish/log-reader/
 
     ;;
 

@@ -1,0 +1,5 @@
+[Unit]
+Description=Zipnish log reader service
+
+[Service]
+ExecStart=/usr/share/zipnish/ui/venv/bin/python /usr/share/zipnish/log-reader/app.py

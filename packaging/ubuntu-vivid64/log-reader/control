@@ -1,4 +1,4 @@
-Source: zipnish-ui
+Source: zipnish
 Section: contrib/web
 Priority: optional
 Maintainer: Muhammad Adeel <adeel@varnish-software.com>
@@ -8,7 +8,7 @@ Homepage: https://github.com/varnish/zipnish
 Vcs-Git: git@github.com:varnish/zipnish.git
 Vcs-Browser: https://github.com/varnish/zipnish
 
-Package: zipnish-ui
+Package: zipnish
 Architecture: any
 Pre-Depends: git, libmysqlclient-dev, python2.7, python2.7-dev, libpython-dev, python-virtualenv, python-mysqldb, python-pip
 Depends: ${shlibs:Depends}, ${misc:Depends}

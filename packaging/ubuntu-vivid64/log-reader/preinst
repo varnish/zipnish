@@ -1,5 +1,5 @@
 #!/bin/sh
-# preinst script for zipnish-ui
+# preinst script for zipnish
 #
 # see: dh_installdeb(1)
 
@@ -16,8 +16,8 @@ set -e
 case "$1" in
     install|upgrade)
 	# only if could do something like this of the end user: apt-get update && apt-get install -y git libmysqlclient-dev python2.7 python2.7-dev libpython-dev python-virtualenv python-mysqldb python-pip
-	echo "Removing old zipnish-ui"
-	rm -rf /usr/share/zipnish/ui/
+	echo "Removing old zipnish/log-reader"
+	rm -rf /usr/share/zipnish/log-reader/
     ;;
 
     abort-upgrade)
