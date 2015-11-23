@@ -3,7 +3,6 @@ import copy
 
 # tabulate, collections used for visual printing data validation
 from collections import OrderedDict
-from tabulate import tabulate
 
 # LogStorage - read and do basic processing of incoming data
 class LogStorage:
@@ -235,7 +234,6 @@ class LogStorage:
         headers = sorted(output.keys())
         orderedDictionary = OrderedDict(sorted(output.items()))
 
-        print tabulate(orderedDictionary, headers, tablefmt="fancy_grid")
-        print
+        print orderedDictionary
 
 
