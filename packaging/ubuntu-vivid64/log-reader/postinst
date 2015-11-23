@@ -24,8 +24,11 @@ case "$1" in
 	echo "Creating configuration file for zipnish inside /etc/zipnish/log-reader.cfg"
 	mkdir -p /etc/zipnish/
 
+    mkdir -p /var/log/zipnish
+    mkdir -p /opt/zipnish/log
+
     if [ ! -f /etc/zipnish/log-reader.cfg ]; then
-        cp /usr/share/zipnish/log-reader/log-reader.cfg /etc/zipnish/log-reader.cfg
+        cp /usr/share/zipnish/log-reader/default.cfg /etc/zipnish/log-reader.cfg
     fi
 
     rm -rf /usr/sbin/zipnish

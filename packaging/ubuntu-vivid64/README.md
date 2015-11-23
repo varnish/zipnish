@@ -18,8 +18,8 @@ $> find /vagrant/tmp/log-reader/src/ -name "*.pyc" -exec rm -rf {} \;
 Choose single and hit confirm after that.
 
 ```
-$> rm -rf /vagrant/tmp/log-reader/zipnish/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/log-reader/ /vagrant/tmp/ui/zipnish/debian/
-$> cd /vagrant/tmp/ui/zipnish/ && debuild -us -uc -i -b
+$> rm -rf /vagrant/tmp/log-reader/zipnish/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/log-reader/ /vagrant/tmp/log-reader/zipnish/debian/
+$> cd /vagrant/tmp/log-reader/zipnish/ && debuild -us -uc -i -b
 $> cd /vagrant/tmp/log-reader/ && rm -rf !(zipnish_0.1-1_amd64.deb)
 # apt-get remove -y zipnish
 # dpkg -i /vagrant/tmp/ui/zipnish_0.1-1_amd64.deb
@@ -27,13 +27,11 @@ $> cd /vagrant/tmp/log-reader/ && rm -rf !(zipnish_0.1-1_amd64.deb)
 
 **When you are repeatedly building and testing below is a time saver**
 
-
 ```
 $ rm -rf /vagrant/tmp/log-reader/zipnish/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/log-reader/ /vagrant/tmp/log-reader/zipnish/debian/ && cd /vagrant/tmp/log-reader/zipnish/ && debuild -us -uc -i -b
 
 # cd /vagrant/tmp/ui && apt-get remove -y zipnish && dpkg -i /vagrant/tmp/log-reader/zipnish_0.1-1_amd64.deb
 ```
-
 
 ### User Interface ###
 
@@ -55,10 +53,7 @@ $> cd /vagrant/tmp/ui/ && rm -rf !(zipnish-ui_0.1-1_amd64.deb)
 # dpkg -i /vagrant/tmp/ui/zipnish-ui_0.1-1_amd64.deb
 ```
 
-
-
 **When you are repeatedly building and testing below is a time saver**
-
 
 ```
 $ rm -rf /vagrant/tmp/ui/zipnish-ui/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/ui/ /vagrant/tmp/ui/zipnish-ui/debian/ && cd /vagrant/tmp/ui/zipnish-ui/ && debuild -us -uc -i -b
