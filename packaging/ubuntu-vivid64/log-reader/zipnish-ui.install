@@ -1,0 +1,2 @@
+../src/* usr/share/zipnish/ui/
+debian/zipnish-ui.service /etc/systemd/system/
