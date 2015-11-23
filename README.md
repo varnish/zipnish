@@ -2,13 +2,10 @@
 
 You need to have [Vagrant](https://www.vagrantup.com/) and [Ansible](http://www.ansible.com/) already installed.
 
-```
+```sh
 $> git clone https://github.com/varnish/zipnish.git
-
 $> cd zipnish/provisioning
-
 $> vagrant up
-
 $> ansible-playbook main.yml
 ```
 
