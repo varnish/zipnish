@@ -39,9 +39,11 @@ case "$1" in
     cd /usr/share/zipnish/ui && virtualenv venv
     cd /usr/share/zipnish/ui/venv/bin/ && chmod u+x activate && ./activate
     /usr/share/zipnish/ui/venv/bin/pip install -r /usr/share/zipnish/ui/requirements.txt
-    ;;
 
-    service zipkin-ui start
+    # start zipnish-ui service
+    service zipnish-ui start
+
+    ;;
 
 
     abort-upgrade|abort-remove|abort-deconfigure)

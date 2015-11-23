@@ -1,2 +1,2 @@
 ../src/* usr/share/zipnish/ui/
-debian/zipkin-ui.service /etc/systemd/system/
+debian/zipnish-ui.service /etc/systemd/system/
