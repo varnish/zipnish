@@ -19,7 +19,7 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
-		
+
 		echo "Removing zipnish-ui directory"
 		rm -rf /usr/share/zipnish/ui/
 
