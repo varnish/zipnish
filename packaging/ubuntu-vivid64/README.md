@@ -28,7 +28,7 @@ $> cd /vagrant/tmp/log-reader/ && rm -rf !(zipnish_0.1-1_amd64.deb)
 **When you are repeatedly building and testing below is a time saver**
 
 ```sh
-$ rm -rf /vagrant/tmp/log-reader/zipnish/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/log-reader/ /vagrant/tmp/log-reader/zipnish/debian/ && cd /vagrant/tmp/log-reader/zipnish/ && debuild -us -uc -i -b
+$> rm -rf /vagrant/tmp/log-reader/zipnish/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/log-reader/ /vagrant/tmp/log-reader/zipnish/debian/ && cd /vagrant/tmp/log-reader/zipnish/ && debuild -us -uc -i -b
 
 # cd /vagrant/tmp/ui && apt-get remove -y zipnish && dpkg -i /vagrant/tmp/log-reader/zipnish_0.1-1_amd64.deb
 ```
@@ -56,7 +56,7 @@ $> cd /vagrant/tmp/ui/ && rm -rf !(zipnish-ui_0.1-1_amd64.deb)
 **When you are repeatedly building and testing below is a time saver**
 
 ```sh
-$ rm -rf /vagrant/tmp/ui/zipnish-ui/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/ui/ /vagrant/tmp/ui/zipnish-ui/debian/ && cd /vagrant/tmp/ui/zipnish-ui/ && debuild -us -uc -i -b
+$> rm -rf /vagrant/tmp/ui/zipnish-ui/debian/ && cp -R /vagrant/packaging/ubuntu-vivid64/ui/ /vagrant/tmp/ui/zipnish-ui/debian/ && cd /vagrant/tmp/ui/zipnish-ui/ && debuild -us -uc -i -b
 
 # cd /vagrant/tmp/ui && apt-get remove -y zipnish-ui && dpkg -i /vagrant/tmp/ui/zipnish-ui_0.1-1_amd64.deb
 ```
