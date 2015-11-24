@@ -1,7 +1,6 @@
 import time
 import copy
 
-# tabulate, collections used for visual printing data validation
 from collections import OrderedDict
 
 # LogStorage - read and do basic processing of incoming data
@@ -21,6 +20,22 @@ class LogStorage:
 
         # minimum number of annotation data points before flushing data to database
         self.minNumOfAnnotationsToFlush = 4
+
+    def __ts_convert(self, row_dict, ts_key, convert_func):
+        """
+
+        :param row_dict: Dictionary containing the timestamps.
+        :param ts_key: Timestamp key which points the the timestamp to
+        be converted.
+        :param convert_func: Convert function.
+        :return:
+        """
+
+        if ts_key in row_dict:
+            ts_value = row_dict[ts_key]
+            ts = ts_value if ts_value else ''
+            if len(ts):
+                row_dict[ts_key] = convert_func(ts)
 
     def push(self, row):
         # process row to attach data to span / annotation
@@ -83,30 +98,15 @@ class LogStorage:
         elif row['request_type'] == 'b':
 
             # backend request considered for annotations
-            
-            if 'timestamp-duration-Start' in row and len(row['timestamp-duration-Start']) > 0:
-                row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
-            
-            if 'timestamp-abs-Start' in row and len(row['timestamp-abs-Start']) > 0:
-                row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
-            
-            if 'timestamp-duration-Bereq' in row and len(row['timestamp-duration-Bereq']) > 0:
-                row['timestamp-duration-Bereq'] = self.convertDuration(row['timestamp-duration-Bereq'])
-            
-            if 'timestamp-abs-Bereq' in row and len(row['timestamp-abs-Bereq']) > 0:
-                row['timestamp-abs-Bereq'] = self.convertTimestamp(row['timestamp-abs-Bereq'])
-            
-            if 'timestamp-duration-Beresp' in row and len(row['timestamp-duration-Beresp']) > 0:
-                row['timestamp-duration-Beresp'] = self.convertDuration(row['timestamp-duration-Beresp'])
-            
-            if 'timestamp-abs-Beresp' in row and len(row['timestamp-abs-Beresp']) > 0:
-                row['timestamp-abs-Beresp'] = self.convertTimestamp(row['timestamp-abs-Beresp'])
-            
-            if 'timestamp-duration-BerespBody' in row and len(row['timestamp-duration-BerespBody']) > 0:
-                row['timestamp-duration-BerespBody'] = self.convertDuration(row['timestamp-duration-BerespBody'])
-            
-            if 'timestamp-abs-BerespBody' in row and len(row['timestamp-abs-BerespBody']) > 0:
-                row['timestamp-abs-BerespBody'] = self.convertTimestamp(row['timestamp-abs-BerespBody'])
+
+            self.__ts_convert(row, 'timestamp-duration-Start', self.convertDuration)
+            self.__ts_convert(row, 'timestamp-abs-Start', self.convertTimestamp)
+            self.__ts_convert(row, 'timestamp-duration-Bereq', self.convertDuration)
+            self.__ts_convert(row, 'timestamp-abs-Bereq', self.convertTimestamp)
+            self.__ts_convert(row, 'timestamp-duration-Beresp', self.convertDuration)
+            self.__ts_convert(row, 'timestamp-abs-Beresp', self.convertTimestamp)
+            self.__ts_convert(row, 'timestamp-duration-BerespBody', self.convertDuration)
+            self.__ts_convert(row, 'timestamp-abs-BerespBody', self.convertTimestamp)
 
             if 'trace_id' not in row:
                 row['trace_id'] = row['span_id']
@@ -141,28 +141,28 @@ class LogStorage:
             }
 
             # Client Start
-            self.annotations.append( copy.copy(annotation) )
+            self.annotations.append(copy.copy(annotation))
 
             annotation['a_timestamp'] = row['timestamp-abs-Bereq']
             annotation['duration'] = row['timestamp-duration-Bereq']
             annotation['value'] = 'sr'
 
             # Server Recieve
-            self.annotations.append( copy.copy(annotation) )
+            self.annotations.append(copy.copy(annotation))
 
             annotation['a_timestamp'] = row['timestamp-abs-Beresp']
             annotation['duration'] = row['timestamp-duration-Beresp']
             annotation['value'] = 'ss'
 
             # Server Response
-            self.annotations.append( copy.copy(annotation) )
+            self.annotations.append(copy.copy(annotation))
 
             annotation['a_timestamp'] = row['timestamp-abs-BerespBody']
             annotation['duration'] = row['timestamp-duration-BerespBody']
             annotation['value'] = 'cr'
 
             # Client Recieve
-            self.annotations.append( copy.copy(annotation) )
+            self.annotations.append(copy.copy(annotation))
 
     def replaceClientSpanId(self, clientSpanId, backendSpanId):
         for spanIndex in range(len(self.spans)):
