@@ -27,8 +27,9 @@ case "$1" in
     mkdir -p /var/log/zipnish
     mkdir -p /opt/zipnish/log
 
-    if [ ! -f /etc/zipnish/log-reader.cfg ]; then
+    if [ ! -f /etc/zipnish/zipnish.cfg ]; then
         cp /usr/share/zipnish/log-reader/default.cfg /etc/zipnish/zipnish.cfg
+        rm /usr/share/zipnish/log-reader/default.cfg
     fi
 
     rm -rf /usr/sbin/zipnish
