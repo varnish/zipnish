@@ -25,15 +25,14 @@ Varnishlog data.
 %prep
 mkdir -p %{_builddir}/var/log/zipnish/
 mkdir -p %{_builddir}/etc/zipnish/
-mkdir -p %{_builddir}/opt/zipnish/log/
+mkdir -p %{_builddir}/opt/zipnish/log-reader/log/
 mkdir -p %{_builddir}/usr/lib/systemd/system/
 mkdir -p %{_builddir}/etc/init.d/
 
 cp %{SOURCEURL0}/default.cfg %{_builddir}/etc/zipnish/zipnish.cfg
-cp %{SOURCEURL0}/app.py %{_builddir}/opt/zipnish/app.py
-cp %{SOURCEURL0}/varnishapi.py %{_builddir}/opt/zipnish/varnishapi.py
-cp %{SOURCEURL0}/requirements.txt %{_builddir}/etc/zipnish/requirements.cfg
-cp -r %{SOURCEURL0}/log %{_builddir}/opt/zipnish
+cp %{SOURCEURL0}/app.py %{_builddir}/opt/zipnish/log-reader/app.py
+cp %{SOURCEURL0}/varnishapi.py %{_builddir}/opt/zipnish/log-reader/varnishapi.py
+cp -r %{SOURCEURL0}/log %{_builddir}/opt/zipnish/log-reader/
 
 cp %{SOURCEURL0}/redhat/log-reader.service %{_builddir}/usr/lib/systemd/system/log-reader.service
 cp %{SOURCEURL0}/redhat/log-reader.service %{_builddir}/etc/init.d/log-reader.service
@@ -41,7 +40,6 @@ cp %{SOURCEURL0}/redhat/log-reader.service %{_builddir}/etc/init.d/log-reader.se
 
 %{__pip_cmd} install simplemysql
 %{__pip_cmd} install crochet
-%{__pip_cmd} install tabulate
 
 
 %install
@@ -53,18 +51,17 @@ exit 0
 %files
 %defattr(-,root,root,-)
 %config(noreplace) /etc/zipnish/zipnish.cfg
-%config(noreplace) /etc/zipnish/requirements.cfg
 %attr(0755,zipnish,zipnish) /var/log/zipnish/
-%attr(0755,zipnish,zipnish) /opt/zipnish/app.py
-%attr(0755,zipnish,zipnish) /opt/zipnish/log
-%attr(0755,zipnish,zipnish) /opt/zipnish/varnishapi.py
+%attr(0755,zipnish,zipnish) /opt/zipnish/log-reader/app.py
+%attr(0755,zipnish,zipnish) /opt/zipnish/log-reader/log
+%attr(0755,zipnish,zipnish) /opt/zipnish/log-reader/varnishapi.py
 %attr(0755,root,root) /usr/lib/systemd/system/log-reader.service
 %attr(0755,root,root) /etc/init.d/log-reader.service
 
 %pre
 # Create user and group
 /usr/bin/getent group zipnish > /dev/null || /usr/sbin/groupadd -r zipnish
-/usr/bin/getent passwd zipnish > /dev/null || /usr/sbin/useradd -r -g zipnish -d /opt/zipnish -s /sbin/nologin zipnish
+/usr/bin/getent passwd zipnish > /dev/null || /usr/sbin/useradd -r -g zipnish -d /opt/zipnish/log-reader -s /sbin/nologin zipnish
 
 %clean
 rm -rf %{_builddir}
