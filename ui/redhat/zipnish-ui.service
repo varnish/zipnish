@@ -3,4 +3,4 @@ Description=Zipnish user interface.
 
 [Service]
 WorkingDirectory=/opt/zipnish/ui
-ExecStart=/opt/zipnish/ui/manage.py runserver
+ExecStart=/usr/bin/python /opt/zipnish/ui/app.py
