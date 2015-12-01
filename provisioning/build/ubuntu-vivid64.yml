@@ -24,13 +24,7 @@
         - debhelper
         - dh-make
         - bzr-builddeb
-
-    - name: Add author information
-      copy:
-        src: files/ubuntu-vivid64/.bashrc
-        dest: '~/.bashrc'
-        force: yes
-
+    
     - name: source .bashrc
       shell: '. ~/.bashrc'
 
