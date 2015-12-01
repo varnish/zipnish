@@ -1,8 +1,8 @@
 ### Common Settings for  ###
 
 ```sh
-$> export DEBFULLNAME="Muhammad Adeel"
-$> export DEBEMAIL="adeel@varnish-software.com"
+$> export DEBFULLNAME="Author Name"
+$> export DEBEMAIL="email@varnish-software.com"
 ```
 
 ### Zipnish (Log Reader) ###
