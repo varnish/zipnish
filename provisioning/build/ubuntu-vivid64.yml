@@ -25,9 +25,6 @@
         - dh-make
         - bzr-builddeb
     
-    - name: source .bashrc
-      shell: '. ~/.bashrc'
-
     - name: make zipkin-ui tar.gz
       shell: 'tar czvf zipnish-ui.tar.gz /vagrant/ui/'
       args:
