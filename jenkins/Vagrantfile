@@ -1,5 +1,14 @@
 Vagrant.configure(2) do |config|
-  config.vm.hostname = "jenkins"
-  config.vm.box = "ubuntu/precise64"
-  config.vm.network :private_network, ip: "192.168.38.15"
+
+	# jenkins
+	config.vm.define 'jenkins' do |jenkins|
+		jenkins.vm.box = "ubuntu/precise64"
+		jenkins.vm.network :private_network, ip: "192.168.38.15"
+	end
+
+	# el6
+	config.vm.define 'el6' do |jenkins|
+		jenkins.vm.box = "geerlingguy/centos6"
+		jenkins.vm.network :private_network, ip: "192.168.38.25"
+	end
 end
