@@ -12,7 +12,7 @@ $> ansible-playbook main.yml
 Once the above task finish you would be able to see the user interface on: [http://192.168.75.11:9000/](http://192.168.75.11:9000/)
 
 #### Presentation ####
-[Varnish Microservices 2.0](http://www.slideshare.net/Varnish_software/microservices-20)
+[Varnish Microservices 2.0](http://www.slideshare.net/Varnish_software/presentations)
 
 #### Screenshots ####
 
