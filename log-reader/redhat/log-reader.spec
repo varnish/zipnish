@@ -29,13 +29,13 @@ mkdir -p %{_builddir}/opt/zipnish/log-reader/log/
 mkdir -p %{_builddir}/usr/lib/systemd/system/
 mkdir -p %{_builddir}/etc/init.d/
 
-cp %{SOURCEURL0}/default.cfg %{_builddir}/etc/zipnish/zipnish.cfg
-cp %{SOURCEURL0}/app.py %{_builddir}/opt/zipnish/log-reader/app.py
-cp %{SOURCEURL0}/varnishapi.py %{_builddir}/opt/zipnish/log-reader/varnishapi.py
+cp %{SOURCEURL0}/log-reader/default.cfg %{_builddir}/etc/zipnish/zipnish.cfg
+cp %{SOURCEURL0}/log-reader/app.py %{_builddir}/opt/zipnish/log-reader/app.py
+cp %{SOURCEURL0}/log-reader/varnishapi.py %{_builddir}/opt/zipnish/log-reader/varnishapi.py
 cp -r %{SOURCEURL0}/log %{_builddir}/opt/zipnish/log-reader/
 
-cp %{SOURCEURL0}/redhat/log-reader.service %{_builddir}/usr/lib/systemd/system/log-reader.service
-cp %{SOURCEURL0}/redhat/log-reader.service %{_builddir}/etc/init.d/log-reader.service
+cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/usr/lib/systemd/system/log-reader.service
+cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/etc/init.d/log-reader.service
 
 
 %{__pip_cmd} install simplemysql
