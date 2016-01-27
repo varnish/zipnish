@@ -32,7 +32,7 @@ mkdir -p %{_builddir}/etc/init.d/
 cp %{SOURCEURL0}/log-reader/default.cfg %{_builddir}/etc/zipnish/zipnish.cfg
 cp %{SOURCEURL0}/log-reader/app.py %{_builddir}/opt/zipnish/log-reader/app.py
 cp %{SOURCEURL0}/log-reader/varnishapi.py %{_builddir}/opt/zipnish/log-reader/varnishapi.py
-cp -r %{SOURCEURL0}/log %{_builddir}/opt/zipnish/log-reader/
+cp -r %{SOURCEURL0}/log-reader %{_builddir}/opt/zipnish/log-reader/
 
 cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/usr/lib/systemd/system/log-reader.service
 cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/etc/init.d/log-reader.service
