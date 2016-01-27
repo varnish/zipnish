@@ -24,7 +24,10 @@ Then update jenkins.
     - Specify path to git inside *Manage Jenkins > Configure System > Git > Path to Git executable*
 
 
-
+# Next todo
+- register el6 node with jenkins
+- copy project workspace to el6 machine
+- make rpm
 
 
 
