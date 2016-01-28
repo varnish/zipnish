@@ -37,6 +37,11 @@ cp -r %{SOURCEURL0}/log-reader %{_builddir}/opt/zipnish/log-reader/
 cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/usr/lib/systemd/system/log-reader.service
 cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/etc/init.d/log-reader.service
 
+# Build virtual environment
+virtualenv %{_builddir}/opt/zipnish/log-reader/rest/venv
+
+source %{_builddir}/opt/api-engine/rest/venv/bin/activate
+export PATH="%{_builddir}/opt/zipnish/log-reader/rest/venv/bin:$PATH"
 
 %{__pip_cmd} install simplemysql
 %{__pip_cmd} install crochet
