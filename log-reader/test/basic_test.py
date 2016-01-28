@@ -71,7 +71,12 @@ def run_cb():
 
 class BasicTestCase(TestCase):
 
-    def test_something(self):
+    def test_log_reader(self):
+        """
+        This test requires that varnish is up and running under
+        the <VARNISH_PORT> and has as a backend the test server
+        spawned with <HOST> and <PORT>.
+        """
         load_yaml_config()
         self.assertEqual(1, len(trace_urls))
 
