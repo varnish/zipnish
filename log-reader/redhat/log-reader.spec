@@ -38,7 +38,7 @@ cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/usr/lib/syste
 cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/etc/init.d/log-reader.service
 
 # Build virtual environment
-virtualenv %{_builddir}/opt/zipnish/log-reader/rest/venv
+virtualenv %{_builddir}/opt/zipnish/log-reader/venv
 
 source %{_builddir}/opt/api-engine/rest/venv/bin/activate
 export PATH="%{_builddir}/opt/zipnish/log-reader/rest/venv/bin:$PATH"
