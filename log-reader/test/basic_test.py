@@ -2,16 +2,18 @@ import sys
 import threading
 import time
 import unittest
-import requests
-
 from multiprocessing import Process
 from unittest import TestCase
+
+import requests
 from server import (
     ServerHandler,
     ThreadedHTTPServer,
     load_yaml_config,
     trace_urls,
 )
+
+
 try:
     sys.path.append("..")
     import varnishapi
@@ -22,10 +24,8 @@ except ImportError as ex:
     print "Import error: %s" % ex
     sys.exit(1)
 
-
 PORT = 9999
 HOST = '127.0.0.1'
-
 VARNISH_PORT = 6081
 
 __DB_PARAMS__ = {
@@ -37,65 +37,135 @@ __DB_PARAMS__ = {
     'truncate_tables': False
 }
 
-log_database = LogDatabase(**__DB_PARAMS__)
-log_storage = LogStorage(log_database)
-log_storage.minNumOfSpansToFlush = 24
-log_storage.minNumOfAnnotationsToFlush = 2 * log_storage.minNumOfSpansToFlush
-log_data_manager = LogDataManager(log_storage)
-vap = varnishapi.VarnishLog(['-g', 'request'])
+_vap = varnishapi.VarnishLog(['-g', 'request'])
+
+_log_database = LogDatabase(**__DB_PARAMS__)
+_log_storage = LogStorage(_log_database)
+_log_storage.minNumOfSpansToFlush = 24
+_log_storage.minNumOfAnnotationsToFlush = 2 * _log_storage.minNumOfSpansToFlush
+_log_data_manager = LogDataManager(_log_storage)
 
 
-def start_test_server():
-    server = ThreadedHTTPServer((HOST, PORT), ServerHandler)
-    server.serve_forever()
-
-
-def vap_callback(vap, cbd, priv):
+def _vap_callback(vap, cbd, priv):
+    lock = threading.Lock()
     try:
+        lock.acquire()
         vxid = cbd['vxid']
         request_type = cbd['type']
         tag = cbd['tag']
         t_tag = vap.VSL_tags[tag]
         data = cbd['data']
-        log_data_manager.add_log_item(vxid, request_type, t_tag, data)
+        _log_data_manager.add_log_item(vxid, request_type, t_tag, data)
+    except KeyError as key_error:
+        print "Key error occured: ", key_error.message
     except Exception as vap_callback_ex:
         print vap_callback_ex
+    finally:
+        lock.release()
 
 
-def run_cb():
-    while True:
-        ret = vap.Dispatch(vap_callback)
-        if not ret:
-            time.sleep(0.5)
+def clear_log_storage():
+    assert _log_storage
+    del _log_storage.spans[:]
+    del _log_storage.annotations[:]
 
 
-class BasicTestCase(TestCase):
+class BaseTestCase(TestCase):
 
-    def test_log_reader(self):
+    __test__ = False
+
+    def __start_test_server():
+        server = ThreadedHTTPServer((HOST, PORT), ServerHandler)
+        server.serve_forever()
+
+    server_process = Process(target=__start_test_server)
+
+    def __run_cb(self):
+        assert _vap
+        while True:
+            ret = _vap.Dispatch(_vap_callback)
+            if not ret:
+                time.sleep(0.5)
+
+    @classmethod
+    def setUpClass(cls):
+        assert cls.server_process
+        load_yaml_config()
+
+        cls.server_process.daemon = True
+        cls.server_process.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.server_process.terminate()
+        cls.server_process.join(timeout=1)
+
+        assert not cls.server_process.is_alive()
+
+    def setUp(self):
+        clear_log_storage()
+
+    def run_test_requests(self):
         """
-        This test requires that varnish is up and running under
+        This method requires that varnish is up and running under
         the <VARNISH_PORT> and has as a backend the test server
         spawned with <HOST> and <PORT>.
         """
-        load_yaml_config()
-        self.assertEqual(1, len(trace_urls))
-
-        server_process = Process(target=start_test_server)
-        server_process.start()
-
-        t = threading.Thread(target=run_cb, args=())
-        t.daemon = True
-        t.start()
+        vap_binding_cb_thread = threading.Thread(target=self.__run_cb)
+        vap_binding_cb_thread.daemon = True
+        vap_binding_cb_thread.start()
 
         req_url = "http://%s:%s%s" % (HOST, VARNISH_PORT, trace_urls[0])
         requests.get(req_url)
 
-        server_process.join(timeout=1)
-        server_process.terminate()
-        t.join(1)
+        vap_binding_cb_thread.join(1)
 
-        self.assertEqual(len(log_storage.spans), 16)
-        self.assertEqual(len(log_storage.annotations), 32)
+
+class LogReaderTestCase(BaseTestCase):
+
+    def assert_dict(self, dict_def, dict_values):
+        assert isinstance(dict_def, dict)
+        assert isinstance(dict_values, dict)
+
+        self.assertEqual(set(dict_def.keys()),
+                         set(dict_values.keys()))
+        for k, v in dict_values.items():
+            self.assertIsNotNone(dict_values[k])
+            self.assertIsInstance(v, dict_def[k])
+
+    def test_span_and_annotation_count(self):
+        self.run_test_requests()
+        self.assertEqual(len(_log_storage.spans), 6)
+        self.assertEqual(len(_log_storage.annotations), 12)
+
+    def test_span_dict_structure(self):
+        self.run_test_requests()
+
+        span_def = {'span_id': str,
+                    'parent_id': str,
+                    'trace_id': str,
+                    'span_name': str,
+                    'debug': int,
+                    'duration': int,
+                    'created_ts': int}
+
+        for span in _log_storage.spans:
+            self.assert_dict(span_def, span)
+
+    def test_annotation_dict_structure(self):
+        self.run_test_requests()
+        annotation_def = {'span_id': str,
+                          'trace_id': str,
+                          'span_name': str,
+                          'service_name': str,
+                          'value': str,
+                          'ipv4': int,
+                          'port': str,
+                          'a_timestamp': int,
+                          'duration': int}
+
+        for annotation in _log_storage.annotations:
+            self.assert_dict(annotation_def, annotation)
 
 
 if __name__ == '__main__':
