@@ -43,6 +43,7 @@ virtualenv %{_builddir}/opt/zipnish/log-reader/venv
 source %{_builddir}/opt/zipnish/log-reader/venv/bin/activate
 export PATH="%{_builddir}/opt/zipnish/log-reader/venv/bin:$PATH"
 
+%{__pip_cmd} install mysql-connector-python
 %{__pip_cmd} install simplemysql
 %{__pip_cmd} install crochet
 
