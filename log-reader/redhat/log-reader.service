@@ -1,5 +1,5 @@
 [Unit]
-Description=Log reader service (varnish 4.0)
+Description=Zipnish log-reader service (varnish 4.0)
 
 [Service]
 WorkingDirectory=/opt/zipnish/log-reader
