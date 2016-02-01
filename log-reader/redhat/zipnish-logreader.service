@@ -1,0 +1,6 @@
+[Unit]
+Description=Zipnish logreader service (varnish 4.0)
+
+[Service]
+WorkingDirectory=/opt/zipnish/logreader
+ExecStart=/opt/zipnish/logreader/app.py
