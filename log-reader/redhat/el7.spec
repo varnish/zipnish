@@ -11,14 +11,7 @@ BuildRequires: python-virtualenv
 Requires(pre): /usr/sbin/useradd, /usr/bin/getent
 Requires(post): /sbin/chkconfig
 
-%if 0%{?el6}
-%define __pip_cmd pip
-%endif
-
-%if 0%{?el7}
 %define __pip_cmd python -m pip
-%endif
-
 
 %description
 This package provides log-reader, a daemon that fetches
