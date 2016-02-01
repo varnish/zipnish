@@ -32,7 +32,6 @@ cp %{SOURCEURL0}/logreader/varnishapi.py %{_builddir}/opt/zipnish/logreader/varn
 cp -r %{SOURCEURL0}/logreader/* %{_builddir}/opt/zipnish/logreader/
 
 cp %{SOURCEURL0}/logreader/redhat/zipnish-logreader.service %{_builddir}/usr/lib/systemd/system/zipnish-logreader.service
-cp %{SOURCEURL0}/logreader/redhat/zipnish-logreader.service %{_builddir}/etc/init.d/zipnish-logreader.service
 
 # Build virtual environment
 virtualenv %{_builddir}/opt/zipnish/logreader/venv
