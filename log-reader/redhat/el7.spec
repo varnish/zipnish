@@ -36,6 +36,22 @@ cp %{SOURCEURL0}/log-reader/redhat/log-reader.service %{_builddir}/etc/init.d/lo
 # Build virtual environment
 virtualenv %{_builddir}/opt/zipnish/log-reader/venv
 
+# Replace symlinks in the venv to decouple it from the system python, which
+# may differ from the system python we're using in our build environment.
+find %{_builddir}/opt/api-engine/rest/venv -type l | while read link; do
+    target=$(readlink "$link")
+    if [ -d "$target" ]; then
+        echo "Replace symlink directory: $target -> $link"
+        rm -rf "$link"
+        cp -rL "$target" "$link"
+    elif [ -f "$target" ]; then
+        echo "Replace symlink file: $target -> $link"
+        cp -L --remove-destination "$target" "$link"
+    else
+        echo "Unknown symlink. Leaving it."
+    fi
+done
+
 source %{_builddir}/opt/zipnish/log-reader/venv/bin/activate
 export PATH="$PATH:%{_builddir}/opt/zipnish/log-reader/venv/bin"
 
