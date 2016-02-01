@@ -55,8 +55,8 @@ done
 source %{_builddir}/opt/zipnish/log-reader/venv/bin/activate
 export PATH="$PATH:%{_builddir}/opt/zipnish/log-reader/venv/bin"
 
-%{__pip_cmd} install simplemysql
-%{__pip_cmd} install crochet
+%{__pip_cmd} install simplemysql==1.0
+%{__pip_cmd} install crochet==1.4.0
 
 virtualenv --relocatable %{_builddir}/opt/zipnish/log-reader/venv
 
