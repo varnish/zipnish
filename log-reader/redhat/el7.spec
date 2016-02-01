@@ -14,8 +14,9 @@ Requires(post): /sbin/chkconfig
 %define __pip_cmd python -m pip
 
 %description
-This package provides log-reader, a daemon that fetches
-Varnishlog data.
+This package provides log-reader, a daemon that plugs
+into varnishlog and reads required time information
+for spans and annotations.
 
 
 %prep
