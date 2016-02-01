@@ -76,7 +76,6 @@ exit 0
 %attr(0755,zipnish,zipnish) /var/log/zipnish/
 %attr(0755,root,root) /opt/zipnish/logreader/
 %attr(0755,root,root) /usr/lib/systemd/system/zipnish-logreader.service
-%attr(0755,root,root) /etc/init.d/zipnish-logreader.service
 
 %pre
 # Create user and group
