@@ -64,6 +64,8 @@ virtualenv --relocatable %{_builddir}/opt/zipnish/logreader/venv
 # Fix broken --relocateable option which does not fix the VIRTUAL_ENV setting of the activate script
 sed -i 's|.*/opt/zipnish/logreader/venv|/opt/zipnish/logreader/venv|g' %{_builddir}/opt/zipnish/logreader/venv/bin/activate
 
+echo "\n\nVIRTUAL_ENV=%{_builddir}/opt/zipnish/logreader/venv/bin" >> %{_builddir}/opt/zipnish/logreader/venv/bin/activate
+
 %install
 rm -rf %{buildroot}
 cp -r %{_builddir} %{buildroot}
