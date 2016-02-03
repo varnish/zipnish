@@ -38,7 +38,7 @@ virtualenv %{_builddir}/opt/zipnish/logreader/venv
 
 # Replace symlinks in the venv to decouple it from the system python, which
 # may differ from the system python we're using in our build environment.
-find %{_builddir}/opt/api-engine/rest/venv -type l | while read link; do
+find %{_builddir}/opt/zipnish/logreader/venv -type l | while read link; do
     target=$(readlink "$link")
     if [ -d "$target" ]; then
         echo "Replace symlink directory: $target -> $link"
@@ -60,6 +60,9 @@ export PATH="$PATH:%{_builddir}/opt/zipnish/logreader/venv/bin"
 %{__pip_cmd} list
 
 virtualenv --relocatable %{_builddir}/opt/zipnish/logreader/venv
+
+# Fix broken --relocateable option which does not fix the VIRTUAL_ENV setting of the activate script
+sed -i 's|.*/opt/zipnish/logreader/venv|/opt/zipnish/logreader/venv|g' %{_builddir}/opt/zipnish/logreader/venv/bin/activate
 
 %install
 rm -rf %{buildroot}
