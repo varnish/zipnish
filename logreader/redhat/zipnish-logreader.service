@@ -2,6 +2,7 @@
 Description=Zipnish logreader service (varnish 4.0)
 
 [Service]
-WorkingDirectory=/opt/zipnish/logreader
-ExecStartPre="source /opt/zipnish/logreader/venv/bin/activate"
-ExecStart=/opt/zipnish/logreader/app.py
+ExecStart=/bin/bash -c 'source /opt/zipnish/logreader/venv/bin/activate; /opt/zipnish/logreader/app.py &'
+
+[Install]
+WantedBy=multi-user.target
