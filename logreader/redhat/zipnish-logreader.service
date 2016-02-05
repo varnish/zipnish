@@ -2,6 +2,7 @@
 Description=Zipnish logreader service (varnish 4.0)
 
 [Service]
+Type=forking
 ExecStart=/bin/bash -c 'source /opt/zipnish/logreader/venv/bin/activate; /opt/zipnish/logreader/app.py &'
 
 [Install]
