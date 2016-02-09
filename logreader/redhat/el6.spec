@@ -11,13 +11,13 @@ BuildRequires: python-virtualenv
 Requires(pre): /usr/sbin/useradd, /usr/bin/getent
 Requires(post): /sbin/chkconfig
 
-%define __pip_cmd pip
-
 %description
 This package provides zipnish-logreader, a daemon that plugs
 into varnishlog and reads required time information
 for spans and annotations.
 
+%define __pip_cmd pip
+%define __python_cmd python
 
 %prep
 mkdir -p %{_builddir}/var/log/zipnish/
@@ -41,9 +41,10 @@ virtualenv %{_builddir}/opt/zipnish/logreader/venv
 source %{_builddir}/opt/zipnish/logreader/venv/bin/activate
 export PATH="$PATH:%{_builddir}/opt/zipnish/logreader/venv/bin"
 
-%{__pip_cmd} install simplemysql==1.0
-%{__pip_cmd} install crochet==1.4.0
-%{__pip_cmd} list
+
+%{__python_cmd} %{__pip_cmd} install simplemysql==1.0
+%{__python_cmd} %{__pip_cmd} install crochet==1.4.0
+%{__python_cmd} %{__pip_cmd} list
 
 virtualenv --relocatable %{_builddir}/opt/zipnish/logreader/venv
 
