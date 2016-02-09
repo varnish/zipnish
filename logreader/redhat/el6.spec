@@ -11,7 +11,7 @@ BuildRequires: python-virtualenv
 Requires(pre): /usr/sbin/useradd, /usr/bin/getent
 Requires(post): /sbin/chkconfig
 
-%define __pip_cmd python -m pip
+%define __pip_cmd pip
 
 %description
 This package provides zipnish-logreader, a daemon that plugs
