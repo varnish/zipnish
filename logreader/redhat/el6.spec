@@ -43,7 +43,7 @@ export PATH="$PATH:%{_builddir}/opt/zipnish/logreader/venv/bin"
 
 
 %{__python_cmd} %{_builddir}/opt/zipnish/logreader/venv/bin/pip install simplemysql==1.0
-%{__python_cmd} %{_builddir}/opt/zipnish/logreader/venv/bin/pip install crochet==1.2.0
+%{__python_cmd} %{_builddir}/opt/zipnish/logreader/venv/bin/pip install crochet==1.1.0
 %{__python_cmd} %{_builddir}/opt/zipnish/logreader/venv/bin/pip list
 
 virtualenv --relocatable %{_builddir}/opt/zipnish/logreader/venv
