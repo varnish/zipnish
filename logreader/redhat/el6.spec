@@ -17,7 +17,7 @@ into varnishlog and reads required time information
 for spans and annotations.
 
 %define __pip_cmd pip
-%define __python_cmd python
+%define __python_cmd python2.7
 
 %prep
 mkdir -p %{_builddir}/var/log/zipnish/
