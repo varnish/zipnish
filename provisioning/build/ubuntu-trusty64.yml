@@ -1,6 +1,6 @@
 ---
 - name: Build for ubuntu-vivid 15.x 64-bit
-  hosts: build-ubuntu-vivid64
+  hosts: buildserver
   sudo: yes
   tasks:
     - name: update apt-cache
@@ -24,7 +24,7 @@
         - debhelper
         - dh-make
         - bzr-builddeb
-    
+
     - name: make zipkin-ui tar.gz
       shell: 'tar czvf zipnish-ui.tar.gz /vagrant/ui/'
       args:

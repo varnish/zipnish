@@ -1,3 +1,3 @@
 ---
 
-- include: build/ubuntu-vivid64.yml
+- include: build/ubuntu-trusty64.yml
