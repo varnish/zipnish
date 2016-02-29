@@ -10,5 +10,5 @@
 [exampleapp]
 192.168.75.14
 
-[build-ubuntu-vivid64]
+[buildserver]
 192.168.75.41
