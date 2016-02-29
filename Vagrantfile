@@ -1,37 +1,43 @@
-Vagrant.configure(2) do |config|
-	config.ssh.insert_key = false
-	config.vm.box = 'ubuntu/vivid64'
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
 
-	# user interface
-	config.vm.define 'userinterface' do |userinterface|
-		userinterface.vm.hostname = 'userinterface'
-		userinterface.vm.network :private_network, ip: '192.168.75.11'
-	end
+#define base_server
+base_server = {
+	:box => 'varnish/ubuntu-14.04-amd64',
+	:box_url => 'https://images.varnish-software.com/vagrant/ubuntu-14.04-amd64.json',
+}
 
-	# database
-	config.vm.define 'database' do |database|
-		database.vm.hostname = 'database'
-		database.vm.network :private_network, ip: '192.168.75.12'
-	end
+zipnish_servers = [
+	{
+		:hostname => 'userinterface',
+		:ip => '192.168.75.11'
+	},
+	{
+		:hostname => 'database',
+		:ip => '192.168.75.12'
+	},
+	{
+		:hostname => 'backend',
+		:ip => '192.168.75.13'
+	},
+	{
+		:hostname => 'exampleapp',
+		:ip => '192.168.75.14'
+	},
+	{
+		:hostname => 'buildserver',
+		:ip => '192.168.75.14'
+	}
 
-	# varnish cache, log reader
-	config.vm.define 'backend' do |backend|
-		backend.vm.hostname = 'backend'
-		backend.vm.network :private_network, ip: '192.168.75.13'
-	end
+]
 
-	# example application
-	config.vm.define 'exampleapp' do |exampleapp|
-		exampleapp.vm.hostname = 'exampleapp'
-		exampleapp.vm.network :private_network, ip: '192.168.75.14'
-	end
-
-	# package building machines
-
-	# ubuntu-vivid 64-bit (15.x)
-	config.vm.define 'build-ubuntu-vivid64' do |ubuntu|
-		ubuntu.vm.box = 'ubuntu/vivid64'
-		ubuntu.vm.hostname = 'build-ubuntu-vivid64'
-		ubuntu.vm.network :private_network, ip: '192.168.75.41'
+Vagrant.configure("2") do |config|
+	zipnish_servers.each do |zipnish|
+		config.vm.define zipnish[:hostname] do |zipnish_config|
+			zipnish_config.vm.box = base_server[:box]
+			zipnish_config.vm.box_url = base_server[:box_url]
+			zipnish_config.vm.hostname = zipnish[:hostname]
+			zipnish_config.vm.network :private_network, ip: zipnish[:ip]
+		end
 	end
 end
