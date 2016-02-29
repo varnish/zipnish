@@ -28,6 +28,6 @@
 - name: configure mysql daemon (mysqld.cnf)
   template:
     src: mysqld.cnf.j2
-    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    dest: /etc/mysql/conf.d/mysqld.cnf
   notify:
     - restart mysql-server

@@ -12,7 +12,7 @@
     - {
         role: python-pip,
         virtualenv: '/vagrant/log-reader/venv',
-        requirements: '/vagrant/log-reader/requirements.txt'
+        requirements: '/vagrant/logreader/requirements.txt'
       }
     - apt-transport-https
     - varnish

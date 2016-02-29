@@ -26,7 +26,7 @@ zipnish_servers = [
 	},
 	{
 		:hostname => 'buildserver',
-		:ip => '192.168.75.14'
+		:ip => '192.168.75.41'
 	}
 
 ]
