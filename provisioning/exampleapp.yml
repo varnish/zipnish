@@ -7,7 +7,7 @@
     - httpie
     - nodejs
     - {
-    	role: npm,
-    	path: /vagrant/rpc-service/
+        role: npm,
+        path: /vagrant/rpc-service/
       }
     - exampleapp

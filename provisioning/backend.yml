@@ -11,8 +11,8 @@
     - python-mysqldb
     - {
         role: python-pip,
-        virtualenv: '/vagrant/log-reader/venv',
-        requirements: '/vagrant/log-reader/requirements.txt'
+        virtualenv: '/vagrant/logreader/venv',
+        requirements: '/vagrant/logreader/requirements.txt'
       }
     - apt-transport-https
     - varnish
