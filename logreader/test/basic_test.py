@@ -17,9 +17,9 @@ from server import (
 try:
     sys.path.append("..")
     import varnishapi
-    from log.LogDataManager import LogDataManager
     from log.LogDatabase import LogDatabase
-    from log.LogStorage import LogStorage
+    from log.log_snapshot import Snapshot
+    from log.parser import parse_log_row, spans, annotations
 except ImportError as ex:
     print "Import error: %s" % ex
     sys.exit(1)
@@ -38,12 +38,9 @@ __DB_PARAMS__ = {
 }
 
 _vap = varnishapi.VarnishLog(['-g', 'request'])
-
 _log_database = LogDatabase(**__DB_PARAMS__)
-_log_storage = LogStorage(_log_database)
-_log_storage.minNumOfSpansToFlush = 24
-_log_storage.minNumOfAnnotationsToFlush = 2 * _log_storage.minNumOfSpansToFlush
-_log_data_manager = LogDataManager(_log_storage)
+_snapshot = Snapshot()
+_snapshot.add_callback_func(parse_log_row)
 
 
 def _vap_callback(vap, cbd, priv):
@@ -55,7 +52,7 @@ def _vap_callback(vap, cbd, priv):
         tag = cbd['tag']
         t_tag = vap.VSL_tags[tag]
         data = cbd['data']
-        _log_data_manager.add_log_item(vxid, request_type, t_tag, data)
+        _snapshot.fill_snapshot(vxid, request_type, t_tag, data)
     except KeyError as key_error:
         print "Key error occured: ", key_error.message
     except Exception as vap_callback_ex:
@@ -65,9 +62,9 @@ def _vap_callback(vap, cbd, priv):
 
 
 def clear_log_storage():
-    assert _log_storage
-    del _log_storage.spans[:]
-    del _log_storage.annotations[:]
+    assert _snapshot
+    del spans[:]
+    del annotations[:]
 
 
 class BaseTestCase(TestCase):
@@ -135,8 +132,8 @@ class LogReaderTestCase(BaseTestCase):
 
     def test_span_and_annotation_count(self):
         self.run_test_requests()
-        self.assertEqual(len(_log_storage.spans), 6)
-        self.assertEqual(len(_log_storage.annotations), 12)
+        self.assertEqual(len(spans), 16)
+        self.assertEqual(len(annotations), 32)
 
     def test_span_dict_structure(self):
         self.run_test_requests()
@@ -149,7 +146,7 @@ class LogReaderTestCase(BaseTestCase):
                     'duration': int,
                     'created_ts': int}
 
-        for span in _log_storage.spans:
+        for span in spans:
             self.assert_dict(span_def, span)
 
     def test_annotation_dict_structure(self):
@@ -164,7 +161,7 @@ class LogReaderTestCase(BaseTestCase):
                           'a_timestamp': int,
                           'duration': int}
 
-        for annotation in _log_storage.annotations:
+        for annotation in annotations:
             self.assert_dict(annotation_def, annotation)
 
 

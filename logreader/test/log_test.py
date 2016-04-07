@@ -2,7 +2,6 @@ import unittest
 from multiprocessing import Process
 from unittest import TestCase
 
-import mysql.connector
 import requests
 from server import (
     ServerHandler,
@@ -11,6 +10,7 @@ from server import (
     load_yaml_config,
     trace_urls,
 )
+from simplemysql import SimpleMysql
 
 
 # Port to be used by the test server.
@@ -33,46 +33,26 @@ __DB_PARAMS__ = {
 }
 
 
-def start_test_server():
+def start_server():
     server = ThreadedHTTPServer((HOST, PORT), ServerHandler)
     server.serve_forever()
 
 
 def run_sql(query, *args):
-    cnx = mysql.connector.connect(**__DB_PARAMS__)
-    cursor = cnx.cursor()
+    db = SimpleMysql(**__DB_PARAMS__)
+    db.query(query, args)
+    db.commit()
+    db.conn.close()
 
-    cursor.execute(query, args)
-    cnx.commit()
+
+def get_timestamp(timestamp_order):
+    db = SimpleMysql(**__DB_PARAMS__)
+    cursor = db.query("select created_ts from zipnish_spans "
+                      "order by created_ts %s limit 1" % timestamp_order)
+
+    ts = cursor.fetchone()[0]
     cursor.close()
-    cnx.close()
-
-
-def get_max_timestamp():
-    cnx = mysql.connector.connect(**__DB_PARAMS__)
-    cursor = cnx.cursor()
-    ts = 0
-    cursor.execute("select created_ts from zipnish_spans "
-                   "order by created_ts DESC limit 1")
-    for (created_ts) in cursor:
-        ts = created_ts[0]
-        break
-    cursor.close()
-    cnx.close()
-    return ts
-
-
-def get_min_timestamp():
-    cnx = mysql.connector.connect(**__DB_PARAMS__)
-    cursor = cnx.cursor()
-    ts = 0
-    cursor.execute("select created_ts from zipnish_spans "
-                   "order by created_ts ASC limit 1")
-    for (created_ts) in cursor:
-        ts = created_ts[0]
-        break
-    cursor.close()
-    cnx.close()
+    db.conn.close()
     return ts
 
 
@@ -82,12 +62,12 @@ class LogReaderTestCase(TestCase):
         run_sql("DELETE FROM zipnish_annotations")
         run_sql("DELETE FROM zipnish_spans")
 
-    def testSerialCallResponseTimes(self):
+    def test_serial_call_response_times(self):
         load_yaml_config()
         self.assertEqual(1, len(trace_urls))
 
         total_sleep_time = int(get_total_sleep_time() * 1000)
-        server_process = Process(target=start_test_server)
+        server_process = Process(target=start_server)
         server_process.start()
 
         req_url = "http://%s:%s%s" % (HOST, VARNISH_PORT, trace_urls[0])
@@ -96,11 +76,11 @@ class LogReaderTestCase(TestCase):
         server_process.join(timeout=1)
         server_process.terminate()
 
-        max = get_max_timestamp()
-        min = get_min_timestamp()
+        max = get_timestamp("DESC")
+        min = get_timestamp("ASC")
 
         delta = (max - min) / 1000
-        self.assertAlmostEqual(delta, total_sleep_time, delta=50)
+        self.assertAlmostEqual(delta, total_sleep_time, delta=150)
 
 
 if __name__ == '__main__':
