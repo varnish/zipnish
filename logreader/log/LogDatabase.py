@@ -53,14 +53,14 @@ class LogDatabase:
 
         span_id_key = "ALTER TABLE zipnish_annotations ADD FOREIGN KEY(span_id) " \
                       "REFERENCES zipnish_spans(span_id) ON DELETE CASCADE;"
-        trace_id_indx = "ALTER TABLE zipnish_annotations ADD INDEX(trace_id);"
+        trace_id_index = "ALTER TABLE zipnish_annotations ADD INDEX(trace_id);"
         span_name_index = "ALTER TABLE zipnish_annotations ADD INDEX(span_name(64));"
         value_index = "ALTER TABLE zipnish_annotations ADD INDEX(value(64));"
         a_timestamp_index = "ALTER TABLE zipnish_annotations ADD INDEX(a_timestamp);"
 
         queryes = [spans_table_query, span_id_index0, trace_id_index0,
                    span_name_index0, created_ts_index,
-                   annotations_table_query, span_id_key, trace_id_indx,
+                   annotations_table_query, span_id_key, trace_id_index,
                    span_name_index, value_index, a_timestamp_index]
 
         stmt = "SHOW TABLES LIKE 'zipnish_%'"

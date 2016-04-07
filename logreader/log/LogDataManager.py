@@ -1,34 +1,32 @@
-import varnishapi,time,os,sys,syslog,traceback
-
 # LogDataManager responsible for recording of log data
 class LogDataManager:
-    def __init__(self, logStorage):
+
+    def __init__(self, log_storage):
         self.logRow = {}
-        self.logStorage = logStorage
+        self.logStorage = log_storage
 
         self.Tags = ['ReqURL', 'BereqURL']
         self.MapTagToZipnishField = {
-                'ReqURL': 'span_name',
-                'BereqURL': 'span_name'
-                }
+            'ReqURL': 'span_name',
+            'BereqURL': 'span_name'
+        }
 
-    def addLogItem(self, vxid, requestType, tag, data):
+    def add_log_item(self, vxid, requestType, tag, data):
 
-        # print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid, tag, data)
+        # print "type: %s, vxid: %d, tag: %s, data: %s" % (requestType, vxid,
+        # tag, data)
 
         if tag == 'Begin':
-            self.logRow = {}
+            self.logRow = dict()
             self.logRow['begin'] = data
 
         elif tag == 'End':
             self.logRow['request_type'] = requestType
             self.logStorage.push(self.logRow)
-
             self.logRow = {}
 
-
         if tag in self.Tags:
-            self.logRow[ self.MapTagToZipnishField[tag] ] = data.rstrip('\x00')
+            self.logRow[self.MapTagToZipnishField[tag]] = data.rstrip('\x00')
 
         elif tag == 'Link':
             value = data.rstrip('\x00')
@@ -45,7 +43,8 @@ class LogDataManager:
             self.logRow['timestamp-abs-' + split[0]] = timeValues[0]
             self.logRow['timestamp-duration-' + split[0]] = timeValues[2]
 
-        elif tag == 'ReqHeader' or tag == 'RespHeader' or tag == 'BereqHeader' or tag == 'BerespHeader':
+        elif tag == 'ReqHeader' or tag == 'RespHeader' or \
+                tag == 'BereqHeader' or tag == 'BerespHeader':
             split = data.split(': ', 1)
             value = split[1].rstrip('\x00')
 
@@ -74,4 +73,3 @@ class LogDataManager:
 
                 self.logRow['ipv4'] = ipv4
                 self.logRow['port'] = port
-

@@ -1,10 +1,12 @@
-import time
 import copy
-
 from collections import OrderedDict
 
+
 # LogStorage - read and do basic processing of incoming data
+
+
 class LogStorage:
+
     def __init__(self, db):
         # connection to database
         self.db = db
@@ -18,7 +20,8 @@ class LogStorage:
         # minimum number of span data points before flushing data to database
         self.minNumOfSpansToFlush = 2
 
-        # minimum number of annotation data points before flushing data to database
+        # minimum number of annotation data points before flushing data to
+        # database
         self.minNumOfAnnotationsToFlush = 4
 
     def __ts_convert(self, row_dict, ts_key, convert_func):
@@ -56,11 +59,15 @@ class LogStorage:
         if row['request_type'] == 'c':
 
             # client request considered for span
-            row['timestamp-abs-Start'] = self.convertTimestamp(row['timestamp-abs-Start'])
-            row['timestamp-duration-Start'] = self.convertDuration(row['timestamp-duration-Start'])
+            row['timestamp-abs-Start'] = self.convertTimestamp(
+                row['timestamp-abs-Start'])
+            row['timestamp-duration-Start'] = self.convertDuration(
+                row['timestamp-duration-Start'])
 
-            row['timestamp-duration-Resp'] = self.convertDuration(row['timestamp-duration-Resp'])
-            row['timestamp-abs-Resp'] = self.convertTimestamp(row['timestamp-abs-Resp'])
+            row['timestamp-duration-Resp'] = self.convertDuration(
+                row['timestamp-duration-Resp'])
+            row['timestamp-abs-Resp'] = self.convertTimestamp(
+                row['timestamp-abs-Resp'])
 
             # add backend request link as key, add reference to client request
 
@@ -70,43 +77,68 @@ class LogStorage:
             # TODO: this needs to be looked into further, this check needs to be documented
             # and elaborated upon why we have done this
             # probably because parent the top most span, which starts the trace
-            # needs to have it's varnish VxID come from the backend request, and not from the 
+            # needs to have it's varnish VxID come from the backend request, and not from the
             # client request
 
-            span = {\
-                'span_id': row['span_id'], \
-                'parent_id': row['parent_id'], \
-                'trace_id': row['trace_id'], \
-                'span_name': row['span_name'], \
-                'debug': row['debug'], \
-                'duration': row['timestamp-duration-Start'], \
-                'created_ts': row['timestamp-abs-Start'] \
+            span = {
+                'span_id': row['span_id'],
+                'parent_id': row['parent_id'],
+                'trace_id': row['trace_id'],
+                'span_name': row['span_name'],
+                'debug': row['debug'],
+                'duration': row['timestamp-duration-Start'],
+                'created_ts': row['timestamp-abs-Start']
             }
 
             # Server Recieve
-            self.spans.append( copy.copy(span) )
+            self.spans.append(copy.copy(span))
 
-            #print "CLIENT -> " + row['span_name'] + ("; span_id: " + str(row['span_id']) + "; parent_id: " + str(row['parent_id']))
+            # print "CLIENT -> " + row['span_name'] + ("; span_id: " +
+            # str(row['span_id']) + "; parent_id: " + str(row['parent_id']))
 
             if row['parent_id'] is not None:
                 span['duration'] = row['timestamp-duration-Resp']
                 span['created_ts'] = row['timestamp-abs-Resp']
 
                 # Server Response
-                self.spans.append( span )
+                self.spans.append(span)
 
         elif row['request_type'] == 'b':
 
             # backend request considered for annotations
 
-            self.__ts_convert(row, 'timestamp-duration-Start', self.convertDuration)
-            self.__ts_convert(row, 'timestamp-abs-Start', self.convertTimestamp)
-            self.__ts_convert(row, 'timestamp-duration-Bereq', self.convertDuration)
-            self.__ts_convert(row, 'timestamp-abs-Bereq', self.convertTimestamp)
-            self.__ts_convert(row, 'timestamp-duration-Beresp', self.convertDuration)
-            self.__ts_convert(row, 'timestamp-abs-Beresp', self.convertTimestamp)
-            self.__ts_convert(row, 'timestamp-duration-BerespBody', self.convertDuration)
-            self.__ts_convert(row, 'timestamp-abs-BerespBody', self.convertTimestamp)
+            self.__ts_convert(
+                row,
+                'timestamp-duration-Start',
+                self.convertDuration)
+            self.__ts_convert(
+                row,
+                'timestamp-abs-Start',
+                self.convertTimestamp)
+            self.__ts_convert(
+                row,
+                'timestamp-duration-Bereq',
+                self.convertDuration)
+            self.__ts_convert(
+                row,
+                'timestamp-abs-Bereq',
+                self.convertTimestamp)
+            self.__ts_convert(
+                row,
+                'timestamp-duration-Beresp',
+                self.convertDuration)
+            self.__ts_convert(
+                row,
+                'timestamp-abs-Beresp',
+                self.convertTimestamp)
+            self.__ts_convert(
+                row,
+                'timestamp-duration-BerespBody',
+                self.convertDuration)
+            self.__ts_convert(
+                row,
+                'timestamp-abs-BerespBody',
+                self.convertTimestamp)
 
             if 'trace_id' not in row:
                 row['trace_id'] = row['span_id']
@@ -119,25 +151,27 @@ class LogStorage:
             clientSpanId = row['begin'][indexLeft:indexRight]
 
             # print "Before: " + str(self.spans)
-            # print "replace client span id -> " + clientSpanId + " WITH " + row["span_id"]
+            # print "replace client span id -> " + clientSpanId + " WITH " +
+            # row["span_id"]
             self.replaceClientSpanId(clientSpanId, row['span_id'])
             # print "After: "  + str(self.spans)
 
             if len(self.spans) >= self.minNumOfSpansToFlush:
                 self.flushSpans()
 
-            #print "BACKEND -> " + row['span_name'] + ("; span_id: " + str(row['span_id']) + ", parent_id: " + str(row['parent_id']))
+            # print "BACKEND -> " + row['span_name'] + ("; span_id: " +
+            # str(row['span_id']) + ", parent_id: " + str(row['parent_id']))
 
-            annotation = {\
-                'span_id': row['span_id'], \
-                'trace_id': row['trace_id'], \
-                'span_name': row['span_name'], \
-                'service_name': row['span_name'], \
-                'value': 'cs', \
-                'ipv4': row['ipv4'], \
-                'port': row['port'], \
-                'a_timestamp': row['timestamp-abs-Start'], \
-                'duration': row['timestamp-duration-Start'] \
+            annotation = {
+                'span_id': row['span_id'],
+                'trace_id': row['trace_id'],
+                'span_name': row['span_name'],
+                'service_name': row['span_name'],
+                'value': 'cs',
+                'ipv4': row['ipv4'],
+                'port': row['port'],
+                'a_timestamp': row['timestamp-abs-Start'],
+                'duration': row['timestamp-duration-Start']
             }
 
             # Client Start
@@ -167,7 +201,8 @@ class LogStorage:
     def replaceClientSpanId(self, clientSpanId, backendSpanId):
         for spanIndex in range(len(self.spans)):
             spanRow = self.spans[spanIndex]
-            #print "spanRow => " + str(spanRow['span_id']) + " == " + clientSpanId + " > " + str(spanRow['span_id'] == clientSpanId)
+            # print "spanRow => " + str(spanRow['span_id']) + " == " +
+            # clientSpanId + " > " + str(spanRow['span_id'] == clientSpanId)
 
             if spanRow['span_id'] == clientSpanId:
                 if spanRow['trace_id'] == spanRow['span_id']:
@@ -178,12 +213,13 @@ class LogStorage:
 
     def convertIP2Integer(self, ip):
         parts = ip.split('.')
-        return (int(parts[0]) << 24) + (int(parts[1]) << 16) + (int(parts[2]) << 8) + int(parts[3])
+        return (int(parts[0]) << 24) + (int(parts[1]) << 16) + \
+            (int(parts[2]) << 8) + int(parts[3])
 
     def convertTimestamp(self, timestamp):
         # probably varnish GMT-0, need to confirm it later
         return int(timestamp.replace('.', ''))
-        #return int(float(timestamp)) * 1000000
+        # return int(float(timestamp)) * 1000000
 
     def convertDuration(self, duration):
         # this one is the most important value, below conversion gives us
@@ -208,12 +244,12 @@ class LogStorage:
         self.annotations = []
 
     def printTable(self, rows):
-        output = {\
-                    'span_id': [], \
-                    'trace_id': [], \
-                    'span_name': [], \
-                    'duration': [] \
-                }
+        output = {
+            'span_id': [],
+            'trace_id': [],
+            'span_name': [],
+            'duration': []
+        }
 
         if 'a_timestamp' in rows[0]:
             output['service_name'] = []
@@ -229,11 +265,9 @@ class LogStorage:
         for dictionary in rows:
             for key, value in dictionary.iteritems():
                 if key in output:
-                    output[ key ].append( value )
+                    output[key].append(value)
 
         headers = sorted(output.keys())
         orderedDictionary = OrderedDict(sorted(output.items()))
 
         print orderedDictionary
-
-

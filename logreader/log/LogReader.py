@@ -1,7 +1,8 @@
 import logging
 import threading
+
 import crochet
-from twisted.internet import reactor, defer
+from twisted.internet import defer, reactor
 
 
 class CallbackRunner(object):

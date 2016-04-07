@@ -3,13 +3,20 @@
 import ConfigParser
 import logging
 import os
+import signal
 import sys
+import threading
 
 import varnishapi
-from log.LogDataManager import LogDataManager
 from log.LogDatabase import LogDatabase
-from log.LogReader import CallbackRunner
-from log.LogStorage import LogStorage
+from log.log_snapshot import Snapshot
+from log.parser import (
+    annotations,
+    clear_annotations,
+    clear_spans,
+    parse_log_row,
+    spans,
+)
 
 
 log = logging.getLogger()
@@ -104,7 +111,7 @@ def vap_callback(vap, cbd, priv):
         tag = cbd['tag']
         t_tag = vap.VSL_tags[tag]
         data = cbd['data']
-        log_data_manager.addLogItem(vxid, request_type, t_tag, data)
+        snapshot.fill_snapshot(vxid, request_type, t_tag, data)
     except Exception as vap_callback_ex:
         log.error(vap_callback_ex)
 
@@ -114,37 +121,57 @@ def error_callback(error):
     vap.Fini()
 
 
-def fetch_varnish_log(vap):
+def fetch_varnish_log():
     out = vap.Dispatch(vap_callback)
     interval = 0
     if not out:
-        interval = callback_sleep_time
-    callback_runner.set_interval(interval)
+        interval = 0.5  # callback_sleep_time
+    task.interval = interval
+
+
+class PeriodicEvent(object):
+
+    def __init__(self, interval, func):
+        self.interval = interval
+        self.func = func
+        self.terminate = threading.Event()
+
+    def _signals_install(self, func):
+        for sig in [signal.SIGINT, signal.SIGTERM]:
+            signal.signal(sig, func)
+
+    def _signal_handler(self, signum, frame):
+        self.terminate.set()
+
+    def run(self):
+        self._signals_install(self._signal_handler)
+        while not self.terminate.is_set():
+            self.func()
+            self.terminate.wait(self.interval)
+        self._signals_install(signal.SIG_DFL)
+
+
+def snapshot_callback(log_input):
+    parse_log_row(log_input)
+
+    if len(annotations) >= 4:
+        storage.insert("spans", spans)
+        storage.insert("annotations", annotations)
+        clear_spans()
+        clear_annotations()
 
 
 if __name__ == '__main__':
+
     init_config()
     init_log()
 
+    storage = LogDatabase(**__DB_PARAMS__)
     if cache_name:
         varnish_log_args.extend(['-n', cache_name])
+    snapshot = Snapshot()
+    snapshot.add_callback_func(snapshot_callback)
+
     vap = varnishapi.VarnishLog(varnish_log_args)
-
-    callbacks = [fetch_varnish_log]
-    callback_runner = CallbackRunner(callbacks, error_callback, False, vap)
-
-    try:
-        log_database = LogDatabase(**__DB_PARAMS__)
-        log_storage = LogStorage(log_database)
-        log_data_manager = LogDataManager(log_storage)
-
-        log_cache_name = "default" if not cache_name else cache_name
-        log.info("Starting log reader for cache: %s" % log_cache_name)
-
-        callback_runner.run()
-    except Exception as e:
-        log.error(e)
-        print "Error occurred: %s" % e.args[0]
-        sys.exit(-1)
-
-    log.info("Log reader has stopped.")
+    task = PeriodicEvent(0.5, fetch_varnish_log)
+    task.run()
