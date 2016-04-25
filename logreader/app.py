@@ -8,7 +8,7 @@ import sys
 import threading
 
 import varnishapi
-from log.LogDatabase import LogDatabase
+from log.db import LogDatabase
 from log.log_snapshot import Snapshot
 from log.parser import (
     annotations,

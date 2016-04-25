@@ -17,7 +17,7 @@ from server import (
 try:
     sys.path.append("..")
     import varnishapi
-    from log.LogDatabase import LogDatabase
+    from log.db import LogDatabase
     from log.log_snapshot import Snapshot
     from log.parser import parse_log_row, spans, annotations
 except ImportError as ex:
