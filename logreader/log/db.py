@@ -22,9 +22,6 @@ class LogDatabase:
 
         self.__create_tables()
 
-        if 'truncate_tables' in keyVals and keyVals['truncate_tables'] == True:
-            self.truncateTables()
-
     def __create_tables(self):
         spans_table_query = "CREATE TABLE IF NOT EXISTS zipnish_spans " \
             "(span_id BIGINT NOT NULL, " \
@@ -73,30 +70,11 @@ class LogDatabase:
 
             self.db.commit()
 
-    def getParams(self):
+    def get_params(self):
         return self.dbParams
 
-    def getDB(self):
-        return self.conn
-
-    def insert(self, tableName, rows):
-        table = self.tablePrefix + tableName
-        if len(rows) > 0:
-            for row in rows:
-                self.db.insert(table, row)
-            self.db.commit()
-
-    # truncate data in tables related to our application
-    def truncateTables(self):
-        print 'Truncating Tables:'
-
-        if self.db is not None and self.db.is_open():
-            for tableName in self.tables:
-                # table prefix + table name
-                table = self.tablePrefix + tableName
-
-                print 'truncating table -> ' + table
-
-                # delete table, and commit changes to database
-                self.db.delete(table)
-                self.db.commit()
+    def insert(self, table_name, rows):
+        table = self.tablePrefix + table_name
+        for row in rows:
+            self.db.insert(table, row)
+        self.db.commit()
