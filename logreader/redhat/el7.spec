@@ -29,7 +29,7 @@ mkdir -p %{_builddir}/etc/init.d/
 cp %{SOURCEURL0}/logreader/default.cfg %{_builddir}/etc/zipnish/zipnish.cfg
 cp %{SOURCEURL0}/logreader/app.py %{_builddir}/opt/zipnish/logreader/app.py
 cp %{SOURCEURL0}/logreader/varnishapi.py %{_builddir}/opt/zipnish/logreader/varnishapi.py
-cp -r %{SOURCEURL0}/logreader/* %{_builddir}/opt/zipnish/logreader/
+cp -r %{SOURCEURL0}/logreader/log/*.py %{_builddir}/opt/zipnish/logreader/log/
 
 cp %{SOURCEURL0}/logreader/redhat/zipnish-logreader.service %{_builddir}/usr/lib/systemd/system/zipnish-logreader.service
 
@@ -56,7 +56,6 @@ source %{_builddir}/opt/zipnish/logreader/venv/bin/activate
 export PATH="$PATH:%{_builddir}/opt/zipnish/logreader/venv/bin"
 
 %{__pip_cmd} install simplemysql==1.0
-%{__pip_cmd} install crochet==1.4.0
 %{__pip_cmd} list
 
 virtualenv --relocatable %{_builddir}/opt/zipnish/logreader/venv
