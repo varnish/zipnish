@@ -37,7 +37,7 @@ class Snapshot(object):
         elif tag in HEADER_TAGS:
             header_info = data.rstrip('\x00').split(": ")
             header_name = header_info[0].lower()
-            header_value = header_info[1]
+            header_value = header_info[1].rsplit()[0]
 
             if header_name == 'x-varnish':
                 self.log_snapshot['span_id'] = header_value
