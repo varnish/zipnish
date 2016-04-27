@@ -8,7 +8,8 @@ import sys
 import threading
 
 import varnishapi
-from log.LogDatabase import LogDatabase
+from _mysql_exceptions import OperationalError
+from log.db import LogDatabase
 from log.log_snapshot import Snapshot
 from log.parser import (
     annotations,
@@ -20,27 +21,23 @@ from log.parser import (
 
 
 log = logging.getLogger()
+snapshot = Snapshot()
+config = ConfigParser.ConfigParser()
+__DB_PARAMS__ = dict()
+
 
 LEVELS = {'debug': logging.DEBUG,
           'info': logging.INFO,
           'warning': logging.WARNING,
           'error': logging.ERROR}
 
-config = ConfigParser.ConfigParser()
-
-# default connection parameters to database
-__DB_PARAMS__ = {
-    'host': '192.168.75.12',
-    'db': 'microservice',
-    'user': 'microservice',
-    'passwd': 'WqPv5fBSLgnskM7',
-    'keep_alive': True,
-    'truncate_tables': False
-}
-
 varnish_log_args = ['-g', 'request']
 callback_sleep_time = 0.5
 cache_name = None
+
+storage = None
+vap = None
+task = None
 
 
 def init_log():
@@ -49,10 +46,14 @@ def init_log():
     log_format = '%(asctime)s %(levelname)s: %(message)s ' \
                  '[in %(pathname)s:%(lineno)d]'
 
-    logging.basicConfig(level=LEVELS.get(log_level.lower()),
-                        format=log_format,
-                        filename=log_file,
-                        filemode='w')
+    try:
+        logging.basicConfig(level=LEVELS.get(log_level.lower()),
+                            format=log_format,
+                            filename=log_file,
+                            filemode='w')
+    except IOError as io:
+        print io.message
+        sys.exit(1)
 
 
 def init_config(overridden_config=None):
@@ -76,24 +77,30 @@ def init_config(overridden_config=None):
                 break
 
     config.read(extra_cfg_files)
-    assert config.has_section('Database'), "Database section is missing."
-    assert config.has_option(
-        'Database', 'host'), "MySql host option is missing."
-    assert config.has_option(
-        'Database', 'db_name'), "MySql database name option is missing."
-    assert config.has_option(
-        'Database', 'user'), "MySql user option is missing."
-    assert config.has_option(
-        'Database', 'pass'), "MySql password option is missing."
-    assert config.has_section('Log'), "Log section missing."
-    assert config.has_option('Log', 'log_file'), "Log file path is missing."
-    assert config.has_option(
-        'Log', 'log_level'), "Log level option is missing."
+    try:
+        assert config.has_section('Database'), "Database section is missing."
+        assert config.has_option(
+            'Database', 'host'), "MySql host option is missing."
+        assert config.has_option(
+            'Database', 'db_name'), "MySql database name option is missing."
+        assert config.has_option(
+            'Database', 'user'), "MySql user option is missing."
+        assert config.has_option(
+            'Database', 'pass'), "MySql password option is missing."
+        assert config.has_section('Log'), "Log section missing."
+        assert config.has_option(
+            'Log', 'log_file'), "Log file path is missing."
+        assert config.has_option(
+            'Log', 'log_level'), "Log level option is missing."
+    except AssertionError as ae:
+        print ae.message
+        sys.exit(1)
 
     __DB_PARAMS__['host'] = config.get('Database', 'host')
     __DB_PARAMS__['db'] = config.get('Database', 'db_name')
     __DB_PARAMS__['user'] = config.get('Database', 'user')
     __DB_PARAMS__['passwd'] = config.get('Database', 'pass')
+    __DB_PARAMS__['keep_alive'] = config.get('Database', 'keep_alive')
 
     if config.has_option('Sync', 'splay'):
         global callback_sleep_time
@@ -161,17 +168,31 @@ def snapshot_callback(log_input):
         clear_annotations()
 
 
-if __name__ == '__main__':
+def main():
+    global storage
+    global vap
+    global task
 
     init_config()
     init_log()
 
-    storage = LogDatabase(**__DB_PARAMS__)
-    if cache_name:
-        varnish_log_args.extend(['-n', cache_name])
-    snapshot = Snapshot()
-    snapshot.add_callback_func(snapshot_callback)
+    try:
+        storage = LogDatabase(**__DB_PARAMS__)
+        if cache_name:
+            varnish_log_args.extend(['-n', cache_name])
+        snapshot.add_callback_func(snapshot_callback)
 
-    vap = varnishapi.VarnishLog(varnish_log_args)
-    task = PeriodicEvent(0.5, fetch_varnish_log)
-    task.run()
+        vap = varnishapi.VarnishLog(varnish_log_args)
+        task = PeriodicEvent(0.5, fetch_varnish_log)
+        log.debug("Log Reader is about to start.")
+        task.run()
+    except OperationalError as op:
+        print "Database error %s" % op.args[0]
+        log.error(op)
+    except Exception as ex:
+        print "Unknown exception %s" % ex.args[0]
+        log.error(ex)
+
+
+if __name__ == '__main__':
+    main()

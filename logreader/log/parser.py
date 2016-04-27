@@ -1,3 +1,7 @@
+import socket
+import struct
+
+
 spans = []
 annotations = []
 
@@ -34,9 +38,8 @@ def __convert_duration(duration):
 
 
 def __convert_ip_to_int(ip):
-    parts = ip.split('.')
-    return (int(parts[0]) << 24) + (int(parts[1]) << 16) + \
-        (int(parts[2]) << 8) + int(parts[3])
+    _ip = socket.gethostbyname(ip)
+    return struct.unpack("!I", socket.inet_aton(_ip))[0]
 
 
 def replace_client_span_id(client_span_id, backend_span_id):
