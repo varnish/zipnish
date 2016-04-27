@@ -52,8 +52,10 @@ A configuration file found at **/etc/zipnish/zipnish.cfg** is required with the 
 
 Contents:
 
+
 .. toctree::
    :maxdepth: 1
 
    ui
+   vcl
    changes
