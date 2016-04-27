@@ -34,6 +34,7 @@ LEVELS = {'debug': logging.DEBUG,
 varnish_log_args = ['-g', 'request']
 callback_sleep_time = 0.5
 cache_name = None
+
 storage = None
 vap = None
 task = None
@@ -45,10 +46,14 @@ def init_log():
     log_format = '%(asctime)s %(levelname)s: %(message)s ' \
                  '[in %(pathname)s:%(lineno)d]'
 
-    logging.basicConfig(level=LEVELS.get(log_level.lower()),
-                        format=log_format,
-                        filename=log_file,
-                        filemode='w')
+    try:
+        logging.basicConfig(level=LEVELS.get(log_level.lower()),
+                            format=log_format,
+                            filename=log_file,
+                            filemode='w')
+    except IOError as io:
+        print io.message
+        sys.exit(1)
 
 
 def init_config(overridden_config=None):
@@ -72,19 +77,24 @@ def init_config(overridden_config=None):
                 break
 
     config.read(extra_cfg_files)
-    assert config.has_section('Database'), "Database section is missing."
-    assert config.has_option(
-        'Database', 'host'), "MySql host option is missing."
-    assert config.has_option(
-        'Database', 'db_name'), "MySql database name option is missing."
-    assert config.has_option(
-        'Database', 'user'), "MySql user option is missing."
-    assert config.has_option(
-        'Database', 'pass'), "MySql password option is missing."
-    assert config.has_section('Log'), "Log section missing."
-    assert config.has_option('Log', 'log_file'), "Log file path is missing."
-    assert config.has_option(
-        'Log', 'log_level'), "Log level option is missing."
+    try:
+        assert config.has_section('Database'), "Database section is missing."
+        assert config.has_option(
+            'Database', 'host'), "MySql host option is missing."
+        assert config.has_option(
+            'Database', 'db_name'), "MySql database name option is missing."
+        assert config.has_option(
+            'Database', 'user'), "MySql user option is missing."
+        assert config.has_option(
+            'Database', 'pass'), "MySql password option is missing."
+        assert config.has_section('Log'), "Log section missing."
+        assert config.has_option(
+            'Log', 'log_file'), "Log file path is missing."
+        assert config.has_option(
+            'Log', 'log_level'), "Log level option is missing."
+    except AssertionError as ae:
+        print ae.message
+        sys.exit(1)
 
     __DB_PARAMS__['host'] = config.get('Database', 'host')
     __DB_PARAMS__['db'] = config.get('Database', 'db_name')
@@ -174,6 +184,7 @@ def main():
 
         vap = varnishapi.VarnishLog(varnish_log_args)
         task = PeriodicEvent(0.5, fetch_varnish_log)
+        log.debug("Log Reader is about to start.")
         task.run()
     except OperationalError as op:
         print "Database error %s" % op.args[0]
