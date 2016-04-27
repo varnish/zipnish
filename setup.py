@@ -19,8 +19,7 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
-        'Topic:: Internet:: Log Analysis',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: Apache Software License',     
         'Programming Language :: Python :: 2.7',
     ],
     author='Adeel Shahid, Per Buer, Marius Magureanu',
