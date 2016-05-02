@@ -7,7 +7,8 @@ main scenarios to be handled here:
 
 1. Caching disabled:
 
-.. code-block:: vcl
+.. code-block:: sh
+    
     vcl 4.0;
 
     backend DemoMicroservice {
@@ -25,7 +26,8 @@ main scenarios to be handled here:
 
 2. Caching enabled:
 
-.. code-block:: vcl
+.. code-block:: sh
+    
     vcl 4.0;
 
     backend DemoMicroservice {
