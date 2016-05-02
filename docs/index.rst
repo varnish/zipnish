@@ -1,7 +1,6 @@
-
-===========
+=======
 Zipnish
-===========
+=======
 
 Microservice monitoring tool based on Varnish Cache. Currently it only supports Varnish 4.
 
@@ -58,4 +57,6 @@ Contents:
 
    ui
    vcl
+   docker
+   examples
    changes
