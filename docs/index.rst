@@ -3,6 +3,21 @@ Zipnish
 =======
 
 Microservice monitoring tool based on Varnish Cache. Currently it only supports Varnish 4.
+Zipnish piggybacks the VarnishLog and stores a bunch of data in a similar way as Zipkin does.
+
+There is a logreader component responsible for fetching data from VSl and having it stored into a MySql database,
+furthermore there is an available UI that will display in a hierachical manner all requests going
+through varnish to your services. Both of these components share the same MySql instance.
+
+Prerequisites
+=============
+
+Following packages are required for running Zipnish:
+
+    * simplemysql
+    * flask
+    * sqlalchemy
+    * mysql-python
 
 Installation
 ============
@@ -48,6 +63,22 @@ A configuration file found at **/etc/zipnish/zipnish.cfg** is required with the 
     # Valid log_levels are: DEBUG, INFO, WARNING, ERROR
     log_level = DEBUG
 
+For convenience purposes, there is a docker configuration available which handles setting up MySql database along with a test user.
+
+Run Zipnish
+===========
+
+Considering that your Varnish instance is properly configured in relation to your services, after installing Zipnish
+there are two commands available:
+
+Run the logreader::
+
+    $ zipnish-logreader
+
+
+Run the ui (by default port 5000)::
+
+    $ zipnish-ui
 
 Contents:
 
