@@ -12,7 +12,7 @@ def read(filename):
 
 
 install_requires = [
-    'simplemysql', 'flask', 'sqlalchemy',
+    'simplemysql', 'flask', 'sqlalchemy', 'flask_sqlalchemy',
 ]
 
 setup(
