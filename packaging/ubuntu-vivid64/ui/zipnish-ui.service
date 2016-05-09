@@ -1,5 +1,0 @@
-[Unit]
-Description=Zipnish user interface service
-
-[Service]
-ExecStart=/usr/share/zipnish/ui/venv/bin/python /usr/share/zipnish/ui/app.py

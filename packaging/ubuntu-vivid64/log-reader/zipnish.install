@@ -1,2 +1,0 @@
-../src/* usr/share/zipnish/log-reader/
-debian/zipnish.service /etc/systemd/system/
