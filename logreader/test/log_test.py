@@ -20,16 +20,16 @@ PORT = 9999
 # Do note that for the test to work, it is required
 # that the test server is set as a backend
 # in your vcl configuration
-HOST = '127.0.0.1'
+HOST = 'localhost'
 
 # The port where varnish is exposed.
 VARNISH_PORT = 6081
 
 __DB_PARAMS__ = {
-    'host': '192.168.75.12',
+    'host': '192.168.59.103',
     'db': 'microservice',
-    'user': 'microservice',
-    'passwd': 'WqPv5fBSLgnskM7'
+    'user': 'zipnish',
+    'passwd': 'secret'
 }
 
 
@@ -46,11 +46,15 @@ def run_sql(query, *args):
 
 
 def get_timestamp(timestamp_order):
+    ts = 0
     db = SimpleMysql(**__DB_PARAMS__)
     cursor = db.query("select created_ts from zipnish_spans "
                       "order by created_ts %s limit 1" % timestamp_order)
 
-    ts = cursor.fetchone()[0]
+    if cursor.rowcount:
+        ts = cursor.fetchone()[0]
+    else:
+        print "No timestamp found, default to 0."
     cursor.close()
     db.conn.close()
     return ts
@@ -80,7 +84,7 @@ class LogReaderTestCase(TestCase):
         min = get_timestamp("ASC")
 
         delta = (max - min) / 1000
-        self.assertAlmostEqual(delta, total_sleep_time, delta=150)
+        self.assertAlmostEqual(delta, total_sleep_time, delta=100)
 
 
 if __name__ == '__main__':
