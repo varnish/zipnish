@@ -1,26 +1,15 @@
-# web framework
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
-# extensions
-from flask.ext.sqlalchemy import SQLAlchemy
-
-# configuration
-from config import config
-
-# initialization
 db = SQLAlchemy()
 
-# called from the main app to create an application instance
-def create_app(config_path):
+
+def create_app(db_dialect):
+
     app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = db_dialect
 
-    # configure application
-    app.config.from_pyfile(config_path, silent=True)
-
-    # initialize extensions
     db.init_app(app)
-
-    # connect blueprints
 
     # /app
     from .application import application as application_blueprint

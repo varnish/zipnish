@@ -1,5 +1,6 @@
 import os
 
+
 class Config(object):
     DEBUG = False
     TESTING = False
@@ -11,14 +12,16 @@ class Config(object):
     DB_NAME = os.environ.get('DB_NAME')
 
     SQLALCHEMY_DATABASE_URI = "mysql+mysqldb://{}:{}@{}:{}/{}".\
-            format(DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME)
+        format(DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME)
 
     @staticmethod
     def init_app(app):
         pass
 
+
 class ProductionConfig(Config):
     pass
+
 
 class DevelopmentConfig(Config):
     DEBUG = True
@@ -30,15 +33,16 @@ class DevelopmentConfig(Config):
     DB_NAME = os.environ.get('DB_NAME')
 
     SQLALCHEMY_DATABASE_URI = "mysql+mysqldb://{}:{}@{}:{}/{}".\
-            format(DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME)
+        format(DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME)
+
 
 class TestingConfig(Config):
     TESTING = True
 
 config = {
-        'development': DevelopmentConfig,
-        'testing': TestingConfig,
-        'production': ProductionConfig,
+    'development': DevelopmentConfig,
+    'testing': TestingConfig,
+    'production': ProductionConfig,
 
-        'default': DevelopmentConfig
+    'default': DevelopmentConfig
 }
