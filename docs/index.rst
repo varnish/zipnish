@@ -43,7 +43,7 @@ A configuration file found at **/etc/zipnish/zipnish.cfg** is required with the 
     db_name = microservice
 
     # User name
-    user = some_user
+    user = zipnish
 
     # Password
     pass = secret
