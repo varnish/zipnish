@@ -2,9 +2,11 @@
 Docker
 ======
 
-Unless you have a MySql instance at hand, this Ubuntu based image will spawn a Mariadb instance. This db instance will be the one used by both the logreader and the ui. Check the IP of your docker setup and update the zipnish.cfg accordingly.
+Unless you have a MySql instance at hand, this_ Ubuntu based image will spawn a Mariadb instance. This instance will be the one used by both the logreader and the ui. Check the IP of your docker setup and update the zipnish.cfg accordingly.
 
-This image relies on two extra files: **database.sql** and **init-db.sh**. Both these files are available in the /docker folder within the zipnish source code. The two extra files are responsible for the creation and initialisation of an user and db tables that Zipnish will use further down the line. Browse to this folder and run the following commands:
+The image relies on two extra files: ``database.sql`` and ``init-db.sh``. Both these files are available in the ``/docker`` folder within the zipnish source code. The two extra files are responsible for the creation and initialisation of an user and db tables that Zipnish will use further down the line. Browse to this folder and run the following commands:
+
+.. _this: https://hub.docker.com/r/mariusm/ubuntu-mariadb/
 
 .. code-block:: sh
 
@@ -21,7 +23,7 @@ A database and db user with the following credentials will be available, if you'
   **db_name** = microservice
 
 
-To quickly check that the container is up and running, you could connect to it directly with a Mysql client.
+To quickly check that the container is up and running, you can connect to it directly with a Mysql client.
 Retrieve the IP of your docker setup and connect to the mariadb instance as follows:
 
 .. code-block:: sh

@@ -5,13 +5,15 @@ Examples
 This section will provide a short example on how to extend an endpoint in order for Zipnish to be aware of it.
 
 Full example code found here:
-  https://github.com/varnish/zipnish/blob/master/logreader/test/server.py
+https://github.com/varnish/zipnish/blob/master/logreader/test/server.py
 
 Zipnish requires three headers to be available per request basis:
 
-  * X-Varnish           - Request id assigned by Varnish.
+  * X-Varnish_          - Request id assigned by Varnish.
   * X-Varnish-Trace     - The id that has been assigned by Varnish to the first incoming request.
   * X-Varnish-Parent    - The id of the parent request which has triggered the current request.
+
+.. _X-Varnish: https://www.varnish-cache.org/docs/2.1/faq/http.html
 
 .. code-block:: python
 
@@ -92,5 +94,6 @@ The scenario is as follows:
   2. In order to serve **/articles**, subsequent calls are required to other endpoints such as **/auth**, **/titles** ...etc
      For demo purposes these subsequent calls are handled by the same server, what is important to notice is that all sub-requests go through Varnish as well.
      A random sleep time has been added for each request in order to simulate some "hard work".
-  3. Zipnish-logreader picks up its required data from Varnishlog as these requests go through.
-  4. As data gets written into the MySql database, Zipnish-UI will be able to represent how requests have been issued and how much time each of them has taken.
+  3. The application server decorates the subsequent requests with the headers found in the code above.
+  4. Zipnish-logreader picks up its required data from VSL_ as these requests go through.
+  5. While data gets written into the MySql database, Zipnish-UI will be able to represent how requests have been issued and how much time each of them has taken.

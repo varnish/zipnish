@@ -2,12 +2,16 @@
 Zipnish
 =======
 
-Microservice monitoring tool based on Varnish Cache. Currently it only supports Varnish 4.
-Zipnish piggybacks the VarnishLog and stores a bunch of data in a similar way as Zipkin does.
+Microservice monitoring tool based on Varnish-Cache_. Currently it only supports Varnish 4.
+Zipnish piggybacks the VSL_ and stores a bunch of data in a similar way as Zipkin_ does.
 
-There is a logreader component responsible for fetching data from VSL and having it stored into a MySql database,
+There is a log-reader component responsible for fetching data from VSL_ and having it stored into a MySql database,
 furthermore there is an available UI that will display in a hierachical manner all requests going
 through varnish to your services. Both of these components share the same MySql instance.
+
+.. _VSL: https://www.varnish-cache.org/docs/4.0/reference/vsl.html
+.. _Zipkin: http://zipkin.io/
+.. _Varnish-Cache: https://varnish-cache.org/
 
 Prerequisites
 =============
@@ -30,7 +34,7 @@ Install with pip::
 Configuration
 =============
 
-A configuration file found at **/etc/zipnish/zipnish.cfg** is required with a structure as described below:
+A configuration file found at ``/etc/zipnish/zipnish.cfg`` is required with a structure as described below:
 
 .. code-block:: sh
 
@@ -64,7 +68,7 @@ A configuration file found at **/etc/zipnish/zipnish.cfg** is required with a st
     # Valid log_levels are: DEBUG, INFO, WARNING, ERROR
     log_level = DEBUG
 
-For convenience purposes, there is a docker image available which handles setting up MySql database along with a test user.
+For convenience purposes, there is a docker image available which handles setting up Mariadb database along with a test user.
 
 Run Zipnish
 ===========

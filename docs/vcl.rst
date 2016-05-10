@@ -2,8 +2,10 @@
 VCL how to's
 ============
 
-In order for Zipnish to grab its required headers there are a few changes that are required in your VCL. There are two
+In order for Zipnish to grab its required headers there are a few changes that are required in your VCL_. There are two
 main scenarios to be handled here:
+
+.. _VCL: http://www.varnish-cache.org/docs/4.0/reference/vcl.html
 
 1. Caching disabled:
 

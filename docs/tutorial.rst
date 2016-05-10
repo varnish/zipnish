@@ -3,7 +3,7 @@ Give Zipnish a try
 ==================
 
 This section will aggregate all other chapters in the documentation and will provide a guide
-through setting up a working environment with Zipnish.
+for setting up a working environment with Zipnish.
 As a side-note, all steps below have been run on a Centos7 machine.
 
 A few of the steps within this tutorial require the Zipnish source code, so make sure
@@ -17,7 +17,9 @@ you have it cloned from its repo in beforehand.
     
         $ python server.py &
     
-    This will spawn a lite web server listening on port 9999, the endpoints available in this server are as defined in the server.yaml file located in the same folder.
+    This will spawn a lite web server listening on port 9999, the endpoints available in this server
+    are as defined in the server.yaml file located in the same folder.
+
 
 2)  **Install, configure and start Varnish**
     
