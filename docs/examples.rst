@@ -91,9 +91,9 @@ and server output:
 The scenario is as follows:
 
   1. A client does a request to the test server asking for **/articles**
-  2. In order to serve **/articles**, subsequent calls are required to other endpoints such as **/auth**, **/titles** ...etc
+  2. In order to serve **/articles**, subsequent calls are required to other endpoints such as **/auth**, **/titles** ...etc.
      For demo purposes these subsequent calls are handled by the same server, what is important to notice is that all sub-requests go through Varnish as well.
      A random sleep time has been added for each request in order to simulate some "hard work".
-  3. The application server decorates the subsequent requests with the headers found in the code above.
-  4. Zipnish-logreader picks up its required data from VSL_ as these requests go through.
-  5. While data gets written into the MySql database, Zipnish-UI will be able to represent how requests have been issued and how much time each of them has taken.
+  3. The application server decorates the subsequent requests with the required headers, as shown in the code above.
+  4. Zipnish-logreader picks up its required data from VSL as these requests go through.
+  5. While data gets written in the MySql database, Zipnish-UI will be able to represent how requests have been issued and how much time each of them has taken.

@@ -17,9 +17,8 @@ you have it cloned from its repo in beforehand.
     
         $ python server.py &
     
-    This will spawn a lite web server listening on port 9999, the endpoints available in this server
+    This will spawn a lite web server listening on port ``9999``, the endpoints available in this server
     are as defined in the server.yaml file located in the same folder.
-
 
 2)  **Install, configure and start Varnish**
     
@@ -97,7 +96,7 @@ you have it cloned from its repo in beforehand.
     **user** = zipnish
     
     **pass** = secret
-    
+
 5)  **Install and configure Zipnish**
     
     Zipnish is available in Pypi, thus run the following command to install it:
