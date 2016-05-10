@@ -91,4 +91,5 @@ Contents:
    vcl
    docker
    examples
+   tutorial
    changes
