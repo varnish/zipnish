@@ -1,11 +1,9 @@
 ---
 traces:
     - trace:
-        - url: /api/v1/get_all
-        - span: /api/v1/get/1
-        - span: /api/v1/get/2
-        - span: /api/v1/get/3
-        - span: /api/v1/get/4
-        - span: /api/v1/get/5
-        - span: /api/v1/get/6
-        - span: /api/v1/get/7
+        - url: /api/articles
+        - span: /api/auth
+        - span: /api/titles
+        - span: /api/images
+        - span: /api/correct
+        - span: /api/compose
