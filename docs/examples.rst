@@ -9,8 +9,8 @@ Full example code found here:
 
 Zipnish requires three headers to be available per request basis:
 
-  * X-Varnish           - Request id assigned by varnish.   
-  * X-Varnish-Trace     - The id that has been assigned by varnish to the first incoming request.
+  * X-Varnish           - Request id assigned by Varnish.
+  * X-Varnish-Trace     - The id that has been assigned by Varnish to the first incoming request.
   * X-Varnish-Parent    - The id of the parent request which has triggered the current request.
 
 .. code-block:: python
@@ -33,14 +33,12 @@ In this specific example there is a very simple web server that handles basic GE
   ---
   traces:
       - trace:
-          - url: /api/v1/get_all
-          - span: /api/v1/get/1
-          - span: /api/v1/get/2
-          - span: /api/v1/get/3
-          - span: /api/v1/get/4
-          - span: /api/v1/get/5
-          - span: /api/v1/get/6
-          - span: /api/v1/get/7
+          - url: /api/articles
+          - span: /api/auth
+          - span: /api/titles
+          - span: /api/images
+          - span: /api/correct
+          - span: /api/compose
 
 The test server is exposed through port 9999, our vcl configuration has a backend the points to this server:
 
@@ -60,7 +58,7 @@ The test server is exposed through port 9999, our vcl configuration has a backen
     
 Given that Varnish has its default settings, the request below:
 
-  $ curl -is http://localhost:6081/api/v1/get_all
+  $ curl -is http://localhost:6081/api/articles
 
 wil have the following output:
 
@@ -68,9 +66,9 @@ wil have the following output:
 
   HTTP/1.1 200 OK
   Server: BaseHTTP/0.3 Python/2.7.9
-  Date: Mon, 02 May 2016 13:54:18 GMT
+  Date: Tue, 10 May 2016 08:43:44 GMT
   Content-type: text/html
-  X-Varnish: 32848
+  X-Varnish: 11
   Age: 0
   Via: 1.1 varnish-v4
   Transfer-Encoding: chunked
@@ -81,20 +79,18 @@ and server output:
 
 .. code-block:: text
   
-  127.0.0.1 - - [02/May/2016 13:54:14] "GET /api/v1/get/1 HTTP/1.1" 200 -
-  127.0.0.1 - - [02/May/2016 13:54:14] "GET /api/v1/get/2 HTTP/1.1" 200 -
-  127.0.0.1 - - [02/May/2016 13:54:15] "GET /api/v1/get/3 HTTP/1.1" 200 -
-  127.0.0.1 - - [02/May/2016 13:54:16] "GET /api/v1/get/4 HTTP/1.1" 200 -
-  127.0.0.1 - - [02/May/2016 13:54:16] "GET /api/v1/get/5 HTTP/1.1" 200 -
-  127.0.0.1 - - [02/May/2016 13:54:17] "GET /api/v1/get/6 HTTP/1.1" 200 -
-  127.0.0.1 - - [02/May/2016 13:54:18] "GET /api/v1/get/7 HTTP/1.1" 200 -
-  127.0.0.1 - - [02/May/2016 13:54:18] "GET /api/v1/get_all HTTP/1.1" 200 -
+  127.0.0.1 - - [10/May/2016 08:43:43] "GET /api/auth HTTP/1.1" 200 -
+  127.0.0.1 - - [10/May/2016 08:43:43] "GET /api/titles HTTP/1.1" 200 -
+  127.0.0.1 - - [10/May/2016 08:43:44] "GET /api/images HTTP/1.1" 200 -
+  127.0.0.1 - - [10/May/2016 08:43:44] "GET /api/correct HTTP/1.1" 200 -
+  127.0.0.1 - - [10/May/2016 08:43:44] "GET /api/compose HTTP/1.1" 200 -
+  127.0.0.1 - - [10/May/2016 08:43:44] "GET /api/articles HTTP/1.1" 200 -
   
 The scenario is as follows:
 
-  1. A client does a request to the test server asking for **/get_all**
-  2. In order to serve **/get_all**, subsequent calls are required to other endpoints such as **/1**, **/2** ...etc
+  1. A client does a request to the test server asking for **/articles**
+  2. In order to serve **/articles**, subsequent calls are required to other endpoints such as **/auth**, **/titles** ...etc
      For demo purposes these subsequent calls are handled by the same server, what is important to notice is that all sub-requests go through Varnish as well.
      A random sleep time has been added for each request in order to simulate some "hard work".
   3. Zipnish-logreader picks up its required data from Varnishlog as these requests go through.
-  4. As data gets written into the MySql database, Zipnish-UI will be able to represent how reuqests have been issued and how much time each of them has taken.
+  4. As data gets written into the MySql database, Zipnish-UI will be able to represent how requests have been issued and how much time each of them has taken.

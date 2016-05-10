@@ -2,7 +2,7 @@
 VCL how to's
 ============
 
-In order for Zipnish to grab its required headers there are a few changes that are required in your vcl. There are two
+In order for Zipnish to grab its required headers there are a few changes that are required in your VCL. There are two
 main scenarios to be handled here:
 
 1. Caching disabled:
