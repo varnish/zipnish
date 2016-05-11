@@ -2,19 +2,33 @@
 Give Zipnish a try
 ==================
 
-This section will aggregate all other chapters in the documentation and will provide a guide
+This section aggregates all other chapters in the documentation and will provide a guide
 for setting up a working environment with Zipnish.
 As a side-note, all steps below have been run on a Centos7 machine.
 
-A few of the steps within this tutorial require the Zipnish source code, so make sure
-you have it cloned from its repo in beforehand.
+A fresh Centos7 VM requires the following packages:
+
+    .. code-block:: sh
+
+        $ sudo yum -y install mariadb-devel
+        $ sudo yum -y install python-devel
+        $ sudo yum -y install python-pip
+    
 
 1)  **Start an application server**
 
-    Browse to the ``/logreader/test`` folder and run the following command:
+    Clone the git repo:
+
+    .. code-block:: sh
+
+        $ git clone https://github.com/varnish/zipnish.git
+
+    
+    Start the application server:
     
     .. code-block:: sh
     
+        $ cd zipnish/logreader/test
         $ python server.py &
     
     This will spawn a lite web server listening on port ``9999``, the endpoints available in this server
@@ -26,9 +40,9 @@ you have it cloned from its repo in beforehand.
     
     .. code-block:: sh
     
-        $ yum install -y varnish
+        $ sudo yum install -y varnish
     
-    Before starting Varnish, update ``/etc/varnish/default.vcl`` file with the following content:
+    Update ``/etc/varnish/default.vcl`` file with the following content:
     
     .. code-block:: sh
     
@@ -44,8 +58,21 @@ you have it cloned from its repo in beforehand.
                 return(pass);
             }
             
+    Start Varnish:
+
+    .. code-block:: sh
+
+        $ sudo service varnish start
+        
+    Or reload, if Varnish has already been installed:
+    
+    .. code-block:: sh
+
+        $ sudo service varnish reload
+    
+
     Unless otherwise specified, Varnish will listen on port ``6081.``
-    For simplicity reasons ``vcl_recv()`` will pass all requests, refer to the VCL_ section in order to have caching enabled. Notice that the default backend points to the server that has just been previously spawned.
+    For simplicity reasons ``vcl_recv()`` will pass all requests, refer to the VCL_ section in order to have caching enabled. Notice that the default backend points to the server that has just been spawned previously.
     
 .. _VCL: http://zipnish.readthedocs.io/en/latest/vcl.html
 .. _Varnish: http://www.varnish-cache.org/
@@ -54,7 +81,7 @@ you have it cloned from its repo in beforehand.
 
 3)  **Check that Varnish and the backend are set correctly**
     
-    Issue the following request in order to check that varnish and the backend server are correctly configured:
+    Issue the following request against Varnish:
     
     .. code-block:: sh
     
@@ -84,6 +111,13 @@ you have it cloned from its repo in beforehand.
     
 4)  **Configure a MariaDb instance**
     
+    Install docker:
+
+    .. code-block:: sh
+    
+        $ sudo yum -y install docker
+    
+    
     Pull and run the following container_ for setting up a MariaDb instance:
     
     .. code-block:: sh
@@ -105,9 +139,17 @@ you have it cloned from its repo in beforehand.
     
         $ pip install -m zipnish
     
-6)  **Run**
+    Create a ``/etc/zipnish/zipnish.cfg`` with a content similar as described in configuration_. Retrieve the docker container IP and update the mysql host accordingly in the .cfg file.
     
-    Prior to running Zipnish, make sure that an ``/etc/zipnish/zipnish.cfg`` file is available as described in configuration_.
+    Create the log folder:
+
+    .. code-block:: sh
+    
+        $ sudo mkdir -p /var/log/zipnish
+        $ sudo chown -R $(whoami): /var/log/zipnish
+
+    
+6)  **Run**
     
     Start the log-reader:
     
