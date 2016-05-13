@@ -2,6 +2,9 @@ sudo: required
 
 language: python
 
+python:
+  - "2.7"
+
 services:
   - docker
 
@@ -15,9 +18,9 @@ before_install:
   - sudo cp logreader/test/test_default.vcl /etc/varnish/default.vcl
   - sudo service varnish start
 
- before_script:
+before_script:
   - pwd
   - cd logreader/test
 
- script:
+script:
   - python log_test.py
