@@ -15,8 +15,9 @@ services:
   - mysql
 
 env:
-  - USER=zipnish
-  - PASS=secret
+  global:
+    - USER=zipnish
+    - PASS=secret
 
 before_install:
   - docker pull mariusm/ubuntu-mariadb
@@ -41,4 +42,4 @@ script:
   - echo "GRANT SELECT ON *.* TO '$USER'@'%'; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
   - echo "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
   - mysqladmin shutdown
-  - sudo service mysql restart
+  - sudo service mysqld restart
