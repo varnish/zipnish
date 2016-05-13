@@ -16,7 +16,7 @@ before_install:
   - sudo apt-get -q update
   - sudo apt-get -y install varnish
   - sudo cp logreader/test/test_default.vcl /etc/varnish/default.vcl
-  - sudo service varnish start
+  - sudo service varnish restart
 
 before_script:
   - pwd
