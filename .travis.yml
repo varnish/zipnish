@@ -11,7 +11,6 @@ install:
   - sudo pip install mysql-python simplemysql
 
 services:
-  - docker
   - mysql
 
 env:
@@ -20,8 +19,6 @@ env:
     - PASS=secret
 
 before_install:
-  - docker pull mariusm/ubuntu-mariadb
-  - docker run -d -p 3306:3306 mariusm/ubuntu-mariadb
   - curl https://repo.varnish-cache.org/debian/GPG-key.txt | sudo apt-key add -
   - echo "deb https://repo.varnish-cache.org/ubuntu/ precise varnish-4.0" | sudo tee /etc/apt/sources.list.d/varnish-cache.list
   - sudo apt-get -q update
@@ -29,17 +26,13 @@ before_install:
   - sudo apt-get -y install python-dev libmysqlclient-dev
   - sudo cp logreader/test/test_default.vcl /etc/varnish/default.vcl
   - sudo service varnish restart
-
-before_script:
-  - pwd
-  - echo $USER
-  - echo $PASS
-
-script:
-  - echo "******************* Create user *************************"
   - echo "CREATE USER '$USER' IDENTIFIED BY '$PASS'" | mysql --default-character-set=utf8
   - echo "REVOKE ALL PRIVILEGES ON *.* FROM '$USER'@'%'; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
   - echo "GRANT SELECT ON *.* TO '$USER'@'%'; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
   - echo "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
   - mysqladmin shutdown
-  - sudo service mysqld restart
+
+before_script:
+  - pwd
+  - echo $USER
+  - echo $PASS
