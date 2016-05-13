@@ -26,10 +26,10 @@ before_install:
   - sudo apt-get -y install python-dev libmysqlclient-dev
   - sudo cp logreader/test/test_default.vcl /etc/varnish/default.vcl
   - sudo service varnish restart
-  - echo "CREATE USER '$USER' IDENTIFIED BY '$PASS'" | mysql --default-character-set=utf8
-  - echo "REVOKE ALL PRIVILEGES ON *.* FROM '$USER'@'%'; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
-  - echo "GRANT SELECT ON *.* TO '$USER'@'%'; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
-  - echo "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
+  - echo "CREATE USER '$USER' IDENTIFIED BY '$PASS'" | mysql -u root --default-character-set=utf8
+  - echo "REVOKE ALL PRIVILEGES ON *.* FROM '$USER'@'%'; FLUSH PRIVILEGES" | mysql -u root --default-character-set=utf8
+  - echo "GRANT SELECT ON *.* TO '$USER'@'%'; FLUSH PRIVILEGES" | mysql -u root --default-character-set=utf8
+  - echo "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql -u root --default-character-set=utf8
   - mysqladmin shutdown
 
 before_script:
