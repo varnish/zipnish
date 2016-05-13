@@ -30,9 +30,13 @@ before_install:
   - echo "REVOKE ALL PRIVILEGES ON *.* FROM '$USER'@'%'; FLUSH PRIVILEGES" | mysql -u root --default-character-set=utf8
   - echo "GRANT SELECT ON *.* TO '$USER'@'%'; FLUSH PRIVILEGES" | mysql -u root --default-character-set=utf8
   - echo "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql -u root --default-character-set=utf8
-  - mysqladmin shutdown
+  - mysql -u root < docker/database.sql
+  - sudo service mysql restart
 
 before_script:
   - pwd
   - echo $USER
   - echo $PASS
+
+script:
+  - ls
