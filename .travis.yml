@@ -12,6 +12,11 @@ install:
 
 services:
   - docker
+  - mysql
+
+env:
+  - USER=zipnish
+  - PASS=secret
 
 before_install:
   - docker pull mariusm/ubuntu-mariadb
@@ -26,5 +31,14 @@ before_install:
 
 before_script:
   - pwd
-  - cd logreader/test
-  - docker-machine ls
+  - echo $USER
+  - echo $PASS
+
+script:
+  - echo "******************* Create user *************************"
+  - echo "CREATE USER '$USER' IDENTIFIED BY '$PASS'" | mysql --default-character-set=utf8
+  - echo "REVOKE ALL PRIVILEGES ON *.* FROM '$USER'@'%'; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
+  - echo "GRANT SELECT ON *.* TO '$USER'@'%'; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
+  - echo "GRANT ALL PRIVILEGES ON *.* TO '$USER'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES" | mysql --default-character-set=utf8
+  - mysqladmin shutdown
+  - sudo service mysql restart
