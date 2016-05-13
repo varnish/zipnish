@@ -27,6 +27,4 @@ before_install:
 before_script:
   - pwd
   - cd logreader/test
-
-script:
-  - python log_test.py
+  - docker-machine ls
