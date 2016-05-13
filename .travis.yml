@@ -6,7 +6,9 @@ python:
   - "2.7"
 
 install:
-  - sudo pip install mysql-python requests simplemysql
+  - sudo pip install --upgrade pip
+  - sudo pip install requests
+  - sudo pip install mysql-python simplemysql
 
 services:
   - docker
