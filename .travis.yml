@@ -25,6 +25,8 @@ before_install:
   - sudo apt-get -y install varnish
   - sudo apt-get -y install python-dev libmysqlclient-dev
   - sudo cp logreader/test/test_default.vcl /etc/varnish/default.vcl
+  - sudo mkdir -p /var/log/zipnish
+  - sudo chown -R $(whoami) /var/log/zipnish
   - sudo service varnish restart
   - echo "CREATE USER '$USER' IDENTIFIED BY '$PASS'" | mysql -u root --default-character-set=utf8
   - echo "REVOKE ALL PRIVILEGES ON *.* FROM '$USER'@'%'; FLUSH PRIVILEGES" | mysql -u root --default-character-set=utf8
@@ -39,4 +41,7 @@ before_script:
   - echo $PASS
 
 script:
-  - ls
+  - cd logreader
+  - python app.py &
+  - cd test
+  - python log_test.py

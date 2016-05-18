@@ -54,6 +54,9 @@ def init_log():
     except IOError as io:
         print io.message
         sys.exit(1)
+    except Exception as ex:
+        print ex.args[0]
+        sys.exit(1)
 
 
 def init_config(overridden_config=None):

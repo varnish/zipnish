@@ -3,6 +3,8 @@ from multiprocessing import Process
 from unittest import TestCase
 
 import requests
+import sys
+
 from server import (
     ServerHandler,
     ThreadedHTTPServer,
@@ -26,7 +28,7 @@ HOST = 'localhost'
 VARNISH_PORT = 6081
 
 __DB_PARAMS__ = {
-    'host': '192.168.59.103',
+    'host': '127.0.0.1',
     'db': 'microservice',
     'user': 'zipnish',
     'passwd': 'secret'
