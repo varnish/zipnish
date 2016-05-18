@@ -137,7 +137,7 @@ A fresh Centos7 VM requires the following packages:
     
     .. code-block:: sh
     
-        $ pip install -m zipnish
+        $ sudo pip install zipnish
     
     Create a ``/etc/zipnish/zipnish.cfg`` with a content similar as described in configuration_. Retrieve the docker container IP and update the mysql host accordingly in the .cfg file.
     

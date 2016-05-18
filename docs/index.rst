@@ -29,7 +29,7 @@ Installation
 
 Install with pip::
 
-    $ python -m pip install zipnish
+    $ sudo pip install zipnish
 
 Configuration
 =============

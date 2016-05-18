@@ -18,11 +18,13 @@ install_requires = [
 setup(
     include_package_data=True,
     name='zipnish',
-    version='0.1.2',
+    version='0.1.5',
     description='zipnish',
     long_description=read('README.rst'),
+    maintainer="Marius Magureanu",
+    maintainer_email="marius@varnish-software.com",
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',     
         'Programming Language :: Python :: 2.7',
@@ -35,9 +37,6 @@ setup(
     packages=find_packages(exclude=['logreader.test']),
     zip_safe=False,
     install_requires=install_requires,
-    package_data={
-        'logreader': ['default.cfg'],
-    },
     entry_points={'console_scripts': ['zipnish-logreader = logreader.app:main',
                                       'zipnish-ui = ui.flask_app:main'],
                   },
