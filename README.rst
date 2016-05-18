@@ -5,6 +5,12 @@ Zipnish
 
 A micro-service monitoring tool based on Varnish Cache.
 
+.. image:: https://img.shields.io/pypi/v/zipnish.svg
+    :target: https://pypi.python.org/pypi/zipnish
+
+.. image:: https://travis-ci.org/varnish/zipnish.svg?branch=dev
+    :target: https://travis-ci.org/varnish/zipnish
+
 .. image:: https://readthedocs.org/projects/zipnish/badge/?version=latest
 
 
