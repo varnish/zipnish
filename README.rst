@@ -5,7 +5,7 @@ Zipnish
 
 A micro-service monitoring tool based on Varnish Cache.
 
-.. image:: https://travis-ci.org/varnish/zipnish.svg?branch=dev
+.. image:: https://travis-ci.org/varnish/zipnish.svg?branch=master
     :target: https://travis-ci.org/varnish/zipnish
 
 .. image:: https://readthedocs.org/projects/zipnish/badge/?version=latest
