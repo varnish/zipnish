@@ -13,6 +13,10 @@ A micro-service monitoring tool based on Varnish Cache.
 
 .. image:: https://readthedocs.org/projects/zipnish/badge/?version=latest
 
+|codebeat badge|
+
+.. |codebeat badge| image:: https://codebeat.co/badges/4c2b6915-7f30-4208-8095-2afc52de394f
+   :target: https://codebeat.co/projects/github-com-varnish-zipnish
 
 * `Documentation <http://zipnish.readthedocs.io/en/latest/?>`_
 * `Changelog <http://zipnish.readthedocs.io/en/latest/changes.html>`_
